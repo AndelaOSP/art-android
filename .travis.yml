@@ -45,7 +45,6 @@ script:
     - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
 before_install:
-    - pip install --user coveralls    #Install coveralls
-
+    - pip install coveralls
 after_success:
-    - coveralls                       #Run coveralls
+  ./gradlew jacocoTestReport coveralls
