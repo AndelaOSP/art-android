@@ -1,6 +1,5 @@
 # ART Android Application
-[![Build Status](https://travis-ci.org/AndelaOSP/art-android.svg?branch=ch-intergrate-travis-ci-154954037)](https://travis-ci.org/AndelaOSP/art-android)
-
+[![Build Status](https://travis-ci.org/AndelaOSP/art-android.svg?branch=develop)](https://travis-ci.org/AndelaOSP/art-android)
 The Andela Resource Tracker Android app.
 
 ## Project Setup

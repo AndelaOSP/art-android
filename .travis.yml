@@ -2,6 +2,9 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+notifications:
+  slack: andela:k9xfklhUprLegPuPWgsWjsHN
+
 env:
   matrix:
     - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
@@ -39,12 +42,12 @@ before_script:
     - emulator -avd test -no-skin -no-window &    #Start emulator
 
 script:
+    - ./gradlew build jacocoTestReport assembleAndroidTest
     - android-wait-for-emulator             #Run wait for the emulator script.
     - adb devices                           #Display list of devices
     - adb shell input keyevent 82 &
     - ./gradlew connectedAndroidTest -PdisablePreDex --stacktrace
 
-before_install:
-    - pip install coveralls
 after_success:
-  ./gradlew jacocoTestReport coveralls
+    - bash <(curl -s https://codecov.io/bash)
+
