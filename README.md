@@ -1,5 +1,7 @@
 # ART Android Application
 [![Build Status](https://travis-ci.org/AndelaOSP/art-android.svg?branch=develop)](https://travis-ci.org/AndelaOSP/art-android)
+[![codecov.io](https://codecov.io/gh/AndelaOSP/art-android/branch/develop/graph/badge.svg)](https://codecov.io/gh/AndelaOSP/art-android/)
+
 The Andela Resource Tracker Android app.
 
 ## Project Setup
