@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Art</string>
+    <string name="menu_send_report">Report Lost Asset</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="display_name">Andela Resource Tracker</string>
+    <string name="email_address">andela.art@andela.com</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="report_lost_asset">Report Lost Asset</string>
+    <string name="log_out">Log Out</string>
+    <string name="scan">Scan</string>
+    <string name="serial_entry">Serial Entry</string>
 </resources>

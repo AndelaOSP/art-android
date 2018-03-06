@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/group_menu"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/mn_serial_entry"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/ic_linked_camera_black"
+            android:title="@string/serial_entry" />
+        <item
+            android:id="@+id/mn_report_asset"
+            android:checkable="true"
+            android:icon="@drawable/ic_move_to_inbox_black"
+            android:title="@string/report_lost_asset" />
+        <item
+            android:id="@+id/mn_logout"
+            android:checkable="true"
+            android:icon="@drawable/ic_exit_to_app_black"
+            android:title="@string/log_out" />
+    </group>
+
+</menu>
