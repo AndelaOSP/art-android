@@ -3,4 +3,5 @@
     <color name="colorPrimary">#3359DF</color>
     <color name="colorPrimaryDark">#0834D0</color>
     <color name="colorAccent">#49AAAF</color>
+    <color name="EmailTextAlpha">#B3FFFFFF</color>
 </resources>
