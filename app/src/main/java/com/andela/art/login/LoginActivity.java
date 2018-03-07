@@ -1,14 +1,17 @@
 package com.andela.art.login;
 
+import com.andela.art.databinding.ActivityLoginBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -25,12 +28,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.shobhitpuri.custombuttons.GoogleSignInButton;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.LoginActivity {
 
-    GoogleSignInButton button;
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 2;
     GoogleSignInClient mGoogleSignInClient;
@@ -61,6 +62,13 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        ActivityLoginBinding activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        activityLoginBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
 
         // Instance of mAuth
         mAuth = FirebaseAuth.getInstance();
