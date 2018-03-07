@@ -4,6 +4,8 @@
     tools:ignore="InnerclassSeparator"
     package="com.andela.art">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,16 +13,12 @@
         android:name=".root.App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".common.ArtApplication"
         android:theme="@style/AppTheme">
+        >
         <activity android:name=".login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".serialentry.SerialEntryActivity"
+        <activity android:name=".serialentry.presentation.SerialEntryActivity">
             android:label="@string/title_activity_serial_entry"
             android:theme="@style/AppTheme"></activity>
     </application>
