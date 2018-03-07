@@ -13,6 +13,9 @@ android {
         lintOptions {
             abortOnError false
         }
+        dataBinding {
+            enabled = true
+        }
     }
     buildTypes {
         release {
@@ -40,8 +43,6 @@ dependencies {
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     androidTestCompile 'com.android.support.test:rules:1.0.1'

@@ -1,9 +1,5 @@
 package com.andela.art.login;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import android.app.ProgressDialog;
@@ -34,7 +30,6 @@ import com.shobhitpuri.custombuttons.GoogleSignInButton;
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.LoginActivity {
 
-    @BindView(R.id.google_sign_in_button)
     GoogleSignInButton button;
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 2;
@@ -66,8 +61,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        ButterKnife.bind(this);
 
         // Instance of mAuth
         mAuth = FirebaseAuth.getInstance();
@@ -126,7 +119,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
 
     }
 
-    @OnClick(R.id.google_sign_in_button)
     @Override
     public void signIn() {
         // Show the dialog as we are now signing in.
