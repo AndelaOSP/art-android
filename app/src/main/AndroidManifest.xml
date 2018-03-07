@@ -4,25 +4,26 @@
     package="com.andela.art"
     tools:ignore="InnerclassSeparator">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name=".root.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".common.ArtApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".login.LoginActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <activity android:name=".serialentry.presentation.SerialEntryActivity"
+            android:label="@string/title_activity_serial_entry"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".serialentry.SerialEntryActivity"
-            android:label="@string/title_activity_serial_entry"
-            android:theme="@style/AppTheme" />
         <activity android:name=".securitydashboard.SecurityDashboardActivity" />
         <activity android:name=".settings.SettingsActivity"></activity>
     </application>
