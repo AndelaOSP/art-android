@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fieldTopMargin">60dp</dimen>
+    <dimen name="hrHeight">2dp</dimen>
+    <dimen name="hrSideMargin">5dp</dimen>
+    <dimen name="hrTopMargin">10dp</dimen>
+    <dimen name="daysVMargin">20dp</dimen>
+</resources>
