@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/etEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fieldTopMargin"
+        android:ems="10"
+        android:hint="@string/email_address_hint"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/coolGreen"/>
+
+    <Spinner
+        android:id="@+id/sCohort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmailAddress"
+        android:layout_marginTop="@dimen/fieldTopMargin" />
+
+    <View
+        android:id="@+id/hr1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hrHeight"
+        android:layout_below="@id/sCohort"
+        android:layout_marginTop="@dimen/hrTopMargin"
+        android:layout_marginLeft="@dimen/hrSideMargin"
+        android:layout_marginRight="@dimen/hrSideMargin"
+        android:background="@color/coolGreen"/>
+
+    <Spinner
+        android:id="@+id/sLostItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hr1"
+        android:layout_marginTop="@dimen/fieldTopMargin" />
+
+    <View
+        android:id="@+id/hr2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hrHeight"
+        android:layout_below="@id/sLostItem"
+        android:layout_marginTop="@dimen/hrTopMargin"
+        android:layout_marginLeft="@dimen/hrSideMargin"
+        android:layout_marginRight="@dimen/hrSideMargin"
+        android:background="@color/coolGreen"/>
+
+    <TextView
+        android:id="@+id/tvLostAsset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/daysVMargin"
+        android:text="@string/days_ago"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvDaysAgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvLostAsset"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:text="@string/lost_asset" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/tvDaysAgo"
+        android:layout_marginBottom="@dimen/daysVMargin"
+        android:background="#eaebec"/>
+</RelativeLayout>
