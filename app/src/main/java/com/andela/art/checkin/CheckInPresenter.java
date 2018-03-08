@@ -1,23 +1,31 @@
 package com.andela.art.checkin;
 
-import com.andela.art.checkin.data.CheckInService;
-import com.andela.art.checkin.data.ServiceBuilder;
+import com.andela.art.data.CheckInService;
+import com.andela.art.data.ServiceBuilder;
+import com.andela.art.models.CheckinResponse;
 
-import java.util.Observable;
+import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
-class CheckInPresenter {
+class CheckInPresenter implements Observer<CheckinResponse> {
 
-    CheckInView view;
-    CheckInActivity activity;
+    @Inject CheckInView view;
 
-    public CheckInPresenter(CheckInActivity activity, CheckInView view) {
-        this.activity = activity;
-        this.view = view;
+    @Inject
+    public CheckInPresenter() {
+
+    }
+
+    private <T> void subscribe(Observable<T> observable, Observer<T> observer) {
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 
     /**
@@ -25,17 +33,27 @@ class CheckInPresenter {
      */
     public void checkIn(String serialNumber) {
         CheckInService mCheckInService = ServiceBuilder.buildService(CheckInService.class);
-        Call<Observable> checkin = mCheckInService.checkIn(serialNumber);
-        checkin.enqueue(new Callback<Observable>() {
-            @Override
-            public void onResponse(Call<Observable> call, Response<Observable> response) {
-                activity.showCheckout();
-            }
+        Observable<CheckinResponse> checkin = mCheckInService.checkIn(serialNumber);
+        subscribe(checkin, this);
+    }
 
-            @Override
-            public void onFailure(Call<Observable> call, Throwable t) {
+    @Override
+    public void onSubscribe(Disposable d) {
 
-            }
-        });
+    }
+
+    @Override
+    public void onNext(CheckinResponse checkinResponse) {
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }
