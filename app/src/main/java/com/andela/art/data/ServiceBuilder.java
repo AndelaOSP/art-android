@@ -1,4 +1,4 @@
-package com.andela.art.checkin.data;
+package com.andela.art.data;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

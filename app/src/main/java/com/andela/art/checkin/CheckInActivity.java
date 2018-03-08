@@ -11,13 +11,17 @@ import android.widget.TextView;
 import com.andela.art.R;
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class CheckInActivity extends AppCompatActivity implements CheckInView {
-    CheckInPresenter presenter = new CheckInPresenter(this, this);
+
+    @Inject CheckInPresenter presenter;
+
     @BindView(R.id.ivPhoto)
     ImageView headerImage;
     @BindView(R.id.serial_info)
@@ -67,10 +71,6 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Override
     public void showCheckout() {
         checkIn.setVisibility(View.INVISIBLE);
-        showCheckIn();
-    }
-
-    private void showCheckIn() {
         checkOut.setVisibility(View.VISIBLE);
     }
 
