@@ -12,4 +12,23 @@
     <string name="title_activity_serial_entry">SerialEntry</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name">Art</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="cohort">Cohort</string>
+    <string name="Cohort_number">18</string>
+    <string name="checkin">CHECK IN</string>
+    <string name="serial_number">C10ASDDGHRRE</string>
+    <string name="serial_title">serial number</string>
+    <string name="email">Email</string>
+    <string name="mail">mail@andela.com</string>
+    <string name="search">search</string>
+    <string name="settings">settings</string>
+    <string name="feedback">feedback</string>
+    <string name="cohort_title">cohort</string>
+    <string name="cohort_number">18</string>
+    <string name="header_image">header image</string>
+    <string name="name">Cesc Mutungi</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="check_out">CHECK OUT</string>
+
 </resources>
