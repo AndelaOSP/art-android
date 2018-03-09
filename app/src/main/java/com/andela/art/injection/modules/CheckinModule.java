@@ -1,6 +1,6 @@
 package com.andela.art.injection.modules;
 
-import com.andela.art.data.CheckInService;
+import com.andela.art.checkin.data.CheckInService;
 import com.andela.art.injection.scope.PerActivity;
 
 import dagger.Module;
