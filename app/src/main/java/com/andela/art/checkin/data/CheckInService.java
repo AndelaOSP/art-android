@@ -1,6 +1,6 @@
-package com.andela.art.data;
+package com.andela.art.checkin.data;
 
-import com.andela.art.models.CheckinResponse;
+import com.andela.art.checkin.models.CheckinResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;

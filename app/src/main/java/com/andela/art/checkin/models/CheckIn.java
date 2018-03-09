@@ -1,11 +1,8 @@
-package com.andela.art.models;
+package com.andela.art.checkin.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by MADGE on 2/26/18.
- */
 
 public class CheckIn {
     @SerializedName("image")

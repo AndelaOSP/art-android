@@ -1,5 +1,5 @@
 
-package com.andela.art.models;
+package com.andela.art.checkin.models;
 
 import javax.annotation.Generated;
 

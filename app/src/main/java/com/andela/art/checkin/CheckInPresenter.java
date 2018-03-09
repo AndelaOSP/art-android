@@ -1,8 +1,7 @@
 package com.andela.art.checkin;
 
-import com.andela.art.data.CheckInService;
-import com.andela.art.data.ServiceBuilder;
-import com.andela.art.models.CheckinResponse;
+import com.andela.art.checkin.data.CheckInService;
+import com.andela.art.checkin.models.CheckinResponse;
 
 import javax.inject.Inject;
 
@@ -16,10 +15,11 @@ import io.reactivex.schedulers.Schedulers;
 class CheckInPresenter implements Observer<CheckinResponse> {
 
     @Inject CheckInView view;
+    @Inject CheckInService mCheckInService;
 
     @Inject
-    public CheckInPresenter() {
-
+    public CheckInPresenter(CheckInView view) {
+        this.view = view;
     }
 
     private <T> void subscribe(Observable<T> observable, Observer<T> observer) {
@@ -31,8 +31,7 @@ class CheckInPresenter implements Observer<CheckinResponse> {
     /**
      * Calls API service to hit check in endpoint.
      */
-    public void checkIn(String serialNumber) {
-        CheckInService mCheckInService = ServiceBuilder.buildService(CheckInService.class);
+    protected void checkIn(String serialNumber) {
         Observable<CheckinResponse> checkin = mCheckInService.checkIn(serialNumber);
         subscribe(checkin, this);
     }
