@@ -1,0 +1,10 @@
+task installGitHooks(type: Copy) {
+    "cp pre-commit.sh .git/hooks/pre-commit".execute()
+}
+
+task gitExecutableHooks() {
+    Runtime.getRuntime().exec("chmod -R +x .git/hooks/")
+}
+
+gitExecutableHooks.dependsOn installGitHooks
+build.dependsOn installGitHooks
