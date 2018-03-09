@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
+apply from: rootProject.file('gradle/install-git-hooks.gradle')
 
 android {
     compileSdkVersion 26
