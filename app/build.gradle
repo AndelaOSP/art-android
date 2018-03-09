@@ -61,6 +61,3 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
-apply from: './code_quality/quality.gradle'
-
