@@ -21,7 +21,7 @@ public class SerialEntryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_serial_entry);
 
-        Toolbar toolbar = findViewById(R.id.toolbarTB);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
