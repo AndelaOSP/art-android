@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/andela_art_background"
+        android:screenOrientation="portrait"
+        tools:context="com.andela.art.login.LoginActivity"
+        android:id="@+id/activity_login">
+
+        <ImageView
+            android:id="@+id/andela_logo_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:adjustViewBounds="false"
+            android:fontFamily="@font/roboto_regular"
+            android:contentDescription="@string/andela_logo_description"
+            android:cropToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/andela_logo_condensed_white" />
+
+        <com.shobhitpuri.custombuttons.GoogleSignInButton
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="96dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/sign_in_with_google"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:isDarkTheme="false">
+
+        </com.shobhitpuri.custombuttons.GoogleSignInButton>
+
+        <TextView
+            android:id="@+id/text_view_andela"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/andela"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/andela_logo_description" />
+
+        <TextView
+            android:id="@+id/text_view_resource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/resource"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_andela" />
+
+        <TextView
+            android:id="@+id/text_view_tracker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/tracker"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_resource" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

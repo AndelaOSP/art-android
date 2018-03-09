@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Art</string>
+    <string name="app_name">Andela Resource Tracker</string>
+    <string name="andela_logo_description">Andela Logo</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="andela">Andela</string>
+    <string name="resource">Resource</string>
+    <string name="tracker">Tracker</string>
+    <string name="menu_send_report">Report Lost Asset</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="display_name">Andela Resource Tracker</string>
+    <string name="email_address">andela.art@andela.com</string>
+    <string name="title_activity_serial_entry">SerialEntry</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
