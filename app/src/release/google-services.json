@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "236168090156",
+    "firebase_url": "https://andela-resource-tracker.firebaseio.com",
+    "project_id": "andela-resource-tracker",
+    "storage_bucket": "andela-resource-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236168090156:android:87126738dadfd41b",
+        "android_client_info": {
+          "package_name": "com.andela.art"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236168090156-b2dcls1n44e08gfb9kbp76vsd3dsienn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "49e53688a0bcbadc4665d9149b4d8e9ff9089b8f"
+          }
+        },
+        {
+          "client_id": "236168090156-qfbk7cd280l0l4q0ffsbnpvlbp21ov47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "a510b050c1bcff0bb8550365fac3bce1e1ca6df0"
+          }
+        },
+        {
+          "client_id": "236168090156-bm69ie9tefknndgcr9ponnm22m700th6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "7e7e0778a6f5bba08a84eeba0a6401832b84570e"
+          }
+        },
+        {
+          "client_id": "236168090156-lsdh3ut1f4j3nhronos4068kibp0i93n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "3c5025849acf8b74750cc90e7b6a1de05d8bbbee"
+          }
+        },
+        {
+          "client_id": "236168090156-btj6h113flq4vsiknpsv8gs636rl6idr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn-xhAudRvr0mxnJ4Cf_XKxUQkpSTq-zI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236168090156-btj6h113flq4vsiknpsv8gs636rl6idr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
