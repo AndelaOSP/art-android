@@ -32,6 +32,11 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run lint, findbugs, pmd, checkstyle"
+            cd ~/repo
+            ./gradlew lint
+            ./gradlew findbugs
+            ./gradlew pmd
+            ./gradlew checkstyle
       
       # Storing reports
       - store_artifacts:

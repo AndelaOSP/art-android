@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+        quiet true
+        lintConfig file('./code_quality/lint.xml')
+    }
 }
 
 dependencies {
@@ -31,3 +36,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
+apply from: './code_quality/quality.gradle'
