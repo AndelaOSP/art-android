@@ -47,3 +47,16 @@ task pmd(type: Pmd) {
         html.destination = file("$project.buildDir/outputs/pmd/pmd.html")
     }
 }
+
+android {
+    lintOptions {
+        abortOnError false
+        quiet true
+        lintConfig file("$project.rootDir/app/code_quality_tools/rules-lint.xml")
+
+        htmlReport true
+        htmlOutput file("$project.buildDir/reports/lint/lint.html")
+    }
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
