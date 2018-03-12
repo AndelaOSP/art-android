@@ -17,15 +17,15 @@ then
 fi
 
 ## Run checkstyle to check the code quality.
-./gradlew checkstyle --daemon
+./gradlew check --daemon
 
 # Store the last exit code in a variable.
-checkStyleResult=$?
+checkResult=$?
 
 # Perform checks
-if [ $checkStyleResult -ne 0 ]
+if [ $checkResult -ne 0 ]
 then
-    echo "Checkstyle rule violations were found., fix them to proceed with the commit"
+    echo "Code violations were found, fix them to proceed with the commit"
     exit 1
 fi
 
