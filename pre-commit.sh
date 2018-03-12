@@ -26,7 +26,6 @@ checkResult=$?
 if [ $checkResult -ne 0 ]
 then
     echo "Code violations were found, fix them to proceed with the commit"
-    exit 1
 fi
 
 # You can commit

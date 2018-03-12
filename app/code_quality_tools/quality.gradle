@@ -60,3 +60,4 @@ android {
 }
 
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+
