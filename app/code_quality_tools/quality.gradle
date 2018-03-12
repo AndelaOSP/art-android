@@ -1,5 +1,6 @@
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 task checkstyle(type: Checkstyle) {
     description 'Check code standard'
@@ -29,5 +30,20 @@ task findbugs(type: FindBugs) {
         xml.enabled = false
         html.enabled = true
         html.destination = file("$project.buildDir/outputs/findbugs/findbugs.html")
+    }
+}
+
+task pmd(type: Pmd) {
+    description 'Identifying potential duplicated code, cyclomatic complexity and overcomplicated expressions'
+    group 'verification'
+    ruleSetFiles = files("$project.rootDir/app/code_quality_tools/rules-pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = file("$project.buildDir/outputs/pmd/pmd.html")
     }
 }
