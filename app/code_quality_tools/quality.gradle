@@ -1,0 +1,14 @@
+apply plugin: 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+
+    configFile rootProject.file('app/code_quality_tools/checkstyle.xml')
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+    ignoreFailures = false
+}
