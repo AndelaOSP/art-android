@@ -7,12 +7,25 @@
 ./gradlew test --daemon
 
 # Store the last exit code in a variable.
-RESULT=$?
+testResult=$?
 
 # Perform checks
-if [ $RESULT -ne 0 ]
+if [ $testResult -ne 0 ]
 then
     echo "Tests failed to run, fix them to proceed with the commit"
+    exit 1
+fi
+
+## Run checkstyle to check the code quality.
+./gradlew checkstyle --daemon
+
+# Store the last exit code in a variable.
+checkStyleResult=$?
+
+# Perform checks
+if [ $checkStyleResult -ne 0 ]
+then
+    echo "Checkstyle rule violations were found., fix them to proceed with the commit"
     exit 1
 fi
 

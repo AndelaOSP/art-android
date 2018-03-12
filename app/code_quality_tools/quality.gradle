@@ -1,4 +1,5 @@
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 task checkstyle(type: Checkstyle) {
     description 'Check code standard'
@@ -11,4 +12,22 @@ task checkstyle(type: Checkstyle) {
 
     classpath = files()
     ignoreFailures = false
+}
+
+task findbugs(type: FindBugs) {
+    description 'Find bugs maingly design flaws, bad practices'
+    group 'verification'
+    excludeFilter = rootProject.file('app/code_quality_tools/findbugs.xml')
+    classes = fileTree("$project.buildDir/intermediates/classes/debug/")
+    source 'src'
+    effort 'max'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = file("$project.buildDir/outputs/findbugs/findbugs.html")
+    }
 }
