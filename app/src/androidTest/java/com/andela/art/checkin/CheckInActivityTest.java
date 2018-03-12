@@ -37,6 +37,14 @@ public class CheckInActivityTest {
         }
     };
 
+    public void setUp(){
+
+
+    }
+
+
+
+
     @Test
     public void testImageViewIsDisplayed()
     {

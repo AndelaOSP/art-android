@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface CheckInService {
 
-    @POST("/checkin")
+    @POST("/checkins")
     @FormUrlEncoded
-    Observable<CheckinResponse> checkIn(@Field("serialNumber") String serialNumber);
+    Observable<CheckinResponse> checkIn(@Field("serial") String serialNumber);
 }

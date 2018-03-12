@@ -43,7 +43,7 @@ class CheckInPresenter implements Observer<CheckinResponse> {
 
     @Override
     public void onNext(CheckinResponse checkinResponse) {
-
+        view.showCheckout();
     }
 
     @Override

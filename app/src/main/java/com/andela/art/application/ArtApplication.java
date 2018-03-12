@@ -2,7 +2,9 @@ package com.andela.art.application;
 
 import android.app.Application;
 
+import com.andela.art.injection.component.ApplicationComponent;
 import com.andela.art.injection.component.DaggerApplicationComponent;
+import com.andela.art.injection.modules.ApplicationModule;
 
 
 /**
@@ -10,6 +12,7 @@ import com.andela.art.injection.component.DaggerApplicationComponent;
  */
 
 public class ArtApplication extends Application {
+    private ApplicationComponent mApplicationComponent;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -17,7 +20,13 @@ public class ArtApplication extends Application {
     }
 
     private void initializeApplicationComponent() {
-        DaggerApplicationComponent.builder();
+        mApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule("http://10.0.2.2:3000", this))
+                .build();
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
     }
 
     @Override
