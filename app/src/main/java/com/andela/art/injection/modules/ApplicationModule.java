@@ -1,5 +1,7 @@
 package com.andela.art.injection.modules;
 
+import android.content.Context;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -9,7 +11,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Singleton
@@ -17,9 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationModule {
 
     private String artBaseUrl;
+    private Context context;
 
-    public ApplicationModule(String artBaseUrl) {
+    public ApplicationModule(String artBaseUrl, Context context) {
         this.artBaseUrl = artBaseUrl;
+        this.context = context;
     }
 
     @Singleton
@@ -46,18 +50,24 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
-        return RxJavaCallAdapterFactory.create();
+    RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+        return  RxJava2CallAdapterFactory.create();
     }
 
     @Singleton
     @Provides
-    Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory converterFactory, RxJavaCallAdapterFactory rxJavaCallAdapterFactory) {
+    Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory converterFactory, RxJava2CallAdapterFactory rxJavaCallAdapterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(artBaseUrl)
                 .addConverterFactory(converterFactory)
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .client(client)
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    Context provideContext() {
+        return context;
     }
 }

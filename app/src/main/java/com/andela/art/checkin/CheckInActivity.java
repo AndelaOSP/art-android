@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andela.art.R;
+import com.andela.art.application.ArtApplication;
+import com.andela.art.injection.component.ApplicationComponent;
+import com.andela.art.injection.component.DaggerCheckinComponent;
+import com.andela.art.injection.modules.CheckinModule;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -35,7 +39,8 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @BindView(R.id.checkoutButton)
     Button checkOut;
 
-    public CheckInActivity() {
+    @Inject
+    public CheckInActivity()  {
     }
 
     @Override
@@ -45,7 +50,24 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         ButterKnife.bind(this);
         displayDetails();
         loadResizedImage();
+        initializeCheckinComponent();
     }
+
+    protected ApplicationComponent getApplicationComponent() {
+        return ((ArtApplication) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Initialize checkin Component
+     */
+    public void initializeCheckinComponent() {
+        DaggerCheckinComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .checkinModule(new CheckinModule(this))
+                .build()
+                .inject(this);
+    }
+
 
     /**
      * Add onclick functionality to check in button.
