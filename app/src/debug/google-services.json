@@ -15,7 +15,62 @@
       },
       "oauth_client": [
         {
-
+          "client_id": "236168090156-3irh1erm3rj5c5kdamgvefk8heuo2eh9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "1dca52ebc4e893c465298bae3181f982a3bc23e5"
+          }
+        },
+        {
+          "client_id": "236168090156-39org0veoh8h6ocip745ekcfdgnj0ssn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "82097eef3114c862c9ce062d2a1d2d90e63f4d26"
+          }
+        },
+        {
+          "client_id": "236168090156-l5dmmretobjit78k9l5429nb5m4p5pdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "4180f52fd83b7283f96456587f26e1675e14d650"
+          }
+        },
+        {
+          "client_id": "236168090156-3mojvn8hm5la0goi6r6nal4d0ake1ccn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "f1f4bcb74c5cc34072576973fb1adb693a36cff0"
+          }
+        },
+        {
+          "client_id": "236168090156-8fi9jt4q9mju0fuidvk6lje2q16l0f2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "ca262ff5fabacd529344623da2d801a6d4a2c45f"
+          }
+        },
+        {
+          "client_id": "236168090156-dtqpqnuqoi1449hts9kc43acmvfo8o9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "5fc4a69f3cf21759eb0bc7b4571fde9d155c4f78"
+          }
+        },
+        {
+          "client_id": "236168090156-89ioi5fd2kapvse48vm364cfofjiharb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "bd84a67f5bb920ca835cc4eaea368386de7e4a2e"
+          }
+        },
+        {
           "client_id": "236168090156-b2dcls1n44e08gfb9kbp76vsd3dsienn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
