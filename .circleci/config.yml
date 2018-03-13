@@ -1,0 +1,276 @@
+default: &defaults
+  docker:
+    - image: circleci/android:api-26-alpha
+
+  working_directory: ~/repo
+
+  environment:
+    # Customize the JVM maximum heap limit
+    JVM_OPTS: -Xmx3200m
+    TERM: dumb
+
+version: 2
+jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run lint, findbugs, pmd, checkstyle"
+            cd ~/repo
+            ./gradlew lint
+            ./gradlew findbugs
+            ./gradlew pmd
+            ./gradlew checkstyle
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  test:
+    <<: *defaults 
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # Running unit tests
+      - run:
+          name: Running unit tests on source code
+          command: |
+            cd ~/repo
+            ./gradlew build jacocoTestReport assembleAndroidTest
+            ls -a app/build/outputs/logs
+      
+      # Storing unit test reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports/jacoco
+          destination: reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports/tests
+          destination: reports
+      
+      # Running UI tests
+      - run:
+          name: Running integration tests on apk build
+          command: |
+            echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
+            echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
+            echo y | emulator -avd test -no-window &
+            circle-android wait-for-boot
+            ./gradlew connectedAndroidTest
+      
+      # Storing UI test reports
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/androidTest-results
+          destination: reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel on succeed
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel on fail
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+    post:
+      - bash <(curl -s https://codecov.io/bash)
+
+  deploy_test_build:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # Building apk files for debug and release
+      - run:
+          name: Assembling apk
+          command: |
+            cd ~/repo
+            ./gradlew build
+
+      # Storing the generated apk files and reports
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/debug
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/release
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+          destination: reports
+
+      # Sending notification
+      - run:
+          name: Notifying slack channel on succeed
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel on fail
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  deploy_staging_build:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # Building apk files for debug and release
+      - run:
+          name: Assembling apk
+          command: |
+            cd ~/repo
+            ./gradlew build
+
+      # Storing the generated apk files and reports
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/debug
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/release
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+          destination: reports
+
+      # Sending notification
+      - run:
+          name: Notifying slack channel on succeed
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel on fail
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  deploy_production_build:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      # Building apk files for debug and release
+      - run:
+          name: Assembling apk
+          command: |
+            cd ~/repo
+            ./gradlew build
+
+      # Storing the generated apk files and reports
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/debug
+      - store_artifacts:
+          path: ~/repo/app/build/outputs/apk/release
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+          destination: reports
+
+      # Sending notification
+      - run:
+          name: Notifying slack channel on succeed
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel on fail
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+workflows:
+  version: 2
+  lint_test_and_deployment:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+      - deploy_test_build:
+          requires:
+            - test
+          filters:
+            branches:
+              only: develop
+      - deploy_staging_build:
+          requires:
+            - test
+          filters:
+            branches:
+              only: staging
+      - deploy_production_build:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
