@@ -17,8 +17,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.andela.art.R;
+import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.login.LoginActivity;
-import com.andela.art.main.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -129,8 +129,12 @@ public class SerialEntryActivity extends AppCompatActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(SerialEntryActivity.this, MainActivity.class);
-                startActivity(i);
+                Intent checkInIntent=new Intent(SerialEntryActivity.this, CheckInActivity.class);
+                checkInIntent.putExtra("name", "Mudge Fudge");
+                checkInIntent.putExtra("email", "mudge@mail.com");
+                checkInIntent.putExtra("cohort", "18");
+                checkInIntent.putExtra("serial", "CR54TEYEQ");
+                startActivity(checkInIntent);
             }
         }, 5000);
     }

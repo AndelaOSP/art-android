@@ -24,11 +24,6 @@
             android:name=".serialentry.SerialEntryActivity"
             android:label="@string/title_activity_serial_entry"
             android:theme="@style/AppTheme"/>
-        <activity android:name=".main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
         <activity android:name=".checkin.CheckInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

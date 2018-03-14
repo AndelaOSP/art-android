@@ -7,7 +7,7 @@
 /build
 /captures
 .externalNativeBuild
-
+.idea/*
 # Google Services (e.g. APIs or Firebase)
 app/google-services.json
 

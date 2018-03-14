@@ -32,6 +32,8 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     TextView serialNumber;
     @BindView(R.id.name)
     TextView name;
+    @BindView(R.id.cohort_header)
+    TextView cohortNumber;
     @BindView(R.id.email_text)
     TextView email;
     @BindView(R.id.checkinButton)
@@ -83,8 +85,9 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Override
     public void displayDetails() {
         name.setText(getIntent().getStringExtra("name"));
-        serialNumber.setText(getIntent().getStringExtra("serialNumber"));
+        serialNumber.setText(getIntent().getStringExtra("serial"));
         email.setText(getIntent().getStringExtra("email"));
+        cohortNumber.setText(getIntent().getStringExtra("cohort"));
     }
 
     /**
