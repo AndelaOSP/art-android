@@ -6,11 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.andela.art.R;
-import com.andela.art.application.ArtApplication;
 import com.andela.art.checkin.CheckInActivity;
-import com.andela.art.injection.component.ApplicationComponent;
 import com.andela.art.injection.component.DaggerMainComponent;
 import com.andela.art.injection.modules.MainModule;
+import com.andela.art.root.App;
+import com.andela.art.root.ApplicationComponent;
 
 import javax.inject.Inject;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     protected ApplicationComponent getApplicationComponent() {
-        return ((ArtApplication) getApplication()).getApplicationComponent();
+        return ((App) getApplication()).getApplicationComponent();
     }
 
     /**

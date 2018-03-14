@@ -12,7 +12,6 @@
     <string name="title_activity_serial_entry">SerialEntry</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="app_name">Art</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="cohort">Cohort</string>
     <string name="Cohort_number">18</string>

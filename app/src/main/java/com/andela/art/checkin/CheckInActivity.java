@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andela.art.R;
-import com.andela.art.application.ArtApplication;
-import com.andela.art.injection.component.ApplicationComponent;
 import com.andela.art.injection.component.DaggerCheckinComponent;
 import com.andela.art.injection.modules.CheckinModule;
+import com.andela.art.root.App;
+import com.andela.art.root.ApplicationComponent;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -54,7 +54,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     }
 
     protected ApplicationComponent getApplicationComponent() {
-        return ((ArtApplication) getApplication()).getApplicationComponent();
+        return ((App) getApplication()).getApplicationComponent();
     }
 
     /**

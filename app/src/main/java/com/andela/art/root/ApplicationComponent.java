@@ -1,19 +1,22 @@
 package com.andela.art.root;
 
-import com.andela.art.login.LoginActivity;
-import com.andela.art.login.LoginModule;
-import dagger.Component;
+import android.content.Context;
+
 import javax.inject.Singleton;
+
+import dagger.Component;
+import retrofit2.Retrofit;
 
 /**
  * Created by Mugiwara_Munyi on 28/02/2018.
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, LoginModule.class})
+@Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
 
-  void inject(LoginActivity target);
+  Retrofit exposeRetrofit();
+  Context exposeContext();
 
 }
 

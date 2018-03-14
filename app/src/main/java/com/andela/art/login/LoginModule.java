@@ -10,6 +10,9 @@ import dagger.Provides;
 @Module
 public class LoginModule {
 
+    public LoginModule() {
+    }
+
     @Provides
     public LoginActivityMVP.LoginPresenter provideLoginActivityPresenter(
             LoginModel model) {

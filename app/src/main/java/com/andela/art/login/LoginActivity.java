@@ -1,26 +1,28 @@
 package com.andela.art.login;
 
-import com.andela.art.databinding.ActivityLoginBinding;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.andela.art.serialentry.SerialEntryActivity;
 import com.andela.art.R;
+import com.andela.art.databinding.ActivityLoginBinding;
+import com.andela.art.injection.component.DaggerLoginComponent;
+import com.andela.art.root.App;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.serialentry.SerialEntryActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -69,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                 signIn();
             }
         });
+        initializeLoginComponent();
 
         // Instance of mAuth
         mAuth = FirebaseAuth.getInstance();
@@ -156,6 +159,21 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                         Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    protected ApplicationComponent getApplicationComponent() {
+        return ((App) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Initialize checkin Component
+     */
+    public void initializeLoginComponent() {
+        DaggerLoginComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .loginModule(new LoginModule())
+                .build()
+                .inject(this);
     }
 
 }

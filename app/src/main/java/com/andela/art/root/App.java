@@ -2,27 +2,31 @@ package com.andela.art.root;
 
 import android.app.Application;
 
-import com.andela.art.login.LoginModule;
-
 /**
  * Created by Mugiwara_Munyi on 28/02/2018.
  */
 
 public class App extends Application {
 
-    private ApplicationComponent component;
-
+    private com.andela.art.root.ApplicationComponent mApplicationComponent;
     @Override
     public void onCreate() {
         super.onCreate();
-        component = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .loginModule(new LoginModule())
-                .build();
-
+        initializeApplicationComponent();
     }
 
-    public ApplicationComponent getComponent() {
-        return component;
+    private void initializeApplicationComponent() {
+        mApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule("http://10.0.2.2:3000", this))
+                .build();
+    }
+
+    public com.andela.art.root.ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
     }
 }

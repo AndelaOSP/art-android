@@ -9,6 +9,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,13 +38,9 @@ public class CheckInActivityTest {
         }
     };
 
+    @Before
     public void setUp(){
-
-
     }
-
-
-
 
     @Test
     public void testImageViewIsDisplayed()
@@ -60,10 +57,8 @@ public class CheckInActivityTest {
     @Test
     public void testDataSentViaIntentIsDisplayed()
     {
-        String name = "madge";
-        String email = "madge.mail.com";
-        onView(withId(R.id.name)).check(matches(withText(name)));
-        onView(withId(R.id.email_text)).check(matches(withText(email)));
+        onView(withId(R.id.name)).check(matches(withText("madge")));
+        onView(withId(R.id.email_text)).check(matches(withText("madge.mail.com")));
     }
 
     @Test

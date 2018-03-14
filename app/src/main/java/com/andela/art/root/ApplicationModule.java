@@ -1,10 +1,18 @@
 package com.andela.art.root;
 
-import android.app.Application;
 import android.content.Context;
+
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Mugiwara_Munyi on 28/02/2018.
@@ -13,15 +21,56 @@ import javax.inject.Singleton;
 @Module
 public class ApplicationModule {
 
-  private Application application;
-  public ApplicationModule (Application application){
-    this.application = application;
+  private String artBaseUrl;
+  private Context context;
 
+  public ApplicationModule(String artBaseUrl, Context context) {
+    this.artBaseUrl = artBaseUrl;
+    this.context = context;
+  }
+
+  @Singleton
+  @Provides
+  GsonConverterFactory gsonConverterFactory() {
+    return GsonConverterFactory.create();
+  }
+
+  @Singleton
+  @Provides
+  HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+    return new HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY);
+  }
+
+  @Singleton
+  @Provides
+  OkHttpClient provideOkHttpClient(HttpLoggingInterceptor loggingInterceptor) {
+    return new OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .build();
+  }
+
+  @Singleton
+  @Provides
+  RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+    return  RxJava2CallAdapterFactory.create();
+  }
+
+  @Singleton
+  @Provides
+  Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory converterFactory, RxJava2CallAdapterFactory rxJavaCallAdapterFactory) {
+    return new Retrofit.Builder()
+            .baseUrl(artBaseUrl)
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(rxJavaCallAdapterFactory)
+            .client(client)
+            .build();
   }
 
   @Provides
   @Singleton
-  public Context provideContext(){
-    return application;
+  Context provideContext() {
+    return context;
   }
 }
