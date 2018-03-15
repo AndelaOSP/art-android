@@ -20,13 +20,37 @@ declare_env_variables() {
 
   # Assigning slack messages based on the CircleCI job name
 
-  if [ "$CIRCLE_JOB" == 'lint' ]; then
+  if [ "$CIRCLE_JOB" == 'android_lint' ]; then
 
-    # Sorting through the artifact urls to get only the lint reports
+    # Sorting through the artifact urls to get only the android lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Lint Phase Failed! :crying_cat_face: \n Get the lint reports here: \n ${CIRCLE_REPORT_ARTIFACTS}"
+    CIRCLE_ARTIFACTS_MESSAGE="Android Lint Phase Failed! :crying_cat_face: \n Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+
+  elif [ "$CIRCLE_JOB" == 'fingbugs_lint' ]; then
+
+    # Sorting through the artifact urls to get only the findbugs lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep '\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="Findbugs Lint Phase Failed! :crying_cat_face: \n Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+
+  elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
+
+    # Sorting through the artifact urls to get only the PMD lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep '\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="PMD Lint Phase Failed! :crying_cat_face: \n Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+
+  elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
+
+    # Sorting through the artifact urls to get only the checkstyle lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep '\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="Checkstyle Lint Phase Failed! :crying_cat_face: \n Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
 
   elif [ "$CIRCLE_JOB" == 'test' ]; then
 
