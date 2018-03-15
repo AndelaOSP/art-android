@@ -78,7 +78,7 @@ jobs:
       
       # Storing reports
       - store_artifacts:
-          path: ~/repo/app/build/reports
+          path: ~/repo/app/build
       
       # Sending notification
       - run:
