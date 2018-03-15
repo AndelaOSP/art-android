@@ -11,7 +11,7 @@ default: &defaults
 
 version: 2
 jobs:
-  lint:
+  android_lint:
     <<: *defaults
     steps:
       - checkout
@@ -31,11 +31,129 @@ jobs:
       - run:
           name: Running quality checks
           command: |
-            echo "Run lint, findbugs, pmd, checkstyle"
+            echo "Run android lint"
             cd ~/repo
             ./gradlew lint
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  findbugs_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run findbugs"
+            cd ~/repo
+            ./gradlew assemble
             ./gradlew findbugs
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  pmd_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run PMD"
+            cd ~/repo
             ./gradlew pmd
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  checkstyle_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run checkstyle"
+            cd ~/repo
             ./gradlew checkstyle
       
       # Storing reports
@@ -252,10 +370,16 @@ workflows:
   version: 2
   lint_test_and_deployment:
     jobs:
-      - lint
+      - android_lint
+      - findbugs_lint
+      - pmd_lint
+      - checkstyle_lint
       - test:
           requires:
-            - lint
+            - android_lint
+            - findbugs_lint
+            - pmd_lint
+            - checkstyle_lint
       - deploy_test_build:
           requires:
             - test
