@@ -1,8 +1,6 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
 /build
 /captures
@@ -11,5 +9,8 @@
 # Google Services (e.g. APIs or Firebase)
 app/google-services.json
 
-.idea/instapk.xml
 instapk.log*
+
+.idea/
+instapk.properties
+.hgignore

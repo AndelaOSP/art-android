@@ -5,12 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/mn_serial_entry"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/ic_linked_camera_black"
+            android:title="@string/serial_entry" />
+        <item
             android:id="@+id/nav_send_report"
-            android:icon="@drawable/ic_menu_send_report"
+            android:checkable="true"
+            android:icon="@drawable/ic_move_to_inbox_black"
             android:title="@string/menu_send_report" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_logout"
+            android:checkable="true"
+            android:icon="@drawable/ic_exit_to_app_black"
             android:title="@string/menu_logout" />
     </group>
 

@@ -1,7 +1,6 @@
 package com.andela.art.serialentry;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,14 +8,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.andela.art.login.LoginActivity;
 import com.andela.art.R;
+import com.andela.art.login.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +30,7 @@ public class SerialEntryActivity extends AppCompatActivity
     FirebaseAuth.AuthStateListener mAuthListener;
     TextView name, email;
     CircleImageView displayPicture;
+    private DrawerLayout drawer;
 
     private static final String TAG = "NavigationDrawer";
 
@@ -52,10 +51,10 @@ public class SerialEntryActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.navigation_drawer);
-        Window w = getWindow();
-        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_serial_entry);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -70,18 +69,18 @@ public class SerialEntryActivity extends AppCompatActivity
             }
         };
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        name = (TextView) navigationView.getHeaderView(0).findViewById(R.id.display_name);
-        email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email_address);
-        displayPicture = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.display_picture);
+        name = navigationView.getHeaderView(0).findViewById(R.id.display_name);
+        email = navigationView.getHeaderView(0).findViewById(R.id.email_address);
+        displayPicture = navigationView.getHeaderView(0).findViewById(R.id.display_picture);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(SerialEntryActivity.this);
         String personName = account.getDisplayName();
@@ -96,7 +95,6 @@ public class SerialEntryActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -110,14 +108,20 @@ public class SerialEntryActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_send_report) {
-        } else if (id == R.id.nav_logout) {
-            // Handle the sign out action
-            mAuth.signOut();
+        switch (id) {
+            case R.id.mn_serial_entry:
+                // Handle the serial entry action
+                break;
+            case R.id.nav_send_report:
+                // Handle the report asset action
+                break;
+            case R.id.nav_logout:
+                mAuth.signOut();
+                break;
+
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawers();
         return true;
     }
 }
