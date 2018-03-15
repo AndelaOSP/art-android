@@ -27,7 +27,7 @@ declare_env_variables() {
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+    CIRCLE_ARTIFACTS_MESSAGE="Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
   elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
     JOB_NAME="Findbugs Lint Phase Passed! :smirk_cat:"
@@ -35,8 +35,8 @@ declare_env_variables() {
     # Sorting through the artifact urls to get only the findbugs lint reports
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+/g' |  grep 'findbugs\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
   elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
     JOB_NAME="PMD Lint Phase Passed! :smirk_cat:"
@@ -45,7 +45,7 @@ declare_env_variables() {
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+    CIRCLE_ARTIFACTS_MESSAGE="Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
   elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
     JOB_NAME="Checkstyle Lint Phase Passed! :smirk_cat:"
@@ -54,7 +54,7 @@ declare_env_variables() {
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the report <here|${CIRCLE_REPORT_ARTIFACTS}>"
+    CIRCLE_ARTIFACTS_MESSAGE="Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
   elif [ "$CIRCLE_JOB" == 'test' ]; then
     JOB_NAME="Test Phase Passed! :smiley:"
