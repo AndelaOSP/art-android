@@ -28,7 +28,7 @@ declare_env_variables() {
 /g' |  grep '\.html')"
     CIRCLE_ARTIFACTS_MESSAGE="Android Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
-  elif [ "$CIRCLE_JOB" == 'fingbugs_lint' ]; then
+  elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
 
     # Sorting through the artifact urls to get only the findbugs lint report
 
