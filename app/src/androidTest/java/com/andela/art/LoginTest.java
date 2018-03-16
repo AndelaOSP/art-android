@@ -37,8 +37,13 @@ public class LoginTest {
     public ActivityTestRule<LoginActivity> loginActivityActivityTestRule =
             new ActivityTestRule<LoginActivity>(LoginActivity.class);
 
+    /**
+     * Test Signin button.
+     *
+     * @throws Exception if an error occurs
+     */
     @Test
-    public void ClickSignInButton() throws Exception {
+    public void clickSignInButton() throws Exception {
         // Click on the sign in with google button
         onView(withId(R.id.google_sign_in_button))
                 .perform(click());

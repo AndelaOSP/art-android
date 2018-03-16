@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 @Module
 public class ApplicationModule {
 
-  private final Application application;
+  private Application application;
 
   /**
    * Set the application.
@@ -25,9 +25,14 @@ public class ApplicationModule {
 
   }
 
+  /**
+   * Provide the application context.
+   *
+   * @return application
+   */
   @Provides
   @Singleton
-  public Context provideContext(){
+  public Context provideContext() {
     return application;
   }
 }

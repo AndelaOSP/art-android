@@ -22,6 +22,11 @@ public class App extends Application {
 
     }
 
+    /**
+     * Get component.
+     *
+     * @return component - return the specified component.
+     */
     public ApplicationComponent getComponent() {
         return component;
     }
