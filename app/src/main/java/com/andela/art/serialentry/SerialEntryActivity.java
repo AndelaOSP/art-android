@@ -24,7 +24,9 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+/**
+ * Display the serial entry activity.
+ */
 public class SerialEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +56,9 @@ public class SerialEntryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer);
         Window w = getWindow();
-        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        w.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mAuth = FirebaseAuth.getInstance();
 
@@ -62,7 +66,9 @@ public class SerialEntryActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null) {
-                    Intent redirect = new Intent(SerialEntryActivity.this, LoginActivity.class);
+                    Intent redirect = new Intent(
+                            SerialEntryActivity.this,
+                            LoginActivity.class);
                     SerialEntryActivity.this.startActivity(redirect);
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -81,9 +87,12 @@ public class SerialEntryActivity extends AppCompatActivity
 
         name = (TextView) navigationView.getHeaderView(0).findViewById(R.id.display_name);
         email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email_address);
-        displayPicture = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.display_picture);
+        displayPicture = (CircleImageView) navigationView
+                .getHeaderView(0)
+                .findViewById(R.id.display_picture);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(SerialEntryActivity.this);
+        GoogleSignInAccount account = GoogleSignIn
+                .getLastSignedInAccount(SerialEntryActivity.this);
         String personName = account.getDisplayName();
         String personEmail = account.getEmail();
         String personPhoto = account.getPhotoUrl().toString();
@@ -110,8 +119,7 @@ public class SerialEntryActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_send_report) {
-        } else if (id == R.id.nav_logout) {
+        if (id == R.id.nav_logout) {
             // Handle the sign out action
             mAuth.signOut();
         }

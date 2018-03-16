@@ -15,8 +15,13 @@ public class LoginPresenter implements LoginActivityMVP.LoginPresenter {
     LoginModel model;
     GoogleSignInClient mGoogleSignInClient;
     ProgressDialog mConnectionProgressDialog;
-    private final static int RC_SIGN_IN = 2;
+    private static final int RC_SIGN_IN = 2;
 
+    /**
+     * LoginPresenter.
+     *
+     * @param model - LoginModel
+     */
     public LoginPresenter(LoginModel model) {
         this.model = model;
     }

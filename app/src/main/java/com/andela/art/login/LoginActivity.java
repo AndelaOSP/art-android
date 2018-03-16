@@ -1,26 +1,25 @@
 package com.andela.art.login;
 
-import com.andela.art.databinding.ActivityLoginBinding;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.andela.art.serialentry.SerialEntryActivity;
 import com.andela.art.R;
+import com.andela.art.databinding.ActivityLoginBinding;
+import com.andela.art.serialentry.SerialEntryActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,11 +28,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-
+/**
+ * LoginActivity handles the login of user into the application.
+ */
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.LoginActivity {
 
     FirebaseAuth mAuth;
-    private final static int RC_SIGN_IN = 2;
+    private static final int RC_SIGN_IN = 2;
     GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "LoginActivity";
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -60,9 +61,12 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Window w = getWindow();
-        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        w.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ActivityLoginBinding activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        ActivityLoginBinding activityLoginBinding = DataBindingUtil
+                .setContentView(this, R.layout.activity_login);
         activityLoginBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,16 +83,17 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                 if (firebaseAuth.getCurrentUser() != null) {
                     // Hide the progress dialog if its showing.
                     mConnectionProgressDialog.dismiss();
-                    Intent redirect = new Intent(LoginActivity.this, SerialEntryActivity.class);
+                    Intent redirect = new Intent(
+                            LoginActivity.this,
+                            SerialEntryActivity.class);
                     LoginActivity.this.startActivity(redirect);
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + firebaseAuth.getCurrentUser().getUid());
                 }
             }
         };
 
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .requestProfile()
@@ -105,7 +110,8 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
 
     @Override
     public void firebasewithGoogleAuth(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        AuthCredential credential = GoogleAuthProvider
+                .getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -117,9 +123,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                             // Hide the progress dialog if its showing.
                             mConnectionProgressDialog.dismiss();
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this,
-                                    "Authentication Failed: Ensure you have an internet connection.",
+                                    "Authentication Failed: "
+                                            + "Ensure you have an internet connection.",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
