@@ -32,6 +32,14 @@
     <Match>
         <Class name="~.*\$\$ViewBinder*"/>
     </Match>
+    <!-- Ignore unread fields -->
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD"/>
+    </Match>
+    <!-- Ignore unread fields -->
+    <Match>
+        <Bug pattern="UUF_UNUSED_FIELD"/>
+    </Match>
     <Match>
         <Class name="~.*\$\$ViewBinder\$InnerUnbinder*"/>
     </Match>
