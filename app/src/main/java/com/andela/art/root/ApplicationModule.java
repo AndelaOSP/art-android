@@ -13,8 +13,14 @@ import javax.inject.Singleton;
 @Module
 public class ApplicationModule {
 
-  private Application application;
-  public ApplicationModule (Application application){
+  private final Application application;
+
+  /**
+   * Set the application.
+   *
+   * @param application - appliation
+   */
+  public ApplicationModule(Application application) {
     this.application = application;
 
   }

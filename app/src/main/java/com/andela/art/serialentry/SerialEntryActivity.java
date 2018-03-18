@@ -33,7 +33,7 @@ public class SerialEntryActivity extends AppCompatActivity
     TextView name, email;
     CircleImageView displayPicture;
 
-    private static final String TAG = "NavigationDrawer";
+    static final String TAG = "NavigationDrawer";
 
     @Override
     protected void onStart() {
