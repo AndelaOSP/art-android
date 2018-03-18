@@ -5,7 +5,7 @@ package com.andela.art.login;
  */
 
 public class LoginModel implements LoginActivityMVP.LoginModel {
-    private LoginRepository repository;
+    private final LoginRepository repository;
 
     /**
      * Perform database operations.

@@ -36,11 +36,11 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 2;
     GoogleSignInClient mGoogleSignInClient;
-    private static final String TAG = "LoginActivity";
+    static final String TAG = "LoginActivity";
     FirebaseAuth.AuthStateListener mAuthListener;
     // A progress dialog to display when the user is connecting in
     // case there is a delay in any of the dialogs being ready.
-    private ProgressDialog mConnectionProgressDialog;
+    ProgressDialog mConnectionProgressDialog;
 
     @Override
     protected void onStart() {

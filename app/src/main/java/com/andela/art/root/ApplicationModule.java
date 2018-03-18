@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 @Module
 public class ApplicationModule {
 
-  private Application application;
+  private final Application application;
 
   /**
    * Set the application.
