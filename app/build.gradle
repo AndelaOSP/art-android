@@ -28,11 +28,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
-        abortOnError false
-        quiet true
-        lintConfig file('./code_quality/lint.xml')
-    }
 }
 
 dependencies {
