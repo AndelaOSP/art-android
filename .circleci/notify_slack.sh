@@ -60,12 +60,20 @@ declare_env_variables() {
     JOB_NAME="Test Phase Passed! :smiley:"
 
     # Sorting through the artifact urls to get only the unit test and integration test reports
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'index\.html')"
-    INTEGRATION_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+    DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'testDebugUnitTest\/index\.html')"
+    RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'testReleaseUnitTest\/index\.html')"
+    JACOCO_DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'jacocoTestDebugUnitTestReport\/html\/index\.html')"
+    JACOCO_RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'jacocoTestReleaseUnitTestReport\/html\/index\.html')"
+    INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'AVD')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the test reports here: \n ${CIRCLE_REPORT_ARTIFACTS} \n ${INTEGRATION_REPORT}"
+    CIRCLE_ARTIFACTS_MESSAGE="Get the test reports here:
+    \n Unit Test Reports <${DEBUG_REPORT}|Debug> | <${RELEASE_REPORT}|Release>
+    \n Jacoco Unit Test Reports <${JACOCO_DEBUG_REPORT}|Debug> | <${JACOCO_Release_REPORT}|Release>
+    \n <${INTEGRATION_TEST_REPORT}|Android Virtual Device (AVD) Test Report>"
 
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
     JOB_NAME="Deploy Test Build Succeeded :rocket:"
