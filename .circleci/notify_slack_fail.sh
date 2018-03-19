@@ -68,7 +68,7 @@ declare_env_variables() {
 /g' |  grep 'AVD')"
     CIRCLE_ARTIFACTS_MESSAGE="Test Phase Failed! :scream: \n Get the test reports here:
     \n Unit Test Reports <${DEBUG_REPORT}|Debug> | <${RELEASE_REPORT}|Release>
-    \n Jacoco Unit Test Reports <${JACOCO_DEBUG_REPORT}|Debug> | <${JACOCO_Release_REPORT}|Release>
+    \n Jacoco Unit Test Reports <${JACOCO_DEBUG_REPORT}|Debug> | <${JACOCO_RELEASE_REPORT}|Release>
     \n <${INTEGRATION_TEST_REPORT}|Android Virtual Device (AVD) Test Report>"
 
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
