@@ -28,6 +28,11 @@ public class AppTest {
     public ActivityTestRule<LoginActivity> loginActivityRule =
             new ActivityTestRule<>(LoginActivity.class, true, false);
 
+    /**
+     * Tests that an activity launches in portrait even if the device is in landscape mode.
+     *
+     * @throws RemoteException if an error occurs.
+     */
     @Test
     public void deviceInLandscape_ActivityLaunchesInPortrait() throws RemoteException {
         device.setOrientationLeft();
@@ -37,6 +42,12 @@ public class AppTest {
         assertEquals(Configuration.ORIENTATION_PORTRAIT, getActivityOrientation());
     }
 
+    /**
+     * Tests that an activity remains in portrait even if the device's orientation is altered
+     * to landscape mode.
+     *
+     * @throws RemoteException if an error occurs.
+     */
     @Test
     public void changeDeviceToLandscape_OrientationRemainsPortrait() throws RemoteException {
         loginActivityRule.launchActivity(null);
@@ -46,6 +57,11 @@ public class AppTest {
         Assert.assertEquals(Configuration.ORIENTATION_PORTRAIT, getActivityOrientation());
     }
 
+    /**
+     * Get activity orientation.
+     *
+     * @return orientation - return the orientation of the activity under test.
+     */
     private int getActivityOrientation() {
         return loginActivityRule.getActivity().getResources().getConfiguration().orientation;
     }
