@@ -12,16 +12,25 @@ import com.andela.art.R;
 
 public class NetworkUtil {
 
-  public void isNetworkAvailable(Context context) {
-    ConnectivityManager connectivityManager
-        = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+  /**
+   * Checks for a device's internet connection status.
+   *
+   * @param context - Context
+   * @return boolean
+   */
+
+  public boolean isNetworkAvailable(Context context) {
+    ConnectivityManager connectivityManager =
+        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 
-    if(activeNetworkInfo == null || !activeNetworkInfo.isConnected()){
+    if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
 
-      Toast.makeText(context, context.getResources().getString(R.string.network_util_error_message), Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, context.getResources().getString(R.string.network_util_error_message),
+          Toast.LENGTH_SHORT).show();
+      return false;
+    } else {
+      return true;
     }
-
   }
-
 }

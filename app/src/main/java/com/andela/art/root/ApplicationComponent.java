@@ -13,6 +13,11 @@ import javax.inject.Singleton;
 @Component(modules = {ApplicationModule.class, LoginModule.class})
 public interface ApplicationComponent {
 
+  /**
+   * Inject the login activity.
+   *
+   * @param target - The target activity
+   */
   void inject(LoginActivity target);
 
 }
