@@ -118,7 +118,18 @@ send_notification() {
   curl -X POST --data-urlencode \
   "payload={
       \"channel\": \"${DEPLOYMENT_CHANNEL}\", 
-      \"username\": \"DeployNotification\"
+      \"username\": \"DeployNotification\", 
+      \"attachments\": [{
+          \"fallback\": \"CircleCI build notification and generated files\",
+          \"color\": \"good\",
+          \"pretext\": \"Art Android Builds\",
+          \"author_name\": \"Branch: $CIRCLE_BRANCH by ${CIRCLE_USERNAME}\",
+          \"author_link\": \"https://github.com/AndelaOSP/art-android/tree/${CIRCLE_BRANCH}\",
+          \"title\": \"${SLACK_TEXT_TITLE}\",
+          \"title_link\": \"$CIRCLE_WORKFLOW_URL\",
+          \"text\": \"${SLACK_DEPLOYMENT_TEXT}\",
+          \"actions\": [${CIRCLE_ARTIFACTS_BUTTON}]
+      }]
   }" \
   "${SLACK_CHANNEL_HOOK}"  
 }
