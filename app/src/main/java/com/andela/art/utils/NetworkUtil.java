@@ -3,8 +3,6 @@ package com.andela.art.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
-import com.andela.art.R;
 
 /**
  * Created by Mugiwara_Munyi on 16/03/2018.
@@ -12,25 +10,26 @@ import com.andela.art.R;
 
 public class NetworkUtil {
 
-  /**
-   * Checks for a device's internet connection status.
-   *
-   * @param context - Context
-   * @return boolean
-   */
+    /**
+     * Empty Constructor for Network Util class.
+     */
 
-  public boolean isNetworkAvailable(Context context) {
-    ConnectivityManager connectivityManager =
-        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-
-    if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
-
-      Toast.makeText(context, context.getResources().getString(R.string.network_util_error_message),
-          Toast.LENGTH_SHORT).show();
-      return false;
-    } else {
-      return true;
+    public NetworkUtil() {
+        //This is empty on purpose, nothing to see here.
     }
-  }
+
+    /**
+     * Checks for a device's internet connection status.
+     *
+     * @param context - Context
+     * @return boolean
+     */
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetworkInfo.isConnected();
+    }
 }
