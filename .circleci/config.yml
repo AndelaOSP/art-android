@@ -44,7 +44,7 @@ jobs:
           name: Notifying slack channel (succeeded)
           when: on_success
           command: |
-            bash ~/repo/.circleci/notify_slack.sh
+            bash ~/repo/.circleci/notify_slack.sh --stacktrace
       - run:
           name: Notifying slack channel (failed)
           when: on_fail
