@@ -27,7 +27,7 @@ declare_env_variables() {
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_BUTTON="{text: \"Android Lint Report\", type: \"button\", url: \"${CIRCLE_REPORT_ARTIFACTS}\"}"
+    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Android Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
     JOB_NAME="Findbugs Lint Phase Passed! :smirk_cat:"
@@ -106,7 +106,9 @@ declare_env_variables() {
   COMMIT_LINK="https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/commit/${CIRCLE_SHA1}"
   IMG_TAG="$(git rev-parse --short HEAD)"
   CIRCLE_WORKFLOW_URL="https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
-  SLACK_DEPLOYMENT_TEXT="CircleCI Build <$CIRCLE_WORKFLOW_URL|#$CIRCLE_BUILD_NUM> \n Branch: $CIRCLE_BRANCH \n Executed Git Commit <$COMMIT_LINK|${IMG_TAG}> by ${CIRCLE_USERNAME}: ${JOB_NAME} \n ${CIRCLE_ARTIFACTS_MESSAGE}"
+  SLACK_TEXT_TITLE="CircleCI Build #$CIRCLE_BUILD_NUM"
+  SLACK_DEPLOYMENT_TEXT="Executed Git Commit <$COMMIT_LINK|${IMG_TAG}>: ${JOB_NAME} \n ${CIRCLE_ARTIFACTS_MESSAGE}"
+
 }
 
 send_notification() {
@@ -118,11 +120,16 @@ send_notification() {
       \"channel\": \"${DEPLOYMENT_CHANNEL}\", 
       \"username\": \"DeployNotification\", 
       \"attachments\": [{
-          text: ${SLACK_DEPLOYMENT_TEXT},
-          fallback: \"Error compiling message\",
-          color: \"#ff0000\",
-          attachment_type: \"default\",
-          actions: ${CIRCLE_ARTIFACTS_BUTTON}
+          \"fallback\": \"CircleCI build notification and generated files\",
+          \"color\": \"good\",
+          \"pretext\": \"Art Android Builds\",
+          \"author_name\": \"Branch: $CIRCLE_BRANCH by ${CIRCLE_USERNAME}\",
+          \"author_link\": \"https://github.com/AndelaOSP/art-android/tree/${CIRCLE_BRANCH}\",
+          \"title\": \"${SLACK_TEXT_TITLE}\",
+          \"title_link\": \"$CIRCLE_WORKFLOW_URL\"
+          \"text\": \"${SLACK_DEPLOYMENT_TEXT}\",
+          \"attachment_type\": \"default\",
+          \"actions\": [${CIRCLE_ARTIFACTS_BUTTON}]
       }]}" \
   "${SLACK_CHANNEL_HOOK}"  
 }
