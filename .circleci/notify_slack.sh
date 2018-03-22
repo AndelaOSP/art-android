@@ -128,9 +128,9 @@ send_notification() {
           \"title\": \"${SLACK_TEXT_TITLE}\",
           \"title_link\": \"$CIRCLE_WORKFLOW_URL\"
           \"text\": \"${SLACK_DEPLOYMENT_TEXT}\",
-          \"attachment_type\": \"default\",
           \"actions\": [${CIRCLE_ARTIFACTS_BUTTON}]
-      }]}" \
+      }]
+  }" \
   "${SLACK_CHANNEL_HOOK}"  
 }
 
