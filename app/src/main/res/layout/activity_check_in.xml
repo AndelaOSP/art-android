@@ -16,12 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/name"
-        android:text="@string/name"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="normal"
         android:layout_alignBottom="@id/ivPhoto"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"/>
 
 
@@ -52,14 +50,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/serial_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/serial_number"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"/>
@@ -91,14 +87,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/cohort_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/cohort_number"
                         android:textColor="@android:color/black"
                         android:textStyle="bold"
                         android:textSize="18sp"/>
@@ -128,7 +122,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:orientation="vertical">
                     <TextView
@@ -143,7 +136,6 @@
                         android:id="@+id/email_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/mail"
                         android:textColor="#939393" />
                 </LinearLayout>
             </LinearLayout>
@@ -159,7 +151,8 @@
         android:text="@string/checkin"
         android:layout_below="@id/card_view"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         android:layout_margin="10dp"
         android:visibility="visible"/>
     <Button
@@ -168,10 +161,11 @@
         android:layout_height="49dp"
         android:layout_alignBaseline="@+id/checkinButton"
         android:layout_alignBottom="@+id/checkinButton"
-        android:layout_alignLeft="@+id/checkinButton"
         android:layout_alignStart="@+id/checkinButton"
         android:background="@color/checkOutButton"
         android:text="@string/check_out"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         android:visibility="invisible" />
 
     </RelativeLayout>
