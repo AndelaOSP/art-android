@@ -27,7 +27,7 @@ declare_env_variables() {
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+    CIRCLE_ARTIFACTS_BUTTON="{text: \"Android Lint Report\", type: \"button\", url: \"${CIRCLE_REPORT_ARTIFACTS}\"}"
 
   elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
     JOB_NAME="Findbugs Lint Phase Passed! :smirk_cat:"
@@ -117,9 +117,13 @@ send_notification() {
   "payload={
       \"channel\": \"${DEPLOYMENT_CHANNEL}\", 
       \"username\": \"DeployNotification\", 
-      \"text\": 
-      \"${SLACK_DEPLOYMENT_TEXT}\", 
-      \"icon_emoji\": \":rocket:\"}" \
+      \"attachments\": [{
+          text: ${SLACK_DEPLOYMENT_TEXT},
+          fallback: \"Error compiling message\",
+          color: \"#ff0000\",
+          attachment_type: \"default\",
+          actions: ${CIRCLE_ARTIFACTS_BUTTON}
+      }]}" \
   "${SLACK_CHANNEL_HOOK}"  
 }
 
