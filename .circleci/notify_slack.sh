@@ -87,9 +87,9 @@ declare_env_variables() {
 /g' |  grep 'app-debug\.apk')"
     CIRCLE_RELEASE_ARTIFACT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'app-release-unsigned\.apk')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"},
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"}
+    CIRCLE_ARTIFACTS_BUTTON="$(echo \
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"}, \
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"} \
     )"
 
   elif [ "$CIRCLE_JOB" == 'deploy_staging_build' ]; then
@@ -98,9 +98,9 @@ declare_env_variables() {
 /g' |  grep 'app-debug\.apk')"
     CIRCLE_RELEASE_ARTIFACT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'app-release-unsigned\.apk')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"},
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"}
+    CIRCLE_ARTIFACTS_BUTTON="$(echo \
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"}, \
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"} \
     )"
 
   elif [ "$CIRCLE_JOB" == 'deploy_production_build' ]; then
@@ -110,8 +110,8 @@ declare_env_variables() {
     CIRCLE_RELEASE_ARTIFACT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'app-release-unsigned\.apk')"
     CIRCLE_ARTIFACTS_BUTTON="$(echo
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"},
-        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"}
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_DEBUG_ARTIFACT}\"}, \
+        {\"type\": \"button\", \"text\": \"Debug APK\", \"url\": \"${CIRCLE_RELEASE_ARTIFACT}\"} \
     )"
 
   else
