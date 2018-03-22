@@ -75,7 +75,7 @@ declare_env_variables() {
         {\"type\": \"button\", \"text\": \"Unit Test Report (Release)\", \"url\": \"${RELEASE_REPORT}\"}, \
         {\"type\": \"button\", \"text\": \"Jacoco Test Report (Debug)\", \"url\": \"${JACOCO_DEBUG_REPORT}\"}, \
         {\"type\": \"button\", \"text\": \"Jacoco Test Report (Release)\", \"url\": \"${JACOCO_RELEASE_REPORT}\"}, \
-        {\"type\": \"button\", \"text\": \"Android Virtual Device (AVD) Test Report\", \"url\": \"${INTEGRATION_TEST_REPORT}\"}) \
+        {\"type\": \"button\", \"text\": \"Android Virtual Device (AVD) Test Report\", \"url\": \"${INTEGRATION_TEST_REPORT}\"} \
     )"
 
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
