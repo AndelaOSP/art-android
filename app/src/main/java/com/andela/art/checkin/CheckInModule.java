@@ -1,4 +1,4 @@
-package com.andela.art.di;
+package com.andela.art.checkin;
 
 import com.andela.art.api.CheckInService;
 

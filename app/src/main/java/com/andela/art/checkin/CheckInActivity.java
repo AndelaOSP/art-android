@@ -22,12 +22,13 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Inject
     CheckInService checkInService;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_check_in);
         ((App) getApplication()).getComponent().inject(this);
-        presenter = new CheckInPresenterImpl(this);
+        presenter = new CheckInPresenterImpl(this, checkInService);
         displayDetails();
         binding.checkinButton.setOnClickListener(new View.OnClickListener() {
             @Override

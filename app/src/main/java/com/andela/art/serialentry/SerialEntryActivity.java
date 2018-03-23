@@ -3,6 +3,7 @@ package com.andela.art.serialentry;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,6 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class SerialEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String personPhoto, personName, personEmail;
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -93,9 +97,9 @@ public class SerialEntryActivity extends AppCompatActivity
 
         GoogleSignInAccount account = GoogleSignIn
                 .getLastSignedInAccount(SerialEntryActivity.this);
-        String personName = account.getDisplayName();
-        String personEmail = account.getEmail();
-        String personPhoto = account.getPhotoUrl().toString();
+        personName = account.getDisplayName();
+        personEmail = account.getEmail();
+        personPhoto = account.getPhotoUrl().toString();
 
         name.setText(personName);
         email.setText(personEmail);
@@ -127,5 +131,22 @@ public class SerialEntryActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent checkInIntent = new Intent(SerialEntryActivity.this, CheckInActivity.class);
+                checkInIntent.putExtra("name", personName);
+                checkInIntent.putExtra("email", personEmail);
+                checkInIntent.putExtra("cohort", "18");
+                checkInIntent.putExtra("serial", "CR54TEYEQ");
+                checkInIntent.putExtra("image", personPhoto);
+                startActivity(checkInIntent);
+            }
+        }, 5000);
     }
 }
