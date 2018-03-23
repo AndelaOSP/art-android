@@ -1,14 +1,12 @@
-package com.andela.art;
+package com.andela.art.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import com.andela.art.utils.NetworkUtil;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
 
 import static junit.framework.TestCase.assertEquals;
 
