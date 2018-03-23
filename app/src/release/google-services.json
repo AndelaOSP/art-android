@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "236168090156-c9dintcvd71t28c7miefa8hm9lmihgjm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "a0b25e9e8eb2a3e949dd3d51b886506fc1430816"
+          }
+        },
+        {
           "client_id": "236168090156-3irh1erm3rj5c5kdamgvefk8heuo2eh9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

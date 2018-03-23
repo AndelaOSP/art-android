@@ -2,7 +2,6 @@ package com.andela.art.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -64,7 +63,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         w.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
         activityLoginBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
