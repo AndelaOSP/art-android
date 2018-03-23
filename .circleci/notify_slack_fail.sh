@@ -20,23 +20,56 @@ declare_env_variables() {
 
   # Assigning slack messages based on the CircleCI job name
 
-  if [ "$CIRCLE_JOB" == 'lint' ]; then
+  if [ "$CIRCLE_JOB" == 'android_lint' ]; then
 
-    # Sorting through the artifact urls to get only the lint reports
+    # Sorting through the artifact urls to get only the android lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Lint Phase Failed! :crying_cat_face: \n Get the lint reports here: \n ${CIRCLE_REPORT_ARTIFACTS}"
+    CIRCLE_ARTIFACTS_MESSAGE="Android Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+
+  elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
+
+    # Sorting through the artifact urls to get only the findbugs lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'findbugs\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="Findbugs Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+
+  elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
+
+    # Sorting through the artifact urls to get only the PMD lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep '\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="PMD Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+
+  elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
+
+    # Sorting through the artifact urls to get only the checkstyle lint report
+
+    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep '\.html')"
+    CIRCLE_ARTIFACTS_MESSAGE="Checkstyle Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
 
   elif [ "$CIRCLE_JOB" == 'test' ]; then
 
     # Sorting through the artifact urls to get only the unit test and integration test reports
 
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'index\.html')"
-    INTEGRATION_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+    DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'testDebugUnitTest\/index\.html')"
+    RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'testReleaseUnitTest\/index\.html')"
+    JACOCO_DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'jacocoTestDebugUnitTestReport\/html\/index\.html')"
+    JACOCO_RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'jacocoTestReleaseUnitTestReport\/html\/index\.html')"
+    INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'AVD')"
-    CIRCLE_ARTIFACTS_MESSAGE="Test Phase Failed! :scream: \n Get the test reports here: \n ${CIRCLE_REPORT_ARTIFACTS} \n ${INTEGRATION_REPORT}"
+    CIRCLE_ARTIFACTS_MESSAGE="Test Phase Failed! :scream: \n Get the test reports here:
+    \n Unit Test Reports <${DEBUG_REPORT}|Debug> | <${RELEASE_REPORT}|Release>
+    \n Jacoco Unit Test Reports <${JACOCO_DEBUG_REPORT}|Debug> | <${JACOCO_RELEASE_REPORT}|Release>
+    \n <${INTEGRATION_TEST_REPORT}|Android Virtual Device (AVD) Test Report>"
 
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
     CIRCLE_ARTIFACTS_MESSAGE="Test Build for Deployment Failed! :scream: \n Get the build reports here:  \n ${CIRCLE_REPORT_ARTIFACTS}"
