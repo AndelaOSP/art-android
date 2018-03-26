@@ -63,4 +63,16 @@
         <item name="android:textColor">@color/EmailTextAlpha</item>
     </style>
 
+    <style name="CheckInToolbarText" parent="@style/Theme.AppCompat">
+        <item name="android:fontFamily">@font/avenir_book</item>
+        <item name="android:textSize">@dimen/tool_bar_title</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:actionOverflowButtonStyle">@style/overFlowMenu</item>
+    </style>
+    
+    <style name="overFlowMenu" parent="@style/Theme.AppCompat">
+        <item name="android:fillColor">@color/white</item>
+    </style>
+
 </resources>

@@ -23,11 +23,10 @@
     <string name="cohort">Cohort</string>
     <string name="checkin">CHECK-IN</string>
     <string name="serial_title">serial number</string>
-    <string name="email">Email</string>
     <string name="search">search</string>
-    <string name="settings">settings</string>
     <string name="feedback">feedback</string>
     <string name="cohort_title">cohort</string>
     <string name="header_image">header image</string>
     <string name="check_out">CHECK-OUT</string>
+    <string name="check_in_title">Resource Tracker</string>
 </resources>

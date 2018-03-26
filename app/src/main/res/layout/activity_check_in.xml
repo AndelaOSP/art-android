@@ -1,172 +1,227 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Theme.AppCompat.Light.NoActionBar"
-    android:background="#EEEEEE">
-    <ImageView
-        android:id="@+id/ivPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/header_image">
-    </ImageView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        android:layout_alignBottom="@id/ivPhoto"
-        android:layout_marginStart="10dp"/>
+    android:background="#1E1D23">
 
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="10dp"
-        android:layout_below="@+id/ivPhoto"
-        android:layout_margin="10dp"
-        card_view:contentPadding="10dp">
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/check_in_toolbar"
             android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#25252f"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_below="@+id/check_in_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="0dp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/mac"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_computer_black_24dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/serial_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:id="@+id/info_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/serial_title"
-                        android:textColor="#939393"
-                        android:textSize="14sp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#dddddd"
-                        android:layout_marginTop="10dp"/>
-                </LinearLayout>
+            android:layout_below="@+id/ivPhoto"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/avenir_heavy"
+            android:text="Godwin Gitonga"
+            android:textColor="#dadcdf"
+            android:textSize="22sp"
+            android:textStyle="normal" />
 
-            </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="348dp"
+            android:layout_height="210dp"
+            android:layout_above="@+id/checkinButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:background="#25252f"
+            android:paddingEnd="33dp"
+            android:paddingStart="20dp"
+            card_view:cardBackgroundColor="#25252f"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="10dp"
+            card_view:contentPadding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/users"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_group_black_24dp"/>
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/cohort_number"
-                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/mac"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:id="@+id/cohort_header"
+                        android:src="@drawable/ic_computer_black_24dp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cohort"
-                        android:textColor="#939393" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#dddddd"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/serial_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_medium"
+                            android:textColor="@color/cardHeader"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/info_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/serial_title"
+                            android:fontFamily="@font/avenir_light"
+                            android:textColor="@color/cardText"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="257dp"
+                            android:layout_height="0.25dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#dadcdf" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_email_black_24dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/email_header"
-                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/users"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/email"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"/>
-                    <TextView
-                        android:id="@+id/email_text"
+                        android:src="@drawable/ic_group_black_24dp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/cohort_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardHeader"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/avenir_medium"/>
+
+                        <TextView
+                            android:id="@+id/cohort_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cohort"
+                            android:textColor="@color/cardText"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/avenir_light"/>
+
+                        <View
+                            android:layout_width="257dp"
+                            android:layout_height="0.25dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#dadcdf" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#939393" />
+                        android:src="@drawable/ic_email_black_24dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/email_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cardHeader"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/avenir_medium"/>
+
+                        <TextView
+                            android:id="@+id/email_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email"
+                            android:textColor="@color/cardText"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/avenir_light"/>
+
+                        <View
+                            android:layout_width="257dp"
+                            android:layout_height="0.25dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#dadcdf" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <Button
-        android:id="@+id/checkinButton"
-        android:layout_width="145dp"
-        android:layout_height="49dp"
-        android:background="@color/checkInButton"
-        android:text="@string/checkin"
-        android:layout_below="@id/card_view"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:visibility="visible"/>
-    <Button
-        android:id="@+id/checkoutButton"
-        android:layout_width="145dp"
-        android:layout_height="49dp"
-        android:layout_alignBaseline="@+id/checkinButton"
-        android:layout_alignBottom="@+id/checkinButton"
-        android:layout_alignStart="@+id/checkinButton"
-        android:background="@color/checkOutButton"
-        android:text="@string/check_out"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:visibility="invisible" />
+        <Button
+            android:id="@+id/checkinButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/checkoutButton"
+            android:layout_alignBottom="@+id/checkoutButton"
+            android:layout_alignEnd="@+id/card_view"
+            android:background="@drawable/checkin_button"
+            android:paddingBottom="9dp"
+            android:paddingEnd="27dp"
+            android:paddingStart="27dp"
+            android:paddingTop="9dp"
+            android:text="@string/checkin"
+            android:fontFamily="@font/avenir_book"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/checkoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/checkinButton"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="22dp"
+            android:background="@drawable/checkout_button"
+            android:paddingBottom="9dp"
+            android:paddingEnd="27dp"
+            android:paddingStart="27dp"
+            android:paddingTop="9dp"
+            android:fontFamily="@font/avenir_book"
+            android:text="@string/check_out"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 </layout>

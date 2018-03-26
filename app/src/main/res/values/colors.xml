@@ -9,5 +9,8 @@
     <color name="profileTextViewColor">#DADCDF</color>
     <color name="profileButtonBg">#35CCC8</color>
     <color name="checkInButton">#009688</color>
-    <color name="checkOutButton">#FFAF30</color>
+    <color name="checkOutButton">#E23B3B</color>
+    <color name="cardHeader">#35CCC8</color>
+    <color name="cardText">#909090</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -3,6 +3,8 @@ package com.andela.art.checkin;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import com.andela.art.R;
@@ -10,6 +12,8 @@ import com.andela.art.api.CheckInService;
 import com.andela.art.databinding.ActivityCheckInBinding;
 import com.andela.art.root.App;
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -36,6 +40,9 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
                 presenter.checkIn(getIntent().getStringExtra("serial"));
             }
         });
+        setSupportActionBar(binding.checkInToolbar);
+        binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInToolbarText);
+
     }
 
     /**
@@ -43,7 +50,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     @Override
     public void displayDetails() {
-        binding.name.setText(getIntent().getStringExtra("name"));
+        binding.name.setText(getIntent().getStringExtra("name").toUpperCase(Locale.US));
         binding.serialInfo.setText(getIntent().getStringExtra("serial"));
         binding.emailText.setText(getIntent().getStringExtra("email"));
         binding.cohortNumber.setText(getIntent().getStringExtra("cohort"));
@@ -66,8 +73,15 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     public void loadResizedImage() {
         Picasso.with(this)
                 .load(getIntent().getStringExtra("image"))
-                .resize(500, 380)
+                .fit()
                 .centerCrop()
                 .into(binding.ivPhoto);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.checkin_menu, menu);
+        return true;
     }
 }

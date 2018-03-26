@@ -27,7 +27,8 @@
         <activity android:name=".securitydashboard.SecurityDashboardActivity" />
         <activity android:name=".settings.SettingsActivity"></activity>
             android:theme="@style/AppTheme"/>
-        <activity android:name=".checkin.CheckInActivity"/>
+        <activity android:name=".checkin.CheckInActivity"
+            android:label="@string/check_in_title"/>
     </application>
 
 </manifest>
