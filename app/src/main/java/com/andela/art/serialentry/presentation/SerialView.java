@@ -8,6 +8,6 @@ import com.andela.art.serialentry.data.Asset;
  */
 
 public interface SerialView extends View{
-    void onDataEntered();
     void onConfirmClicked(String serial);
+    void sendIntent(Asset asset);
 }

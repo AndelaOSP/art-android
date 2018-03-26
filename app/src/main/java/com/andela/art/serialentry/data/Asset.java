@@ -8,7 +8,9 @@ package com.andela.art.serialentry.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Asset {
+import java.io.Serializable;
+
+public class Asset implements Serializable {
 
     @SerializedName("id")
     @Expose

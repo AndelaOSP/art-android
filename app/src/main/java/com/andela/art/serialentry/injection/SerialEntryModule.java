@@ -1,8 +1,9 @@
 package com.andela.art.serialentry.injection;
 
-import com.andela.art.serialentry.data.AssetRespository;
-import com.andela.art.serialentry.domain.GetAssetUseCase;
+import com.andela.art.api.ApiService;
+import com.andela.art.common.Activity;
 import com.andela.art.serialentry.presentation.SerialPresenter;
+import com.andela.art.serialentry.presentation.SerialView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,14 +15,10 @@ import dagger.Provides;
 @Module
 public class SerialEntryModule {
 
+
     @Activity
     @Provides
-    GetAssetUseCase provideGetAssetUseCase(AssetRespository assetRespository){
-        return new GetAssetUseCase(assetRespository);
-    }
-    @Activity
-    @Provides
-    SerialPresenter provideSerialPresenter(GetAssetUseCase getAssetUseCase){
-        return new SerialPresenter(getAssetUseCase);
+    SerialPresenter provideSerialPresenter(ApiService apiService){
+        return new SerialPresenter(apiService);
     }
 }

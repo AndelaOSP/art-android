@@ -2,6 +2,8 @@ package com.andela.art.common;
 
 import android.app.Application;
 
+import dagger.android.support.DaggerApplication;
+
 /**
  * Created by zack on 3/5/18.
  */
@@ -19,10 +21,8 @@ public class ArtApplication extends Application {
     }
 
     public void inject(){
-        applicationComponent =  DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .dataModule(new DataModule())
-                .build();
+        ArtApplication application = new ArtApplication();
+        applicationComponent = DaggerApplicationComponent.builder().application(this).build();
     }
 
 }

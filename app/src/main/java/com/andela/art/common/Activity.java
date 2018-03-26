@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.injection;
+package com.andela.art.common;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

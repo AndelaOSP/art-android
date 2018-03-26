@@ -17,10 +17,19 @@
         android:theme="@style/AppTheme">
         >
         <activity android:name=".login.LoginActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
 
         <activity android:name=".serialentry.presentation.SerialEntryActivity">
             android:label="@string/title_activity_serial_entry"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
+
+        </activity>
+        <activity android:name=".checkin.CheckInActivity"/>
     </application>
 
 </manifest>
