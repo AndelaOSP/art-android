@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#0834D0</color>
     <color name="colorAccent">#49AAAF</color>
     <color name="EmailTextAlpha">#B3FFFFFF</color>
+    <color name="primaryBalticSea">#1E1D23</color>
+    <color name="primaryCharade">#25252f</color>
 </resources>
