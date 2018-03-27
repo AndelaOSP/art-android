@@ -1,11 +1,11 @@
-package com.andela.art.securitydashboard;
+package com.andela.art.settings;
 
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
-import com.andela.art.settings.SettingsActivity;
+import com.andela.art.securitydashboard.SecurityDashboardActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,49 +19,33 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Tests for the security dashboard.
+ * Tests for the settings activity.
  */
 @RunWith(AndroidJUnit4.class)
-public class SecurityDashboardTest {
+public class SettingsTest {
 
     @Rule
     public ActivityTestRule<SecurityDashboardActivity> securityDashboardActivityTestRule =
             new ActivityTestRule<>(SecurityDashboardActivity.class);
 
     /**
-     * Tests that the toolbar is shown on the security dashboard.
+     * Tests that clicking the tool bar home button on the settings activity returns user to
+     * the security dashboard activity.
      */
     @Test
-    public void toolBarIsRenderedInDashboardActivity() {
-        onView(withId(R.id.mToolBar)).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Tests that the menu is shown on the security dashboard in the toolbar by checking the
-     * presence of the settings menu item.
-     */
-    @Test
-    public void menuIsRenderedInDashboardActivity() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText(R.string.settings)).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Tests that the settings activity is opened when a user clicks the settings menu item from
-     * the security dashboard.
-     */
-    @Test
-    public void clickingSettingsMenuItem__OpensSettingsActivity() {
+    public void clickingHomeButton__ReturnsToSecurityDashboardActivity() {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         Intents.init();
-
         onView(withText(R.string.settings)).perform(click());
-
         intended(hasComponent(SettingsActivity.class.getName()));
         Intents.release();
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click());
+
+        onView(withText(R.string.app_title)).check(matches(isDisplayed()));
     }
 }
