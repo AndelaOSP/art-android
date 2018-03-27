@@ -9,6 +9,7 @@
     app:title="@string/app_title"
     app:theme="@style/AppTheme.AppBarOverlay"
     app:titleTextAppearance="@style/AppBarTitle"
+    app:popupTheme="@style/ThemeOverlay.AppBarPopup"
     tools:context="com.andela.art.securitydashboard.SecurityDashboardActivity">
 
 
