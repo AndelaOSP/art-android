@@ -23,6 +23,7 @@
             android:name=".serialentry.SerialEntryActivity"
             android:label="@string/title_activity_serial_entry"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".securitydashboard.SecurityDashboardActivity"></activity>
     </application>
 
 </manifest>

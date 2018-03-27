@@ -13,8 +13,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.andela.art.R;
+import com.andela.art.securitydashboard.SecurityDashboardActivity;
 import com.andela.art.databinding.ActivityLoginBinding;
-import com.andela.art.serialentry.SerialEntryActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     // A progress dialog to display when the user is connecting in
     // case there is a delay in any of the dialogs being ready.
     ProgressDialog mConnectionProgressDialog;
+    Intent dashboard;
 
     @Override
     protected void onStart() {
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
         Window w = getWindow();
         w.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -81,10 +83,8 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                 if (firebaseAuth.getCurrentUser() != null) {
                     // Hide the progress dialog if its showing.
                     mConnectionProgressDialog.dismiss();
-                    Intent redirect = new Intent(
-                            LoginActivity.this,
-                            SerialEntryActivity.class);
-                    LoginActivity.this.startActivity(redirect);
+                    // Add check if user is admin here in future
+                    LoginActivity.this.startActivity(dashboard);
                 }
             }
         };
@@ -117,6 +117,8 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
+                            // Add check if user is admin here in future
+                            startActivity(dashboard);
                         } else {
                             // Hide the progress dialog if its showing.
                             mConnectionProgressDialog.dismiss();
