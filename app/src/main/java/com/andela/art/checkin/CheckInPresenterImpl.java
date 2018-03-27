@@ -1,6 +1,7 @@
 package com.andela.art.checkin;
 
 import com.andela.art.api.CheckInService;
+import com.andela.art.model.CheckInModel;
 import com.andela.art.model.CheckInResponse;
 
 import io.reactivex.Observable;
@@ -29,9 +30,14 @@ public class CheckInPresenterImpl implements CheckInPresenter {
     /**
      * Check in user with asset serial number.
      * @param serial - asset serial number.
+     * @param securityUser - security user name.
      */
-    public void checkIn(String serial) {
-        Observable<CheckInResponse> checkin = checkInService.checkIn(serial);
+    public void checkIn(String serial, String securityUser) {
+        CheckInModel checkInModel = new CheckInModel();
+        checkInModel.setAction("CHECKIN");
+        checkInModel.setSecurityUser(securityUser);
+        checkInModel.setSerialNumber(serial);
+        Observable<CheckInResponse> checkin = checkInService.checkIn(checkInModel);
         checkin.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<CheckInResponse>() {

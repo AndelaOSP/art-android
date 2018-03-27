@@ -12,22 +12,40 @@ import com.google.gson.annotations.SerializedName;
 public class CheckInResponse {
 
     @SerializedName("id")
-    private Long mId;
+    private String mId;
+    @SerializedName("serial_number")
+    private String mSerialNumber;
 
     /**
      * Id getter.
-     * @return mId
+     * @return mId - integer
      */
-    public Long getId() {
+    public String getId() {
         return mId;
     }
 
     /**
-     * Id setter.
-     * @param id - check in id
+     * Id getter.
+     * @param id - integer
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         mId = id;
+    }
+
+    /**
+     * Serial number getter.
+     * @return mSerialNumber - String
+     */
+    public String getSerialNumber() {
+        return mSerialNumber;
+    }
+
+    /**
+     * Serial number setter.
+     * @param serialNumber - String
+     */
+    public void setSerialNumber(String serialNumber) {
+        mSerialNumber = serialNumber;
     }
 
 }

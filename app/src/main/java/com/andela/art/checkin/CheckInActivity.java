@@ -37,7 +37,8 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         binding.checkinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.checkIn(getIntent().getStringExtra("serial"));
+                presenter.checkIn(getIntent().getStringExtra("serial"),
+                        getIntent().getStringExtra("name"));
             }
         });
         setSupportActionBar(binding.checkInToolbar);

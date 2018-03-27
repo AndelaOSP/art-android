@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import okhttp3.mockwebserver.MockWebServer;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -22,13 +24,16 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Check in activity tests.
  */
-public class CheckInActivityTest {
+public class CheckInModelActivityTest {
+
+    MockWebServer server = new MockWebServer();
+
     /**
      * Setup required before each test.
      * @throws Exception - exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
     }
 
     /**
@@ -53,7 +58,7 @@ public class CheckInActivityTest {
      * @throws Exception - exception
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     /**
@@ -61,7 +66,7 @@ public class CheckInActivityTest {
      * @throws Exception - exception
      */
     @Test
-    public void testDisplayDetails() throws Exception {
+    public void testDisplayDetails() {
         onView(withId(R.id.name)).check(matches(withText("MADGE")));
         onView(withId(R.id.email_text)).check(matches(withText("madge@mail.com")));
         onView(withId(R.id.cohort_number)).check(matches(withText("18")));
@@ -72,7 +77,7 @@ public class CheckInActivityTest {
      * @throws Exception - exception
      */
     @Test
-    public void testClickCheckin() throws Exception {
+    public void testClickCheckin() {
         onView(withId(R.id.checkinButton)).check(matches(isClickable()));
     }
 
@@ -81,8 +86,7 @@ public class CheckInActivityTest {
      * @throws Exception - exception.
      */
     @Test
-    public void testLoadResizedImage() throws Exception {
+    public void testLoadResizedImage() {
         onView(withId(R.id.ivPhoto)).check(matches(isDisplayed()));
     }
-
 }

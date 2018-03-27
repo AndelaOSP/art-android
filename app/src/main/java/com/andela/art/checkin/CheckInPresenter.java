@@ -9,8 +9,9 @@ public interface CheckInPresenter {
      /**
       * Check in users with asset serial number.
       * @param serialNumber - asset serial number.
+      * @param securityUser - security user name.
       */
-     void checkIn(String serialNumber);
+     void checkIn(String serialNumber, String securityUser);
 
      /**
       * Call method to show checkout button.
