@@ -21,38 +21,43 @@ declare_env_variables() {
   # Assigning slack messages based on the CircleCI job name
 
   if [ "$CIRCLE_JOB" == 'android_lint' ]; then
+    MESSAGE_TEXT="Android Lint Phase Failed! :crying_cat_face:"
 
     # Sorting through the artifact urls to get only the android lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Android Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Android Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
+    MESSAGE_TEXT="Findbugs Lint Phase Failed! :crying_cat_face:"
 
     # Sorting through the artifact urls to get only the findbugs lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'findbugs\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Findbugs Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Findbugs Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
+    MESSAGE_TEXT="PMD Lint Phase Failed! :crying_cat_face:"
 
     # Sorting through the artifact urls to get only the PMD lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="PMD Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"PMD Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
+    MESSAGE_TEXT="Checkstyle Lint Phase Failed! :crying_cat_face:"
 
     # Sorting through the artifact urls to get only the checkstyle lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_MESSAGE="Checkstyle Lint Phase Failed! :crying_cat_face: \n Get the report <${CIRCLE_REPORT_ARTIFACTS}|here>"
+    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Checkstyle Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'test' ]; then
+    MESSAGE_TEXT="Test Phase Failed! :scream:"
 
     # Sorting through the artifact urls to get only the unit test and integration test reports
 
@@ -66,22 +71,26 @@ declare_env_variables() {
 /g' |  grep 'jacocoTestReleaseUnitTestReport\/html\/index\.html')"
     INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'AVD')"
-    CIRCLE_ARTIFACTS_MESSAGE="Test Phase Failed! :scream: \n Get the test reports here:
-    \n Unit Test Reports <${DEBUG_REPORT}|Debug> | <${RELEASE_REPORT}|Release>
-    \n Jacoco Unit Test Reports <${JACOCO_DEBUG_REPORT}|Debug> | <${JACOCO_RELEASE_REPORT}|Release>
-    \n <${INTEGRATION_TEST_REPORT}|Android Virtual Device (AVD) Test Report>"
+
+    CIRCLE_ARTIFACTS_BUTTON="$(echo \
+        "{\"type\": \"button\", \"text\": \"Unit Test Report (Debug)\", \"url\": \"${DEBUG_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Unit Test Report (Release)\", \"url\": \"${RELEASE_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Jacoco Test Report (Debug)\", \"url\": \"${JACOCO_DEBUG_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Jacoco Test Report (Release)\", \"url\": \"${JACOCO_RELEASE_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Android Virtual Device (AVD) Test Report\", \"url\": \"${INTEGRATION_TEST_REPORT}\"}"
+      )"
 
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
-    CIRCLE_ARTIFACTS_MESSAGE="Test Build for Deployment Failed! :scream: \n Get the build reports here:  \n ${CIRCLE_REPORT_ARTIFACTS}"
+    MESSAGE_TEXT="Test Build for Deployment Failed! :scream:"
 
   elif [ "$CIRCLE_JOB" == 'deploy_staging_build' ]; then
-    CIRCLE_ARTIFACTS_MESSAGE="Staging Build for Deployment Failed! :scream: \n Get the build reports here:  \n ${CIRCLE_REPORT_ARTIFACTS}"
+    MESSAGE_TEXT="Staging Build for Deployment Failed! :scream:"
 
   elif [ "$CIRCLE_JOB" == 'deploy_production_build' ]; then
-    CIRCLE_ARTIFACTS_MESSAGE="Production Build for Deployment Failed! :scream: \n Get the build reports here:  \n ${CIRCLE_REPORT_ARTIFACTS}"
+    MESSAGE_TEXT="Production Build for Deployment Failed! :scream:"
 
   else
-    CIRCLE_ARTIFACTS_MESSAGE="Unknown job failed"
+    MESSAGE_TEXT="Unknown job failed"
   fi
 
   # Some template for the Slack message
@@ -89,7 +98,8 @@ declare_env_variables() {
   COMMIT_LINK="https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/commit/${CIRCLE_SHA1}"
   IMG_TAG="$(git rev-parse --short HEAD)"
   CIRCLE_WORKFLOW_URL="https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
-  SLACK_DEPLOYMENT_TEXT="CircleCI Build <$CIRCLE_WORKFLOW_URL|#$CIRCLE_BUILD_NUM> \n Branch: $CIRCLE_BRANCH \n Executed Git Commit <$COMMIT_LINK|${IMG_TAG}> by ${CIRCLE_USERNAME} \n ${CIRCLE_ARTIFACTS_MESSAGE}"
+  SLACK_TEXT_TITLE="CircleCI Build #$CIRCLE_BUILD_NUM"
+  SLACK_DEPLOYMENT_TEXT="Executed Git Commit <$COMMIT_LINK|${IMG_TAG}>: ${MESSAGE_TEXT}"
 }
 
 send_notification() {
@@ -100,10 +110,18 @@ send_notification() {
   "payload={
       \"channel\": \"${DEPLOYMENT_CHANNEL}\", 
       \"username\": \"DeployNotification\", 
-      \"text\": 
-      \"${SLACK_DEPLOYMENT_TEXT}\", 
-      \"icon_emoji\": \":rocket:\"}" \
-  "${SLACK_CHANNEL_HOOK}"  
+      \"attachments\": [{
+          \"fallback\": \"CircleCI build notification and generated files\",
+          \"color\": \"danger\",
+          \"author_name\": \"Branch: $CIRCLE_BRANCH by ${CIRCLE_USERNAME}\",
+          \"author_link\": \"https://github.com/AndelaOSP/art-android/tree/${CIRCLE_BRANCH}\",
+          \"title\": \"${SLACK_TEXT_TITLE}\",
+          \"title_link\": \"$CIRCLE_WORKFLOW_URL\",
+          \"text\": \"${SLACK_DEPLOYMENT_TEXT}\",
+          \"actions\": [${CIRCLE_ARTIFACTS_BUTTON}]
+      }]
+  }" \
+  "${SLACK_CHANNEL_HOOK}"
 }
 
 main() {
