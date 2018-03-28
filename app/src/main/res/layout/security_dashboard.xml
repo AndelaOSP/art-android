@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
     android:screenOrientation="portrait"
-    tools:context="com.andela.art.SecurityDashboardActivity">
+    tools:context="com.andela.art.dashboard.SecurityDashboardActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
@@ -19,5 +19,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="88dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="13dp"
+        android:text="Full name"
+        android:textColor="#dadcdf"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+
+    <TextView
+        android:id="@+id/email_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="13dp"
+        android:text="example@gmail.com"
+        android:textColor="#dadcdf"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/full_name" />
+
+    <Button
+        android:id="@+id/check_serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="106dp"
+        android:background="#35ccc8"
+        android:paddingBottom="8dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="59dp"
+        android:paddingTop="9dp"
+        android:text="Check Serial"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_address" />
+
 
 </android.support.constraint.ConstraintLayout>
