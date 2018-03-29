@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mToolBar"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="?attr/actionBarSize"
     android:minHeight="80dp"
     app:title="@string/app_title"
     app:theme="@style/AppTheme.AppBarOverlay"
     app:titleTextAppearance="@style/AppBarTitle"
     app:popupTheme="@style/ThemeOverlay.AppBarPopup"
     tools:context="com.andela.art.securitydashboard.SecurityDashboardActivity">
-
 
 </android.support.v7.widget.Toolbar>
 
