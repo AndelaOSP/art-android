@@ -1,6 +1,6 @@
 package com.andela.art.api;
 
-import com.andela.art.util.Constants;
+import com.andela.art.BuildConfig;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,26 +17,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApiModule {
 
+
+    /**
+     * Provide client instance for injection.
+     * @return OkHttp client instance
+     */
     @Provides
-    OkHttpClient provideOkHttp(){
+    OkHttpClient provideOkHttp() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder().addInterceptor(new HttpLoggingInterceptor()).build();
     }
 
+
+    /**
+     * Provide retrofit instance for injection.
+     *
+     * @param client Okhttp client to be used
+     * @return Retrofit instances
+     */
     @Provides
-    Retrofit provideRetrofit(OkHttpClient client){
+    Retrofit provideRetrofit(OkHttpClient client) {
         return new Retrofit
                 .Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
+    /**
+     * Provide api service interface for injection.
+     *
+     * @param retrofit retrofit instance used by api service
+     *
+     * @return ApiService instance
+     */
     @Provides
-    ApiService provideService(Retrofit retrofit){
+    ApiService provideService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
     }
 }

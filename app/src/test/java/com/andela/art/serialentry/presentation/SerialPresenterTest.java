@@ -4,7 +4,6 @@ import com.andela.art.api.ApiService;
 import com.andela.art.serialentry.data.Asset;
 import com.andela.art.util.RxSchedulersOverrideRule;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Observable;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +32,10 @@ public class SerialPresenterTest {
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
 
+    /**
+     * Test setup method.
+     * @throws Exception if an exception is raised.
+     */
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -42,16 +44,13 @@ public class SerialPresenterTest {
         asset = new Asset();
     }
 
+    /**
+     * Return asset when serial presenter get asset is called.
+     */
     @Test
-    public void getAssetShouldReturnAsset(){
+    public void getAssetShouldReturnAsset() {
         when(apiService.getAsset(anyString())).thenReturn(Observable.just(asset));
         serialPresenter.getAsset(anyString());
         verify(serialView).sendIntent(asset);
     }
-
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
 }

@@ -5,6 +5,7 @@ apply from: rootProject.file('app/code_quality_tools/quality.gradle')
 
 android {
     compileSdkVersion 26
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.andela.art"
         minSdkVersion 22
@@ -28,15 +29,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+            buildConfigField "String" ,"BASE_URL", "\"http:/localhost:3000\""
+        }
+        prod{
+            buildConfigField "String" ,"BASE_URL", "\"http://art.andela.com\""
+        }
+    }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:26.1.0'
@@ -46,17 +59,11 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation  'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.16.0'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     implementation 'com.google.dagger:dagger-android:2.14.1'
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     implementation 'com.google.firebase:firebase-core:11.8.0'
@@ -75,6 +82,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
     androidTestImplementation 'com.android.support.test:rules:1.0.1'
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.16.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

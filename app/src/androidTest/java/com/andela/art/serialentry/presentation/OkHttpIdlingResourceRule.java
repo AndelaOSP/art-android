@@ -10,7 +10,6 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by zack on 3/20/18.
@@ -23,7 +22,7 @@ public class OkHttpIdlingResourceRule implements TestRule {
             OkHttpClient client = new OkHttpClient.Builder().build();
             @Override
             public void evaluate() throws Throwable {
-                IdlingResource idlingResource = OkHttp3IdlingResource.create("oKhttp",client);
+                IdlingResource idlingResource = OkHttp3IdlingResource.create("oKhttp", client);
                 IdlingRegistry.getInstance().register(idlingResource);
                 base.evaluate();
                 IdlingRegistry.getInstance().unregister(idlingResource);

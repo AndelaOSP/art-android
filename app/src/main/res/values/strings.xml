@@ -12,6 +12,7 @@
     <string name="title_activity_serial_entry">SerialEntry</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="enter_text">Please enter the serial number</string>
-    <string name="serial_hint">'Serial Number</string>
+    <string name="enter_text">Enter Serial</string>
+    <string name="serial_hint">Serial Number</string>
+    <string name="serial_settings">settings</string>
 </resources>

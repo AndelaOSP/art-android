@@ -1,16 +1,14 @@
 package com.andela.art.serialentry.presentation;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.EditText;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
@@ -19,35 +17,47 @@ import com.andela.art.common.ArtApplication;
 import com.andela.art.serialentry.data.Asset;
 import com.andela.art.serialentry.injection.DaggerSerialEntryComponent;
 import com.andela.art.serialentry.injection.SerialEntryModule;
-//import com.andela.art.serialentry.injection.DaggerSerialEntryComponent;
-//import com.andela.art.serialentry.injection.SerialEntryModule;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by zack on 3/5/18.
+ * Display Dialog box to enter serial and retrieve asset details.
  */
 
-public class SerialEntryActivity extends AppCompatActivity implements SerialView{
+public class SerialEntryActivity extends AppCompatActivity implements SerialView {
 
     @Inject
     SerialPresenter serialPresenter;
 
     @BindView(R.id.addSerial)
-    FloatingActionButton addSerialButton;
-    @BindView(R.id.itemcode)
-    TextView itemView;
+    Button addSerialButton;
 
+    @BindView(R.id.profilePhoto)
+    CircleImageView profilePhoto;
+
+    @BindView(R.id.email_address)
+    TextView email;
+
+    @BindView(R.id.display_name)
+    TextView displayName;
+
+    /**
+     * Activity on create method.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.serial_entry_layout);
         ButterKnife.bind(this);
-        ApplicationComponent applicationComponent = ((ArtApplication) getApplication()).applicationComponent();
+        getSupportActionBar().setTitle("Resource Tracker");
+        ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
+                .applicationComponent();
 
         DaggerSerialEntryComponent.builder()
                 .applicationComponent(applicationComponent)
@@ -57,34 +67,51 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
 
         serialPresenter.attachView(this);
     }
-    @OnClick(R.id.addSerial)
-    public void openDialog(){
-        final EditText editText = new EditText(this);
-        editText.setHint(R.string.serial_hint);
-        AlertDialog serialDialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.enter_text)
-                .setView(editText)
-                .setPositiveButton("OK", (DialogInterface dialogInterface, int i) -> {
-                        String input = editText.getText().toString();
-                        onConfirmClicked(input);
-                    })
-                .setCancelable(true)
-                .show();
 
+    /**
+     * Create dialog for serial when add button is clicked.
+     */
+    @OnClick(R.id.addSerial)
+    public void openDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SerialDialog serialDialog = SerialDialog.newInstance();
+        serialDialog.show(fragmentManager, "Serial Dialog");
     }
+
+    /**
+     * Retrieve asset on confirm button is clicked.
+     *
+     * @param serial
+     */
     @Override
     public void onConfirmClicked(String serial) {
         serialPresenter.getAsset(serial);
 }
 
+    /**
+     * Start checkin Activity with asset data.
+     *
+     * @param asset
+     */
     @Override
     public void sendIntent(Asset asset) {
-        Log.d("ART-2",asset.getItemCode());
         Intent checkInIntent = new Intent(SerialEntryActivity.this, CheckInActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("asset", asset);
         checkInIntent.putExtras(bundle);
         startActivity(checkInIntent);
 
+    }
+
+    /**
+     *
+     * @param menu
+     * @return boolean
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.serial_menu, menu);
+        return true;
     }
 }

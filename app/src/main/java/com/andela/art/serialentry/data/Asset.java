@@ -10,6 +10,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Asset POJO class.
+ */
 public class Asset implements Serializable {
 
     @SerializedName("id")
@@ -25,34 +28,71 @@ public class Asset implements Serializable {
     @Expose
     private String serialNumber;
 
+    /**
+     * Return id.
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    /**
+     * Set asset id.
+     *
+     * @param id asset id
+     */
+    public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Return userid.
+     *
+     * @return userid
+     */
     public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    /**
+     * Set asset userId.
+     *
+     * @param userId id for asset owner
+     */
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    /**
+     * Return itemcode.
+     * @return itemcode
+     */
     public String getItemCode() {
         return itemCode;
     }
 
+    /**
+     * Set asset itemCode.
+     *
+     * @param itemCode asset item code
+     */
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
     }
 
+    /**
+     * Return serial number.
+     * @return id
+     */
     public String getSerialNumber() {
         return serialNumber;
     }
 
+    /**
+     * Set serial number.
+     *
+     * @param serialNumber asset item code
+     */
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }

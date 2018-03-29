@@ -3,7 +3,6 @@ package com.andela.art.serialentry.injection;
 import com.andela.art.api.ApiService;
 import com.andela.art.common.Activity;
 import com.andela.art.serialentry.presentation.SerialPresenter;
-import com.andela.art.serialentry.presentation.SerialView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,10 +14,16 @@ import dagger.Provides;
 @Module
 public class SerialEntryModule {
 
-
+    /**
+     * Provide serial presenter instance.
+     *
+     * @param apiService api service to be used by serial presenter
+     *
+     * @return serial presenter instance
+     */
     @Activity
     @Provides
-    SerialPresenter provideSerialPresenter(ApiService apiService){
+    SerialPresenter provideSerialPresenter(ApiService apiService) {
         return new SerialPresenter(apiService);
     }
 }

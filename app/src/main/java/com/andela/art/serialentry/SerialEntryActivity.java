@@ -20,8 +20,6 @@ import com.andela.art.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Picasso;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -95,11 +93,10 @@ public class SerialEntryActivity extends AppCompatActivity
                 .getLastSignedInAccount(SerialEntryActivity.this);
         String personName = account.getDisplayName();
         String personEmail = account.getEmail();
-        String personPhoto = account.getPhotoUrl().toString();
+
 
         name.setText(personName);
         email.setText(personEmail);
-        Picasso.with(SerialEntryActivity.this).load(personPhoto).into(displayPicture);
     }
 
 
