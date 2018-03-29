@@ -23,6 +23,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/primaryCharade</item>
+    </style>
+
+    <style name="AppBarTitle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/avenir_book</item>
     </style>
 
     <style name="MenuItemsText" parent="@android:style/TextAppearance.Medium">
