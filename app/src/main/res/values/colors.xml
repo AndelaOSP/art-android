@@ -6,5 +6,5 @@
     <color name="EmailTextAlpha">#B3FFFFFF</color>
     <color name="primaryBalticSea">#1E1D23</color>
     <color name="primaryCharade">#25252f</color>
-    <color name="backgroundDark">#1e1d23</color>
+    <color name="textColor">#DADCDF</color>
 </resources>
