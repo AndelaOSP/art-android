@@ -12,4 +12,7 @@
     <string name="title_activity_serial_entry">SerialEntry</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="full_name">Full name</string>
+    <string name="email">example@gmail.com</string>
+    <string name="check_serial">Check Serial</string>
 </resources>
