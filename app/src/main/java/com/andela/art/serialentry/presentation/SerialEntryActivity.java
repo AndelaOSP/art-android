@@ -79,7 +79,7 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
     /**
      * Start checkin Activity with asset data.
      *
-     * @param asset
+     * @param asset - asset data sent to check in activity
      */
     public void sendIntent(Asset asset) {
         Intent checkInIntent = new Intent(SerialEntryActivity.this, CheckInActivity.class);
