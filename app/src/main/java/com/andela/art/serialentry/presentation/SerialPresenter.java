@@ -1,39 +1,43 @@
 package com.andela.art.serialentry.presentation;
 
-import android.util.Log;
-
+import com.andela.art.api.ApiService;
 import com.andela.art.common.Presenter;
-import com.andela.art.serialentry.data.Asset;
-import com.andela.art.serialentry.domain.GetAssetUseCase;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zack on 3/5/18.
  */
 
-public class SerialPresenter implements Presenter<SerialView>{
-    private GetAssetUseCase getAssetUseCase;
-    private Disposable disposable;
+
+public class SerialPresenter implements Presenter<SerialView> {
     private SerialView serialView;
+    private final ApiService apiService;
+    private Disposable disposable;
 
-    public SerialPresenter(GetAssetUseCase getAssetUseCase) {
-        this.getAssetUseCase = getAssetUseCase;
+    /**
+     * Serial presenter constructor.
+     * @param apiService api service interface
+     */
+    public SerialPresenter(ApiService apiService) {
+        this.apiService = apiService;
     }
 
-    public void getAsset(String serial){
-        getAssetUseCase.setSerial(serial);
-        getAssetUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+    /**
+     * Return asset from disposable.
+     * @param serial serial entered by dialog
+     */
+    public void getAsset(String serial) {
+         disposable = apiService.getAsset(serial).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(serialView::sendIntent);
     }
 
-
+    /**
+     * Instantiate view that will be used by the presenter.
+     * @param view view that will be instantiated
+     */
     @Override
     public void attachView(SerialView view) {
         this.serialView = view;

@@ -48,6 +48,18 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
+    <style name="CheckInToolbarText" parent="@style/Theme.AppCompat">
+        <item name="android:fontFamily">@font/avenir_book</item>
+        <item name="android:textSize">@dimen/tool_bar_title</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:actionOverflowButtonStyle">@style/overFlowMenu</item>
+    </style>
+
+    <style name="overFlowMenu" parent="@style/Theme.AppCompat">
+        <item name="android:fillColor">@color/white</item>
+    </style>
+
     <style name="DisplayNameText" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textColorHint">?android:textColorHint</item>
@@ -61,6 +73,9 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/nav_drawer_text_size</item>
         <item name="android:textColor">@color/EmailTextAlpha</item>
+    </style>
+    <style name="SerialTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:windowActionBar"> true</item>
     </style>
 
 </resources>

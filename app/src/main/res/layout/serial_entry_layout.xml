@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#1e1d23"
+    android:orientation="vertical"
+    >
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="67dp"
+        android:src="@mipmap/ic_launcher_round" />
 
-    <android.support.design.widget.FloatingActionButton
+    <TextView
+        android:id="@+id/display_name"
+        android:layout_width="183dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/addSerial"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="22dp"
+        android:background="#25252f"
+        android:fontFamily="@font/avenir_heavy"
+        android:text="hiiiii"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/email_address"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profilePhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="141dp"
+        android:background="#25252f"
+        android:fontFamily="@font/avenir_book"
+        android:text="sydftfghjkym"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+    <Button
         android:id="@+id/addSerial"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_add_white_24dp"
-        android:layout_gravity="bottom|right|end"
-        />
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_width="208dp"
+        android:layout_height="39dp"
+        android:layout_below="@+id/email_address"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72dp"
+        android:background="#35ccc8"
+        android:fontFamily="@font/avenir_book"
+        android:text="Check Serial"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+</RelativeLayout>

@@ -1,8 +1,5 @@
 package com.andela.art.common;
 
-import com.andela.art.serialentry.data.AssetRepositoryImpl;
-import com.andela.art.serialentry.data.AssetRespository;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
