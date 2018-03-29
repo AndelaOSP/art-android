@@ -1,0 +1,62 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+
+    configFile rootProject.file('app/code_quality_tools/checkstyle.xml')
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+    ignoreFailures = false
+}
+
+task findbugs(type: FindBugs) {
+    description 'Find bugs maingly design flaws, bad practices'
+    group 'verification'
+    excludeFilter = rootProject.file('app/code_quality_tools/findbugs.xml')
+    classes = fileTree("$project.buildDir/intermediates/classes/debug/")
+    source 'src'
+    effort 'max'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = file("$project.buildDir/outputs/findbugs/findbugs.html")
+    }
+}
+
+task pmd(type: Pmd) {
+    description 'Identifying potential duplicated code, cyclomatic complexity and overcomplicated expressions'
+    group 'verification'
+    ruleSetFiles = files("$project.rootDir/app/code_quality_tools/rules-pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination = file("$project.buildDir/outputs/pmd/pmd.html")
+    }
+}
+
+android {
+    lintOptions {
+        abortOnError false
+        quiet true
+        lintConfig file("$project.rootDir/app/code_quality_tools/rules-lint.xml")
+
+        htmlReport true
+        htmlOutput file("$project.buildDir/reports/lint/lint.html")
+    }
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
