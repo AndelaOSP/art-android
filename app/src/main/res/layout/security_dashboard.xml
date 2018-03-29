@@ -3,15 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:background="@color/primaryBalticSea"
     tools:context="com.andela.art.securitydashboard.SecurityDashboardActivity">
 
     <include layout="@layout/tool_bar"></include>
-=======
-    android:background="@color/backgroundDark"
-    tools:context="com.andela.art.dashboard.SecurityDashboardActivity">
->>>>>>> Add fullname, email, and button
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
