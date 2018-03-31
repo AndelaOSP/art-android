@@ -8,6 +8,7 @@ import com.andela.art.R;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.securitydashboard.SecurityDashboardActivity;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,7 +45,6 @@ public class SettingsTest {
         Intents.init();
         onView(withText(R.string.settings)).perform(click());
         intended(hasComponent(SettingsActivity.class.getName()));
-        Intents.release();
     }
 
     /**
@@ -78,11 +78,17 @@ public class SettingsTest {
     @Test
     public void acceptingLogout__RedirectsToLoginActivity() {
         onView(withId(R.id.tvLogOut)).perform(click());
-        Intents.init();
 
         onView(withId(R.id.tvLogoutDialogYes)).perform(click());
 
         intended(hasComponent(LoginActivity.class.getName()));
+    }
+
+    /**
+     * Release intents after running each test case.
+     */
+    @After
+    public void tearDown() {
         Intents.release();
     }
 }
