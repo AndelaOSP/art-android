@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="188dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvLogOutDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir_medium"
+        android:lineSpacingExtra="@dimen/dialog_line_spacing"
+        android:paddingLeft="24dp"
+        android:paddingTop="22dp"
+        android:text="@string/logout"
+        android:textColor="@color/logoutDialogTitleMessageColor"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvLogOutDialogMessage"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLogOutDialogTitle"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/avenir_book"
+        android:lineSpacingExtra="@dimen/dialog_line_spacing"
+        android:paddingLeft="24dp"
+        android:text="Are you sure you want to log out?"
+        android:textColor="@color/logoutDialogTitleMessageColor"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvLogoutDialogYes"
+        android:layout_width="74dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/logout_yes"
+        android:textColor="@color/logoutDialogYesCancelColor"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvLogoutDialogCancel"
+        android:layout_width="75dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="7dp"
+        android:layout_toLeftOf="@+id/tvLogoutDialogYes"
+        android:gravity="center"
+        android:text="@string/logout_cancel"
+        android:textColor="@color/logoutDialogYesCancelColor"
+        android:textSize="14sp" />
+
+</RelativeLayout>

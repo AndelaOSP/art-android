@@ -13,4 +13,6 @@
     <dimen name="sixteen_sp">16sp</dimen>
     <dimen name="twelve_sp">12sp</dimen>
     <dimen name="twenty_two_sp">22sp</dimen>
+    <dimen name="dialog_line_spacing">8sp</dimen>
+>>>>>>> Add logout dialog layout
 </resources>
