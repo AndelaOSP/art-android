@@ -2,6 +2,8 @@ package com.andela.art.root;
 
 import com.andela.art.login.LoginActivity;
 import com.andela.art.login.LoginModule;
+import com.andela.art.settings.SettingsActivity;
+
 import dagger.Component;
 import javax.inject.Singleton;
 
@@ -20,5 +22,11 @@ public interface ApplicationComponent {
    */
   void inject(LoginActivity target);
 
+  /**
+   * Inject the settings activity.
+   *
+   * @param settingsActivity - SettingsActivity
+   */
+  void inject(SettingsActivity settingsActivity);
 }
 

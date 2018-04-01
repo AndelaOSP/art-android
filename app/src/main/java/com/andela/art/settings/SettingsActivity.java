@@ -12,20 +12,24 @@ import android.widget.TextView;
 
 import com.andela.art.R;
 import com.andela.art.login.LoginActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.andela.art.root.App;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
+
+import javax.inject.Inject;
 
 /**
  * This is activity manages a users settings.
  */
 public class SettingsActivity extends AppCompatActivity {
+    @Inject GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_page);
+        ((App) getApplicationContext()).getComponent().inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.mToolBar);
         setSupportActionBar(toolbar);
@@ -50,13 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
-                        .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .requestProfile()
-                        .build();
-                GoogleSignIn.getClient(SettingsActivity.this, googleSignInOptions).signOut();
+                googleSignInClient.signOut();
                 Intent loginActivity = new Intent(SettingsActivity.this, LoginActivity.class);
                 startActivity(loginActivity);
             }
