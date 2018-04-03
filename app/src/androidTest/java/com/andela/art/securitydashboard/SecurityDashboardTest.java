@@ -64,4 +64,16 @@ public class SecurityDashboardTest {
         intended(hasComponent(SettingsActivity.class.getName()));
         Intents.release();
     }
+
+    /**
+     * Test the dashboard activity that it loads and displays all the views.
+     */
+    @Test
+    public void dashboardViewsAreRenderedInDashboardActivity() {
+        onView(withId(R.id.profile_picture)).check(matches(isDisplayed()));
+        onView(withId(R.id.full_name)).check(matches(isDisplayed()));
+        onView(withId(R.id.email_address)).check(matches(isDisplayed()));
+        onView(withId(R.id.check_serial)).check(matches(isDisplayed()));
+        onView(withId(R.id.check_serial)).check(matches(withText(R.string.check_serial)));
+    }
 }
