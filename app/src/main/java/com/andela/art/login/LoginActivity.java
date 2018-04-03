@@ -20,12 +20,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.ArrayList;
 
 /**
  * LoginActivity handles the login of user into the application.
@@ -41,6 +44,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     // case there is a delay in any of the dialogs being ready.
     ProgressDialog mConnectionProgressDialog;
     Intent dashboard;
+
+    // Custom error code for unauthorized GMail addresses
+    private static final int UNAUTHORIZED_CODE = 14672;
 
     @Override
     protected void onStart() {
@@ -151,17 +157,60 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                String emailDomain = account.getEmail().split("@")[1];
+
+                // filter out Andela email addresses
+                if ("andela.com".equals(emailDomain)) {
+
+                    Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    // filter out only specific GMail addresses assigned to the guards
+                    if (isAllowedNonAndelaEmail(account.getEmail())) {
+                        Toast.makeText(this, "Allowed non Andela email",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        mGoogleSignInClient.signOut();
+                        throw new ApiException(new Status(UNAUTHORIZED_CODE));
+                    }
+                }
+
                 firebasewithGoogleAuth(account);
+
             } catch (ApiException e) {
                 // Hide the progress dialog if its showing.
                 mConnectionProgressDialog.dismiss();
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(LoginActivity.this,
-                        "Authorization Failed: Ensure you have selected a Google account.",
-                        Toast.LENGTH_LONG).show();
+                if (e.getStatusCode() == UNAUTHORIZED_CODE) {
+                    Toast.makeText(LoginActivity.this,
+                            "Please use your Andela email address",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this,
+                            "Authorization Failed: Ensure you have selected a Google account.",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         }
+    }
+
+
+    /**
+     * Check to see if a given non Andela GMail address is among the ones allowed to login.
+     *
+     * @param email Email address for the user
+     * @return boolean true if an email is allowed, false if the email is not allowed
+     */
+    public static boolean isAllowedNonAndelaEmail(String email) {
+
+        ArrayList<String> allowedEmailAddresses = new ArrayList<>();
+        allowedEmailAddresses.add("muhallan1@gmail.com");
+        allowedEmailAddresses.add("chadwalt04@gmail.com");
+
+        return allowedEmailAddresses.contains(email);
+
     }
 
 }
