@@ -171,7 +171,7 @@
                             android:id="@+id/email_header"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/email"
+                            android:text="@string/email_title"
                             android:textColor="@color/cardText"
                             android:textSize="12sp"
                             android:fontFamily="@font/avenir_light"/>

@@ -29,4 +29,5 @@
     <string name="header_image">header image</string>
     <string name="check_out">CHECK-OUT</string>
     <string name="check_in_title">Resource Tracker</string>
+    <string name="email_title">Email</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.andela.art.securitydashboard;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.andela.art.R;
+import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.settings.SettingsActivity;
 
 /**
@@ -41,4 +43,23 @@ public class SecurityDashboardActivity extends AppCompatActivity {
         startActivity(settings);
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+                        CheckInActivity.class);
+                checkInIntent.putExtra("name", "Jane Doe");
+                checkInIntent.putExtra("email", "jane.doe@mail.com");
+                checkInIntent.putExtra("cohort", "18");
+                checkInIntent.putExtra("serial", "CR54TEYEQ");
+                checkInIntent.putExtra("image", "");
+                startActivity(checkInIntent);
+            }
+        }, 1000);
+    }
 }
+

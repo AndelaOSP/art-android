@@ -73,7 +73,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Override
     public void loadResizedImage() {
         Picasso.with(this)
-                .load(getIntent().getStringExtra("image"))
+                .load(R.drawable.photo)
                 .fit()
                 .centerCrop()
                 .into(binding.ivPhoto);

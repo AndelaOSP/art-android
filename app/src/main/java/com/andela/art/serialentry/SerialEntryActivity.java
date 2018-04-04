@@ -3,7 +3,6 @@ package com.andela.art.serialentry;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -131,22 +129,5 @@ public class SerialEntryActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent checkInIntent = new Intent(SerialEntryActivity.this, CheckInActivity.class);
-                checkInIntent.putExtra("name", personName);
-                checkInIntent.putExtra("email", personEmail);
-                checkInIntent.putExtra("cohort", "18");
-                checkInIntent.putExtra("serial", "CR54TEYEQ");
-                checkInIntent.putExtra("image", personPhoto);
-                startActivity(checkInIntent);
-            }
-        }, 5000);
     }
 }
