@@ -66,7 +66,7 @@ public class SettingsTest {
     public void cancelingLogout__StaysOnSettingsActivity() {
         onView(withId(R.id.tvLogOut)).perform(click());
 
-        onView(withId(R.id.tvLogoutDialogCancel)).perform(click());
+        onView(withText(R.string.logout_cancel)).perform(click());
 
         onView(withText(R.string.report_a_problem)).check(matches(isDisplayed()));
     }
@@ -79,7 +79,7 @@ public class SettingsTest {
     public void acceptingLogout__RedirectsToLoginActivity() {
         onView(withId(R.id.tvLogOut)).perform(click());
 
-        onView(withId(R.id.tvLogoutDialogYes)).perform(click());
+        onView(withText(R.string.logout_yes)).perform(click());
 
         intended(hasComponent(LoginActivity.class.getName()));
     }
