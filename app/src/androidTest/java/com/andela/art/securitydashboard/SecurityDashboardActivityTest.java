@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.securitydashboard;
+package com.andela.art.securitydashboard;
 
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;

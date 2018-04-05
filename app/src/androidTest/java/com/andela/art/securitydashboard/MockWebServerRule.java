@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.securitydashboard;
+package com.andela.art.securitydashboard;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
