@@ -1,11 +1,13 @@
 package com.andela.art.securitydashboard;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.settings.SettingsActivity;
@@ -17,6 +19,7 @@ import com.andela.art.settings.SettingsActivity;
 public class SecurityDashboardActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    boolean backButtonToExitPressedTwice = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +43,26 @@ public class SecurityDashboardActivity extends AppCompatActivity {
                 SettingsActivity.class);
         startActivity(settings);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backButtonToExitPressedTwice) {
+            super.onBackPressed();
+            finish();
+            moveTaskToBack(true);
+        }
+
+        this.backButtonToExitPressedTwice = true;
+        Toast.makeText(this, "Press BACK BUTTON again to exit.",
+                Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                backButtonToExitPressedTwice = false;
+            }
+        }, 2000);
     }
 }
