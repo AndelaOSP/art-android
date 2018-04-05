@@ -75,7 +75,7 @@ public class FirebasePresenter implements Presenter<SerialView> {
     /**
      * Mock user class.
      */
-    static class MockUser {
+    public static class MockUser {
         String displayName;
         String email;
         String photoURI;
@@ -86,7 +86,7 @@ public class FirebasePresenter implements Presenter<SerialView> {
          * @param email - email
          * @param photoURI - photoURI
          */
-        MockUser(String displayName, String email, String photoURI) {
+        public MockUser(String displayName, String email, String photoURI) {
             this.displayName = displayName;
             this.email = email;
             this.photoURI = photoURI;

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,7 +15,7 @@ import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.common.ApplicationComponent;
 import com.andela.art.common.ArtApplication;
-import com.andela.art.databinding.SerialEntryLayoutBinding;
+import com.andela.art.databinding.SecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.securitydashboard.data.Asset;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
@@ -34,7 +35,7 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
     @Inject
     SerialPresenter serialPresenter;
 
-    SerialEntryLayoutBinding  serialLayoutBinding;
+    SecurityDashboardBinding securityDashboardBinding;
 
     @Inject
     FirebasePresenter firebasePresenter;
@@ -46,11 +47,11 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        serialLayoutBinding = DataBindingUtil.setContentView(this,
-                R.layout.serial_entry_layout);
+        securityDashboardBinding = DataBindingUtil.setContentView(this,
+                R.layout.security_dashboard);
 
-        serialLayoutBinding.addSerial.setOnClickListener(view -> openDialog());
-        getSupportActionBar().setTitle("Resource Tracker");
+        securityDashboardBinding.addSerial.setOnClickListener(view -> openDialog());
+        setSupportActionBar((Toolbar) securityDashboardBinding.mToolBar);
         ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
 
@@ -117,13 +118,13 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
     @Override
     public void setAccountDetails(String email, String name, String photo) {
         Uri photoUri = Uri.parse(photo);
-        serialLayoutBinding.emailAddress.setText(email);
-        serialLayoutBinding.displayName.setText(name);
+        securityDashboardBinding.emailAddress.setText(email);
+        securityDashboardBinding.displayName.setText(name);
         Picasso.with(getApplicationContext())
                 .load(photoUri)
                 .fit()
                 .centerCrop()
-                .into(serialLayoutBinding.profilePhoto);
+                .into(securityDashboardBinding.profilePhoto);
     }
 
     @Override

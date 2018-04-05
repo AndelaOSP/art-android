@@ -53,6 +53,13 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
+    gradle.taskGraph.useFilter { task ->
+        if (task.name.startsWith("test") && task.name.contains("Prod")) {
+            return false;
+        }
+        return true;
+    }
 }
 
 dependencies {

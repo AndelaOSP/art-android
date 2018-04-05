@@ -12,7 +12,6 @@ import dagger.Provides;
 @Activity
 @Module
 public class FirebasePresenterModule {
-
     /**
      * Provide firebase presenter.
      * @param firebaseAuth - firebaseAuth
