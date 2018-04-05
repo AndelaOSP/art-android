@@ -40,6 +40,12 @@ before_script:
     - android list targets
     - echo no | android create avd --force --name test --target android-22 --abi $ANDROID_ABI    #Create AVD for given api
     - emulator -avd test -no-skin -no-window &    #Start emulator
+    - mkdir /home/travis/build/AndelaOSP/art-android/keystores/
+    - touch /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
+    - echo "keyAlias=androiddebugkey" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
+    - echo "keyPassword=android" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
+    - echo "storeFile=/home/travis/.android/debug.keystore" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
+    - echo "storePassword=android" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
 
 script:
     - ./gradlew build jacocoTestReport assembleAndroidTest
