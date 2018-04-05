@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.presentation;
+package com.andela.art.securitydashboard.presentation;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
@@ -16,10 +16,11 @@ import com.andela.art.common.ApplicationComponent;
 import com.andela.art.common.ArtApplication;
 import com.andela.art.databinding.SerialEntryLayoutBinding;
 import com.andela.art.login.LoginActivity;
-import com.andela.art.serialentry.data.Asset;
-import com.andela.art.serialentry.injection.DaggerSerialEntryComponent;
-import com.andela.art.serialentry.injection.FirebasePresenterModule;
-import com.andela.art.serialentry.injection.SerialEntryModule;
+import com.andela.art.securitydashboard.data.Asset;
+import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
+import com.andela.art.securitydashboard.injection.SerialEntryModule;
+import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
+import com.andela.art.settings.SettingsActivity;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ import javax.inject.Inject;
  * Display Dialog box to enter serial and retrieve asset details.
  */
 
-public class SerialEntryActivity extends AppCompatActivity implements SerialView {
+public class SecurityDashboardActivity extends AppCompatActivity implements SerialView {
 
     @Inject
     SerialPresenter serialPresenter;
@@ -89,7 +90,8 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
      * @param asset - asset data sent to check in activity
      */
     public void sendIntent(Asset asset) {
-        Intent checkInIntent = new Intent(SerialEntryActivity.this, CheckInActivity.class);
+        Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+                CheckInActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("asset", asset);
         checkInIntent.putExtras(bundle);
@@ -143,8 +145,15 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.serial_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent settings = new Intent(SecurityDashboardActivity.this,
+                SettingsActivity.class);
+        startActivity(settings);
         return true;
     }
 }

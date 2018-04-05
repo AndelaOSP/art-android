@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.data;
+package com.andela.art.securitydashboard.data;
 
 /**
  * Created by zack on 3/5/18.

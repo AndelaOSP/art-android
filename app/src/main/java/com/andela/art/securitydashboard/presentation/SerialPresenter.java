@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.presentation;
+package com.andela.art.securitydashboard.presentation;
 
 import com.andela.art.api.ApiService;
 import com.andela.art.common.Presenter;

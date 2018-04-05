@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.presentation;
+package com.andela.art.securitydashboard.presentation;
 
 import android.app.Dialog;
 import android.databinding.DataBindingUtil;
@@ -40,7 +40,7 @@ public class SerialDialog extends AppCompatDialogFragment {
 
         dialogBinding.submit.setOnClickListener(view -> {
             String serial = dialogBinding.serialEditText.getText().toString();
-            ((SerialEntryActivity) getActivity()).onConfirmClicked(serial);
+            ((SecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
             dismiss();
         });
 

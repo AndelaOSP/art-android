@@ -1,7 +1,7 @@
-package com.andela.art.serialentry.injection;
+package com.andela.art.securitydashboard.injection;
 
 import com.andela.art.api.ApiService;
-import com.andela.art.serialentry.presentation.SerialPresenter;
+import com.andela.art.securitydashboard.presentation.SerialPresenter;
 
 import dagger.Module;
 import dagger.Provides;

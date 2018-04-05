@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
-import com.andela.art.securitydashboard.SecurityDashboardActivity;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

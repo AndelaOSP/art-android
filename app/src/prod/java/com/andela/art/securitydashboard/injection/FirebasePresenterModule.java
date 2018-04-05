@@ -1,6 +1,6 @@
-package com.andela.art.serialentry.injection;
+package com.andela.art.securitydashboard.injection;
 
-import com.andela.art.serialentry.presentation.FirebasePresenter;
+import com.andela.art.securitydashboard.presentation.FirebasePresenter;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.Module;

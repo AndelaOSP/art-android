@@ -1,4 +1,4 @@
-package com.andela.art.serialentry.presentation;
+package com.andela.art.serialentry.securitydashboard;
 
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
@@ -6,6 +6,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.securitydashboard.presentation.FirebasePresenter;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +35,7 @@ import static org.hamcrest.CoreMatchers.allOf;
  * Created by zack on 3/20/18.
  */
 @RunWith(AndroidJUnit4.class)
-public class SerialEntryActivityTest {
+public class SecurityDashboardActivityTest {
 
     FirebasePresenter firebasePresenter;
 
@@ -46,8 +48,8 @@ public class SerialEntryActivityTest {
      * blocks of Junit tests.
      */
     @Rule
-    public IntentsTestRule<SerialEntryActivity> activityTestRule =
-            new IntentsTestRule<>(SerialEntryActivity.class,
+    public IntentsTestRule<SecurityDashboardActivity> activityTestRule =
+            new IntentsTestRule<>(SecurityDashboardActivity.class,
                     true, false);
 
     @Rule

@@ -1,9 +1,9 @@
-package com.andela.art.serialentry.injection;
+package com.andela.art.securitydashboard.injection;
 
 import com.andela.art.api.ApiModule;
 import com.andela.art.common.ApplicationComponent;
 import com.andela.art.firebase.FirebaseModule;
-import com.andela.art.serialentry.presentation.SerialEntryActivity;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
 import dagger.Component;
 
@@ -19,7 +19,7 @@ import dagger.Component;
 public interface SerialEntryComponent {
     /**
      * Inject serial presenter to serial entry activity.
-     * @param serialEntryActivity activity where serial presenter will be injected
+     * @param securityDashboardActivity activity where serial presenter will be injected
      */
-    void inject(SerialEntryActivity serialEntryActivity);
+    void inject(SecurityDashboardActivity securityDashboardActivity);
 }

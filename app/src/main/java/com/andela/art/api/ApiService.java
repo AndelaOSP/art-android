@@ -1,6 +1,6 @@
 package com.andela.art.api;
 
-import com.andela.art.serialentry.data.Asset;
+import com.andela.art.securitydashboard.data.Asset;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

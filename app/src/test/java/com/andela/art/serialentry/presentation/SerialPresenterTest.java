@@ -1,7 +1,9 @@
 package com.andela.art.serialentry.presentation;
 
 import com.andela.art.api.ApiService;
-import com.andela.art.serialentry.data.Asset;
+import com.andela.art.securitydashboard.data.Asset;
+import com.andela.art.securitydashboard.presentation.SerialPresenter;
+import com.andela.art.securitydashboard.presentation.SerialView;
 import com.andela.art.util.RxSchedulersOverrideRule;
 
 import org.junit.Before;

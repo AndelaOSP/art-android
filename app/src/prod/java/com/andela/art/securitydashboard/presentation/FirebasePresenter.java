@@ -1,4 +1,7 @@
-package com.andela.art.serialentry.presentation;
+package com.andela.art.securitydashboard.presentation;
+
+
+
 
 import com.andela.art.common.Presenter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -11,8 +14,6 @@ public class FirebasePresenter implements Presenter<SerialView> {
     private SerialView serialView;
     private final FirebaseAuth firebaseAuth;
     private final FirebaseAuth.AuthStateListener authStateListener;
-    public MockUser dummyUser;
-    String imagePath = "file:///android_asset/images/dummyPhoto.png";
 
     /**
      * Constructor.
@@ -23,8 +24,6 @@ public class FirebasePresenter implements Presenter<SerialView> {
                              FirebaseAuth.AuthStateListener authStateListener) {
         this.firebaseAuth = firebaseAuth;
         this.authStateListener = authStateListener;
-        dummyUser = new MockUser("Zacharia Mwangi", "zac@gmail.com",
-                imagePath);
     }
 
     /**
@@ -55,7 +54,7 @@ public class FirebasePresenter implements Presenter<SerialView> {
      * Called to check if user is logged in.
      */
     public void onAuthStateChanged() {
-        if (dummyUser == null) {
+        if (firebaseAuth.getCurrentUser() == null) {
             serialView.redirectLoggedOutUser();
         } else {
             setAccountDetails();
@@ -66,30 +65,9 @@ public class FirebasePresenter implements Presenter<SerialView> {
      * Set account details.
      */
     public void setAccountDetails() {
-       String email = dummyUser.email;
-       String name = dummyUser.displayName;
-       String photo = dummyUser.photoURI;
+       String email = firebaseAuth.getCurrentUser().getEmail();
+       String name = firebaseAuth.getCurrentUser().getDisplayName();
+       String photo = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
        serialView.setAccountDetails(email, name, photo);
-    }
-
-    /**
-     * Mock user class.
-     */
-    static class MockUser {
-        String displayName;
-        String email;
-        String photoURI;
-
-        /**
-         * MockUser constructor.
-         * @param displayName - displayName
-         * @param email - email
-         * @param photoURI - photoURI
-         */
-        MockUser(String displayName, String email, String photoURI) {
-            this.displayName = displayName;
-            this.email = email;
-            this.photoURI = photoURI;
-        }
     }
 }
