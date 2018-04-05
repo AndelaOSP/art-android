@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1e1d23"
@@ -25,13 +25,11 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="22dp"
-        android:background="#25252f"
+        android:background="#1e1d23"
         android:fontFamily="@font/avenir_heavy"
-        android:text="hiiiii"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:textSize="22sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/email_address"
@@ -41,13 +39,11 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="141dp"
-        android:background="#25252f"
+        android:background="#1e1d23"
         android:fontFamily="@font/avenir_book"
-        android:text="sydftfghjkym"
         android:textAlignment="center"
-        android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/addSerial"
@@ -65,3 +61,4 @@
         android:textColor="#ffffff"
         android:textSize="16sp" />
 </RelativeLayout>
+</layout>

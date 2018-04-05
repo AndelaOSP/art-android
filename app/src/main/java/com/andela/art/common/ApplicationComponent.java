@@ -3,6 +3,7 @@ package com.andela.art.common;
 
 
 import com.andela.art.api.ApiModule;
+import com.andela.art.firebase.FirebaseModule;
 
 import javax.inject.Singleton;
 
@@ -12,7 +13,7 @@ import dagger.Component;
 /**
  * Created by zack on 3/5/18.
  */
-@Singleton @Component(modules = {ApiModule.class})
+@Singleton @Component(modules = {ApiModule.class, FirebaseModule.class})
 public interface ApplicationComponent {
 
     /**

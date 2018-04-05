@@ -43,4 +43,14 @@ public class SerialPresenter implements Presenter<SerialView> {
         this.serialView = view;
     }
 
+    /**
+     * Dispose disposable after activity stops.
+     */
+    public void dispose() {
+        if (!disposable.isDisposed()) {
+            disposable.dispose();
+        }
+
+    }
+
 }

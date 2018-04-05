@@ -1,27 +1,28 @@
 package com.andela.art.serialentry.presentation;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.Button;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.common.ApplicationComponent;
 import com.andela.art.common.ArtApplication;
+import com.andela.art.databinding.SerialEntryLayoutBinding;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.serialentry.data.Asset;
 import com.andela.art.serialentry.injection.DaggerSerialEntryComponent;
+import com.andela.art.serialentry.injection.FirebasePresenterModule;
 import com.andela.art.serialentry.injection.SerialEntryModule;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Display Dialog box to enter serial and retrieve asset details.
@@ -32,8 +33,10 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
     @Inject
     SerialPresenter serialPresenter;
 
-    @BindView(R.id.addSerial)
-    Button addSerialButton;
+    SerialEntryLayoutBinding  serialLayoutBinding;
+
+    @Inject
+    FirebasePresenter firebasePresenter;
 
     /**
      * Activity on create method.
@@ -42,8 +45,10 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.serial_entry_layout);
-        ButterKnife.bind(this);
+        serialLayoutBinding = DataBindingUtil.setContentView(this,
+                R.layout.serial_entry_layout);
+
+        serialLayoutBinding.addSerial.setOnClickListener(view -> openDialog());
         getSupportActionBar().setTitle("Resource Tracker");
         ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
@@ -51,15 +56,17 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
         DaggerSerialEntryComponent.builder()
                 .applicationComponent(applicationComponent)
                 .serialEntryModule(new SerialEntryModule())
+                .firebasePresenterModule(new FirebasePresenterModule())
                 .build()
                 .inject(this);
         serialPresenter.attachView(this);
+        firebasePresenter.attachView(this);
+        firebasePresenter.onAuthStateChanged();
     }
 
     /**
      * Create dialog for serial when add button is clicked.
      */
-    @OnClick(R.id.addSerial)
     public void openDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         SerialDialog serialDialog = SerialDialog.newInstance();
@@ -91,7 +98,46 @@ public class SerialEntryActivity extends AppCompatActivity implements SerialView
     }
 
     /**
-     *
+     * Redirect user if they are not logged in.
+     */
+    @Override
+    public void redirectLoggedOutUser() {
+        Intent redirect = new Intent(this, LoginActivity.class);
+        startActivity(redirect);
+    }
+
+    /**
+     * Set account details once a user logs in.
+     * @param email email
+     * @param name name
+     * @param photo photo
+     */
+    @Override
+    public void setAccountDetails(String email, String name, String photo) {
+        Uri photoUri = Uri.parse(photo);
+        serialLayoutBinding.emailAddress.setText(email);
+        serialLayoutBinding.displayName.setText(name);
+        Picasso.with(getApplicationContext())
+                .load(photoUri)
+                .fit()
+                .centerCrop()
+                .into(serialLayoutBinding.profilePhoto);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebasePresenter.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebasePresenter.stop();
+    }
+
+    /**
+     * Create a menu.
      * @param menu
      * @return boolean
      */

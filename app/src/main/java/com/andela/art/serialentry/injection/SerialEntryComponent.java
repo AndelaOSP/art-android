@@ -2,6 +2,7 @@ package com.andela.art.serialentry.injection;
 
 import com.andela.art.api.ApiModule;
 import com.andela.art.common.ApplicationComponent;
+import com.andela.art.firebase.FirebaseModule;
 import com.andela.art.serialentry.presentation.SerialEntryActivity;
 
 import dagger.Component;
@@ -11,7 +12,10 @@ import dagger.Component;
  */
 @Activity
 @Component(dependencies = {ApplicationComponent.class},
-        modules = {ApiModule.class, SerialEntryModule.class})
+        modules = {ApiModule.class,
+                SerialEntryModule.class,
+                FirebaseModule.class,
+                FirebasePresenterModule.class})
 public interface SerialEntryComponent {
     /**
      * Inject serial presenter to serial entry activity.

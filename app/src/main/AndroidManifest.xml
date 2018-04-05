@@ -14,20 +14,21 @@
         android:supportsRtl="true"
         android:name=".common.ArtApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".securitydashboard.SecurityDashboardActivity" />
         <activity android:name=".settings.SettingsActivity"></activity>
 
 
         <activity android:name=".serialentry.presentation.SerialEntryActivity"
-            android:theme="@style/SerialTheme"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/SerialTheme">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".checkin.CheckInActivity"/>

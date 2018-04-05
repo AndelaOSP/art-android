@@ -19,4 +19,17 @@ public interface SerialView extends View {
      * @param asset asset that is passed from presenter
      */
     void sendIntent(Asset asset);
+
+    /**
+     * redirect user if they are logged out.
+     */
+    void redirectLoggedOutUser();
+
+    /**
+     *
+     * @param email email
+     * @param name name
+     * @param photo photo
+     */
+    void setAccountDetails(String email, String name, String photo);
 }
