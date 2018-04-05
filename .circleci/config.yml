@@ -225,14 +225,14 @@ jobs:
           name: Notifying slack channel on succeed
           when: on_success
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack.sh
       - run:
           name: Notifying slack channel on fail
           when: on_fail
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack_fail.sh
-    post:
-      - bash <(curl -s https://codecov.io/bash)
 
   deploy_test_build:
     <<: *defaults
