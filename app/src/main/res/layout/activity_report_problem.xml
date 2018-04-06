@@ -17,7 +17,7 @@
         app:titleTextAppearance="@style/AppBarTitle">
 
         <ImageView
-            android:id="@+id/close_report_btn"
+            android:id="@+id/close_report_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
