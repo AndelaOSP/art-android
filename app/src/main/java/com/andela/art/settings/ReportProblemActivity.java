@@ -3,6 +3,8 @@ package com.andela.art.settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.andela.art.R;
 
@@ -27,5 +29,16 @@ public class ReportProblemActivity extends AppCompatActivity {
         // Remove the default toolbar title.
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        ImageView closeReportView = findViewById(R.id.close_report_button);
+        closeReportView.setOnClickListener(closeReportListener);
     }
+
+    /**
+     * Move back to the previous activity.
+     */
+    private final View.OnClickListener closeReportListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            finish();
+        }
+    };
 }

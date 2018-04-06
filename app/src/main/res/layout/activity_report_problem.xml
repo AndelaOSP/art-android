@@ -17,7 +17,7 @@
         app:titleTextAppearance="@style/AppBarTitle">
 
         <ImageView
-            android:id="@+id/close_report_btn"
+            android:id="@+id/close_report_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -27,7 +27,6 @@
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Report a Problem"
             android:textColor="@color/white"
             android:textSize="22sp" />
@@ -48,7 +47,6 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="23dp"
         android:text="SOMETHING IS'NT WORKING?"
-        android:fontFamily="@font/avenir_heavy"
         android:textColor="@color/profileTextViewColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_toolbar" />

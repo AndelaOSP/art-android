@@ -38,6 +38,9 @@
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             android:label="@string/app_title"/>
+
+            <activity android:name=".settings.presentation.ReportProblemActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

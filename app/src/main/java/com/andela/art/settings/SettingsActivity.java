@@ -85,4 +85,13 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
             logoutDialog.dismiss();
         }
     }
+    /**
+     * Launch the Report Problem Activity.
+     */
+    private final View.OnClickListener reportProblemListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this,
+                        ReportProblemActivity.class));
+            }
+    };
 }
