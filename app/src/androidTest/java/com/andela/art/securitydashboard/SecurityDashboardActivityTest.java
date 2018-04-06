@@ -82,6 +82,7 @@ public class SecurityDashboardActivityTest {
         onView(withId(R.id.addSerial)).perform(click());
         onView(withId(R.id.serial_edit_text)).
                 perform(typeText("123"), closeSoftKeyboard());
+
         onView(withId(R.id.submit)).perform(click());
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
                 hasComponent(CheckInActivity.class.getName())));
@@ -94,7 +95,6 @@ public class SecurityDashboardActivityTest {
     @Test
     public void testEmailIsDisplayed() throws IOException {
         activityTestRule.launchActivity(null);
-
         onView(withId(R.id.email_address))
                 .check(matches(allOf(isDisplayed(), withText("zac@gmail.com"))));
     }

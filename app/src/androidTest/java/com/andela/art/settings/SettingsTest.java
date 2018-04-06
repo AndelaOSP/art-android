@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.squareup.settings.SettingsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.andela.art.settings;
+package com.squareup.settings;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
