@@ -26,17 +26,16 @@ import javax.inject.Inject;
  */
 public class SettingsActivity extends AppCompatActivity implements Dialog.OnClickListener {
     @Inject GoogleSignInClient googleSignInClient;
-    SettingsPageBinding settingsPageBinding;
     Dialog logoutDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        settingsPageBinding = DataBindingUtil.setContentView(this, R.layout.settings_page);
+        SettingsPageBinding binding = DataBindingUtil.setContentView(this, R.layout.settings_page);
         ((App) getApplicationContext()).getComponent().inject(this);
 
-        setSupportActionBar((Toolbar) settingsPageBinding.tbToolBar);
+        setSupportActionBar((Toolbar) binding.tbToolBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.settings);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -49,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
                 .setCancelable(false);
         logoutDialog = logoutDialogBuilder.create();
 
-        settingsPageBinding.tvLogOut.setOnClickListener(new View.OnClickListener() {
+        binding.tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logoutDialog.show();
@@ -69,6 +68,7 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
             FirebaseAuth.getInstance().signOut();
             googleSignInClient.signOut();
             Intent loginActivity = new Intent(SettingsActivity.this, LoginActivity.class);
+            loginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(loginActivity);
         } else {
             logoutDialog.dismiss();
