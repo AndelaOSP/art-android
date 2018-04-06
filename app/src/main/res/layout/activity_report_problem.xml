@@ -7,40 +7,66 @@
     android:background="@color/primaryBalticSea"
     tools:context="com.andela.art.settings.ReportProblemActivity">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/report_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primaryCharade"
+        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppBarPopup"
-        app:titleTextAppearance="@style/AppBarTitle"
-        app:layout_constraintTop_toTopOf="parent">
+        app:titleTextAppearance="@style/AppBarTitle">
 
         <ImageView
             android:id="@+id/close_report_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:src="@mipmap/ic_clear_white"/>
+            android:src="@mipmap/ic_clear_white" />
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="22sp"
-            android:textColor="#ffffff"
-            android:text="Report a Problem" />
+            android:text="Report a Problem"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/report_done_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_done_white"
-            android:layout_gravity= "right"
-            app:layout_constraintRight_toRightOf="@id/toolbar_title"/>
+            android:layout_gravity="right"
+            android:src="@mipmap/ic_done_white" />
 
     </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="23dp"
+        android:text="SOMETHING IS'NT WORKING?"
+        android:fontFamily="@font/avenir_heavy"
+        android:textColor="@color/profileTextViewColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_toolbar" />
+
+    <EditText
+        android:id="@+id/reportProblem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="#35ccc8"
+        android:hint="Briefly explain what happened"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textColorHint="#909090"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>
