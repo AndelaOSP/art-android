@@ -21,7 +21,7 @@ import com.andela.art.securitydashboard.data.Asset;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
-import com.squareup.settings.SettingsActivity;
+import com.andela.art.settings.SettingsActivity;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;

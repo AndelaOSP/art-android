@@ -28,7 +28,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.squareup.settings.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".checkin.CheckInActivity"
