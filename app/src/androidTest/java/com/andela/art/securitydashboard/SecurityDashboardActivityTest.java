@@ -50,7 +50,7 @@ public class SecurityDashboardActivityTest {
     @Rule
     public IntentsTestRule<SecurityDashboardActivity> activityTestRule =
             new IntentsTestRule<>(SecurityDashboardActivity.class,
-                    true, false);
+                    true, true);
 
     @Rule
     public OkHttpIdlingResourceRule okHttpIdlingResource = new OkHttpIdlingResourceRule();
@@ -64,7 +64,6 @@ public class SecurityDashboardActivityTest {
      */
     @Test
     public void testDialogBoxAppearsWhenButtonClicked() throws IOException {
-        activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial))
                 .perform(click());
         onView(withText(R.string.enter_text)).check(matches(isDisplayed()));
@@ -78,7 +77,6 @@ public class SecurityDashboardActivityTest {
     public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws IOException {
         String json = "{\"id\": 1,\"userId\": 1,\"item_code\": \"123\",\"serial_number\":\"123\"}";
         mockWebServerRule.server.enqueue(new MockResponse().setBody(json));
-        activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial)).perform(click());
         onView(withId(R.id.serial_edit_text)).
                 perform(typeText("123"), closeSoftKeyboard());
@@ -94,7 +92,6 @@ public class SecurityDashboardActivityTest {
      */
     @Test
     public void testEmailIsDisplayed() throws IOException {
-        activityTestRule.launchActivity(null);
         onView(withId(R.id.email_address))
                 .check(matches(allOf(isDisplayed(), withText("zac@gmail.com"))));
     }
@@ -105,7 +102,6 @@ public class SecurityDashboardActivityTest {
      */
     @Test
     public void testDisplayNameIsDisplayed() throws IOException {
-        activityTestRule.launchActivity(null);
         onView(withId(R.id.display_name))
                 .check(matches(allOf(isDisplayed(),
                         withText("Zacharia Mwangi"))
