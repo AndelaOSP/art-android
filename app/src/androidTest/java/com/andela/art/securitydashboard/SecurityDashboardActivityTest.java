@@ -105,6 +105,6 @@ public class SecurityDashboardActivityTest {
         onView(withId(R.id.display_name))
                 .check(matches(allOf(isDisplayed(),
                         withText("Zacharia Mwangi"))
-                        ));
+                ));
     }
 }
