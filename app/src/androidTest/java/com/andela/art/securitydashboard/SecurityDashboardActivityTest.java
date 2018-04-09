@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
@@ -33,7 +34,7 @@ import static org.hamcrest.CoreMatchers.allOf;
  * Tests for the security dashboard.
  */
 @RunWith(AndroidJUnit4.class)
-public class SecurityDashboardTest {
+public class SecurityDashboardActivityTest {
 
     @Rule
     public ActivityTestRule<SecurityDashboardActivity> securityDashboardActivityTestRule =
@@ -89,6 +90,23 @@ public class SecurityDashboardTest {
 
         onView(withId(R.id.check_serial)).check(matches(isDisplayed()));
         onView(withId(R.id.check_serial)).check(matches(withText(R.string.check_serial)));
+    }
+
+    /**
+     * Test pressing the back button twice within 2 seconds exits the app.
+     */
+    @Test
+    public void backButtonToExitPressedTwiceExitsTheApp() {
+        pressBack();
+
+        // Added a sleep statement to match the app's execution delay.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pressBack();
     }
 
     /**
