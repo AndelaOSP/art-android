@@ -1,10 +1,10 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 <android.support.design.widget.CoordinatorLayout
-
     android:layout_width="360dp"
     android:layout_height="1000dp"
     android:paddingLeft="24dp"
+    android:background="#ffffff"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -13,6 +13,7 @@
         android:textSize="20sp"
         android:textColor="#262729"
         android:text="@string/enter_text"
+        android:background="#ffffff"
         />
 
     <EditText
@@ -20,7 +21,8 @@
         android:layout_width="278dp"
         android:layout_height="50dp"
         android:layout_marginTop="72dp"
-        android:backgroundTint="#35ccc8" />
+        android:backgroundTint="#35ccc8"
+        />
     <Button
         android:id="@+id/cancel"
         android:layout_width="75dp"
