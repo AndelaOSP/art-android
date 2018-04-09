@@ -50,9 +50,8 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
         super.onCreate(savedInstanceState);
         securityDashboardBinding = DataBindingUtil.setContentView(this,
                 R.layout.security_dashboard);
-
-        securityDashboardBinding.addSerial.setOnClickListener(view -> openDialog());
         setSupportActionBar((Toolbar) securityDashboardBinding.mToolBar);
+        securityDashboardBinding.addSerial.setOnClickListener(view -> openDialog());
         ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
 

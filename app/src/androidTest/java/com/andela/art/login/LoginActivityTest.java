@@ -61,7 +61,7 @@ public class LoginActivityTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        googleSignInButton.perform(click());
+//        googleSignInButton.perform(click());
     }
 
     /**
