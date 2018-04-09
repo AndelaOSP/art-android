@@ -28,12 +28,8 @@ public interface ApplicationComponent {
          * @param artApplication application instance to be used by builder
          * @return Builder
          */
-<<<<<<< HEAD
         @BindsInstance
         Builder application(ArtApplication artApplication);
-=======
-        @BindsInstance Builder application(ArtApplication artApplication);
->>>>>>> develop
 
         /**
          * Application component builder.
