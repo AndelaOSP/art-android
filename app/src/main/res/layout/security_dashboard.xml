@@ -57,7 +57,7 @@
             android:paddingTop="@dimen/profile_button_padding_top"
             android:textAllCaps="false"
             android:text="@string/check_serial"
-            android:textColor="#ffffff"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/sixteen_sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
