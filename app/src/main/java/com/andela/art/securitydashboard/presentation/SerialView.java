@@ -32,4 +32,10 @@ public interface SerialView extends View {
      * @param photo photo
      */
     void setAccountDetails(String email, String name, String photo);
+
+    /**
+     *
+     * @param error
+     */
+    void displayErrorMessage(Throwable error);
 }

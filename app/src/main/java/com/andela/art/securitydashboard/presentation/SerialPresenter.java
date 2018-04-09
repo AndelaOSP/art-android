@@ -31,7 +31,8 @@ public class SerialPresenter implements Presenter<SerialView> {
      */
     public void getAsset(String serial) {
          disposable = apiService.getAsset(serial).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(serialView::sendIntent);
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(serialView::sendIntent,
+                         serialView::displayErrorMessage);
     }
 
     /**

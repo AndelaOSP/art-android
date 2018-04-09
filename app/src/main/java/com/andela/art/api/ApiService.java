@@ -4,7 +4,7 @@ import com.andela.art.securitydashboard.data.Asset;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 /**
  * Created by zack on 3/5/18.
@@ -18,6 +18,6 @@ public interface ApiService {
      * @param serial serial to be searched
      * @return Observable
      */
-    @GET("/assets")
-    Observable<Asset> getAsset(@Query("serial_number") String serial);
+    @GET("/assets/{serial_number}/")
+    Observable<Asset> getAsset(@Path("serial_number") String serial);
 }

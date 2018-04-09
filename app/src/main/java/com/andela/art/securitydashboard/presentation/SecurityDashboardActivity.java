@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
@@ -125,6 +126,12 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
                 .fit()
                 .centerCrop()
                 .into(securityDashboardBinding.profilePhoto);
+    }
+
+    @Override
+    public void displayErrorMessage(Throwable error) {
+        String message = error.getMessage().toString();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

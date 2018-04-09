@@ -29,6 +29,9 @@ public class SerialPresenterTest {
     @Mock
     SerialView serialView;
 
+    @Mock
+    Throwable error;
+
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
 
@@ -52,5 +55,15 @@ public class SerialPresenterTest {
         when(apiService.getAsset(anyString())).thenReturn(Observable.just(asset));
         serialPresenter.getAsset(anyString());
         verify(serialView).sendIntent(asset);
+    }
+
+    /**
+     * Return error when serial presenter get asset is called
+     */
+    @Test
+    public void getAssetErrorShouldDisplayError() throws Throwable {
+        when(apiService.getAsset(anyString())).thenReturn(Observable.error(error));
+        serialPresenter.getAsset(anyString());
+        verify(serialView).displayErrorMessage(error);
     }
 }
