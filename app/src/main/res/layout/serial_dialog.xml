@@ -44,7 +44,7 @@
         android:layout_marginLeft="207dp"
         android:layout_marginBottom="16dp"
         android:text="Submit"
-        android:textColor="color/dialog_tint"
+        android:textColor="@color/dialog_tint"
         android:fontFamily="@font/avenir_medium"
         />
 
