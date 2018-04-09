@@ -52,7 +52,7 @@ public class SecurityDashboardActivity extends AppCompatActivity {
             finish();
             moveTaskToBack(true);
         } else {
-            Toast.makeText(this, "Press BACK BUTTON again to exit.",
+            Toast.makeText(this, "Press again to exit.",
                     Toast.LENGTH_SHORT).show();
         }
 
