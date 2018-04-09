@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
         actionBar.setTitle(R.string.settings);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        AlertDialog.Builder logoutDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder logoutDialogBuilder = new AlertDialog.Builder(this, R.style.AppDialog);
         logoutDialogBuilder.setTitle(getString(R.string.logout))
                 .setMessage(getString(R.string.logout_message))
                 .setNegativeButton(R.string.logout_cancel, this)
@@ -70,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
             Intent loginActivity = new Intent(SettingsActivity.this, LoginActivity.class);
             loginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(loginActivity);
+            finish();
         } else {
             logoutDialog.dismiss();
         }
