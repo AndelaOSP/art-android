@@ -58,6 +58,9 @@ android {
         if (task.name.startsWith("test") && task.name.contains("Prod")) {
             return false;
         }
+        else if(task.name.startsWith("connected")&& task.name.contains("Prod")){
+            return false;
+        }
         return true;
     }
 }
