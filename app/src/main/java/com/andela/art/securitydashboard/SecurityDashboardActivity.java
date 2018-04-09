@@ -51,11 +51,12 @@ public class SecurityDashboardActivity extends AppCompatActivity {
             super.onBackPressed();
             finish();
             moveTaskToBack(true);
+        } else {
+            Toast.makeText(this, "Press BACK BUTTON again to exit.",
+                    Toast.LENGTH_SHORT).show();
         }
 
         this.backButtonToExitPressedTwice = true;
-        Toast.makeText(this, "Press BACK BUTTON again to exit.",
-                Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
@@ -63,6 +64,7 @@ public class SecurityDashboardActivity extends AppCompatActivity {
             public void run() {
                 backButtonToExitPressedTwice = false;
             }
+
         }, 2000);
     }
 }
