@@ -58,7 +58,8 @@ public class SerialPresenterTest {
     }
 
     /**
-     * Return error when serial presenter get asset is called
+     * Return error when serial presenter get asset is called.
+     * @throws Throwable if error occurs
      */
     @Test
     public void getAssetErrorShouldDisplayError() throws Throwable {

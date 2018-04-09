@@ -35,7 +35,7 @@ public interface SerialView extends View {
 
     /**
      *
-     * @param error
+     * @param error error
      */
     void displayErrorMessage(Throwable error);
 }
