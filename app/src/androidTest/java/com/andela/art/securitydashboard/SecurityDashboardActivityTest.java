@@ -20,6 +20,7 @@ import okhttp3.mockwebserver.MockResponse;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
@@ -80,7 +81,7 @@ public class SecurityDashboardActivityTest {
         onView(withId(R.id.addSerial)).perform(click());
         onView(withId(R.id.serial_edit_text)).
                 perform(typeText("123"), closeSoftKeyboard());
-
+        closeSoftKeyboard();
         onView(withId(R.id.submit)).perform(click());
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
                 hasComponent(CheckInActivity.class.getName())));
