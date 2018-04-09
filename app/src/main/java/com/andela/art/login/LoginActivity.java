@@ -8,13 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.databinding.ActivityLoginBinding;
+import com.andela.art.securitydashboard.SecurityDashboardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -67,10 +66,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
-        Window w = getWindow();
-        w.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
         activityLoginBinding.googleSignInButton.setOnClickListener(new View.OnClickListener() {
