@@ -11,13 +11,10 @@ public class User {
 
     /**
      * Set the first name and last name of the user.
-     *
-     * @param firstName - First name of the user.
-     * @param lastName - Last name of the user.
-     */
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+     *  */
+    public User() {
+        this.firstName = "Fox";
+        this.lastName = "Mulder";
     }
 
     /**
@@ -32,10 +29,9 @@ public class User {
     /**
      * Set user ID.
      *
-     * @param id - ID of the user.
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        this.id = 0;
     }
 
     /**

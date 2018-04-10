@@ -1,68 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.andela.art.securitydashboard.SecurityDashboardActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        android:id="@+id/mToolBar"
-        layout="@layout/tool_bar"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBalticSea"
+        tools:context="com.andela.art.securitydashboard.presentation.SecurityDashboardActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture"
-        android:layout_width="@dimen/profile_image_diameter"
-        android:layout_height="@dimen/profile_image_diameter"
-        android:layout_marginTop="@dimen/profile_margin_top"
-        tools:src="@mipmap/ic_launcher_round"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mToolBar"/>
+        <include
+            android:id="@+id/mToolBar"
+            layout="@layout/tool_bar" />
 
-    <TextView
-        android:id="@+id/full_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/profile_margin_top"
-        tools:text="@string/full_name"
-        android:textColor="@color/profileTextViewColor"
-        android:fontFamily="@font/avenir_heavy"
-        android:textSize="@dimen/twenty_two_sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="@dimen/profile_image_diameter"
+            android:layout_height="@dimen/profile_image_diameter"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mToolBar" />
 
-    <TextView
-        android:id="@+id/email_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/email"
-        android:textColor="@color/profileTextViewColor"
-        android:textSize="@dimen/twelve_sp"
-        android:fontFamily="@font/avenir_book"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/full_name" />
+        <TextView
+            android:id="@+id/display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:fontFamily="@font/avenir_heavy"
+            android:textColor="@color/profileTextViewColor"
+            android:textSize="@dimen/twenty_two_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePhoto" />
 
-    <Button
-        android:id="@+id/check_serial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/profile_button_margin_top"
-        android:background="@color/profileButtonBg"
-        android:paddingBottom="@dimen/profile_button_padding_top"
-        android:paddingLeft="@dimen/profile_button_padding_left"
-        android:paddingRight="@dimen/profile_button_padding_left"
-        android:paddingTop="@dimen/profile_button_padding_top"
-        android:text="@string/check_serial"
-        android:textColor="#ffffff"
-        android:fontFamily="@font/avenir_book"
-        android:textSize="@dimen/sixteen_sp"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_address" />
+        <TextView
+            android:id="@+id/email_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            android:textColor="@color/profileTextViewColor"
+            android:textSize="@dimen/twelve_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/display_name" />
 
-
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/addSerial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_button_margin_top"
+            android:background="@color/profileButtonBg"
+            android:fontFamily="@font/avenir_book"
+            android:paddingBottom="@dimen/profile_button_padding_top"
+            android:paddingLeft="@dimen/profile_button_padding_left"
+            android:paddingRight="@dimen/profile_button_padding_left"
+            android:paddingTop="@dimen/profile_button_padding_top"
+            android:textAllCaps="false"
+            android:text="@string/check_serial"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sixteen_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_address" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

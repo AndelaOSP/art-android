@@ -1,137 +1,108 @@
 package com.andela.art.securitydashboard;
 
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.intent.Intents;
-import android.support.test.rule.ActivityTestRule;
+import android.support.test.espresso.intent.matcher.BundleMatchers;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
-import android.widget.TextView;
 
 import com.andela.art.R;
-import com.andela.art.settings.SettingsActivity;
+import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
-import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import java.io.IOException;
+
+import okhttp3.mockwebserver.MockResponse;
+
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtras;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static org.hamcrest.CoreMatchers.allOf;
 
+
 /**
- * Tests for the security dashboard.
+ * Created by zack on 3/20/18.
  */
 @RunWith(AndroidJUnit4.class)
 public class SecurityDashboardActivityTest {
 
-    @Rule
-    public ActivityTestRule<SecurityDashboardActivity> securityDashboardActivityTestRule =
-            new ActivityTestRule<>(SecurityDashboardActivity.class);
+
 
     /**
-     * Tests that the toolbar is shown on the security dashboard.
-     */
-    @Test
-    public void toolBarIsRenderedInDashboardActivity() {
-        onView(withId(R.id.mToolBar)).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Tests that the menu is shown on the security dashboard in the toolbar by checking the
-     * presence of the settings menu item.
-     */
-    @Test
-    public void menuIsRenderedInDashboardActivity() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText(R.string.settings)).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Tests that the settings activity is opened when a user clicks the settings menu item from
-     * the security dashboard.
-     */
-    @Test
-    public void clickingSettingsMenuItem__OpensSettingsActivity() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        Intents.init();
-
-        onView(withText(R.string.settings)).perform(click());
-
-        intended(hasComponent(SettingsActivity.class.getName()));
-        Intents.release();
-    }
-
-    /**
-     * Test the dashboard activity that it loads and displays all the views.
-     */
-    @Test
-    public void dashboardViewsAreRenderedInDashboardActivity() {
-        onView(withId(R.id.profile_picture)).check(matches(isDisplayed()));
-
-        onView(withId(R.id.full_name)).perform(setTextInTextView("Full name"));
-        onView(withId(R.id.full_name)).check(matches(isDisplayed()));
-        onView(withId(R.id.full_name)).check(matches(withText("Full name")));
-
-        onView(withId(R.id.email_address)).perform(setTextInTextView("test_email@domain.com"));
-        onView(withId(R.id.email_address)).check(matches(isDisplayed()));
-        onView(withId(R.id.email_address)).check(matches(withText("test_email@domain.com")));
-
-        onView(withId(R.id.check_serial)).check(matches(isDisplayed()));
-        onView(withId(R.id.check_serial)).check(matches(withText(R.string.check_serial)));
-    }
-
-    /**
-     * Test pressing the back button twice within 2 seconds exits the app.
-     */
-    @Test
-    public void backButtonToExitPressedTwiceExitsTheApp() {
-        pressBack();
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-    }
-
-    /**
-     * Custom Matchers method to help set the text of a TextView while testing using Espresso.
+     * {@link IntentsTestRule} is a JUnit {@link Rule @Rule} to launch your activity under test.
      *
-     * @param value The string to set on the TextView
-     * @return ViewAction
+     * <p>
+     * Rules are interceptors which are executed for each test method and are important building
+     * blocks of Junit tests.
      */
-    public static ViewAction setTextInTextView(final String value) {
-        return new ViewAction() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public Matcher<View> getConstraints() {
-                return allOf(isAssignableFrom(TextView.class));
-            }
+    @Rule
+    public IntentsTestRule<SecurityDashboardActivity> activityTestRule =
+            new IntentsTestRule<>(SecurityDashboardActivity.class,
+                    true, true);
 
-            @Override
-            public void perform(UiController uiController, View view) {
-                ((TextView) view).setText(value);
-            }
+    @Rule
+    public OkHttpIdlingResourceRule okHttpIdlingResource = new OkHttpIdlingResourceRule();
 
-            @Override
-            public String getDescription() {
-                return "replace text";
-            }
-        };
+    @Rule
+    public MockWebServerRule mockWebServerRule = new MockWebServerRule();
+
+    /**
+     * Test dialog box.
+     * @throws IOException if an error occurs
+     */
+    @Test
+    public void testDialogBoxAppearsWhenButtonClicked() throws IOException {
+        onView(withId(R.id.addSerial))
+                .perform(click());
+        onView(withText(R.string.enter_text)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test asset retrieved and intent sent.
+     * @throws IOException if an error occurs
+     */
+    @Test
+    public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws IOException {
+        String json = "{\"id\": 1,\"userId\": 1,\"item_code\": \"123\",\"serial_number\":\"123\"}";
+        mockWebServerRule.server.enqueue(new MockResponse().setBody(json));
+        onView(withId(R.id.addSerial)).perform(click());
+        onView(withId(R.id.serial_edit_text)).
+                perform(typeText("123"), closeSoftKeyboard());
+        closeSoftKeyboard();
+        onView(withId(R.id.submit)).perform(click());
+        intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
+                hasComponent(CheckInActivity.class.getName())));
+    }
+
+    /**
+     * Test email is displayed.
+     * @throws IOException if an error occurs
+     */
+    @Test
+    public void testEmailIsDisplayed() throws IOException {
+        onView(withId(R.id.email_address))
+                .check(matches(allOf(isDisplayed(), withText("zac@gmail.com"))));
+    }
+
+    /**
+     * Test display name is displayed.
+     * @throws IOException if an error occurs
+     */
+    @Test
+    public void testDisplayNameIsDisplayed() throws IOException {
+        onView(withId(R.id.display_name))
+                .check(matches(allOf(isDisplayed(),
+                        withText("Zacharia Mwangi"))
+                ));
     }
 }
