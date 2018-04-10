@@ -8,7 +8,6 @@ import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
