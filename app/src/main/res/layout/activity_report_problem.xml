@@ -13,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primaryCharade"
         app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/ThemeOverlay.AppBarPopup"
         app:titleTextAppearance="@style/AppBarTitle">
 
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="23dp"
-        android:text="SOMETHING IS'NT WORKING?"
+        android:text="@string/report_problem_description"
         android:textColor="@color/profileTextViewColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_toolbar" />
