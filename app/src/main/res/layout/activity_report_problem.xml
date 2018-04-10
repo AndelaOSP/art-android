@@ -13,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primaryCharade"
         app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/ThemeOverlay.AppBarPopup"
         app:titleTextAppearance="@style/AppBarTitle">
 
