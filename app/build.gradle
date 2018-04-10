@@ -5,6 +5,7 @@ apply from: rootProject.file('app/code_quality_tools/quality.gradle')
 
 android {
     compileSdkVersion 26
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.andela.art"
         minSdkVersion 22
@@ -37,17 +38,66 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+            buildConfigField "String" ,"BASE_URL", "\"http:/localhost:3000\""
+        }
+        prod {
+            buildConfigField "String" ,"BASE_URL", "\"http://art.andela.com\""
+        }
+    }
+
+    sourceSets{
+        mock {
+            java.srcDirs('src/mock/java')
+            assets.srcDir('src/mock/assets')
+        }
+        prod {
+            java.srcDirs('src/prod/java')
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    gradle.taskGraph.useFilter { task ->
+        if (task.name.startsWith("test") && task.name.contains("Prod")) {
+            return false;
+        }
+        else if(task.name.startsWith("connected")&& task.name.contains("Prod")){
+            return false;
+        } else if(task.name.contains("createProdDebugAndroidTestCoverageReport")){
+            return false;
+        }
+        return true;
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    testAnnotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.google.dagger:dagger:2.14.1'
+    implementation 'com.google.dagger:dagger-android-support:2.14.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'com.google.dagger:dagger-android:2.14.1'
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     implementation 'com.google.firebase:firebase-core:12.0.1'
@@ -62,7 +112,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.1'
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.1"
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
+    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    androidTestImplementation 'org.mockito:mockito-core:2.16.0'
+    androidTestImplementation 'com.google.dagger:dagger:2.14.1'
+    androidTestImplementation 'com.google.dagger:dagger-android-support:2.14.1'
+    testImplementation 'com.google.dagger:dagger:2.14.1'
+    testImplementation 'com.google.dagger:dagger-android-support:2.14.1'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.16.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

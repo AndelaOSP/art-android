@@ -9,7 +9,7 @@
     app:theme="@style/AppTheme.AppBarOverlay"
     app:titleTextAppearance="@style/AppBarTitle"
     app:popupTheme="@style/ThemeOverlay.AppBarPopup"
-    tools:context="com.andela.art.securitydashboard.SecurityDashboardActivity">
+    tools:context="com.andela.art.securitydashboard.presentation.SecurityDashboardActivity">
 
 </android.support.v7.widget.Toolbar>
 

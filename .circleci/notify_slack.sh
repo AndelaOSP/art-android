@@ -61,13 +61,13 @@ declare_env_variables() {
 
     # Sorting through the artifact urls to get only the unit test and integration test reports
     DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'testDebugUnitTest\/index\.html')"
+/g' | grep 'test[A-Za-z0-9]*Debug[A-Za-z0-9]*\/index\.html')"
     RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'testReleaseUnitTest\/index\.html')"
+/g' | grep 'test[A-Za-z0-9]*Release[A-Za-z0-9]*\/index\.html')"
     JACOCO_DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'jacocoTestDebugUnitTestReport\/html\/index\.html')"
+/g' | grep 'jacoco[A-Za-z0-9]*Debug[A-Za-z0-9]*\/html\/index\.html')"
     JACOCO_RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'jacocoTestReleaseUnitTestReport\/html\/index\.html')"
+/g' | grep 'jacoco[A-Za-z0-9]*Release[A-Za-z0-9]*\/html\/index\.html')"
     INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' |  grep 'AVD')"
     CIRCLE_ARTIFACTS_BUTTON="$(echo \

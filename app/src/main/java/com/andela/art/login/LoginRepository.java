@@ -16,8 +16,8 @@ public class LoginRepository {
     public User getUser() {
 
         if (user == null) {
-            User user = new User("Fox", "Mulder");
-            user.setId(0);
+            User user = new User();
+            user.setId();
             return user;
         } else {
             return user;
