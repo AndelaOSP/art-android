@@ -21,6 +21,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -61,6 +62,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -102,6 +104,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -142,6 +145,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -182,7 +186,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -225,14 +229,14 @@ jobs:
           name: Notifying slack channel on succeed
           when: on_success
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack.sh
       - run:
           name: Notifying slack channel on fail
           when: on_fail
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack_fail.sh
-    post:
-      - bash <(curl -s https://codecov.io/bash)
 
   deploy_test_build:
     <<: *defaults
@@ -244,6 +248,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -255,7 +260,7 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
       - store_artifacts:
@@ -288,6 +293,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -299,7 +305,7 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
       - store_artifacts:
@@ -332,6 +338,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -343,7 +350,7 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assembleRelease
 
       # Storing the generated apk files and reports
       - store_artifacts:
