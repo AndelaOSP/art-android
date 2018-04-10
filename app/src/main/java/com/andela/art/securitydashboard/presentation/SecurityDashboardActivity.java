@@ -38,6 +38,7 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
     SerialPresenter serialPresenter;
 
     SecurityDashboardBinding securityDashboardBinding;
+    boolean backButtonToExitPressedTwice = false;
 
     @Inject
     FirebasePresenter firebasePresenter;
@@ -174,7 +175,7 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
             finish();
             moveTaskToBack(true);
         } else {
-            Toast.makeText(this, "Press again to exit.",
+            Toast.makeText(this.getApplicationContext(), "Press again to exit.",
                     Toast.LENGTH_SHORT).show();
         }
 
