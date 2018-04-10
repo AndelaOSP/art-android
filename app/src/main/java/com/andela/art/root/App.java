@@ -2,7 +2,6 @@ package com.andela.art.root;
 
 import android.app.Application;
 
-import com.andela.art.root.DaggerApplicationComponent;
 import com.andela.art.login.LoginModule;
 
 /**

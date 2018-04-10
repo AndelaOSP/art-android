@@ -14,7 +14,6 @@ import com.andela.art.R;
 import com.andela.art.databinding.ActivityLoginBinding;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.root.App;
-import com.andela.art.databinding.ActivityLoginBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

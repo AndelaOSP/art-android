@@ -8,8 +8,6 @@ import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.securitydashboard.MockWebServerRule;
 import com.andela.art.securitydashboard.OkHttpIdlingResourceRule;
-import com.andela.art.securitydashboard.presentation.FirebasePresenter;
-import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
