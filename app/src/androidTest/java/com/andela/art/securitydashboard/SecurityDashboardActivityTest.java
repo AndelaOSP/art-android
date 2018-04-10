@@ -1,4 +1,4 @@
-package com.andela.art.securitydashboard.presentation;
+package com.andela.art.securitydashboard;
 
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
@@ -6,9 +6,9 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
-import com.andela.art.securitydashboard.MockWebServerRule;
-import com.andela.art.securitydashboard.OkHttpIdlingResourceRule;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -10,6 +10,7 @@ import com.andela.art.login.LoginActivity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Tests for the settings activity.
  */
+@Ignore
 @RunWith(AndroidJUnit4.class)
 public class SettingsTest {
 

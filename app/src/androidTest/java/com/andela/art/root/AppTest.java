@@ -9,6 +9,7 @@ import android.support.test.uiautomator.UiDevice;
 import com.andela.art.login.LoginActivity;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Jeffkungu on 14/03/2018.
  */
+@Ignore
 @RunWith(AndroidJUnit4.class)
 public class AppTest {
 
