@@ -13,10 +13,11 @@ import android.widget.Toast;
 import com.andela.art.R;
 import com.andela.art.databinding.ActivityLoginBinding;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.andela.art.root.App;
+import com.andela.art.databinding.ActivityLoginBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,15 +28,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
+import javax.inject.Inject;
 
 /**
  * LoginActivity handles the login of user into the application.
  */
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.LoginActivity {
 
+    @Inject LoginRepository loginRepository;
+    @Inject GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 2;
-    GoogleSignInClient mGoogleSignInClient;
     static final String TAG = "LoginActivity";
     FirebaseAuth.AuthStateListener mAuthListener;
     // A progress dialog to display when the user is connecting in
@@ -64,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ((App) getApplicationContext()).getComponent().inject(this);
         dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
@@ -88,17 +92,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
                 }
             }
         };
-
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .requestProfile()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Configure the ProgressDialog that will be shown if there is a
         // delay in presenting the user with the next sign in step.

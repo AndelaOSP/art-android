@@ -16,7 +16,7 @@ declare_env_variables() {
 
   # Retrieving the urls for the CircleCI artifacts
 
-  CIRCLE_ARTIFACTS_URL="$(curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN} | grep -o 'https://[^"]*')"
+  CIRCLE_ARTIFACTS_URL="$(curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BUILD_NUM}/artifacts?circle-token=${CIRCLE_TOKEN} | grep -o 'https://[^"]*' || true)"
 
   # Assigning slack messages based on the CircleCI job name
 
@@ -26,7 +26,7 @@ declare_env_variables() {
     # Sorting through the artifact urls to get only the android lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
+/g' |  grep '\.html' || true)"
     CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Android Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
@@ -35,7 +35,7 @@ declare_env_variables() {
     # Sorting through the artifact urls to get only the findbugs lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'findbugs\.html')"
+/g' |  grep 'findbugs\.html' || true)"
     CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Findbugs Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
@@ -44,7 +44,7 @@ declare_env_variables() {
     # Sorting through the artifact urls to get only the PMD lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
+/g' |  grep '\.html' || true)"
     CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"PMD Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
@@ -53,7 +53,7 @@ declare_env_variables() {
     # Sorting through the artifact urls to get only the checkstyle lint report
 
     CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
+/g' |  grep '\.html' || true)"
     CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Checkstyle Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
 
   elif [ "$CIRCLE_JOB" == 'test' ]; then
@@ -70,7 +70,7 @@ declare_env_variables() {
     JACOCO_RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' | grep 'jacoco[A-Za-z0-9]*Release[A-Za-z0-9]*\/html\/index\.html')"
     INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'AVD')"
+/g' |  grep 'AVD' || true)"
 
     CIRCLE_ARTIFACTS_BUTTON="$(echo \
         "{\"type\": \"button\", \"text\": \"Unit Test Report (Debug)\", \"url\": \"${DEBUG_REPORT}\"}", \

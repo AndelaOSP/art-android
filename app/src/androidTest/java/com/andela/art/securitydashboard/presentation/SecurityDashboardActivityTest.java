@@ -1,4 +1,4 @@
-package com.andela.art.securitydashboard;
+package com.andela.art.securitydashboard.presentation;
 
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
@@ -6,6 +6,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.securitydashboard.MockWebServerRule;
+import com.andela.art.securitydashboard.OkHttpIdlingResourceRule;
 import com.andela.art.securitydashboard.presentation.FirebasePresenter;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
@@ -37,7 +39,6 @@ import static org.hamcrest.CoreMatchers.allOf;
 @RunWith(AndroidJUnit4.class)
 public class SecurityDashboardActivityTest {
 
-    FirebasePresenter firebasePresenter;
 
 
     /**

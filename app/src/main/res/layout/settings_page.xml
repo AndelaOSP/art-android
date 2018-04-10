@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/tool_bar"></include>
-
-
-    <TextView
-        android:id="@+id/tvLogOut"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/avenir_book"
-        android:padding="24dp"
-        android:text="@string/logout"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:background="@color/primaryBalticSea"
+        android:orientation="vertical">
 
-    <View style="@style/Divider" />
+        <include layout="@layout/tool_bar"
+            android:id="@+id/tbToolBar">
+        </include>
 
-    <TextView
-        android:id="@+id/tvReportProblem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/avenir_book"
-        android:padding="24dp"
-        android:text="@string/report_a_problem"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvLogOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            android:padding="@dimen/settings_page_item_top_padding"
+            android:text="@string/logout"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sixteen_sp" />
 
-    <View style="@style/Divider" />
+        <View style="@style/Divider" />
 
-    <TextView
-        android:id="@+id/tvSendFeedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/avenir_book"
-        android:padding="24dp"
-        android:text="@string/send_feedback"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvReportProblem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            android:padding="@dimen/settings_page_item_top_padding"
+            android:text="@string/report_a_problem"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sixteen_sp" />
 
-</LinearLayout>
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/tvSendFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            android:padding="@dimen/settings_page_item_top_padding"
+            android:text="@string/send_feedback"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sixteen_sp" />
+
+    </LinearLayout>
+
+</layout>
