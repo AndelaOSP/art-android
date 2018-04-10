@@ -13,4 +13,5 @@
     <dimen name="sixteen_sp">16sp</dimen>
     <dimen name="twelve_sp">12sp</dimen>
     <dimen name="twenty_two_sp">22sp</dimen>
+    <dimen name="settings_page_item_top_padding">24dp</dimen>
 </resources>
