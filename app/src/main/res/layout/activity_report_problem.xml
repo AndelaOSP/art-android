@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primaryBalticSea"
-    tools:context="com.andela.art.settings.ReportProblemActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/report_toolbar"
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaryCharade"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/ThemeOverlay.AppBarPopup"
-        app:titleTextAppearance="@style/AppBarTitle">
+        android:layout_height="match_parent"
+        android:background="@color/primaryBalticSea"
+        tools:context="com.andela.art.settings.ReportProblemActivity">
 
-        <ImageView
-            android:id="@+id/close_report_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:src="@mipmap/ic_clear_white" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/report_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primaryCharade"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppBarPopup"
+            app:theme="@style/AppTheme.AppBarOverlay"
+            app:titleTextAppearance="@style/AppBarTitle">
+
+            <ImageView
+                android:id="@+id/close_report_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:src="@mipmap/ic_clear_white"
+                android:onClick="cancelReportSending"/>
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Report a Problem"
+                android:textColor="@color/textColorWhite"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/report_done_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@mipmap/ic_done_white" />
+
+        </android.support.v7.widget.Toolbar>
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
