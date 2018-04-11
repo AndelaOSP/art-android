@@ -40,8 +40,6 @@ before_script:
     - android list targets
     - echo no | android create avd --force --name test --target android-22 --abi $ANDROID_ABI    #Create AVD for given api
     - emulator -avd test -no-skin -no-window &    #Start emulator
-    - rm -rf /home/travis/build/AndelaOSP/art-android/keystores
-    - mkdir /home/travis/build/AndelaOSP/art-android/keystores/
     - touch /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
     - echo "keyAlias=androiddebugkey" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
     - echo "keyPassword=android" >> /home/travis/build/AndelaOSP/art-android/keystores/keystore.properties
