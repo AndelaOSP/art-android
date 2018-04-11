@@ -1,4 +1,4 @@
-package com.andela.art.common;
+package com.andela.art.root;
 
 /**
  * Created by zack on 3/6/18.

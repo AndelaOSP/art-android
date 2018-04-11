@@ -1,4 +1,4 @@
-package com.andela.art.common;
+package com.andela.art.root;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

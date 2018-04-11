@@ -1,8 +1,6 @@
-package com.andela.art.common;
+package com.andela.art.root;
 
 import android.app.Application;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 
 /**
  * Created by zack on 3/5/18.
@@ -27,6 +25,7 @@ public class ArtApplication extends Application {
         super.onCreate();
         applicationComponent = DaggerApplicationComponent.builder()
                 .application(this)
+                .applicationModule(new ApplicationModule(this))
                 .build();
     }
 }

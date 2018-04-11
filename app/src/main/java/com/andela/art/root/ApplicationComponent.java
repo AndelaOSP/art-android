@@ -1,32 +1,48 @@
 package com.andela.art.root;
 
-import com.andela.art.login.LoginActivity;
-import com.andela.art.login.LoginModule;
-import com.andela.art.settings.SettingsActivity;
+import com.andela.art.api.ApiModule;
+import com.andela.art.firebase.FirebaseModule;
 
-import dagger.Component;
 import javax.inject.Singleton;
 
-/**
- * Created by Mugiwara_Munyi on 28/02/2018.
- */
+import dagger.BindsInstance;
+import dagger.Component;
 
-@Singleton
-@Component(modules = {ApplicationModule.class, LoginModule.class})
+/**
+ * Created by zack on 3/5/18.
+ */
+@Singleton @Component(modules = {ApiModule.class, FirebaseModule.class, ApplicationModule.class})
 public interface ApplicationComponent {
 
-  /**
-   * Inject the login activity.
-   *
-   * @param target - The target activity
-   */
-  void inject(LoginActivity target);
+    /**
+     * Builder instance for application component.
+     */
+    @Component.Builder
+    interface Builder {
 
-  /**
-   * Inject the settings activity.
-   *
-   * @param settingsActivity - SettingsActivity
-   */
-  void inject(SettingsActivity settingsActivity);
+        /**
+         * Bind application instance.
+         *
+         * @param artApplication application instance to be used by builder
+         * @return Builder
+         */
+        @BindsInstance
+        Builder application(ArtApplication artApplication);
+
+        /**
+         * Bind application module instance.
+         * @param applicationModule application module
+         * @return Builder
+         */
+        Builder applicationModule(ApplicationModule applicationModule);
+
+        /**
+         * Application component builder.
+         * @return applicationcomponent
+         */
+        ApplicationComponent build();
+
+
+
+    }
 }
-
