@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.ActivityReportProblemBinding;
@@ -25,7 +26,7 @@ public class ReportProblemActivity extends AppCompatActivity {
                 this, R.layout.activity_report_problem
         );
         setSupportActionBar(reportBinding.reportToolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     /**
@@ -37,4 +38,12 @@ public class ReportProblemActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Submit the report.
+     *
+     * @param view The view that calls this method whis is an ImageView
+     */
+    public void sendReport(View view) {
+        Toast.makeText(this, "Send Report", Toast.LENGTH_SHORT).show();
+    }
 }

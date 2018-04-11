@@ -29,23 +29,23 @@ public class ReportProblemTest {
             new ActivityTestRule<ReportProblemActivity>(ReportProblemActivity.class);
 
     /**
-     * Test the close button.
-     */
-    @Test
-    public void clickCloseReportButton() {
-        onView(withId(R.id.close_report_button)).check(matches(isDisplayed()));
-
-        onView(withId(R.id.close_report_button)).perform(click());
-        onView(withText("Settings")).check(matches(isDisplayed()));
-    }
-
-    /**
      * Test the rendering of the report a problem views.
      */
     @Test
     public void renderReportProblewViews() {
         onView(withText("Report a Problem")).check(matches(isDisplayed()));
-        onView(withText("Report a Problem")).check(matches(isDisplayed()));
+        onView(withText("SOMETHING IS'NT WORKING?")).check(matches(isDisplayed()));
 
+        onView(withId(R.id.reportProblem)).check(matches(isDisplayed()));
+        onView(withId(R.id.close_report_button)).check(matches(isDisplayed()));
+        onView(withId(R.id.submit_report_btn)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test the close button.
+     */
+    @Test
+    public void clickCloseReportButton() {
+        onView(withId(R.id.close_report_button)).perform(click());
     }
 }
