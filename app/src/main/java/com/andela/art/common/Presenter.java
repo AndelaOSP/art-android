@@ -8,7 +8,6 @@ package com.andela.art.common;
 
 public interface Presenter<T extends View> {
     /**
-     *
      * @param view view that will be instantiated by the presenter
      */
     void attachView(T view);

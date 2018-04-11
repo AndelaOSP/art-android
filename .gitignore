@@ -10,7 +10,10 @@
 app/google-services.json
 
 instapk.log*
-
+.idea/misc.xml
 .idea/
 instapk.properties
 .hgignore
+
+.idea/instapk.xml
+app/release/

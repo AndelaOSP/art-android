@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "236168090156-9fmpppgjopfcr55vh87isjfm5e43ltc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "1c99baeb23e9d885b8c6f00951c7dce1ae6ec710"
+          }
+        },
+        {
+          "client_id": "236168090156-2v75smg1eba8r45mj8ki4ors2cfo2tfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "f41bb2c72423af025df33587c5ba1815b15eef82"
+          }
+        },
+        {
+          "client_id": "236168090156-n4nm5mtie376v23359v6s23dofbm6heo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "9abbde92084357bc31fe30bd0f2c50fa64a601a5"
+          }
+        },
+        {
           "client_id": "236168090156-c9dintcvd71t28c7miefa8hm9lmihgjm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

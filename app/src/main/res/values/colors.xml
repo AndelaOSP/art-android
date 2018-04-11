@@ -4,8 +4,14 @@
     <color name="colorPrimaryDark">#0834D0</color>
     <color name="colorAccent">#49AAAF</color>
     <color name="EmailTextAlpha">#B3FFFFFF</color>
+    <color name="primaryBalticSea">#1E1D23</color>
+    <color name="primaryCharade">#25252f</color>
+    <color name="profileTextViewColor">#DADCDF</color>
+    <color name="profileButtonBg">#35CCC8</color>
     <color name="checkOutButton">#E23B3B</color>
     <color name="cardHeader">#35CCC8</color>
     <color name="cardText">#909090</color>
     <color name="white">#FFFFFF</color>
+    <color name="dialog_tint">#35ccc8</color>
+    <color name="dialog_text_view">#262729</color>
 </resources>
