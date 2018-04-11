@@ -37,11 +37,12 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/report_done_btn"
+                android:id="@+id/submit_report_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:src="@mipmap/ic_done_white" />
+                android:src="@mipmap/ic_done_white"
+                android:onClick="sendReport"/>
 
         </android.support.v7.widget.Toolbar>
 
