@@ -19,22 +19,29 @@ function copyEnvVarsToProperties {
 
     echo "Keystore Properties should exist at $KEYSTORE_PROPERTIES"
 
+    if [ ! -d "$KEYSTORE_DIR" ]
+    then
+        echo "Keystore directory does not exist. Making the directory now..."
+        mkdir $KEYSTORE_DIR
+    fi
+
     if [ ! -f "$KEYSTORE_PROPERTIES" ]
     then
-        echo "${KEYSTORE_PROPERTIES} does not exist...Creating file"
-
-        if [ ! -d "$KEYSTORE_DIR" ]
-        then
-            mkdir $KEYSTORE_DIR
-        fi
+        echo "${KEYSTORE_PROPERTIES} does not exist. Creating the file..."
 
         touch ${KEYSTORE_PROPERTIES}
+    else
+        echo "${KEYSTORE_PROPERTIES} detected. Overwriting values..."
 
-        echo "keyAlias=$KEY_ALIAS" >> ${KEYSTORE_PROPERTIES}
-        echo "keyPassword=$KEY_PASSWORD" >> ${KEYSTORE_PROPERTIES}
-        echo "storeFile=$STORE_FILE" >> ${KEYSTORE_PROPERTIES}
-        echo "storePassword=$STORE_PASSWORD" >> ${KEYSTORE_PROPERTIES}
+        echo "" > ${KEYSTORE_PROPERTIES}
     fi
+
+    echo "Copying keystore properties..."
+
+    echo "keyAlias=$KEY_ALIAS" >> ${KEYSTORE_PROPERTIES}
+    echo "keyPassword=$KEY_PASSWORD" >> ${KEYSTORE_PROPERTIES}
+    echo "storeFile=$STORE_FILE" >> ${KEYSTORE_PROPERTIES}
+    echo "storePassword=$STORE_PASSWORD" >> ${KEYSTORE_PROPERTIES}
 
 }
 
@@ -50,7 +57,7 @@ function downloadKeyStoreFile {
 
         curl -L -o ${STORE_FILE} ${KEY_STORE_URI}
     else
-            echo "Keystore uri not set, .APK artifact will not be signed."
+        echo "Keystore uri not set, .APK artifact will not be signed."
     fi
 }
 
