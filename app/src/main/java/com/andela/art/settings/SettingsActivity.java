@@ -5,21 +5,22 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.andela.art.R;
-import com.andela.art.root.ApplicationComponent;
-import com.andela.art.root.ApplicationModule;
-import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SettingsPageBinding;
+import com.andela.art.feedback.FeedbackActivity;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.login.injection.DaggerLoginComponent;
 import com.andela.art.login.injection.LoginModule;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
+import com.andela.art.root.ArtApplication;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -84,5 +85,13 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
         } else {
             logoutDialog.dismiss();
         }
+    }
+
+    /**
+     * Redirect to Feedback Activity.
+     * @param view The view that calls this method which is a TextView
+     */
+    public void openFeedbackActivity(View view) {
+        startActivity(new Intent(this, FeedbackActivity.class));
     }
 }
