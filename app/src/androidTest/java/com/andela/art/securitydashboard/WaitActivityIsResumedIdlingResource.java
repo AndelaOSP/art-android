@@ -42,7 +42,7 @@ public class WaitActivityIsResumedIdlingResource implements IdlingResource {
     @Override
     public boolean isIdleNow() {
         resumed = isActivityLaunched();
-        if(resumed && resourceCallback != null) {
+        if (resumed && resourceCallback != null) {
             resourceCallback.onTransitionToIdle();
         }
 
@@ -56,7 +56,7 @@ public class WaitActivityIsResumedIdlingResource implements IdlingResource {
     private boolean isActivityLaunched() {
         Collection<Activity> activitiesInStage = instance.getActivitiesInStage(Stage.RESUMED);
         for (Activity activity : activitiesInStage) {
-            if(activity.getClass().getName().equals(activityToWaitClassName)){
+            if (activity.getClass().getName().equals(activityToWaitClassName)) {
                 return true;
             }
         }
