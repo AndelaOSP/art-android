@@ -28,4 +28,6 @@
     <dimen name="cancel_margin_left">115dp</dimen>
     <dimen name="submit_margin_left">207dp</dimen>
     <dimen name="settings_page_item_top_padding">24dp</dimen>
+    <dimen name="twenty_eight_dp">28dp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
 </resources>
