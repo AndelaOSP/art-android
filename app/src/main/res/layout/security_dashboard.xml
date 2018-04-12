@@ -1,0 +1,66 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBalticSea"
+        tools:context="com.andela.art.securitydashboard.presentation.SecurityDashboardActivity">
+
+        <include
+            android:id="@+id/mToolBar"
+            layout="@layout/tool_bar" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="@dimen/profile_image_diameter"
+            android:layout_height="@dimen/profile_image_diameter"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mToolBar" />
+
+        <TextView
+            android:id="@+id/display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:fontFamily="@font/avenir_heavy"
+            android:textColor="@color/profileTextViewColor"
+            android:textSize="@dimen/twenty_two_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePhoto" />
+
+        <TextView
+            android:id="@+id/email_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_book"
+            android:textColor="@color/profileTextViewColor"
+            android:textSize="@dimen/twelve_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/display_name" />
+
+        <Button
+            android:id="@+id/addSerial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_button_margin_top"
+            android:background="@color/profileButtonBg"
+            android:fontFamily="@font/avenir_book"
+            android:paddingBottom="@dimen/profile_button_padding_top"
+            android:paddingLeft="@dimen/profile_button_padding_left"
+            android:paddingRight="@dimen/profile_button_padding_left"
+            android:paddingTop="@dimen/profile_button_padding_top"
+            android:textAllCaps="false"
+            android:text="@string/check_serial"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sixteen_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_address" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

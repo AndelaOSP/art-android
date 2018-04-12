@@ -11,7 +11,7 @@ default: &defaults
 
 version: 2
 jobs:
-  lint:
+  android_lint:
     <<: *defaults
     steps:
       - checkout
@@ -21,6 +21,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -31,11 +32,132 @@ jobs:
       - run:
           name: Running quality checks
           command: |
-            echo "Run lint, findbugs, pmd, checkstyle"
+            echo "Run android lint"
             cd ~/repo
             ./gradlew lint
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/reports
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  findbugs_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run findbugs"
+            cd ~/repo
+            ./gradlew assemble
             ./gradlew findbugs
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build/outputs
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  pmd_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run PMD"
+            cd ~/repo
             ./gradlew pmd
+      
+      # Storing reports
+      - store_artifacts:
+          path: ~/repo/app/build
+      
+      # Sending notification
+      - run:
+          name: Notifying slack channel (succeeded)
+          when: on_success
+          command: |
+            bash ~/repo/.circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel (failed)
+          when: on_fail
+          command: |
+            bash ~/repo/.circleci/notify_slack_fail.sh
+
+  checkstyle_lint:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      
+      # Running static analysis tools
+      - run:
+          name: Running quality checks
+          command: |
+            echo "Run checkstyle"
+            cd ~/repo
             ./gradlew checkstyle
       
       # Storing reports
@@ -64,7 +186,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -93,7 +215,7 @@ jobs:
           command: |
             echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
             echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
-            echo y | emulator -avd test -no-window &
+            echo y | emulator -avd test -skin 768x1280 -no-window &
             circle-android wait-for-boot
             ./gradlew connectedAndroidTest
       
@@ -107,14 +229,14 @@ jobs:
           name: Notifying slack channel on succeed
           when: on_success
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack.sh
       - run:
           name: Notifying slack channel on fail
           when: on_fail
           command: |
+            bash <(curl -s https://codecov.io/bash)
             bash ~/repo/.circleci/notify_slack_fail.sh
-    post:
-      - bash <(curl -s https://codecov.io/bash)
 
   deploy_test_build:
     <<: *defaults
@@ -126,6 +248,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -137,13 +260,13 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports
@@ -170,6 +293,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -181,13 +305,13 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports
@@ -214,6 +338,7 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -225,13 +350,13 @@ jobs:
           name: Assembling apk
           command: |
             cd ~/repo
-            ./gradlew build
+            ./gradlew :app:assembleRelease
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports
@@ -252,10 +377,16 @@ workflows:
   version: 2
   lint_test_and_deployment:
     jobs:
-      - lint
+      - android_lint
+      - findbugs_lint
+      - pmd_lint
+      - checkstyle_lint
       - test:
           requires:
-            - lint
+            - android_lint
+            - findbugs_lint
+            - pmd_lint
+            - checkstyle_lint
       - deploy_test_build:
           requires:
             - test

@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="InnerclassSeparator"
-    package="com.andela.art">
+    package="com.andela.art"
+    tools:ignore="InnerclassSeparator">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".root.ArtApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".root.App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity">
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".serialentry.SerialEntryActivity"
-            android:label="@string/title_activity_serial_entry"
-            android:theme="@style/AppTheme"></activity>
+            android:name=".securitydashboard.presentation.SecurityDashboardActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".checkin.CheckInActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
