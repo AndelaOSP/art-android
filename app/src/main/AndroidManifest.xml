@@ -25,11 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".securitydashboard.presentation.SecurityDashboardActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".settings.SettingsActivity"
             android:screenOrientation="portrait" />
@@ -38,6 +36,8 @@
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             android:label="@string/app_title"/>
+        <activity android:name=".feedback.FeedbackActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
