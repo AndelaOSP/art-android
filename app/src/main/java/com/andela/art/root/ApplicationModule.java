@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 
 /**
  * Created by Mugiwara_Munyi on 28/02/2018.
@@ -18,7 +17,7 @@ public class ApplicationModule {
   /**
    * Set the application.
    *
-   * @param application - appliation
+   * @param application - application
    */
   public ApplicationModule(Application application) {
     this.application = application;
@@ -31,7 +30,6 @@ public class ApplicationModule {
    * @return application
    */
   @Provides
-  @Singleton
   public Context provideContext() {
     return application;
   }

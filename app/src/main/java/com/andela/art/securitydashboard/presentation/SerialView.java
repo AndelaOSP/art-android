@@ -1,6 +1,6 @@
 package com.andela.art.securitydashboard.presentation;
 
-import com.andela.art.common.View;
+import com.andela.art.root.View;
 import com.andela.art.securitydashboard.data.Asset;
 
 /**
