@@ -13,9 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.andela.art.R;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
+import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SettingsPageBinding;
 import com.andela.art.login.LoginActivity;
-import com.andela.art.root.App;
+import com.andela.art.login.injection.DaggerLoginComponent;
+import com.andela.art.login.injection.LoginModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,8 +37,14 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
 
         super.onCreate(savedInstanceState);
         SettingsPageBinding binding = DataBindingUtil.setContentView(this, R.layout.settings_page);
-        ((App) getApplicationContext()).getComponent().inject(this);
-
+        ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
+                .applicationComponent();
+        DaggerLoginComponent.builder()
+                .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getApplication()))
+                .loginModule(new LoginModule())
+                .build()
+                .inject(this);
         setSupportActionBar((Toolbar) binding.tbToolBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.settings);

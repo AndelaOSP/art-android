@@ -1,5 +1,7 @@
 package com.andela.art.securitydashboard;
 
+import android.support.test.espresso.IdlingRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -80,8 +82,13 @@ public class SecurityDashboardActivityTest {
                 perform(typeText("123"), closeSoftKeyboard());
         closeSoftKeyboard();
         onView(withId(R.id.submit)).perform(click());
+        IdlingResource idlingResource = new WaitActivityIsResumedIdlingResource(
+                CheckInActivity.class.getName());
+        IdlingRegistry.getInstance().register(idlingResource);
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
                 hasComponent(CheckInActivity.class.getName())));
+        IdlingRegistry.getInstance().unregister(idlingResource);
+
     }
 
     /**

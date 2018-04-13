@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
+import com.andela.art.root.ApplicationComponent;
 import com.andela.art.databinding.ActivityLoginBinding;
+import com.andela.art.login.injection.DaggerLoginComponent;
+import com.andela.art.login.injection.LoginModule;
+import com.andela.art.root.ApplicationModule;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
-import com.andela.art.root.App;
+import com.andela.art.root.ArtApplication;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,9 +36,8 @@ import javax.inject.Inject;
 /**
  * LoginActivity handles the login of user into the application.
  */
-public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.LoginActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    @Inject LoginRepository loginRepository;
     @Inject GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 2;
@@ -66,7 +69,14 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ((App) getApplicationContext()).getComponent().inject(this);
+        ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
+                .applicationComponent();
+        DaggerLoginComponent.builder()
+                .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getApplication()))
+                .loginModule(new LoginModule())
+                .build()
+                .inject(this);
         dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
@@ -98,7 +108,10 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
         mConnectionProgressDialog.setMessage("Signing in...");
     }
 
-    @Override
+    /**
+     * Log in with google.
+     * @param account - google account
+     */
     public void firebasewithGoogleAuth(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider
                 .getCredential(account.getIdToken(), null);
@@ -125,7 +138,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
 
     }
 
-    @Override
+    /**
+     * Sign in and redirect.
+     */
     public void signIn() {
         // Show the dialog as we are now signing in.
         mConnectionProgressDialog.show();

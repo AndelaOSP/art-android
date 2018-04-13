@@ -1,7 +1,7 @@
 package com.andela.art.securitydashboard.presentation;
 
 import com.andela.art.api.ApiService;
-import com.andela.art.common.Presenter;
+import com.andela.art.root.Presenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

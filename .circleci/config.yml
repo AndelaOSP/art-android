@@ -264,9 +264,9 @@ jobs:
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports
@@ -309,9 +309,9 @@ jobs:
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports
@@ -354,9 +354,9 @@ jobs:
 
       # Storing the generated apk files and reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/debug
+          path: ~/repo/app/build/outputs/apk/prod/debug
       - store_artifacts:
-          path: ~/repo/app/build/outputs/apk/release
+          path: ~/repo/app/build/outputs/apk/prod/release
       - store_artifacts:
           path: ~/repo/app/build/reports
           destination: reports

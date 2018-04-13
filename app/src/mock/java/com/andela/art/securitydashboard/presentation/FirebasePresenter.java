@@ -1,6 +1,6 @@
 package com.andela.art.securitydashboard.presentation;
 
-import com.andela.art.common.Presenter;
+import com.andela.art.root.Presenter;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
