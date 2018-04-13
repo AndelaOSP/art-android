@@ -19,6 +19,7 @@ import java.io.IOException;
 import okhttp3.mockwebserver.MockResponse;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -111,5 +112,22 @@ public class SecurityDashboardActivityTest {
                 .check(matches(allOf(isDisplayed(),
                         withText("Zacharia Mwangi"))
                 ));
+    }
+
+    /**
+     * Test pressing the back button twice within 2 seconds exits the app.
+     */
+    @Test
+    public void backButtonToExitPressedTwiceExitsTheApp() {
+        pressBack();
+
+        // Added a sleep statement to match the app's execution delay.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pressBack();
     }
 }

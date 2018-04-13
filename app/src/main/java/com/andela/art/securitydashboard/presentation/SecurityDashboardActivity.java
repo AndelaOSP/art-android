@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,8 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
 
     @Inject
     FirebasePresenter firebasePresenter;
+
+    boolean backButtonToExitPressedTwice = false;
 
     /**
      * Activity on create method.
@@ -162,5 +165,28 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
                 SettingsActivity.class);
         startActivity(settings);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backButtonToExitPressedTwice) {
+            super.onBackPressed();
+            finish();
+            moveTaskToBack(true);
+        } else {
+            Toast.makeText(this, "Press again to exit.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        this.backButtonToExitPressedTwice = true;
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                backButtonToExitPressedTwice = false;
+            }
+
+        }, 2000);
     }
 }
