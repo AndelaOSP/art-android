@@ -1,8 +1,6 @@
 package com.andela.art.root;
 
 import android.app.Application;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 
 /**
  * Created by zack on 3/5/18.
