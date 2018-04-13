@@ -1,50 +1,52 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="@dimen/dialog_width"
         android:layout_height="@dimen/dialog_height"
+        android:paddingLeft="@dimen/dialog_padding_text"
         android:background="@android:color/white"
-        android:paddingLeft="@dimen/dialog_padding_text">
-
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dialog_padding_text"
-            android:background="@android:color/white"
-            android:text="@string/enter_text"
+            android:textSize="@dimen/dialog_text_size"
             android:textColor="@color/dialog_text_view"
-            android:textSize="@dimen/dialog_text_size" />
+            android:text="@string/enter_text"
+            android:background="@android:color/white"
+            />
 
         <EditText
             android:id="@+id/serial_edit_text"
-            android:layout_width="278dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="72dp"
-            android:backgroundTint="#35ccc8" />
-
-        <Button
-            android:id="@+id/cancel"
             android:layout_width="@dimen/dialog_edit_text_width"
             android:layout_height="@dimen/dialog_edit_text_height"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="115dp"
             android:layout_marginTop="@dimen/edit_text_margin_top"
-            android:background="@android:color/transparent"
             android:backgroundTint="@color/dialog_tint"
+            />
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="@dimen/dialog_button_width"
+            android:layout_height="@dimen/dialog_button_height"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:layout_marginBottom="@dimen/button_margin_bottom"
+            android:layout_marginLeft="@dimen/cancel_margin_left"
+            android:text="@string/cancel"
+            android:textColor="@color/dialog_tint"
             android:fontFamily="@font/avenir_medium"
-            android:text="Cancel"
-            android:textColor="#35ccc8" />
-
+            />
         <Button
             android:id="@+id/submit"
             android:layout_width="@dimen/dialog_button_width"
             android:layout_height="@dimen/dialog_edit_text_height"
-            android:layout_marginBottom="@dimen/button_margin_bottom"
-            android:layout_marginLeft="@dimen/submit_margin_left"
-            android:layout_marginTop="@dimen/button_margin_top"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/avenir_medium"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:layout_marginLeft="@dimen/submit_margin_left"
+            android:layout_marginBottom="@dimen/button_margin_bottom"
             android:text="@string/submit"
-            android:textColor="@color/dialog_tint" />
+            android:textColor="@color/dialog_tint"
+            android:fontFamily="@font/avenir_medium"
+            />
+
     </android.support.design.widget.CoordinatorLayout>
 </layout>
