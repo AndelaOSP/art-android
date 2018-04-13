@@ -38,7 +38,7 @@
         <Button
             android:id="@+id/submit"
             android:layout_width="@dimen/dialog_button_width"
-            android:layout_height="@dimen/dialog_edit_text_height"
+            android:layout_height="@dimen/dialog_button_height"
             android:background="@android:color/transparent"
             android:layout_marginTop="@dimen/button_margin_top"
             android:layout_marginLeft="@dimen/submit_margin_left"
