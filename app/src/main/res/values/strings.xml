@@ -12,6 +12,7 @@
     <string name="title_activity_serial_entry">SerialEntry</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="network_util_error_message">You're currently not connected to the internet. Please try again.</string>
     <string name="app_title">Resource Tracker</string>
     <string name="settings">Settings</string>
     <string name="logout">Log out</string>
