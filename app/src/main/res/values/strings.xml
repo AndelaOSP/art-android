@@ -28,4 +28,11 @@
     <string name="logout_yes">YES</string>
     <string name="logout_cancel">CANCEL</string>
     <string name="logout_message">Are you sure you want to log out?</string>
+    <string name="cohort_title">cohort</string>
+    <string name="header_image">header image</string>
+    <string name="check_out">CHECK-OUT</string>
+    <string name="email_title">Email</string>
+    <string name="cohort">Cohort</string>
+    <string name="checkin">CHECK-IN</string>
+    <string name="serial_title">serial number</string>
 </resources>
