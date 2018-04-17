@@ -1,9 +1,7 @@
 package com.andela.art.api;
 
-import com.andela.art.checkin.data.CheckInModel;
-import com.andela.art.checkin.data.CheckInResponse;
-import com.andela.art.securitydashboard.data.Asset;
-import com.andela.art.utils.Constants;
+import com.andela.art.models.Asset;
+import com.andela.art.models.CheckInModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -55,7 +53,7 @@ public interface ApiService {
      * @param checkInModel - check in model
      * @return Observable
      */
-    @POST(Constants.CHECK_IN)
+    @POST("/api/v1/asset-logs/")
     @FormUrlEncoded
-    Observable<CheckInResponse> checkIn(@Body CheckInModel checkInModel);
+    Observable<CheckInModel> checkIn(@Body CheckInModel checkInModel);
 }

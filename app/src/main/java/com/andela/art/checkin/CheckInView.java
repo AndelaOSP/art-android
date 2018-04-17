@@ -1,5 +1,7 @@
 package com.andela.art.checkin;
 
+import com.andela.art.models.Asset;
+
 /**
  * Check in view.
  */
@@ -7,8 +9,9 @@ package com.andela.art.checkin;
 public interface CheckInView {
     /**
      * Display check out button.
+     * @param asset - Asset instance
      */
-    void showCheckout();
+    void showCheckout(Asset asset);
 
     /**
      * Pass intent data to the views.
@@ -17,6 +20,12 @@ public interface CheckInView {
 
     /**
      * Load image to the image view from intent url.
+     * @param url - image url
      */
-    void loadResizedImage();
+    void loadResizedImage(String  url);
+
+    /**
+     * Get back to security dashboard activity.
+     */
+    void goToCheckSerial();
 }

@@ -1,7 +1,6 @@
 package com.andela.art.securitydashboard.presentation;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 
 import com.andela.art.R;
-import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.databinding.SerialDialogBinding;
 
 /**
@@ -43,7 +41,6 @@ public class SerialDialog extends AppCompatDialogFragment {
         dialogBinding.submit.setOnClickListener(view -> {
             String serial = dialogBinding.serialEditText.getText().toString();
             ((SecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
-            initializeCheckInComponent();
             dismiss();
         });
 
@@ -54,17 +51,5 @@ public class SerialDialog extends AppCompatDialogFragment {
         return new AlertDialog.Builder(getActivity())
                 .setView(dialogBinding.getRoot())
                 .create();
-    }
-
-    /**
-     * Initialize CheckInActivity with Intent data.
-     */
-    public void initializeCheckInComponent() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), CheckInActivity.class);
-        intent.putExtra("name", "Mudge Fudge");
-        intent.putExtra("cohort", "18");
-        intent.putExtra("serial", "CRT45632");
-        intent.putExtra("email", "mudge.fudge@andela.com");
-        startActivity(intent);
     }
 }

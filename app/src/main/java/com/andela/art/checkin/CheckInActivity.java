@@ -1,5 +1,6 @@
 package com.andela.art.checkin;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,8 +13,11 @@ import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
 import com.andela.art.databinding.ActivityCheckInBinding;
+import com.andela.art.models.Asset;
+import com.andela.art.models.AssignedTo;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -37,13 +41,12 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         initializeCheckInComponent();
-        displayDetails();
         binding.checkinButton.setOnClickListener(v -> presenter
-                .checkIn(getIntent().getStringExtra("serial"),
-                getIntent().getStringExtra("name")));
+                .checkIn(getIntent().getStringExtra("serial")));
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
         presenter.attachView(this);
+        displayDetails();
     }
 
     /**
@@ -51,33 +54,66 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     @Override
     public void displayDetails() {
-        binding.name.setText(getIntent().getStringExtra("name").toUpperCase(Locale.US));
-        binding.serialInfo.setText(getIntent().getStringExtra("serial"));
-        binding.emailText.setText(getIntent().getStringExtra("email"));
-        binding.cohortNumber.setText(getIntent().getStringExtra("cohort"));
-        loadResizedImage();
+        Bundle bundle = getIntent().getExtras();
+        Asset asset = (Asset) bundle.getSerializable("asset");
+        AssignedTo user = asset.getAssignedTo();
+        binding.name.setText(user.getFullName().toUpperCase(Locale.US));
+        binding.serialInfo.setText(asset.getSerialNumber());
+        binding.emailText.setText(user.getEmail());
+        binding.cohortNumber.setText(String.valueOf(user.getCohort()));
+        loadResizedImage(user.getPicture());
+        showCheckout(asset);
     }
 
     /**
      * Display checkout button.
      */
     @Override
-    public void showCheckout() {
-        binding.checkinButton.setVisibility(View.INVISIBLE);
-        binding.checkoutButton.setVisibility(View.VISIBLE);
+    public void showCheckout(Asset asset) {
+        if (asset.getCheckinStatus().equals("Checkout")) {
+            binding.checkinButton.setVisibility(View.INVISIBLE);
+            binding.checkoutButton.setVisibility(View.VISIBLE);
+        } else {
+            binding.checkinButton.setVisibility(View.VISIBLE);
+            binding.checkoutButton.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     /**
      * Resize and load image to image view.
+     * @param url - image url
      */
     @Override
-    public void loadResizedImage() {
-        Picasso.with(this)
-                .load(R.drawable.photo)
-                .fit()
-                .centerCrop()
-                .into(binding.ivPhoto);
+    public void loadResizedImage(String url) {
+
+        if (url == null) {
+
+            Picasso.with(this)
+                    .load(R.drawable.photo)
+                    .fit()
+                    .centerCrop()
+                    .into(binding.ivPhoto);
+        } else {
+            Picasso.with(this)
+                    .load(url)
+                    .fit()
+                    .centerCrop()
+                    .into(binding.ivPhoto);
+        }
     }
+
+    /**
+     * Go to security dashboard activity.
+     */
+    @Override
+    public void goToCheckSerial() {
+        Intent intent = new Intent(CheckInActivity.this,
+                SecurityDashboardActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

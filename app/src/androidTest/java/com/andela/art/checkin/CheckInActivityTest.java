@@ -2,10 +2,13 @@ package com.andela.art.checkin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
 import com.andela.art.R;
+import com.andela.art.models.Asset;
+import com.andela.art.models.AssignedTo;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,10 +44,36 @@ public class CheckInActivityTest {
         protected Intent getActivityIntent() {
             Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
             Intent intent = new Intent(targetContext, CheckInActivity.class);
-            intent.putExtra("name", "madge");
-            intent.putExtra("email", "madge@mail.com");
-            intent.putExtra("cohort", "18");
-            intent.putExtra("serial", "CRT46YT");
+
+            AssignedTo assignedTo = new AssignedTo();
+            assignedTo.setCohort(18);
+            assignedTo.setDateJoined("20-12-2017");
+            assignedTo.setEmail("mudge.fudge@mail.com");
+            assignedTo.setFirstName("mudge");
+            assignedTo.setLastName("Fudge");
+            assignedTo.setFullName("Mudge Fudge");
+            assignedTo.setPicture("R.drawable.photo");
+            assignedTo.setId(1);
+            assignedTo.setSlackHandle("");
+            assignedTo.setLastLogin("");
+            assignedTo.setLastModified("");
+
+
+            Asset asset = new Asset();
+            asset.setId(1);
+            asset.setAllocationStatus("Checkin");
+            asset.setAssignedTo(assignedTo);
+            asset.setCheckinStatus("Checkin");
+            asset.setCreatedAt("12-09-2018");
+            asset.setItemCode("ER34521");
+            asset.setLastModified("");
+            asset.setModelNumber("");
+            asset.setSerialNumber("CRT5647Y");
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("asset", asset);
+            intent.putExtras(bundle);
+
             return intent;
         }
     };
@@ -54,10 +83,10 @@ public class CheckInActivityTest {
      */
     @Test
     public void displayDetails() {
-        onView(withId(R.id.name)).check(matches(withText("MADGE")));
-        onView(withId(R.id.email_text)).check(matches(withText("madge@mail.com")));
+        onView(withId(R.id.name)).check(matches(withText("MUDGE FUDGE")));
+        onView(withId(R.id.email_text)).check(matches(withText("mudge.fudge@mail.com")));
         onView(withId(R.id.cohort_number)).check(matches(withText("18")));
-        onView(withId(R.id.serial_info)).check(matches(withText("CRT46YT")));
+        onView(withId(R.id.serial_info)).check(matches(withText("CRT5647Y")));
     }
 
     /**

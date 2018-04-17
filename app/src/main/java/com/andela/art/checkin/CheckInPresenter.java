@@ -1,8 +1,7 @@
 package com.andela.art.checkin;
 
 import com.andela.art.api.ApiService;
-import com.andela.art.checkin.data.CheckInModel;
-import com.andela.art.checkin.data.CheckInResponse;
+import com.andela.art.models.CheckInModel;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
  * Check in presenter.
  */
 public class CheckInPresenter {
-    private CheckInView view;
+    protected CheckInView view;
     private final ApiService apiService;
 
     /**
@@ -27,20 +26,18 @@ public class CheckInPresenter {
     /**
      * Check in user with asset serial number.
      * @param serial - asset serial number.
-     * @param securityUser - security user name.
      */
-    public void checkIn(String serial, String securityUser) {
+    public void checkIn(String serial) {
         CheckInModel checkInModel = new CheckInModel();
-        checkInModel.setAction("CHECKIN");
-        checkInModel.setSecurityUser(securityUser);
+        checkInModel.setLogType("Checkin");
         checkInModel.setSerialNumber(serial);
-        Observable<CheckInResponse> checkin = apiService.checkIn(checkInModel);
+        Observable<CheckInModel> checkin = apiService.checkIn(checkInModel);
         checkin.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<CheckInResponse>() {
+                .subscribe(new DisposableObserver<CheckInModel>() {
                     @Override
-                    public void onNext(CheckInResponse response) {
-                        callShowCheckOut();
+                    public void onNext(CheckInModel response) {
+                        view.goToCheckSerial();
                     }
 
                     @Override
@@ -63,10 +60,4 @@ public class CheckInPresenter {
         this.view = checkInView;
     }
 
-    /**
-     * Call method to show checkout button.
-     */
-    public void callShowCheckOut() {
-        view.showCheckout();
-    }
 }
