@@ -3,6 +3,8 @@ package com.andela.art.login.injection;
 import android.content.Context;
 
 import com.andela.art.R;
+import com.andela.art.api.ApiService;
+import com.andela.art.login.SecurityEmailsPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -31,5 +33,15 @@ public class LoginModule {
                 .requestProfile()
                 .build();
         return GoogleSignIn.getClient(context, googleSignInOptions);
+    }
+
+    /**
+     * Provide SecurityEmailsPresenter.
+     * @param apiService - apiService
+     * @return SecurityEmailsPresenter object
+     */
+    @Provides
+    public SecurityEmailsPresenter providesSecurityEmailsPresenter(ApiService apiService) {
+        return new SecurityEmailsPresenter(apiService);
     }
 }

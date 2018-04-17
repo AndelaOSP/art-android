@@ -33,4 +33,5 @@ public class ApplicationModule {
   public Context provideContext() {
     return application;
   }
+
 }

@@ -26,7 +26,9 @@ public class ApiModule {
     OkHttpClient provideOkHttp() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        return new OkHttpClient.Builder().addInterceptor(new HttpLoggingInterceptor()).build();
+        return new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
     }
 
 

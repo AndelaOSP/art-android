@@ -44,7 +44,7 @@ android {
             buildConfigField "String" ,"BASE_URL", "\"http:/localhost:3000\""
         }
         prod {
-            buildConfigField "String" ,"BASE_URL", "\"http://art.andela.com\""
+            buildConfigField "String" ,"BASE_URL", "\"http://art-backend.herokuapp.com\""
         }
     }
 
