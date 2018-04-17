@@ -12,6 +12,7 @@ app/google-services.json
 instapk.log*
 .idea/misc.xml
 .idea/
+.idea
 instapk.properties
 .hgignore
 
