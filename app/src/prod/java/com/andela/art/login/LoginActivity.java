@@ -42,15 +42,10 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
     private static final int RC_SIGN_IN = 2;
     static final String TAG = "LoginActivity";
     FirebaseAuth.AuthStateListener mAuthListener;
-    // A progress dialog to display when the user is connecting in
-    // case there is a delay in any of the dialogs being ready.
     ProgressDialog mConnectionProgressDialog;
     Intent dashboard;
 
     public List<String> allowedEmailAddresses = new ArrayList();
-
-
-    // Custom error code for unauthorized GMail addresses
     private static final int UNAUTHORIZED_CODE = 14672;
 
     @Override
@@ -86,20 +81,15 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .setContentView(this, R.layout.activity_login);
         activityLoginBinding.googleSignInButton.setOnClickListener(view -> signIn());
 
-        // Instance of mAuth
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
-                // Hide the progress dialog if its showing.
                 mConnectionProgressDialog.dismiss();
-                // Add check if user is admin here in future
                 LoginActivity.this.startActivity(dashboard);
             }
         };
 
-        // Configure the ProgressDialog that will be shown if there is a
-        // delay in presenting the user with the next sign in step.
         mConnectionProgressDialog = new ProgressDialog(this);
         mConnectionProgressDialog.setMessage("Signing in...");
     }
@@ -197,6 +187,9 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      * @return boolean true if an email is allowed, false if the email is not allowed
      */
     public boolean isAllowedNonAndelaEmail(String email) {
+        if(allowedEmailAddresses.isEmpty()){
+            return false;
+        }
         return allowedEmailAddresses.contains(email);
 
     }
