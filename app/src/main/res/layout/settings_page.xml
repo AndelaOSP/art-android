@@ -42,6 +42,7 @@
             android:fontFamily="@font/avenir_book"
             android:padding="@dimen/settings_page_item_top_padding"
             android:text="@string/send_feedback"
+            android:onClick="openFeedbackActivity"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sixteen_sp" />
 

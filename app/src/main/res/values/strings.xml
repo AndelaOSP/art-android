@@ -15,7 +15,7 @@
     <string name="app_title">Resource Tracker</string>
     <string name="settings">Settings</string>
     <string name="logout">Log out</string>
-    <string name="send_feedback">Send feedback</string>
+    <string name="send_feedback">Send Feedback</string>
     <string name="report_a_problem">Report a problem</string>
     <string name="full_name">Full name</string>
     <string name="email">example@gmail.com</string>
@@ -28,4 +28,8 @@
     <string name="logout_yes">YES</string>
     <string name="logout_cancel">CANCEL</string>
     <string name="logout_message">Are you sure you want to log out?</string>
+    <string name="feedback_hint">What would you like us to improve?</string>
+    <string name="leave_us_feedback">Kindly leave us feedback regarding our app and its features.</string>
+    <string name="clear">Clear</string>
+    <string name="done">Done</string>
 </resources>
