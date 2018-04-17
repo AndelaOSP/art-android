@@ -3,7 +3,11 @@ package com.andela.art.api;
 import com.andela.art.securitydashboard.data.Asset;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -18,6 +22,27 @@ public interface ApiService {
      * @param serial serial to be searched
      * @return Observable
      */
-    @GET("/assets/{serial_number}/")
+    @GET("/api/v1/assets/{serial_number}/")
     Observable<Asset> getAsset(@Path("serial_number") String serial);
+
+    /**
+     * Fetch oauth token to be used for fetching security users emails.
+     * @param grantType - grantType
+     * @param clientId - clientId
+     * @param clientSecret - clientSecret
+     * @return Observable
+     */
+    @FormUrlEncoded
+    @POST("/api/v1/o/token/")
+    Observable<TokenResponse> fetchOauthToken(@Field("grant_type") String grantType,
+                                       @Field("client_id")String clientId,
+                                       @Field("client_secret")String clientSecret);
+
+    /**
+     * Fetch emails of security users.
+     * @param token - token
+     * @return Observable
+     */
+    @GET("/api/v1/security-user-emails/")
+    Observable<EmailsResponse> getEmails(@Header("Authorization")String token);
 }

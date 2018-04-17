@@ -8,7 +8,6 @@ import android.app.Application;
 
 public class ArtApplication extends Application {
     public ApplicationComponent applicationComponent;
-
     /**
      *
      * @return Application component.

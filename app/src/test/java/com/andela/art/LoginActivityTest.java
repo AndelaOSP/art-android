@@ -2,15 +2,17 @@ package com.andela.art;
 
 import org.junit.Test;
 
-import static com.andela.art.login.LoginActivity.isAllowedNonAndelaEmail;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import com.andela.art.login.LoginActivity;
 
 /**
  * Created by allan on 27/03/2018.
  */
 
 public class LoginActivityTest {
+    LoginActivity loginActivity;
 
     /**
      * Test if a provided Non-Andelan email address is allowed or disallowed.
@@ -20,7 +22,8 @@ public class LoginActivityTest {
      */
     @Test
     public void non_andela_emails_allowed_correctly() throws Exception {
-        assertTrue(isAllowedNonAndelaEmail("muhallan1@gmail.com"));
-        assertFalse(isAllowedNonAndelaEmail("eric_elem@gmail.com"));
+        loginActivity = new LoginActivity();
+        assertTrue(loginActivity.isAllowedNonAndelaEmail("muhallan1@gmail.com"));
+        assertFalse(loginActivity.isAllowedNonAndelaEmail("eric_elem@gmail.com"));
     }
 }
