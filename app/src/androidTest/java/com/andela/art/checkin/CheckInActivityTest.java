@@ -7,8 +7,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
 import com.andela.art.R;
+import com.andela.art.models.Asignee;
 import com.andela.art.models.Asset;
-import com.andela.art.models.AssignedTo;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,24 +45,24 @@ public class CheckInActivityTest {
             Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
             Intent intent = new Intent(targetContext, CheckInActivity.class);
 
-            AssignedTo assignedTo = new AssignedTo();
-            assignedTo.setCohort(18);
-            assignedTo.setDateJoined("20-12-2017");
-            assignedTo.setEmail("mudge.fudge@mail.com");
-            assignedTo.setFirstName("mudge");
-            assignedTo.setLastName("Fudge");
-            assignedTo.setFullName("Mudge Fudge");
-            assignedTo.setPicture("R.drawable.photo");
-            assignedTo.setId(1);
-            assignedTo.setSlackHandle("");
-            assignedTo.setLastLogin("");
-            assignedTo.setLastModified("");
+            Asignee asignee = new Asignee();
+            asignee.setCohort(18);
+            asignee.setDateJoined("20-12-2017");
+            asignee.setEmail("mudge.fudge@mail.com");
+            asignee.setFirstName("mudge");
+            asignee.setLastName("Fudge");
+            asignee.setFullName("Mudge Fudge");
+            asignee.setPicture("R.drawable.photo");
+            asignee.setId(1);
+            asignee.setSlackHandle("");
+            asignee.setLastLogin("");
+            asignee.setLastModified("");
 
 
             Asset asset = new Asset();
             asset.setId(1);
             asset.setAllocationStatus("Checkin");
-            asset.setAssignedTo(assignedTo);
+            asset.setAssignedTo(asignee);
             asset.setCheckinStatus("Checkin");
             asset.setCreatedAt("12-09-2018");
             asset.setItemCode("ER34521");

@@ -35,4 +35,6 @@
     <string name="cohort">Cohort</string>
     <string name="checkin">CHECK-IN</string>
     <string name="serial_title">serial number</string>
+    <string name="mac">mac</string>
+    <string name="serial">Serial: </string>
 </resources>

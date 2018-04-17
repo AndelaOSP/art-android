@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Assigned to model.
  */
-public class AssignedTo implements Serializable {
+public class Asignee implements Serializable {
 
     @SerializedName("cohort")
     private int mCohort;

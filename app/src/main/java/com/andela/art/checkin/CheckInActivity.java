@@ -14,7 +14,7 @@ import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
 import com.andela.art.databinding.ActivityCheckInBinding;
 import com.andela.art.models.Asset;
-import com.andela.art.models.AssignedTo;
+import com.andela.art.models.Asignee;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
@@ -56,7 +56,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     public void displayDetails() {
         Bundle bundle = getIntent().getExtras();
         Asset asset = (Asset) bundle.getSerializable("asset");
-        AssignedTo user = asset.getAssignedTo();
+        Asignee user = asset.getAssignedTo();
         binding.name.setText(user.getFullName().toUpperCase(Locale.US));
         binding.serialInfo.setText(asset.getSerialNumber());
         binding.emailText.setText(user.getEmail());

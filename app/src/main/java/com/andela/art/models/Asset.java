@@ -13,7 +13,7 @@ public class Asset implements Serializable {
     @SerializedName("allocation_status")
     private String mAllocationStatus;
     @SerializedName("assigned_to")
-    private AssignedTo mAssignedTo;
+    private Asignee mAsignee;
     @SerializedName("checkin_status")
     private String mCheckinStatus;
     @SerializedName("created_at")
@@ -47,18 +47,18 @@ public class Asset implements Serializable {
 
     /**
      * Assigned to getter.
-     * @return mAssignedTo - AssignedTo
+     * @return mAsignee - Asignee
      */
-    public AssignedTo getAssignedTo() {
-        return mAssignedTo;
+    public Asignee getAssignedTo() {
+        return mAsignee;
     }
 
     /**
      * Assigned to setter.
-     * @param assignedTo - user the asset is assigned to
+     * @param asignee - user the asset is assigned to
      */
-    public void setAssignedTo(AssignedTo assignedTo) {
-        mAssignedTo = assignedTo;
+    public void setAssignedTo(Asignee asignee) {
+        mAsignee = asignee;
     }
 
     /**
