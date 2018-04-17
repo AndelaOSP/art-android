@@ -187,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      * @return boolean true if an email is allowed, false if the email is not allowed
      */
     public boolean isAllowedNonAndelaEmail(String email) {
-        if(allowedEmailAddresses.isEmpty()){
+        if (allowedEmailAddresses.isEmpty()) {
             return false;
         }
         return allowedEmailAddresses.contains(email);
