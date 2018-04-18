@@ -44,7 +44,6 @@ public class CheckInActivityTest {
         protected Intent getActivityIntent() {
             Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
             Intent intent = new Intent(targetContext, CheckInActivity.class);
-
             Asignee asignee = new Asignee();
             asignee.setCohort(18);
             asignee.setDateJoined("20-12-2017");
