@@ -19,7 +19,7 @@ public class RestServiceTestHelper {
      *
      * @param is - inputstream
      * @return string
-     * @throws Exception
+     * @throws Exception - Exception
      */
     public static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -37,7 +37,7 @@ public class RestServiceTestHelper {
      * @param context - context
      * @param filePath - filePath
      * @return string
-     * @throws Exception
+     * @throws Exception - Exception
      */
     public static String getStringFromFile(Context context, String filePath) throws Exception {
         final InputStream stream = context.getResources().getAssets().open(filePath);
