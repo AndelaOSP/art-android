@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -26,6 +26,7 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.Intents.times;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtras;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -80,7 +81,7 @@ public class SecurityDashboardActivityTest {
     public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws Exception {
         String fileName = "asset_response.json";
         String asset = RestServiceTestHelper.
-                getStringFromFile(getInstrumentation().getContext(), fileName);
+                getStringFromFile(getTargetContext(), fileName);
         mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
         activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial)).perform(click());
@@ -92,7 +93,7 @@ public class SecurityDashboardActivityTest {
                 CheckInActivity.class.getName());
         IdlingRegistry.getInstance().register(idlingResource);
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
-                hasComponent(CheckInActivity.class.getName())));
+                hasComponent(CheckInActivity.class.getName())), times(2));
         IdlingRegistry.getInstance().unregister(idlingResource);
 
     }
