@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 
 import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
@@ -41,7 +40,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         initializeCheckInComponent();
-        binding.checkinButton.setOnClickListener(v -> presenter
+        binding.checkInButton.setOnClickListener(v -> presenter
                 .checkIn(getIntent().getStringExtra("serial")));
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
@@ -70,12 +69,12 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     @Override
     public void showCheckout(Asset asset) {
-        if (asset.getCheckinStatus().equals("Checkout")) {
-            binding.checkinButton.setVisibility(View.INVISIBLE);
-            binding.checkoutButton.setVisibility(View.VISIBLE);
+        if (asset.getCheckinStatus().equals("Checkin")) {
+            binding.checkInButton.setBackground(getDrawable(R.drawable.checkout_button));
+            binding.checkInButton.setText(getResources().getString(R.string.check_out));
         } else {
-            binding.checkinButton.setVisibility(View.VISIBLE);
-            binding.checkoutButton.setVisibility(View.INVISIBLE);
+            binding.checkInButton.setBackground(getDrawable(R.drawable.checkin_button));
+            binding.checkInButton.setText(getResources().getString(R.string.checkin));
         }
 
     }

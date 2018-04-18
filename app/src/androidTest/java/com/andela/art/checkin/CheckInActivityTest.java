@@ -102,7 +102,7 @@ public class CheckInActivityTest {
      */
     @Test
     public void testClickCheckin() {
-        onView(withId(R.id.checkinButton)).check(matches(isClickable()));
+        onView(withId(R.id.checkInButton)).check(matches(isClickable()));
     }
 
     /**

@@ -80,9 +80,9 @@ public class SerialDialog extends AppCompatDialogFragment {
 
         Asset asset = new Asset();
         asset.setId(1);
-        asset.setAllocationStatus("Checkin");
+        asset.setAllocationStatus("");
         asset.setAssignedTo(asignee);
-        asset.setCheckinStatus("Checkout");
+        asset.setCheckinStatus("Checkin");
         asset.setCreatedAt("12-09-2018");
         asset.setItemCode("ER34521");
         asset.setLastModified("");
