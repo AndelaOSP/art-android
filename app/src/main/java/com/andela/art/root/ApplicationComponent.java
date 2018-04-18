@@ -11,7 +11,7 @@ import dagger.Component;
 /**
  * Created by zack on 3/5/18.
  */
-@Singleton @Component(modules = {ApiModule.class, FirebaseModule.class, ApplicationModule.class})
+@Singleton @Component(modules = {ApplicationModule.class, ApiModule.class, FirebaseModule.class})
 public interface ApplicationComponent {
 
     /**

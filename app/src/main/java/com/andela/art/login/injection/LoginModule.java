@@ -5,9 +5,12 @@ import android.content.Context;
 import com.andela.art.R;
 import com.andela.art.api.ApiService;
 import com.andela.art.login.SecurityEmailsPresenter;
+import com.andela.art.login.TokenAuthPresenter;
+import com.andela.art.root.SharedPrefsWrapper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.Module;
 import dagger.Provides;
@@ -43,5 +46,17 @@ public class LoginModule {
     @Provides
     public SecurityEmailsPresenter providesSecurityEmailsPresenter(ApiService apiService) {
         return new SecurityEmailsPresenter(apiService);
+    }
+
+    /**
+     * Provide TokenAuthPresenter.
+     * @param firebaseAuth - firebaseAuth
+     * @param sharedPrefsWrapper - sharedPrefsWrapper
+     * @return TokenAuthPresenter object
+     */
+    @Provides
+    public TokenAuthPresenter providesTokenAuthPresenter(FirebaseAuth firebaseAuth,
+                                                         SharedPrefsWrapper sharedPrefsWrapper) {
+        return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
     }
 }

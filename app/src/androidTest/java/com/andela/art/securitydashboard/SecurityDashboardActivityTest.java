@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -73,12 +74,14 @@ public class SecurityDashboardActivityTest {
 
     /**
      * Test asset retrieved and intent sent.
-     * @throws IOException if an error occurs
+     * @throws Exception if an error occurs
      */
     @Test
-    public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws IOException {
-        String json = "{\"id\": 1,\"userId\": 1,\"item_code\": \"123\",\"serial_number\":\"123\"}";
-        mockWebServerRule.server.enqueue(new MockResponse().setBody(json));
+    public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws Exception {
+        String fileName = "asset_response.json";
+        String asset = RestServiceTestHelper.
+                getStringFromFile(getInstrumentation().getContext(), fileName);
+        mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
         activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial)).perform(click());
         onView(withId(R.id.serial_edit_text)).

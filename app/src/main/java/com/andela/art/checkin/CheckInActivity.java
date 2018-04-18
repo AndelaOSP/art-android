@@ -15,6 +15,7 @@ import com.andela.art.databinding.ActivityCheckInBinding;
 import com.andela.art.models.Asset;
 import com.andela.art.models.Asignee;
 import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
@@ -127,6 +128,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     public void initializeCheckInComponent() {
         DaggerCheckInComponent.builder()
                 .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getApplication()))
                 .checkInModule(new CheckInModule())
                 .build()
                 .inject(this);
