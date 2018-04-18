@@ -1,12 +1,14 @@
 package com.andela.art.api;
 
-import com.andela.art.securitydashboard.data.Asset;
+import com.andela.art.models.Asset;
+import com.andela.art.models.CheckInModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -45,4 +47,13 @@ public interface ApiService {
      */
     @GET("/api/v1/security-user-emails/")
     Observable<EmailsResponse> getEmails(@Header("Authorization")String token);
+
+    /**
+     * Check in route.
+     * @param checkInModel - check in model
+     * @return Observable
+     */
+    @POST("/api/v1/asset-logs/")
+    @FormUrlEncoded
+    Observable<CheckInModel> checkIn(@Body CheckInModel checkInModel);
 }

@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
-import com.andela.art.securitydashboard.data.Asset;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
