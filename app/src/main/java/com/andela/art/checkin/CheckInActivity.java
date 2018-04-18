@@ -33,6 +33,9 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Inject
     CheckInPresenter presenter;
     ApplicationComponent applicationComponent;
+    Asset asset;
+    Asignee user;
+    Bundle bundle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,8 +44,13 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         initializeCheckInComponent();
-        binding.checkInButton.setOnClickListener(v -> presenter
-                .checkIn(getIntent().getStringExtra("serial")));
+
+        bundle = getIntent().getExtras();
+        asset = (Asset) bundle.getSerializable("asset");
+        user = asset.getAssignee();
+        binding.checkInButton.setOnClickListener(v ->
+                callCheckin(asset.getSerialNumber(), asset.getCheckinStatus()));
+
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
         presenter.attachView(this);
@@ -54,9 +62,6 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     @Override
     public void displayDetails() {
-        Bundle bundle = getIntent().getExtras();
-        Asset asset = (Asset) bundle.getSerializable("asset");
-        Asignee user = asset.getAssignee();
         binding.name.setText(user.getFullName().toUpperCase(Locale.US));
         binding.serialInfo.setText(asset.getSerialNumber());
         binding.emailText.setText(user.getEmail());
@@ -71,10 +76,12 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     @Override
     public void showCheckout(Asset asset) {
         if (asset.getCheckinStatus().equals("Checkin")) {
-            binding.checkInButton.setBackground(getDrawable(R.drawable.checkout_button));
+            binding.checkInButton.setBackground(getResources()
+                    .getDrawable(R.drawable.checkout_button));
             binding.checkInButton.setText(getResources().getString(R.string.check_out));
         } else {
-            binding.checkInButton.setBackground(getDrawable(R.drawable.checkin_button));
+            binding.checkInButton.setBackground(getResources()
+                    .getDrawable(R.drawable.checkin_button));
             binding.checkInButton.setText(getResources().getString(R.string.checkin));
         }
 
@@ -132,5 +139,21 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
                 .checkInModule(new CheckInModule())
                 .build()
                 .inject(this);
+    }
+
+    /**
+     * Call the check in method in presenter.
+     *
+     * @param serial - asset serial number
+     * @param logType - check in status
+     */
+    public void callCheckin(String serial, String logType) {
+        String status;
+        if ("Checkin".equals(logType)) {
+            status = "Checkout";
+        } else {
+            status = "Checkin";
+        }
+        presenter.checkIn(serial, status);
     }
 }
