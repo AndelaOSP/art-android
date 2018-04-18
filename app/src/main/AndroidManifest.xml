@@ -35,7 +35,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".checkin.CheckInActivity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            android:label="@string/app_title"/>
     </application>
 
 </manifest>
