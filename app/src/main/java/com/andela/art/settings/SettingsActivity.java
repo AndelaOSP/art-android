@@ -3,7 +3,6 @@ package com.andela.art.settings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +19,7 @@ import com.andela.art.databinding.SettingsPageBinding;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.login.injection.DaggerLoginComponent;
 import com.andela.art.login.injection.LoginModule;
+import com.andela.art.settings.presentation.ReportProblemActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -49,6 +49,8 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.settings);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        binding.tvReportProblem.setOnClickListener(reportProblemListener);
 
         AlertDialog.Builder logoutDialogBuilder = new AlertDialog.Builder(this, R.style.AppDialog);
         logoutDialogBuilder.setTitle(getString(R.string.logout))

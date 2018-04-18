@@ -2,6 +2,7 @@ package com.andela.art.api;
 
 import com.andela.art.models.Asset;
 import com.andela.art.models.CheckInModel;
+import com.andela.art.settings.data.ReportProblem;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -55,4 +56,21 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<CheckInModel> checkIn(@Field("asset") String serialNumber,
                                      @Field("log_type") String logType);
+    /**
+     * Report a problem.
+     *
+     * @param reportedBy the person submitting the report
+     * @param message the report to submit
+     * @param reportType the type of report (bug)
+     *
+     * @return Observable
+     */
+    @FormUrlEncoded
+    @POST("/user-feedback/")
+    Observable<ReportProblem> reportProblem(
+            @Field("reported_by") String reportedBy,
+            @Field("message") String message,
+            @Field("report_type") String reportType
+    );
+
 }

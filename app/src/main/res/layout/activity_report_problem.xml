@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryBalticSea"
-        tools:context="com.andela.art.settings.ReportProblemActivity">
+        tools:context="com.andela.art.settings.presentation.ReportProblemActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/report_toolbar"
@@ -56,7 +56,7 @@
             android:text="Report a Problem" />
 
         <EditText
-            android:id="@+id/reportProblem"
+            android:id="@+id/reportProblemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
