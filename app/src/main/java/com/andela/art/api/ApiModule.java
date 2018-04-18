@@ -39,7 +39,7 @@ public class ApiModule {
             } else {
                 Request authorizedRequest = request.newBuilder()
                         .header("Authorization:",
-                                "Token "+sharedPrefsWrapper.getString("AUTH_TOKEN"))
+                                "Token " + sharedPrefsWrapper.getString("AUTH_TOKEN"))
                         .build();
                 return chain.proceed(authorizedRequest);
             }
