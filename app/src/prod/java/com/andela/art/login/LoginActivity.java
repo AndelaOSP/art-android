@@ -34,10 +34,11 @@ import javax.inject.Inject;
 /**
  * LoginActivity handles the login of user into the application.
  */
-public class LoginActivity extends AppCompatActivity implements SecurityEmailsView {
+public class LoginActivity extends AppCompatActivity implements SecurityEmailsView, TokenAuthView {
 
     @Inject GoogleSignInClient mGoogleSignInClient;
     @Inject SecurityEmailsPresenter securityEmailsPresenter;
+    @Inject TokenAuthPresenter tokenAuthPresenter;
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 2;
     static final String TAG = "LoginActivity";
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .build()
                 .inject(this);
         securityEmailsPresenter.attachView(this);
+        tokenAuthPresenter.attachView(this);
         securityEmailsPresenter.retrieveOauthToken();
         dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
@@ -105,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success");
+                        tokenAuthPresenter.saveToken();
                         // Add check if user is admin here in future
                         startActivity(dashboard);
                     } else {
@@ -201,5 +203,14 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
     @Override
     public void populateEmailList(List<String> emails) {
         allowedEmailAddresses.addAll(emails);
+    }
+
+    /**
+     * Report error.
+     * @param exception - exception
+     */
+    @Override
+    public void reportError(Exception exception) {
+        Toast.makeText(this, exception.getMessage().toString(), Toast.LENGTH_LONG).show();
     }
 }

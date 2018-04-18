@@ -1,6 +1,7 @@
 package com.andela.art.firebase;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,6 +31,15 @@ public class FirebaseModule {
         return firebaseAuth -> {
 
         };
+    }
+
+    /**
+     * Provide firebase user.
+     * @return firebase user
+     */
+    @Provides
+    FirebaseUser providesFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
     }
 
 }

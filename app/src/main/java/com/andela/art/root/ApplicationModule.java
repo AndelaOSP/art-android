@@ -34,4 +34,22 @@ public class ApplicationModule {
     return application;
   }
 
+  /**
+   * Provide SharedPreferences implementation.
+   * @return SharedPreferenceImpl - object
+   */
+  @Provides
+  public SharedPreferenceImpl provideSharedPreference() {
+    return new SharedPreferenceImpl(application);
+  }
+
+  /**
+   *
+   * @param sharedPreference - sharedPreference
+   * @return sharedPreference
+   */
+  @Provides
+  public SharedPrefsWrapper provideSharedPrefsWrapper(SharedPreferenceImpl sharedPreference) {
+    return sharedPreference;
+  }
 }

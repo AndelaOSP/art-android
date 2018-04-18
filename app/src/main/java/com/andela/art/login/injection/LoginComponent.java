@@ -1,6 +1,7 @@
 package com.andela.art.login.injection;
 
 import com.andela.art.api.ApiModule;
+import com.andela.art.firebase.FirebaseModule;
 import com.andela.art.root.Activity;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -14,7 +15,10 @@ import dagger.Component;
  */
 @Activity
 @Component(dependencies = {ApplicationComponent.class},
-            modules = { ApplicationModule.class, ApiModule.class, LoginModule.class})
+        modules = {ApplicationModule.class,
+                ApiModule.class,
+                LoginModule.class,
+                FirebaseModule.class})
 public interface LoginComponent {
     /**
      * Inject the login activity.
