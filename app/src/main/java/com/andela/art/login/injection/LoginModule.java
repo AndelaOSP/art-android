@@ -10,7 +10,7 @@ import com.andela.art.root.SharedPrefsWrapper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 import dagger.Module;
 import dagger.Provides;
@@ -50,13 +50,13 @@ public class LoginModule {
 
     /**
      * Provide TokenAuthPresenter.
-     * @param firebaseUser - firebaseUser
+     * @param firebaseAuth - firebaseAuth
      * @param sharedPrefsWrapper - sharedPrefsWrapper
      * @return TokenAuthPresenter object
      */
     @Provides
-    public TokenAuthPresenter providesTokenAuthPresenter(FirebaseUser firebaseUser,
+    public TokenAuthPresenter providesTokenAuthPresenter(FirebaseAuth firebaseAuth,
                                                          SharedPrefsWrapper sharedPrefsWrapper) {
-        return new TokenAuthPresenter(firebaseUser, sharedPrefsWrapper);
+        return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
     }
 }

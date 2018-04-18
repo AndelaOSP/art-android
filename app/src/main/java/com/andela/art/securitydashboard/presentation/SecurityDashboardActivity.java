@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
@@ -60,6 +61,7 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
 
         DaggerSerialEntryComponent.builder()
                 .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getApplication()))
                 .serialEntryModule(new SerialEntryModule())
                 .firebasePresenterModule(new FirebasePresenterModule())
                 .build()

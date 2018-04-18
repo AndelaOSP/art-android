@@ -15,7 +15,7 @@ import dagger.Component;
  */
 @Activity
 @Component(dependencies = {ApplicationComponent.class},
-        modules = {ApplicationModule.class,
+           modules = {ApplicationModule.class,
                 ApiModule.class,
                 LoginModule.class,
                 FirebaseModule.class})
