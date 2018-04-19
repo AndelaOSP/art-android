@@ -62,15 +62,4 @@ public class LoginModule {
         return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
     }
 
-    /**
-     * Provide TokenAuthPresenter.
-     * @param firebaseAuth - firebaseAuth
-     * @param sharedPrefsWrapper - sharedPrefsWrapper
-     * @return TokenAuthPresenter object
-     */
-    @Provides
-    public TokenAuthPresenter providesTokenAuthPresenter(FirebaseAuth firebaseAuth,
-                                                         SharedPrefsWrapper sharedPrefsWrapper) {
-        return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
-    }
 }
