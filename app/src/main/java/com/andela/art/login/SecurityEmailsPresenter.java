@@ -3,6 +3,7 @@ package com.andela.art.login;
 import com.andela.art.api.ApiService;
 import com.andela.art.root.Constants;
 import com.andela.art.root.Presenter;
+import com.andela.art.root.SharedPrefsWrapper;
 
 import java.util.List;
 
@@ -16,13 +17,15 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
 
     private final ApiService apiService;
     private SecurityEmailsView securityEmailsView;
+    SharedPrefsWrapper sharedPrefsWrapper;
 
     /**
-     *
+     * @param sharedPrefsWrapper  - sharedPrefsWrapper
      * @param apiService - apiService
      */
-    public SecurityEmailsPresenter(ApiService apiService) {
+    public SecurityEmailsPresenter(SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService) {
         this.apiService = apiService;
+        this.sharedPrefsWrapper = sharedPrefsWrapper;
     }
 
     /**
@@ -45,16 +48,17 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tokenResponse -> {
                     String accessToken = tokenResponse.getAccessToken();
-                    fetchSecurityUserEmails("Bearer " + accessToken);
+                    sharedPrefsWrapper.putString("OAUTH", accessToken);
+                    fetchSecurityUserEmails();
                 });
 
     }
     /**
      * Fetch the emails for a security user.
-     * @param token - token
+     * @param
      */
-    public void fetchSecurityUserEmails(String token) {
-         apiService.getEmails(token)
+    public void fetchSecurityUserEmails() {
+         apiService.getEmails()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(emailsResponse -> {

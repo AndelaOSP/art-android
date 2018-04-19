@@ -49,7 +49,7 @@ public class Asset implements Serializable {
      * Assigned to getter.
      * @return mAsignee - Asignee
      */
-    public Asignee getAssignedTo() {
+    public Asignee getAssignee() {
         return mAsignee;
     }
 

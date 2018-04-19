@@ -3,6 +3,7 @@ package com.andela.art.login;
 import com.andela.art.api.ApiService;
 import com.andela.art.api.EmailsResponse;
 import com.andela.art.api.TokenResponse;
+import com.andela.art.root.SharedPrefsWrapper;
 import com.andela.art.util.RxSchedulersOverrideRule;
 
 import org.junit.Before;
@@ -27,6 +28,9 @@ public class SecurityEmailsPresenterTest {
     @Mock
     SecurityEmailsView securityEmailsView;
 
+    @Mock
+    SharedPrefsWrapper sharedPrefsWrapper;
+
     SecurityEmailsPresenter securityEmailsPresenter;
 
     EmailsResponse emailsResponse;
@@ -42,7 +46,7 @@ public class SecurityEmailsPresenterTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        securityEmailsPresenter = new SecurityEmailsPresenter(apiService);
+        securityEmailsPresenter = new SecurityEmailsPresenter(sharedPrefsWrapper, apiService);
         securityEmailsPresenter.attachView(securityEmailsView);
         emailsResponse = new EmailsResponse();
         tokenResponse = new TokenResponse();
@@ -58,7 +62,7 @@ public class SecurityEmailsPresenterTest {
     public void testOauthTokenisRetrieved() throws Exception {
         when(apiService.fetchOauthToken(anyString(), anyString(), anyString()))
                 .thenReturn(Observable.just(tokenResponse));
-        when(apiService.getEmails(anyString())).thenReturn(Observable.just(emailsResponse));
+        when(apiService.getEmails()).thenReturn(Observable.just(emailsResponse));
         securityEmailsPresenter.retrieveOauthToken();
         verify(securityEmailsView).populateEmailList(emailsResponse.getEmails());
 
@@ -69,8 +73,8 @@ public class SecurityEmailsPresenterTest {
      */
     @Test
     public void testSecurityEmailsAreAddedtoList() throws Exception {
-        when(apiService.getEmails(anyString())).thenReturn(Observable.just(emailsResponse));
-        securityEmailsPresenter.fetchSecurityUserEmails(anyString());
+        when(apiService.getEmails()).thenReturn(Observable.just(emailsResponse));
+        securityEmailsPresenter.fetchSecurityUserEmails();
         verify(securityEmailsView).populateEmailList(emailsResponse.getEmails());
     }
 }
