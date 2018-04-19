@@ -224,7 +224,8 @@
             android:paddingTop="9dp"
             android:text="@string/check_out"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:clickable="true"/>
 
     </RelativeLayout>
 </layout>

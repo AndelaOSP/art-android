@@ -93,7 +93,7 @@ public class SecurityDashboardActivityTest {
                 CheckInActivity.class.getName());
         IdlingRegistry.getInstance().register(idlingResource);
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
-                hasComponent(CheckInActivity.class.getName())), times(2));
+                hasComponent(CheckInActivity.class.getName())), times(1));
         IdlingRegistry.getInstance().unregister(idlingResource);
 
     }

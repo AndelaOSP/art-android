@@ -7,7 +7,6 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -48,10 +47,12 @@ public interface ApiService {
 
     /**
      * Check in route.
-     * @param checkInModel - check in model
+     * @param serialNumber - asset serial number
+     * @param logType - check in status
      * @return Observable
      */
     @POST("/api/v1/asset-logs/")
     @FormUrlEncoded
-    Observable<CheckInModel> checkIn(@Body CheckInModel checkInModel);
+    Observable<CheckInModel> checkIn(@Field("asset") String serialNumber,
+                                     @Field("log_type") String logType);
 }

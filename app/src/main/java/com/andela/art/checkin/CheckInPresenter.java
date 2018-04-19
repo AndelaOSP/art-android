@@ -26,12 +26,10 @@ public class CheckInPresenter {
     /**
      * Check in user with asset serial number.
      * @param serial - asset serial number.
+     * @param logType - checkin status
      */
-    public void checkIn(String serial) {
-        CheckInModel checkInModel = new CheckInModel();
-        checkInModel.setLogType("Checkin");
-        checkInModel.setSerialNumber(serial);
-        Observable<CheckInModel> checkin = apiService.checkIn(checkInModel);
+    public void checkIn(String serial, String logType) {
+        Observable<CheckInModel> checkin = apiService.checkIn(serial, logType);
         checkin.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<CheckInModel>() {
