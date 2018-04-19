@@ -24,10 +24,6 @@ public class ApiModule {
 
     /**
      * Provide client instance for injection.
-<<<<<<< HEAD
-     *
-=======
->>>>>>> 211e29734222b7624d8ee81cac804f31d1c09dc9
      * @param sharedPrefsWrapper - shared prefs wrapper
      * @return OkHttp client instance
      */
