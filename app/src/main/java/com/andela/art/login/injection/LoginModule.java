@@ -61,4 +61,5 @@ public class LoginModule {
                                                          SharedPrefsWrapper sharedPrefsWrapper) {
         return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
     }
+
 }

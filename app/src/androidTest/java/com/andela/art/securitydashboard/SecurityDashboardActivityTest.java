@@ -82,7 +82,6 @@ public class SecurityDashboardActivityTest {
         String fileName = "asset_response.json";
         String asset = RestServiceTestHelper.
                 getStringFromFile(getTargetContext(), fileName);
-
         mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
         activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial)).perform(click());
