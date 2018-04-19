@@ -53,6 +53,6 @@ public interface ApiService {
      */
     @POST("/api/v1/asset-logs/")
     @FormUrlEncoded
-    Observable<CheckInModel> checkIn(@Field("serial_number") String serialNumber,
+    Observable<CheckInModel> checkIn(@Field("asset") String serialNumber,
                                      @Field("log_type") String logType);
 }

@@ -75,11 +75,12 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     @Override
     public void showCheckout(Asset asset) {
-        if (asset.getCheckinStatus().equals("Checkin")) {
+
+        if (asset.getCheckinStatus() == null || "checked_in".equals(asset.getCheckinStatus())) {
             binding.checkInButton.setBackground(getResources()
                     .getDrawable(R.drawable.checkout_button));
             binding.checkInButton.setText(getResources().getString(R.string.check_out));
-        } else {
+        } else if ("checked_out".equals(asset.getCheckinStatus())) {
             binding.checkInButton.setBackground(getResources()
                     .getDrawable(R.drawable.checkin_button));
             binding.checkInButton.setText(getResources().getString(R.string.checkin));
@@ -149,7 +150,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      */
     public void callCheckin(String serial, String logType) {
         String status;
-        if ("Checkin".equals(logType)) {
+        if ("checked_in".equals(logType)) {
             status = "Checkout";
         } else {
             status = "Checkin";
