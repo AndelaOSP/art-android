@@ -40,12 +40,26 @@ public class LoginModule {
 
     /**
      * Provide SecurityEmailsPresenter.
+     * @param sharedPrefsWrapper  - sharedPrefsWrapper
      * @param apiService - apiService
      * @return SecurityEmailsPresenter object
      */
     @Provides
-    public SecurityEmailsPresenter providesSecurityEmailsPresenter(ApiService apiService) {
-        return new SecurityEmailsPresenter(apiService);
+    public SecurityEmailsPresenter providesSecurityEmailsPresenter(
+            SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService) {
+        return new SecurityEmailsPresenter(sharedPrefsWrapper, apiService);
+    }
+
+    /**
+     * Provide TokenAuthPresenter.
+     * @param firebaseAuth - firebaseAuth
+     * @param sharedPrefsWrapper - sharedPrefsWrapper
+     * @return TokenAuthPresenter object
+     */
+    @Provides
+    public TokenAuthPresenter providesTokenAuthPresenter(FirebaseAuth firebaseAuth,
+                                                         SharedPrefsWrapper sharedPrefsWrapper) {
+        return new TokenAuthPresenter(firebaseAuth, sharedPrefsWrapper);
     }
 
     /**

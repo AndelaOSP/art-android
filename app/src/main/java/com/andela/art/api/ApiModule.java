@@ -6,6 +6,7 @@ import com.andela.art.root.SharedPrefsWrapper;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,15 +35,27 @@ public class ApiModule {
             Request request = chain.request();
             if (request.url().encodedPath().equalsIgnoreCase("/api/v1/o/token/")
                     || request.url().encodedPath().
-                        equalsIgnoreCase("/api/v1/security-user-emails/")) {
-                return chain.proceed(request);
-            } else {
-                Request authorizedRequest = request.newBuilder()
-                        .header("Authorization:",
-                                "Token " + sharedPrefsWrapper.getString("AUTH_TOKEN"))
+                    equalsIgnoreCase("/api/v1/security-user-emails/")) {
+                HttpUrl url = request.url();
+                HttpUrl newUrl = url.newBuilder()
                         .build();
-                return chain.proceed(authorizedRequest);
+                Request.Builder builder = request.newBuilder()
+                        .url(newUrl)
+                        .addHeader("Authorization",
+                        "Bearer " + sharedPrefsWrapper.getString("OAUTH"));
+                Request newRequest = builder.build();
+                return chain.proceed(newRequest);
             }
+            HttpUrl url = request.url();
+            HttpUrl newUrl = url.newBuilder()
+                    .build();
+            Request.Builder builder = request.newBuilder()
+                    .url(newUrl)
+                    .addHeader("Authorization",
+                            "Token " + sharedPrefsWrapper.getString("AUTH_TOKEN"));
+            Request newRequest = builder.build();
+            return chain.proceed(newRequest);
+
         };
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
@@ -72,7 +85,6 @@ public class ApiModule {
      * Provide api service interface for injection.
      *
      * @param retrofit retrofit instance used by api service
-     *
      * @return ApiService instance
      */
     @Provides

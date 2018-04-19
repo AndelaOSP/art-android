@@ -56,7 +56,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     public void displayDetails() {
         Bundle bundle = getIntent().getExtras();
         Asset asset = (Asset) bundle.getSerializable("asset");
-        Asignee user = asset.getAssignedTo();
+        Asignee user = asset.getAssignee();
         binding.name.setText(user.getFullName().toUpperCase(Locale.US));
         binding.serialInfo.setText(asset.getSerialNumber());
         binding.emailText.setText(user.getEmail());
