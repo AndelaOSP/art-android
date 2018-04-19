@@ -24,14 +24,13 @@ public class ApiModule {
 
     /**
      * Provide client instance for injection.
-     *
      * @param sharedPrefsWrapper - shared prefs wrapper
      * @return OkHttp client instance
      */
     @Provides
     OkHttpClient provideOkHttp(SharedPrefsWrapper sharedPrefsWrapper) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         Interceptor authInterceptor = chain -> {
             Request request = chain.request();
             if (request.url().encodedPath().equalsIgnoreCase("/api/v1/o/token/")
