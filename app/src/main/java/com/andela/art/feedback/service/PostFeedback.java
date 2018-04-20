@@ -2,7 +2,7 @@ package com.andela.art.feedback.service;
 
 import com.andela.art.BuildConfig;
 import com.andela.art.api.ApiService;
-import com.andela.art.feedback.data.Feedback;
+import com.andela.art.models.Feedback;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

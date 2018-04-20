@@ -1,21 +1,13 @@
 package com.andela.art.api;
 
-<<<<<<< HEAD
+import com.andela.art.models.Feedback;
 import com.andela.art.models.Asset;
 import com.andela.art.models.CheckInModel;
-=======
-import com.andela.art.feedback.data.Feedback;
-import com.andela.art.securitydashboard.data.Asset;
->>>>>>> feat(feedback): post feedback to API endpoint
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-<<<<<<< HEAD
-=======
-import retrofit2.http.Header;
-import retrofit2.http.Body;
->>>>>>> feat(feedback): post feedback to API endpoint
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;

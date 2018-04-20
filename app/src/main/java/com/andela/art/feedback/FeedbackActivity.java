@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.ActivityFeedbackBinding;
-import com.andela.art.feedback.data.Feedback;
+import com.andela.art.models.Feedback;
 import com.andela.art.feedback.service.PostFeedback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

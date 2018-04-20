@@ -1,4 +1,4 @@
-package com.andela.art.feedback.data;
+package com.andela.art.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
