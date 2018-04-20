@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.andela.art.R;
+import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -64,6 +65,8 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
                 logoutDialog.show();
             }
         });
+
+        binding.tvReportProblem.setOnClickListener(reportProblemListener);
     }
 
     @Override
@@ -85,4 +88,12 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
             logoutDialog.dismiss();
         }
     }
+
+    private final View.OnClickListener reportProblemListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            startActivity(new Intent(SettingsActivity.this,
+                    ReportProblemActivity.class));
+        }
+    };
+
 }
