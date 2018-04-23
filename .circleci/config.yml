@@ -1,6 +1,9 @@
 default: &defaults
   docker:
     - image: gcr.io/microservicedemo-198709/circlebuildenv:v4
+      auth:
+        username: _json_key
+        password: '${SERVICE_ACCOUNT_JSON_KEY}'
 
   working_directory: ~/repo
 
