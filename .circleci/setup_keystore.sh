@@ -5,7 +5,7 @@ set -o pipefail
 
 export KEYSTORE_DIR=$HOME"/repo/keystores"
 export KEYSTORE_PROPERTIES=$HOME"/repo/keystores/keystore.properties"
-export STORE_FILE_LOCATION=$HOME"/repo/art-android.jks"
+export STORE_FILE_LOCATION=$HOME"/repo/.secrets/art-android.jks"
 
 # Environment variables assigned externally are:
 # KEY_ALIAS: This value was set when generating the key in Android Studio
@@ -45,27 +45,10 @@ function copyEnvVarsToProperties {
 
 }
 
-# download key store file from remote location
-# keystore URI will be the location uri for the *.jks file for signing the application
-function downloadKeyStoreFile {
-    # use curl to download a keystore from $KEYSTORE_URI, if set,
-    # to the path/filename set in $KEYSTORE.
-    echo "Looking for $STORE_FILE_LOCATION ..."
-
-    if [ ! -f ${STORE_FILE_LOCATION} ] ; then
-        echo "Downloading keystore file"
-
-        curl -L -o ${STORE_FILE} ${KEY_STORE_URI}
-    else
-        echo "Keystore uri not set, .APK artifact will not be signed."
-    fi
-}
-
 main() {
   
   copyEnvVarsToProperties
-  downloadKeyStoreFile
 
 }
 
-main "$@"
+main
