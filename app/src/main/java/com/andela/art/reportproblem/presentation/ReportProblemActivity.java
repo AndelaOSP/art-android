@@ -100,6 +100,8 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
                 this,
                 "Report submitted successfully",
                 Toast.LENGTH_LONG).show();
+
+        reportProblemPresenter.dispose();
     }
 
     /**
