@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.ActivityReportProblemBinding;
+import com.andela.art.models.ReportProblem;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -20,9 +21,9 @@ import javax.inject.Inject;
 /**
  * Report issues about the application.
  */
-public class ReportProblemActivity extends AppCompatActivity {
+public class ReportProblemActivity extends AppCompatActivity implements ReportProblemView {
     @Inject
-    com.andela.art.reportproblem.presentation.ReportProblemPresenter reportProblemPresenter;
+    ReportProblemPresenter reportProblemPresenter;
 
     ActivityReportProblemBinding reportBinding;
     private FirebaseAuth mAuth;
@@ -44,6 +45,8 @@ public class ReportProblemActivity extends AppCompatActivity {
 
         applicationComponent = ((ArtApplication) getApplication()).applicationComponent();
         initializeReportProblemComponent();
+        reportProblemPresenter.attachView(this);
+
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -86,5 +89,28 @@ public class ReportProblemActivity extends AppCompatActivity {
         reportProblemPresenter.reportProblem(email, message, reportType);
 
         finish();
+    }
+
+    /**
+     * Success on call of an endpoint.
+     * @param reportProblem reportProblem model
+     */
+    public void reportProblemSuccess(ReportProblem reportProblem) {
+        Toast.makeText(
+                this,
+                "Report submitted successfully",
+                Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Show error resulted from call of the endpoint.
+     *
+     * @param e throwable exception
+     */
+    public void reportProblemError(Throwable e) {
+        Toast.makeText(
+                this,
+                "Report not submitted. Please try again",
+                Toast.LENGTH_LONG).show();
     }
 }

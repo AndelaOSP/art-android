@@ -1,17 +1,20 @@
 package com.andela.art.reportproblem.presentation;
 
-import android.util.Log;
-
 import com.andela.art.api.ApiService;
+import com.andela.art.root.Presenter;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by chadwalt on 4/17/18.
  */
 
-public class ReportProblemPresenter {
+public class ReportProblemPresenter implements Presenter<ReportProblemView> {
     private final ApiService apiService;
+    private ReportProblemView reportProblemView;
+    private Disposable disposable;
 
     /**
      * Report Problem constructor.
@@ -31,27 +34,31 @@ public class ReportProblemPresenter {
      *
      */
     public void reportProblem(String reportedBy, String message, String reportType) {
-        apiService.reportProblem(reportedBy, message, reportType).subscribeOn(Schedulers.io())
+        disposable = apiService.reportProblem(reportedBy, message, reportType)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        ReportProblem -> reportProblemSuccess(),
-                        e -> reportProblemError(e)
+                        reportProblemView::reportProblemSuccess,
+                        reportProblemView::reportProblemError
                 );
     }
 
     /**
-     * Success on call of an endpoint.
+     * Instantiate view that will be used by the presenter.
+     * @param view view that will be instantiated
      */
-    public void reportProblemSuccess() {
-        Log.d("Api Debugging", "Done calling the Api successfully ");
+    @Override
+    public void attachView(ReportProblemView view) {
+        this.reportProblemView = view;
     }
 
     /**
-     * Show error resulted from call of the endpoint.
-     *
-     * @param e throwable exception
+     * Dispose disposable after activity stops.
      */
-    public void reportProblemError(Throwable e) {
-        Log.i("Error Report Problem", e.toString());
+    public void dispose() {
+        if (!disposable.isDisposed()) {
+            disposable.dispose();
+        }
+
     }
 }
