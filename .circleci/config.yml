@@ -36,7 +36,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run android lint"
-            cd ~/repo
             ./gradlew lint
       
       # Storing reports
@@ -77,8 +76,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run findbugs"
-            mv /home/.secrets ~/repo
-            cd ~/repo
             ./gradlew assemble
             ./gradlew findbugs
       
@@ -120,7 +117,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run PMD"
-            cd ~/repo
             ./gradlew pmd
       
       # Storing reports
@@ -161,7 +157,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run checkstyle"
-            cd ~/repo
             ./gradlew checkstyle
       
       # Storing reports
@@ -201,8 +196,6 @@ jobs:
       - run:
           name: Running unit tests on source code
           command: |
-            cd ~/repo
-            mv /home/.secrets ~/repo
             ./gradlew build jacocoTestReport assembleAndroidTest
             ls -a app/build/outputs/logs
       
@@ -218,7 +211,6 @@ jobs:
       - run:
           name: Running integration tests on apk build
           command: |
-            mv /home/.secrets ~/repo  
             echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
             echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
             echo y | emulator -avd test -skin 768x1280 -no-window &
@@ -265,8 +257,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
-            mv /home/.secrets ~/repo
             ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
@@ -311,8 +301,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
-            mv /home/.secrets ~/repo
             ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
@@ -357,8 +345,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
-            mv /home/.secrets ~/repo
             ./gradlew :app:assembleRelease
 
       # Storing the generated apk files and reports

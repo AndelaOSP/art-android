@@ -5,7 +5,7 @@ set -o pipefail
 
 export KEYSTORE_DIR=$HOME"/repo/keystores"
 export KEYSTORE_PROPERTIES=$HOME"/repo/keystores/keystore.properties"
-export STORE_FILE_LOCATION=$HOME"/repo/.secrets/art-android.jks"
+export STORE_FILE_LOCATION=$HOME"/.secrets/art-android.jks"
 
 # Environment variables assigned externally are:
 # KEY_ALIAS: This value was set when generating the key in Android Studio
