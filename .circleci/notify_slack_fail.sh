@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -ex
-set -o pipefail
+set -eo pipefail
 
 declare_env_variables() {
 
@@ -11,8 +10,6 @@ declare_env_variables() {
   # CIRCLE_TOKEN : This is the API token that is provided for the CircleCI user. Used for accessing artifacts
   # SLACK_CHANNEL_HOOK : This is the webhook for the Slack App where notifications will be sent from
   # DEPLOYMENT_CHANNEL : This is the channel on which the Slack notifications will be posted
-  # QEMU_AUDIO_DRV : This will set the Android emulator used for integration tests to have no audio
-
 
   # Retrieving the urls for the CircleCI artifacts
 
@@ -133,4 +130,4 @@ main() {
 
 }
 
-main "$@"
+main

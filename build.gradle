@@ -25,9 +25,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    keystorePropertiesFile = rootProject.file("keystores/keystore.properties")
-    keystoreProperties = new Properties()
-    keystoreProperties.load(new FileInputStream(ext.keystorePropertiesFile))    
-}
