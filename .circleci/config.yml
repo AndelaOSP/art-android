@@ -3,7 +3,7 @@ default: &defaults
     - image: gcr.io/andela-learning/circlebuildenv:v4
       auth:
         username: _json_key
-        password: $SERVICE_ACCOUNT_JSON_KEY
+        password: ${SERVICE_ACCOUNT_JSON_KEY}
 
   working_directory: ~/repo
 
