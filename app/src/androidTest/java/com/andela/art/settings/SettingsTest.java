@@ -5,6 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
+import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.login.LoginActivity;
 
@@ -82,6 +83,18 @@ public class SettingsTest {
         onView(withText(R.string.logout_yes)).perform(click());
 
         intended(hasComponent(LoginActivity.class.getName()));
+    }
+
+    /**
+     * Tests that clicking report a problem takes the user to the report a problem activity.
+     */
+    @Test
+    public void reportProblem_MovesToReportProblemActivity() {
+        onView(withId(R.id.tvReportProblem)).perform(click());
+
+        onView(withText("Report a Problem")).check(matches(isDisplayed()));
+
+        intended(hasComponent(ReportProblemActivity.class.getName()));
     }
 
     /**

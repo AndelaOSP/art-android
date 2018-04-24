@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBalticSea"
+        tools:context="com.andela.art.settings.presentation.ReportProblemActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/report_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primaryCharade"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppBarPopup"
+            app:theme="@style/AppTheme.AppBarOverlay"
+            app:titleTextAppearance="@style/AppBarTitle">
+
+            <ImageView
+                android:id="@+id/close_report_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:src="@mipmap/ic_clear_white"
+                android:onClick="cancelReportSending"/>
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Report a Problem"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/submit_report_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@mipmap/ic_done_white"
+                android:onClick="sendReport"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/report_problem_description"
+            android:textColor="@color/profileTextViewColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/report_toolbar" />
+
+        <EditText
+            android:id="@+id/reportProblemText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#35ccc8"
+            android:hint="Briefly explain what happened"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:textColor="@color/white"
+            android:textColorHint="#909090"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
