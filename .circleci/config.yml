@@ -209,7 +209,7 @@ jobs:
       
       # Running UI tests
       - run:
-          name: Running integration tests on apk build
+          name: Running instrumentation tests on apk build
           command: |
             echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
             echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
