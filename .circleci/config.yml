@@ -1,6 +1,9 @@
 default: &defaults
   docker:
-    - image: circleci/android:api-26-alpha
+    - image: gcr.io/andela-learning/circlebuildenv:v4
+      auth:
+        username: _json_key
+        password: '${SERVICE_ACCOUNT_JSON_KEY}'
 
   working_directory: ~/repo
 
@@ -21,7 +24,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -33,7 +35,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run android lint"
-            cd ~/repo
             ./gradlew lint
       
       # Storing reports
@@ -62,7 +63,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -74,7 +74,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run findbugs"
-            cd ~/repo
             ./gradlew assemble
             ./gradlew findbugs
       
@@ -104,7 +103,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -116,7 +114,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run PMD"
-            cd ~/repo
             ./gradlew pmd
       
       # Storing reports
@@ -145,7 +142,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -157,7 +153,6 @@ jobs:
           name: Running quality checks
           command: |
             echo "Run checkstyle"
-            cd ~/repo
             ./gradlew checkstyle
       
       # Storing reports
@@ -186,7 +181,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -197,7 +191,6 @@ jobs:
       - run:
           name: Running unit tests on source code
           command: |
-            cd ~/repo
             ./gradlew build jacocoTestReport assembleAndroidTest
             ls -a app/build/outputs/logs
       
@@ -211,7 +204,7 @@ jobs:
       
       # Running UI tests
       - run:
-          name: Running integration tests on apk build
+          name: Running instrumentation tests on apk build
           command: |
             echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
             echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
@@ -248,7 +241,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -259,7 +251,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
             ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
@@ -293,7 +284,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -304,7 +294,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
             ./gradlew :app:assemble
 
       # Storing the generated apk files and reports
@@ -338,7 +327,6 @@ jobs:
           - v1-dependencies-{{ checksum "build.gradle" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: bash ~/repo/.circleci/setup_keystore.sh
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -349,7 +337,6 @@ jobs:
       - run:
           name: Assembling apk
           command: |
-            cd ~/repo
             ./gradlew :app:assembleRelease
 
       # Storing the generated apk files and reports

@@ -22,10 +22,10 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias rootProject.ext.keystoreProperties['keyAlias']
-            keyPassword rootProject.ext.keystoreProperties['keyPassword']
-            storeFile rootProject.file(rootProject.ext.keystoreProperties['storeFile'])
-            storePassword rootProject.ext.keystoreProperties['storePassword']
+            keyAlias "$System.env.KEY_ALIAS"
+            keyPassword "$System.env.KEY_PASSWORD"
+            storeFile file("$System.env.HOME/.secrets/art-android.jks")
+            storePassword "$System.env.STORE_PASSWORD"
         }
     }
     buildTypes {
