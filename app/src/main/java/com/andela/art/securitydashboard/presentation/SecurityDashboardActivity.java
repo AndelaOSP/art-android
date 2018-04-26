@@ -7,12 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.models.Asset;
@@ -21,19 +17,18 @@ import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
+import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
-import com.andela.art.settings.SettingsActivity;
 import com.squareup.picasso.Picasso;
-
 import javax.inject.Inject;
 
 /**
  * Display Dialog box to enter serial and retrieve asset details.
  */
 
-public class SecurityDashboardActivity extends AppCompatActivity implements SerialView {
+public class SecurityDashboardActivity extends BaseMenuActivity implements SerialView {
 
     @Inject
     SerialPresenter serialPresenter;
@@ -148,25 +143,6 @@ public class SecurityDashboardActivity extends AppCompatActivity implements Seri
     protected void onStop() {
         super.onStop();
         firebasePresenter.stop();
-    }
-
-    /**
-     * Create a menu.
-     * @param menu
-     * @return boolean
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent settings = new Intent(SecurityDashboardActivity.this,
-                SettingsActivity.class);
-        startActivity(settings);
-        return true;
     }
 
     @Override

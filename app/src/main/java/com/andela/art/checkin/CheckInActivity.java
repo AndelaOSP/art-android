@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-
 import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
@@ -17,18 +13,17 @@ import com.andela.art.models.Asignee;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
-
 import java.util.Locale;
-
 import javax.inject.Inject;
 
 /**
  * Created by zack on 3/26/18.
  */
 
-public class CheckInActivity extends AppCompatActivity implements CheckInView {
+public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     ActivityCheckInBinding binding;
     @Inject
     CheckInPresenter presenter;
@@ -120,14 +115,6 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
                 SecurityDashboardActivity.class);
         startActivity(intent);
         finish();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
     }
 
     /**
