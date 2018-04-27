@@ -42,12 +42,13 @@ public class LoginModule {
      * Provide SecurityEmailsPresenter.
      * @param sharedPrefsWrapper  - sharedPrefsWrapper
      * @param apiService - apiService
+     * @param context - context
      * @return SecurityEmailsPresenter object
      */
     @Provides
     public SecurityEmailsPresenter providesSecurityEmailsPresenter(
-            SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService) {
-        return new SecurityEmailsPresenter(sharedPrefsWrapper, apiService);
+            SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService, Context context) {
+        return new SecurityEmailsPresenter(sharedPrefsWrapper, apiService, context);
     }
 
     /**

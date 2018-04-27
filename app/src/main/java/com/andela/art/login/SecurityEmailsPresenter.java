@@ -1,5 +1,7 @@
 package com.andela.art.login;
 
+import android.content.Context;
+import android.widget.Toast;
 import com.andela.art.api.ApiService;
 import com.andela.art.root.Constants;
 import com.andela.art.root.Presenter;
@@ -18,14 +20,18 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
     private final ApiService apiService;
     private SecurityEmailsView securityEmailsView;
     SharedPrefsWrapper sharedPrefsWrapper;
+    private final Context mContext;
 
     /**
      * @param sharedPrefsWrapper  - sharedPrefsWrapper
      * @param apiService - apiService
+     * @param context - context
      */
-    public SecurityEmailsPresenter(SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService) {
+    public SecurityEmailsPresenter(SharedPrefsWrapper sharedPrefsWrapper, ApiService apiService,
+                                   Context context) {
         this.apiService = apiService;
         this.sharedPrefsWrapper = sharedPrefsWrapper;
+        this.mContext = context;
     }
 
     /**
@@ -50,8 +56,9 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
                     String accessToken = tokenResponse.getAccessToken();
                     sharedPrefsWrapper.putString("OAUTH", accessToken);
                     fetchSecurityUserEmails();
-                });
-
+                }, e -> Toast
+                        .makeText(mContext, "No internet Connection", Toast.LENGTH_SHORT)
+                        .show());
     }
     /**
      * Fetch the emails for a security user.
