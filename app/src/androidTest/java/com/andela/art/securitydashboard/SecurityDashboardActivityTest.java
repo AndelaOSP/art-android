@@ -105,11 +105,11 @@ public class SecurityDashboardActivityTest {
      * @throws Exception if an error occurss
      */
     @Test
-    public void testUnassignedAssetDisplaysUnassignedToast() throws Exception{
+    public void testUnassignedAssetDisplaysUnassignedToast() throws Exception {
         String fileName = "null_asset_response.json";
-        String null_asset = RestServiceTestHelper.
+        String nullAsset = RestServiceTestHelper.
                 getStringFromFile(getTargetContext(), fileName);
-        mockWebServerRule.server.enqueue(new MockResponse().setBody(null_asset));
+        mockWebServerRule.server.enqueue(new MockResponse().setBody(nullAsset));
         activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial)).perform(click());
         onView(withId(R.id.serial_edit_text)).
@@ -117,7 +117,9 @@ public class SecurityDashboardActivityTest {
         closeSoftKeyboard();
         onView(withId(R.id.submit)).perform(click());
 
-        onView(withText("Asset not assigned.")).inRoot(RootMatchers.withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+        onView(withText("Asset not assigned.")).inRoot(RootMatchers
+                .withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
 
     }
 
