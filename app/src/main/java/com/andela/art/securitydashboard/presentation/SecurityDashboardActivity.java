@@ -91,12 +91,16 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      * @param asset - asset data sent to check in activity
      */
     public void sendIntent(Asset asset) {
-        Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
-                CheckInActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("asset", asset);
-        checkInIntent.putExtras(bundle);
-        startActivity(checkInIntent);
+        if (asset.getAssignee() == null) {
+            Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+                    CheckInActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("asset", asset);
+            checkInIntent.putExtras(bundle);
+            startActivity(checkInIntent);
+        }
 
     }
 
