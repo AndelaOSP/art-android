@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:src="@mipmap/ic_clear_white"
-                android:onClick="cancelReportSending"/>
+                android:onClick="closeFeedback"/>
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:src="@mipmap/ic_done_white"
-                android:onClick="sendReport"/>
+                android:onClick="sendFeedback"/>
 
         </android.support.v7.widget.Toolbar>
 

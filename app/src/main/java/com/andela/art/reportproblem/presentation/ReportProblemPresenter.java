@@ -30,7 +30,7 @@ public class ReportProblemPresenter implements Presenter<ReportProblemView> {
      *
      * @param reportedBy - the user submitting the problem
      * @param message - the description about the problem
-     * @param reportType - the type of return
+     * @param reportType - the type of report
      *
      */
     public void reportProblem(String reportedBy, String message, String reportType) {

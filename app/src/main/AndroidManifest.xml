@@ -41,6 +41,9 @@
 
         <activity android:name=".reportproblem.presentation.ReportProblemActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".sendfeedback.presentation.SendFeedbackActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

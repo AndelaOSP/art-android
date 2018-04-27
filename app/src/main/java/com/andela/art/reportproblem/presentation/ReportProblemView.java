@@ -9,14 +9,14 @@ import com.andela.art.root.View;
 public interface ReportProblemView extends View {
 
     /**
-     * Report success submitation of the report.
+     * Report success submission of the report.
      *
      * @param reportProblem reportProblem model
      */
     void reportProblemSuccess(ReportProblem reportProblem);
 
     /**
-     * Report unsuccessful submitation of the report.
+     * Report unsuccessful submission of the report.
      *
      * @param e error
      */
