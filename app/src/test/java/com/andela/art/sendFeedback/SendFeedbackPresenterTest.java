@@ -58,6 +58,7 @@ public class SendFeedbackPresenterTest {
                 .thenReturn(Observable.just(sendFeedback));
         sendFeedbackPresenter.sendFeedback(anyString(), anyString(), anyString());
         verify(sendFeedbackView).sendFeedbackSuccess(sendFeedback);
+        sendFeedbackPresenter.dispose();
     }
 
     /**
