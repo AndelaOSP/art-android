@@ -1,5 +1,7 @@
 package com.andela.art.login;
 
+import android.content.Context;
+
 import com.andela.art.api.ApiService;
 import com.andela.art.api.EmailsResponse;
 import com.andela.art.api.TokenResponse;
@@ -31,6 +33,9 @@ public class SecurityEmailsPresenterTest {
     @Mock
     SharedPrefsWrapper sharedPrefsWrapper;
 
+    @Mock
+    Context context;
+
     SecurityEmailsPresenter securityEmailsPresenter;
 
     EmailsResponse emailsResponse;
@@ -46,7 +51,8 @@ public class SecurityEmailsPresenterTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        securityEmailsPresenter = new SecurityEmailsPresenter(sharedPrefsWrapper, apiService);
+        securityEmailsPresenter = new SecurityEmailsPresenter(
+                sharedPrefsWrapper, apiService, context);
         securityEmailsPresenter.attachView(securityEmailsView);
         emailsResponse = new EmailsResponse();
         tokenResponse = new TokenResponse();
