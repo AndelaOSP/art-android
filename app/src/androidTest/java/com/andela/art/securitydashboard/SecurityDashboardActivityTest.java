@@ -4,6 +4,7 @@ import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
@@ -33,6 +34,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 
 /**
@@ -95,6 +97,29 @@ public class SecurityDashboardActivityTest {
         intended(allOf(hasExtras(BundleMatchers.hasKey("asset")),
                 hasComponent(CheckInActivity.class.getName())), times(1));
         IdlingRegistry.getInstance().unregister(idlingResource);
+
+    }
+
+    /**
+     * Test an Unassigned asset displays a toast.
+     * @throws Exception if an error occurss
+     */
+    @Test
+    public void testUnassignedAssetDisplaysUnassignedToast() throws Exception {
+        String fileName = "null_asset_response.json";
+        String nullAsset = RestServiceTestHelper.
+                getStringFromFile(getTargetContext(), fileName);
+        mockWebServerRule.server.enqueue(new MockResponse().setBody(nullAsset));
+        activityTestRule.launchActivity(null);
+        onView(withId(R.id.addSerial)).perform(click());
+        onView(withId(R.id.serial_edit_text)).
+                perform(typeText("123"), closeSoftKeyboard());
+        closeSoftKeyboard();
+        onView(withId(R.id.submit)).perform(click());
+
+        onView(withText("Asset not assigned.")).inRoot(RootMatchers
+                .withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
 
     }
 
