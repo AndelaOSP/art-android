@@ -8,6 +8,7 @@ import com.andela.art.R;
 import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.login.LoginActivity;
+import com.andela.art.sendfeedback.presentation.SendFeedbackActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -95,6 +96,18 @@ public class SettingsTest {
         onView(withText("Report a Problem")).check(matches(isDisplayed()));
 
         intended(hasComponent(ReportProblemActivity.class.getName()));
+    }
+
+    /**
+     * Test that clicking send feedback takes the user to the send feedback activity.
+     */
+    @Test
+    public void sendFeedback_MovesToSendFeedbackActivity() {
+        onView(withId(R.id.tvSendFeedback)).perform(click());
+
+        onView(withText("Send Feedback")).check(matches(isDisplayed()));
+
+        intended(hasComponent(SendFeedbackActivity.class.getName()));
     }
 
     /**

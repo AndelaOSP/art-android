@@ -1,4 +1,4 @@
-package com.andela.art.reportproblem.presentation;
+package com.andela.art.sendfeedback.presentation;
 
 import com.andela.art.api.ApiService;
 import com.andela.art.root.Presenter;
@@ -8,38 +8,36 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by chadwalt on 4/17/18.
+ * Send Feedback Presenter.
  */
-
-public class ReportProblemPresenter implements Presenter<ReportProblemView> {
+public class SendFeedbackPresenter implements Presenter<SendFeedbackView> {
     private final ApiService apiService;
-    private ReportProblemView reportProblemView;
     private Disposable disposable;
+    private SendFeedbackView sendFeedbackView;
 
     /**
-     * Report Problem constructor.
+     * Send Feedback presenter constructor.
      *
-     * @param apiService api service interface.
+     * @param apiService - send feedback service.
      */
-    public ReportProblemPresenter(ApiService apiService) {
+    public SendFeedbackPresenter(ApiService apiService) {
         this.apiService = apiService;
     }
 
     /**
-     * Submit the report.
+     * Send feedback.
      *
-     * @param reportedBy - the user submitting the problem
-     * @param message - the description about the problem
+     * @param reportedBy - the user sending feedback
+     * @param message - the description for the feedback
      * @param reportType - the type of report
-     *
      */
-    public void reportProblem(String reportedBy, String message, String reportType) {
-        disposable = apiService.reportProblem(reportedBy, message, reportType)
+    public void sendFeedback(String reportedBy, String message, String reportType) {
+        disposable = apiService.sendFeedback(reportedBy, message, reportType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        reportProblemView::reportProblemSuccess,
-                        reportProblemView::reportProblemError
+                        sendFeedbackView::sendFeedbackSuccess,
+                        sendFeedbackView::sendFeedbackError
                 );
     }
 
@@ -48,8 +46,8 @@ public class ReportProblemPresenter implements Presenter<ReportProblemView> {
      * @param view view that will be instantiated
      */
     @Override
-    public void attachView(ReportProblemView view) {
-        this.reportProblemView = view;
+    public void attachView(SendFeedbackView view) {
+        this.sendFeedbackView = view;
     }
 
     /**
@@ -59,6 +57,5 @@ public class ReportProblemPresenter implements Presenter<ReportProblemView> {
         if (!disposable.isDisposed()) {
             disposable.dispose();
         }
-
     }
 }

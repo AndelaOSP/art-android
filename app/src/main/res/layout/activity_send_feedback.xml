@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryBalticSea"
-        tools:context="com.andela.art.reportproblem.presentation.ReportProblemActivity">
+        tools:context="com.andela.art.sendfeedback.presentation.sendFeebackActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/report_toolbar"
@@ -20,31 +20,49 @@
             app:titleTextAppearance="@style/AppBarTitle">
 
             <ImageView
-                android:id="@+id/close_report_button"
+                android:id="@+id/close_sendfeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:src="@mipmap/ic_clear_white"
-                android:onClick="cancelReportSending"/>
+                android:onClick="closeFeedback"/>
 
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Report a Problem"
+                android:text="@string/send_feedback"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/submit_report_btn"
+                android:id="@+id/submit_feedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:src="@mipmap/ic_done_white"
-                android:onClick="sendReport"/>
+                android:onClick="sendFeedback"/>
 
         </android.support.v7.widget.Toolbar>
+
+
+        <EditText
+            android:id="@+id/seedFeedbackText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#35ccc8"
+            android:hint="@string/send_feedback_hint"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:textColor="@color/white"
+            android:textColorHint="#909090"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/report_toolbar"/>
 
         <TextView
             android:id="@+id/textView"
@@ -52,26 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="23dp"
-            android:text="@string/report_problem_description"
+            android:text="@string/send_feedback_description"
             android:textColor="@color/profileTextViewColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/report_toolbar" />
-
-        <EditText
-            android:id="@+id/reportProblemText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#35ccc8"
-            android:hint="Briefly explain what happened"
-            android:inputType="textMultiLine"
-            android:singleLine="false"
-            android:textColor="@color/white"
-            android:textColorHint="#909090"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/seedFeedbackText"
+            app:layout_constraintStart_toStartOf="@+id/report_toolbar" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -74,7 +74,7 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
     /**
      * Submit the report.
      *
-     * @param view The view that calls this method whis is an ImageView
+     * @param view The view that calls this method is an ImageView
      */
     public void sendReport(View view) {
         String email = mAuth.getCurrentUser().getEmail();

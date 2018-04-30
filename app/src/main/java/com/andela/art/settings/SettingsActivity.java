@@ -5,22 +5,23 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.andela.art.R;
-import com.andela.art.reportproblem.presentation.ReportProblemActivity;
-import com.andela.art.root.ApplicationComponent;
-import com.andela.art.root.ApplicationModule;
-import com.andela.art.root.ArtApplication;
 import com.andela.art.databinding.SettingsPageBinding;
 import com.andela.art.login.LoginActivity;
 import com.andela.art.login.injection.DaggerLoginComponent;
 import com.andela.art.login.injection.LoginModule;
+import com.andela.art.reportproblem.presentation.ReportProblemActivity;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
+import com.andela.art.root.ArtApplication;
+import com.andela.art.sendfeedback.presentation.SendFeedbackActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,7 +31,8 @@ import javax.inject.Inject;
  * This is activity manages a users settings.
  */
 public class SettingsActivity extends AppCompatActivity implements Dialog.OnClickListener {
-    @Inject GoogleSignInClient googleSignInClient;
+    @Inject
+    GoogleSignInClient googleSignInClient;
     Dialog logoutDialog;
 
     @Override
@@ -67,6 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
         });
 
         binding.tvReportProblem.setOnClickListener(reportProblemListener);
+        binding.tvSendFeedback.setOnClickListener(view -> openSendFeedback());
     }
 
     @Override
@@ -95,5 +98,15 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
                     ReportProblemActivity.class));
         }
     };
+
+    /**
+     * Open send feedback activity.
+     */
+    private void openSendFeedback() {
+        startActivity(new Intent(
+                SettingsActivity.this,
+                SendFeedbackActivity.class
+        ));
+    }
 
 }
