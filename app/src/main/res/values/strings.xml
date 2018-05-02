@@ -45,4 +45,11 @@
         Kindly leave us feeback regarding our app and it’s features.
     </string>
     <string name="report_damage_loss">Report Damage/Loss</string>
+    <string name="insurance_caption">This information is required for insurance purposes</string>
+    <string name="location">Location of the incident</string>
+    <string name="description">Description of the incident</string>
+    <string name="injuries_report">Were there any injuries sustained during this incident? If Yes, please describe the injuries sustained.</string>
+    <string name="police_abstract">Have you obtained a police abstract?</string>
+    <string name="witnesses">Were there any witness? If Yes, please list them down with their contact information.</string>
+    <string name="property_list">Was there any loss of property involved during this incident? If Yes, Please list and describe theproperty lost</string>
 </resources>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e1d23">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/incident_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#25252f"
+        app:theme="@style/AppTheme.AppBarOverlay"
+        app:titleTextAppearance="@style/AppBarTitle"
+        app:popupTheme="@style/ThemeOverlay.AppBarPopup"/>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/incident_toolbar"
+        android:background="#1e1d23">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10.5dp"
+            android:layout_marginStart="18dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/caution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_light"
+                android:paddingTop="10dp"
+                android:text="@string/insurance_caption"
+                android:layout_marginBottom="10dp"
+                android:textColor="#909090"
+                android:textSize="14sp"
+                android:background="#1e1d23"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/location"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/description"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/injuries_report"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/property_list"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/witnesses"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
+                android:text="@string/police_abstract"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/cardHeader"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/avenir_book"/>
+
+            <Button
+                android:id="@+id/incident_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/incident_button"
+                android:paddingBottom="8dp"
+                android:paddingEnd="39dp"
+                android:paddingStart="39dp"
+                android:paddingTop="8dp"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
+</layout>
