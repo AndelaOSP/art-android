@@ -50,6 +50,9 @@
             android:theme="@style/SplashTheme"/>
 
         Add Comment
+        <activity android:name=".incidentreport.presentation.IncidentReportActivity"
+            android:theme="@style/SplashTheme"
+            android:label="Report Incident"/>
     </application>
 
 </manifest>
