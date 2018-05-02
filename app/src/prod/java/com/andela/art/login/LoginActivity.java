@@ -16,6 +16,7 @@ import com.andela.art.login.injection.LoginModule;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.userdashboard.UserDashBoardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -88,7 +89,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 mConnectionProgressDialog.dismiss();
-                LoginActivity.this.startActivity(dashboard);
             }
         };
 
@@ -147,14 +147,14 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
 
                 // filter out Andela email addresses
                 if ("andela.com".equals(emailDomain)) {
-                    Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
+                   Intent intent = new Intent(this, UserDashBoardActivity.class);
+                   startActivity(intent);
 
                 } else {
 
                     // filter out only specific GMail addresses assigned to the guards
                     if (isAllowedNonAndelaEmail(account.getEmail())) {
-                        Toast.makeText(this, "Allowed non Andela email",
-                                Toast.LENGTH_SHORT).show();
+                        LoginActivity.this.startActivity(dashboard);
                     } else {
                         mGoogleSignInClient.signOut();
                         throw new ApiException(new Status(UNAUTHORIZED_CODE));
