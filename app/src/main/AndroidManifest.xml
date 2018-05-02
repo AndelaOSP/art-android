@@ -41,8 +41,11 @@
         <activity
             android:name=".sendfeedback.presentation.SendFeedbackActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".userdashboard.UserDashBoardActivity">
-        </activity>
+        <activity android:name=".userdashboard.UserDashBoardActivity"
+            android:label="@string/app_title"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"/>
+
     </application>
 
 </manifest>
