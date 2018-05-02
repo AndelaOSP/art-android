@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.andela.art"
-    tools:ignore="InnerclassSeparator">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.andela.art"
+          tools:ignore="InnerclassSeparator">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".root.ArtApplication"
@@ -17,33 +17,32 @@
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            >
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".securitydashboard.presentation.SecurityDashboardActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".settings.SettingsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".checkin.CheckInActivity"
-            android:theme="@style/SplashTheme"
+            android:label="@string/app_title"
             android:screenOrientation="portrait"
-            android:label="@string/app_title"/>
-
-        <activity android:name=".reportproblem.presentation.ReportProblemActivity"
+            android:theme="@style/SplashTheme"/>
+        <activity
+            android:name=".reportproblem.presentation.ReportProblemActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".sendfeedback.presentation.SendFeedbackActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".sendfeedback.presentation.SendFeedbackActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".userdashboard.UserDashBoardActivity">
+        </activity>
     </application>
 
 </manifest>
