@@ -147,7 +147,8 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
 
                 // filter out Andela email addresses
                 if ("andela.com".equals(emailDomain)) {
-                   Intent intent = new Intent(this, UserDashBoardActivity.class);
+                   Intent intent = UserDashBoardActivity.newIntent(
+                           LoginActivity.this, account);
                    startActivity(intent);
 
                 } else {
