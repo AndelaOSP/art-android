@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/fragment_container"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-</FrameLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/userdashboard_in_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#25252f"
+        app:theme="@style/AppTheme.AppBarOverlay"
+        app:titleTextAppearance="@style/AppBarTitle"
+        app:popupTheme="@style/ThemeOverlay.AppBarPopup"/>
+
+    <FrameLayout
+         android:id="@+id/fragment_container"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+    </FrameLayout>
+    </LinearLayout>
+</layout>

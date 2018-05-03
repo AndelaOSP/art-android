@@ -16,7 +16,7 @@ import com.andela.art.login.injection.LoginModule;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.userdashboard.UserDashBoardActivity;
+import com.andela.art.userdashboard.presentation.UserDashBoardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
