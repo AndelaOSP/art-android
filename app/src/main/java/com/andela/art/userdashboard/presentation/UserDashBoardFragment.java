@@ -1,7 +1,6 @@
 package com.andela.art.userdashboard.presentation;
 
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,14 +35,9 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
          binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_user_dashboard, container, false);
 
-        String fullName = mGoogleSignInAccount.getDisplayName();
-        binding.name.setText(fullName);
-
-        String email = mGoogleSignInAccount.getEmail();
-        binding.emailAddress.setText(email);
-
-        Uri photoUrl = mGoogleSignInAccount.getPhotoUrl();
-        loadResizedImage(photoUrl);
+        binding.name.setText(getArguments().getString("name"));
+        binding.emailAddress.setText(getArguments().getString("email"));
+        loadResizedImage(getArguments().getString("photoUrl"));
 
         return binding.getRoot();
     }
@@ -64,7 +58,7 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
     }
 
     @Override
-    public void loadResizedImage(Uri url) {
+    public void loadResizedImage(String url) {
 
         if (url == null) {
 

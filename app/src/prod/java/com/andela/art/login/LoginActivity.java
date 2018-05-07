@@ -35,7 +35,8 @@ import javax.inject.Inject;
 /**
  * LoginActivity handles the login of user into the application.
  */
-public class LoginActivity extends AppCompatActivity implements SecurityEmailsView, TokenAuthView {
+public class LoginActivity extends AppCompatActivity implements SecurityEmailsView,
+        TokenAuthView {
 
     @Inject GoogleSignInClient mGoogleSignInClient;
     @Inject SecurityEmailsPresenter securityEmailsPresenter;
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
     FirebaseAuth.AuthStateListener mAuthListener;
     ProgressDialog mConnectionProgressDialog;
     Intent dashboard;
+    boolean andelan;
 
     public List<String> allowedEmailAddresses = new ArrayList();
     private static final int UNAUTHORIZED_CODE = 14672;
@@ -89,7 +91,30 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 mConnectionProgressDialog.dismiss();
-                LoginActivity.this.startActivity(dashboard);
+                // filter out Andela email addresses
+                if ("andela.com".equals(mAuth.getCurrentUser().getEmail())) {
+                    Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, UserDashBoardActivity.class);
+                    startActivity(intent);
+
+                } else {
+
+                    // filter out only specific GMail addresses assigned to the guards
+                    if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
+                        Toast.makeText(this, "Allowed non Andela email",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this,
+                                SecurityDashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        mGoogleSignInClient.signOut();
+                        try {
+                            throw new ApiException(new Status(UNAUTHORIZED_CODE));
+                        } catch (ApiException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         };
 
@@ -110,7 +135,20 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                         // Sign in success, update UI with the signed-in user's information
                         tokenAuthPresenter.saveToken();
                         // Add check if user is admin here in future
-                        startActivity(dashboard);
+                        if (andelan) {
+                            Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this,
+                                    UserDashBoardActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(this, "Allowed non Andela email",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this,
+                                    SecurityDashboardActivity.class);
+                            startActivity(intent);
+                        }
+
+
                     } else {
                         // Hide the progress dialog if its showing.
                         mConnectionProgressDialog.dismiss();
@@ -148,23 +186,21 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
 
                 // filter out Andela email addresses
                 if ("andela.com".equals(emailDomain)) {
-                    Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
-                    Intent intent = UserDashBoardActivity.newIntent(LoginActivity.this, account);
-                    startActivity(intent);
+                    andelan = true;
+                    firebasewithGoogleAuth(account);
 
                 } else {
 
                     // filter out only specific GMail addresses assigned to the guards
                     if (isAllowedNonAndelaEmail(account.getEmail())) {
-                        Toast.makeText(this, "Allowed non Andela email",
-                                Toast.LENGTH_SHORT).show();
+                        andelan = false;
+                        firebasewithGoogleAuth(account);
                     } else {
                         mGoogleSignInClient.signOut();
                         throw new ApiException(new Status(UNAUTHORIZED_CODE));
                     }
-                }
 
-                firebasewithGoogleAuth(account);
+                }
 
             } catch (ApiException e) {
                 // Hide the progress dialog if its showing.
