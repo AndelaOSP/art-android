@@ -1,21 +1,38 @@
 package com.andela.art.userdashboard.presentation;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentUserDashboardBinding;
+import com.andela.art.models.Asset;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
+import com.andela.art.root.ArtApplication;
+import com.andela.art.userdashboard.injection.DaggerUserDashBoardComponent;
+import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Displays the user dashboard screen.
  */
 public class UserDashBoardFragment extends Fragment implements UserDashBoardView {
+
+    @Inject
+    AssetsPresenter assetsPresenter;
+
+    ApplicationComponent applicationComponent;
     private static final String ARG_ACCOUNT = "google_account";
     private GoogleSignInAccount mGoogleSignInAccount;
     FragmentUserDashboardBinding binding;
@@ -23,9 +40,13 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        initializeUserDashBoardComponent();
 
         mGoogleSignInAccount = getArguments()
                 .getParcelable(ARG_ACCOUNT);
+        assetsPresenter.getAssets();
+
 
     }
 
@@ -37,7 +58,7 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
 
         binding.name.setText(getArguments().getString("name"));
         binding.emailAddress.setText(getArguments().getString("email"));
-        loadResizedImage(getArguments().getString("photoUrl"));
+        onLoadResizedImage(getArguments().getString("photoUrl"));
 
         return binding.getRoot();
     }
@@ -57,8 +78,24 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
         return fragment;
     }
 
+    /**
+     * Initialize userDashBoardComponent.
+     */
+    private void initializeUserDashBoardComponent() {
+        applicationComponent = ((ArtApplication) getActivity()
+                .getApplication()).applicationComponent();
+
+        DaggerUserDashBoardComponent.builder()
+                .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getActivity().getApplication()))
+                .userDashBoardModule(new UserDashBoardModule())
+                .build()
+                .inject(this);
+        assetsPresenter.attachView(this);
+    }
+
     @Override
-    public void loadResizedImage(String url) {
+    public void onLoadResizedImage(String url) {
 
         if (url == null) {
 
@@ -73,6 +110,26 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
                     .fit()
                     .centerCrop()
                     .into(binding.ivPhoto);
+        }
+    }
+
+    @Override
+    public void onDisplayErrorMessage(Throwable error) {
+        Toast.makeText(getActivity(), "Could not fetch assets", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetAssets(List<Asset> assets) {
+        if (!assets.isEmpty()) {
+            Asset asset = assets.get(0);
+            binding.Asset.setText(getString(R.string.Asset));
+            binding.AssetName.setText(asset.getModelNumber());
+            binding.Serial.setText("Serial: " + asset.getSerialNumber());
+            Drawable drawable = getResources().getDrawable(R.drawable.ic_computer_black_24dp);
+            binding.mac.setImageDrawable(drawable);
+            binding.Tag.setText("Tag: " + asset.getItemCode());
+        } else {
+            binding.Serial.setText(R.string.unassigned);
         }
     }
 }

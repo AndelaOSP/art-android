@@ -20,7 +20,7 @@ public class Asset implements Serializable {
     private String mCreatedAt;
     @SerializedName("id")
     private int mId;
-    @SerializedName("item_code")
+    @SerializedName("asset_code")
     private String mItemCode;
     @SerializedName("last_modified")
     private String mLastModified;

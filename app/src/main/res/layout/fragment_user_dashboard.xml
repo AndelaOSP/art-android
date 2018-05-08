@@ -1,6 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +39,7 @@
             android:layout_below="@+id/name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="139dp"
+            android:layout_marginBottom="19dp"
             android:fontFamily="@font/avenir_book"
             android:text="@string/email_address"
             android:textColor="#dadcdf"
@@ -48,7 +49,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="145dp"
+            android:layout_height="165dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="179dp"
@@ -65,36 +66,42 @@
                 android:background="@android:color/transparent">
 
                 <TextView
-                    android:id="@+id/unassigned_asset_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/avenir_heavy"
-                    android:text="@string/unassigned"
-                    android:textColor="@color/cardHeader"
-                    android:textSize="14sp" />
-
-
-                <TextView
                     android:id="@+id/Asset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/avenir_heavy"
-                    android:text="@string/Asset"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/avenir_medium"
                     android:textColor="@color/cardHeader"
-                    android:textSize="14sp" />
+                    android:textSize="20dp"
+                    tools:text="Asset"/>
+            <LinearLayout
+                android:id="@+id/image_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/Asset"
+                android:padding="18dp">
 
                 <ImageView
                     android:id="@+id/mac"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/unassigned_asset_text_view"
-                    android:layout_alignStart="@+id/Asset"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignStart="@id/Asset"
+                    android:layout_below="@id/Asset"
+                    android:layout_marginTop="5dp"
                     android:contentDescription="@string/mac"
-                    android:src="@drawable/ic_computer_black_24dp" />
+                    android:padding="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_toRightOf="@id/image_layout"
+                android:layout_below="@id/Asset">
 
                 <TextView
                     android:id="@+id/AssetName"
@@ -102,12 +109,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="72dp"
-                    android:layout_marginTop="19dp"
                     android:fontFamily="@font/avenir_medium"
-                    android:text="@string/AssetTypeMacbookPro"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="20dp"
+                    tools:text="MacBook Pro"/>
 
                 <TextView
                     android:id="@+id/Serial"
@@ -115,24 +120,22 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignStart="@+id/AssetName"
-                    android:layout_marginBottom="32dp"
                     android:fontFamily="@font/avenir_medium"
-                    android:text="Serial: CO2SC42VG8WP"
                     android:textColor="#35ccc8"
-                    android:textSize="14sp" />
+                    android:textSize="20dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    tools:text="24523522354"/>
 
                 <TextView
                     android:id="@+id/Tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignStart="@+id/Serial"
                     android:fontFamily="@font/avenir_medium"
-                    android:text="Tag: AKL/CA/000100"
                     android:textColor="#35ccc8"
-                    android:textSize="14sp" />
-
-
+                    android:textSize="20dp"
+                    tools:text="45245252355315"/>
+            </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </RelativeLayout>

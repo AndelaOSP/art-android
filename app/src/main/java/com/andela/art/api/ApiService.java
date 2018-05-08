@@ -5,6 +5,8 @@ import com.andela.art.models.CheckInModel;
 import com.andela.art.models.ReportProblem;
 import com.andela.art.models.SendFeedback;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -26,6 +28,14 @@ public interface ApiService {
      */
     @GET("/api/v1/assets/{serial_number}/")
     Observable<Asset> getAsset(@Path("serial_number") String serial);
+
+    /**
+     * Get all assets method.
+     *
+     * @return Observable
+     */
+    @GET("/api/v1/assets/")
+    Observable<List<Asset>> getAssets();
 
     /**
      * Fetch oauth token to be used for fetching security users emails.
