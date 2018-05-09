@@ -128,7 +128,7 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
             Drawable drawable = getResources().getDrawable(R.drawable.ic_computer_black_24dp);
             binding.mac.setImageDrawable(drawable);
             binding.Tag.setText("Tag: " + asset.getItemCode());
-        } else {
+        } else if (assets.isEmpty()) {
             binding.Serial.setText(R.string.unassigned);
         }
     }
