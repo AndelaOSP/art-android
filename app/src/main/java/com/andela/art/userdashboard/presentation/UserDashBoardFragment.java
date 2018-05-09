@@ -123,7 +123,7 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
         if (!assets.isEmpty()) {
             Asset asset = assets.get(0);
             binding.Asset.setText(getString(R.string.Asset));
-            binding.AssetName.setText(asset.getModelNumber());
+            binding.AssetName.setText(asset.getAssetType());
             binding.Serial.setText("Serial: " + asset.getSerialNumber());
             Drawable drawable = getResources().getDrawable(R.drawable.ic_computer_black_24dp);
             binding.mac.setImageDrawable(drawable);

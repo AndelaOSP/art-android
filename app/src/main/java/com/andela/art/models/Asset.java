@@ -28,6 +28,8 @@ public class Asset implements Serializable {
     private String mModelNumber;
     @SerializedName("serial_number")
     private String mSerialNumber;
+    @SerializedName("asset_type")
+    private String mAssetType;
 
     /**
      * Allocation status getter.
@@ -173,4 +175,19 @@ public class Asset implements Serializable {
         mSerialNumber = serialNumber;
     }
 
+    /**
+     * Asset type getter.
+     * @return mAssetType - String
+     */
+    public String getAssetType() {
+        return mAssetType;
+    }
+
+    /**
+     * Asset type setter.
+     * @param assetType - String
+     */
+    public void setAssetType(String assetType) {
+        mAssetType = assetType;
+    }
 }
