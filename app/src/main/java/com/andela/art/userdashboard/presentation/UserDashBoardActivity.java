@@ -12,12 +12,7 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentActivityBinding;
-import com.andela.art.root.ApplicationComponent;
-import com.andela.art.root.ApplicationModule;
-import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
-import com.andela.art.userdashboard.injection.DaggerUserDashBoardComponent;
-import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,10 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
  * Hosts UserDashboardFragment.
  */
 public class UserDashBoardActivity extends BaseMenuActivity {
+
     private static final String EXTRA_ACCOUNT_INFORMATION = "user_account";
-    ApplicationComponent mApplicationComponent;
-    GoogleSignInAccount mAccount;
-    FragmentActivityBinding mBinding;
+    GoogleSignInAccount account;
+    FragmentActivityBinding binding;
     String name, email;
     Uri photoUrl;
     boolean backButtonToExitPressedTwice;
@@ -40,9 +35,9 @@ public class UserDashBoardActivity extends BaseMenuActivity {
      * @return fragment
      */
     public  Fragment createFragment() {
-        mAccount = getIntent()
+        account = getIntent()
                 .getParcelableExtra(EXTRA_ACCOUNT_INFORMATION);
-        return UserDashBoardFragment.newInstance(mAccount);
+        return UserDashBoardFragment.newInstance(account);
     }
 
     /**
@@ -53,11 +48,9 @@ public class UserDashBoardActivity extends BaseMenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.fragment_activity);
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_activity);
 
-        mApplicationComponent = ((ArtApplication) getApplication()).applicationComponent();
-        initializeUserDashBoardComponent();
-        setSupportActionBar(mBinding.userdashboardInToolbar);
+        setSupportActionBar(binding.userdashboardInToolbar);
 
        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
@@ -81,17 +74,6 @@ public class UserDashBoardActivity extends BaseMenuActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
-
-    }
-    /**
-     * Initialize userDashBoardComponent.
-     */
-    private void initializeUserDashBoardComponent() {
-        DaggerUserDashBoardComponent.builder()
-                .applicationModule(new ApplicationModule(getApplication()))
-                .userDashBoardModule(new UserDashBoardModule())
-                .build()
-                .inject(this);
     }
 
     /**
@@ -129,4 +111,5 @@ public class UserDashBoardActivity extends BaseMenuActivity {
 
         }, 2000);
     }
+
 }

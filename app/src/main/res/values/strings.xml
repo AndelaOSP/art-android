@@ -36,6 +36,8 @@
     <string name="checkin">CHECK-IN</string>
     <string name="mac">mac</string>
     <string name="serial">Serial: </string>
+    <string name="Asset">ASSET </string>
+    <string name="AssetTypeMacbookPro">Macbook Pro </string>
     <string name="unassigned">NO ASSET ASSIGNED YET </string>
     <string name="report_problem_description">SOMETHING IS\'NT WORKING?</string>
     <string name="send_feedback_hint">What would you like us to improve?</string>
