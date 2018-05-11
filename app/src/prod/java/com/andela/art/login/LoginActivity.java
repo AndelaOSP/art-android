@@ -133,20 +133,33 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        tokenAuthPresenter.saveToken();
-                        // Add check if user is admin here in future
-                        if (andelan) {
-                            Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this,
-                                    UserDashBoardActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(this, "Allowed non Andela email",
-                                    Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this,
-                                    SecurityDashboardActivity.class);
-                            startActivity(intent);
-                        }
+                        tokenAuthPresenter.saveToken(new TokenAuthPresenter.CompletionListener() {
+                            @Override
+                            public void onComplete() {
+                                // Add check if user is admin here in future
+                                if (andelan) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Andela email",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this,
+                                            UserDashBoardActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Allowed non Andela email",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this,
+                                            SecurityDashboardActivity.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
 
 
                     } else {

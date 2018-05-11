@@ -44,4 +44,5 @@
     <string name="send_feedback_description">
         Kindly leave us feeback regarding our app and it’s features.
     </string>
+    <string name="report_damage_loss">Report Damage/Loss</string>
 </resources>

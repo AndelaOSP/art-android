@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -34,7 +35,7 @@ public class UserDashBoardActivity extends BaseMenuActivity {
      * creates and configures UserDashboardFragment.
      * @return fragment
      */
-    public  Fragment createFragment() {
+    public  Fragment profileFragment() {
         account = getIntent()
                 .getParcelableExtra(EXTRA_ACCOUNT_INFORMATION);
         return UserDashBoardFragment.newInstance(account);
@@ -58,22 +59,19 @@ public class UserDashBoardActivity extends BaseMenuActivity {
                 email = user.getEmail();
                 photoUrl = user.getPhotoUrl();
             }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
-
         Bundle bundle = new Bundle();
         bundle.putString("name", name);
         bundle.putString("email", email);
         bundle.putString("photoUrl", photoUrl.toString());
 
-        if (fragment == null) {
-            fragment = createFragment();
-            fragment.setArguments(bundle);
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment profileFragment = profileFragment();
+        profileFragment.setArguments(bundle);
+        fragmentTransaction.add(R.id.profile_container, profileFragment);
+        fragmentTransaction.commit();
+
+
     }
 
     /**

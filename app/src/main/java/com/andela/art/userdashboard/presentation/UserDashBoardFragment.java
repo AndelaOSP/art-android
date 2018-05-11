@@ -29,10 +29,6 @@ import javax.inject.Inject;
  */
 public class UserDashBoardFragment extends Fragment implements UserDashBoardView {
 
-    @Inject
-    AssetsPresenter assetsPresenter;
-
-    ApplicationComponent applicationComponent;
     private static final String ARG_ACCOUNT = "google_account";
     private GoogleSignInAccount mGoogleSignInAccount;
     FragmentUserDashboardBinding binding;
@@ -41,11 +37,9 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        initializeUserDashBoardComponent();
 
         mGoogleSignInAccount = getArguments()
                 .getParcelable(ARG_ACCOUNT);
-        assetsPresenter.getAssets();
 
 
     }
@@ -78,21 +72,7 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
         return fragment;
     }
 
-    /**
-     * Initialize userDashBoardComponent.
-     */
-    private void initializeUserDashBoardComponent() {
-        applicationComponent = ((ArtApplication) getActivity()
-                .getApplication()).applicationComponent();
 
-        DaggerUserDashBoardComponent.builder()
-                .applicationComponent(applicationComponent)
-                .applicationModule(new ApplicationModule(getActivity().getApplication()))
-                .userDashBoardModule(new UserDashBoardModule())
-                .build()
-                .inject(this);
-        assetsPresenter.attachView(this);
-    }
 
     @Override
     public void onLoadResizedImage(String url) {
@@ -113,23 +93,4 @@ public class UserDashBoardFragment extends Fragment implements UserDashBoardView
         }
     }
 
-    @Override
-    public void onDisplayErrorMessage(Throwable error) {
-        Toast.makeText(getActivity(), "Could not fetch assets", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onGetAssets(List<Asset> assets) {
-        if (!assets.isEmpty()) {
-            Asset asset = assets.get(0);
-            binding.Asset.setText(getString(R.string.Asset));
-            binding.AssetName.setText(asset.getAssetType());
-            binding.Serial.setText("Serial: " + asset.getSerialNumber());
-            Drawable drawable = getResources().getDrawable(R.drawable.ic_computer_black_24dp);
-            binding.mac.setImageDrawable(drawable);
-            binding.Tag.setText("Tag: " + asset.getItemCode());
-        } else if (assets.isEmpty()) {
-            binding.Serial.setText(R.string.unassigned);
-        }
-    }
 }

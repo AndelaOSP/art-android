@@ -17,16 +17,4 @@ public interface UserDashBoardView extends View {
      */
     void onLoadResizedImage(String url);
 
-    /**
-     *Handle error message.
-     * @param error error.
-     */
-    void onDisplayErrorMessage(Throwable error);
-
-    /**
-     * gets all the assets for a particular user.
-     *
-     * @param assets List of assets
-     */
-    void onGetAssets(List<Asset> assets);
 }

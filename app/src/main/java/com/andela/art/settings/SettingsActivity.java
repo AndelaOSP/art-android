@@ -21,6 +21,7 @@ import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.root.SharedPreferenceImpl;
 import com.andela.art.sendfeedback.presentation.SendFeedbackActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,6 +84,8 @@ public class SettingsActivity extends AppCompatActivity implements Dialog.OnClic
         if (whichOption == AlertDialog.BUTTON_POSITIVE) {
             FirebaseAuth.getInstance().signOut();
             googleSignInClient.signOut();
+            SharedPreferenceImpl sharedPreference = new SharedPreferenceImpl(this);
+            sharedPreference.clear();
             Intent loginActivity = new Intent(SettingsActivity.this, LoginActivity.class);
             loginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(loginActivity);

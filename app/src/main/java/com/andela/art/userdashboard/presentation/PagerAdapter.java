@@ -1,0 +1,61 @@
+package com.andela.art.userdashboard.presentation;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.andela.art.models.Asset;
+
+import java.util.List;
+
+/**
+ * Created by zack on 5/11/18.
+ */
+
+public class PagerAdapter extends FragmentStatePagerAdapter {
+    private List<Asset> assets;
+
+    public PagerAdapter(FragmentManager fm, List<Asset> assets) {
+
+        super(fm);
+        this.assets = assets;
+    }
+
+    /**
+     * Return the Fragment associated with a specified position.
+     *
+     * @param position
+     */
+    @Override
+    public Fragment getItem(int position) {
+        AssetSliderFragment fragment = new AssetSliderFragment();
+        return fragment;
+    }
+
+    /**
+     * Return the number of views available.
+     */
+    @Override
+    public int getCount() {
+        return assets.size();
+    }
+
+    /**
+     * Called when the host view is attempting to determine if an item's position
+     * has changed. Returns {@link #POSITION_UNCHANGED} if the position of the given
+     * item has not changed or {@link #POSITION_NONE} if the item is no longer present
+     * in the adapter.
+     * <p>
+     * <p>The default implementation assumes that items will never
+     * change position and always returns {@link #POSITION_UNCHANGED}.
+     *
+     * @param object Object representing an item, previously returned by a call.
+     * @return object's new position index from [0, {@link #getCount()}),
+     * {@link #POSITION_UNCHANGED} if the object's position has not changed,
+     * or {@link #POSITION_NONE} if the item is no longer present.
+     */
+    @Override
+    public int getItemPosition(Object object) {
+        return super.getItemPosition(object);
+    }
+}
