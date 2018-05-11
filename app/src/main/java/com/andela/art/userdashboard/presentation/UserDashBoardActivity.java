@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -73,6 +74,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         setSupportActionBar(binding.userdashboardInToolbar);
         initializeUserDashBoardComponent();
         assetsPresenter.getAssets();
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
@@ -167,5 +170,6 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     public void onGetAssets(List<Asset> assets) {
         pagerAdapter = new PagerAdapter(fragmentManager, assets);
         binding.pager.setAdapter(pagerAdapter);
+        binding.tabDots.setupWithViewPager(binding.pager, true);
     }
 }
