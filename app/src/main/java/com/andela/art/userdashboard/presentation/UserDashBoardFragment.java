@@ -1,22 +1,14 @@
 package com.andela.art.userdashboard.presentation;
 
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentUserDashboardBinding;
-import com.andela.art.models.Asset;
-import com.andela.art.root.ApplicationComponent;
-import com.andela.art.root.ApplicationModule;
-import com.andela.art.root.ArtApplication;
-import com.andela.art.userdashboard.injection.DaggerUserDashBoardComponent;
-import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.squareup.picasso.Picasso;
 

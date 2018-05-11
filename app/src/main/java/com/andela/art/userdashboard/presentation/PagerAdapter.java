@@ -1,8 +1,10 @@
 package com.andela.art.userdashboard.presentation;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.andela.art.models.Asset;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private List<Asset> assets;
+    private Asset asset;
 
     public PagerAdapter(FragmentManager fm, List<Asset> assets) {
 
@@ -29,6 +32,12 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         AssetSliderFragment fragment = new AssetSliderFragment();
+        asset = assets.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("type", asset.getAssetType());
+        bundle.putString("serial", asset.getSerialNumber());
+        bundle.putString("tag", asset.getItemCode());
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -37,6 +46,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
+        Log.d("count",String.valueOf(assets.size()));
         return assets.size();
     }
 
@@ -56,6 +66,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getItemPosition(Object object) {
-        return super.getItemPosition(object);
+        return PagerAdapter.POSITION_NONE;
     }
 }

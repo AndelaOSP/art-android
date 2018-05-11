@@ -1,13 +1,16 @@
 package com.andela.art.userdashboard.presentation;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.andela.art.R;
+import com.andela.art.databinding.FragmentAssetSliderBinding;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -23,13 +26,10 @@ import javax.inject.Inject;
  * Created by zack on 5/10/18.
  */
 
-public class AssetSliderFragment extends Fragment implements SliderView {
+public class AssetSliderFragment extends Fragment {
 
-    @Inject
-    AssetsPresenter assetsPresenter;
 
-    ApplicationComponent applicationComponent;
-
+    FragmentAssetSliderBinding binding;
     /**
      * Called to do initial creation of a fragment.  This is called after
      * and before
@@ -50,8 +50,6 @@ public class AssetSliderFragment extends Fragment implements SliderView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserDashBoardComponent();
-        assetsPresenter.getAssets();
 
     }
 
@@ -77,44 +75,15 @@ public class AssetSliderFragment extends Fragment implements SliderView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_asset_slider,
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_asset_slider,
                 container, false);
-
-        return viewGroup;
-    }
-    /**
-     * Initialize userDashBoardComponent.
-     */
-    private void initializeUserDashBoardComponent() {
-        applicationComponent = ((ArtApplication) getActivity()
-                .getApplication()).applicationComponent();
-
-        DaggerUserDashBoardComponent.builder()
-                .applicationComponent(applicationComponent)
-                .applicationModule(new ApplicationModule(getActivity().getApplication()))
-                .userDashBoardModule(new UserDashBoardModule())
-                .build()
-                .inject(this);
-        assetsPresenter.attachView(this);
+        setDetails();
+        return binding.getRoot();
     }
 
-    /**
-     * Handle error message.
-     *
-     * @param error error.
-     */
-    @Override
-    public void onDisplayErrorMessage(Throwable error) {
-
-    }
-
-    /**
-     * gets all the assets for a particular user.
-     *
-     * @param assets List of assets
-     */
-    @Override
-    public void onGetAssets(List<Asset> assets) {
-
+    public void setDetails(){
+        binding.assetType.setText(getArguments().getString("type"));
+        binding.serial.setText(getArguments().getString("serial"));
+        binding.tag.setText(getArguments().getString("tag"));
     }
 }

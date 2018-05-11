@@ -5,6 +5,7 @@ import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.securitydashboard.injection.Activity;
 import com.andela.art.userdashboard.presentation.AssetSliderFragment;
+import com.andela.art.userdashboard.presentation.UserDashBoardActivity;
 import com.andela.art.userdashboard.presentation.UserDashBoardFragment;
 
 import dagger.Component;
@@ -21,7 +22,7 @@ public interface UserDashBoardComponent {
 
     /**
      * Inject check in activity.
-     * @param fragment activity to inject
+     * @param activity activity to inject
      */
-    void inject(AssetSliderFragment fragment);
+    void inject(UserDashBoardActivity activity);
 }
