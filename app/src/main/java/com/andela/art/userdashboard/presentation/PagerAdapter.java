@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.andela.art.models.Asset;
 
@@ -15,9 +14,14 @@ import java.util.List;
  */
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    private List<Asset> assets;
+    private final List<Asset> assets;
     private Asset asset;
 
+    /**
+     *
+     * @param fm - fragment manager.
+     * @param assets - list of assets fetched.
+     */
     public PagerAdapter(FragmentManager fm, List<Asset> assets) {
 
         super(fm);
@@ -46,7 +50,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
-        Log.d("count",String.valueOf(assets.size()));
         return assets.size();
     }
 

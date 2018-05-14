@@ -2,14 +2,10 @@ package com.andela.art.login;
 
 import android.util.Log;
 
-import com.andela.art.api.TokenResponse;
 import com.andela.art.root.Presenter;
 import com.andela.art.root.SharedPrefsWrapper;
 import com.google.firebase.auth.FirebaseAuth;
 
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.SingleOnSubscribe;
 
 /**
  * Created by zack on 4/18/18.
@@ -32,6 +28,7 @@ public class TokenAuthPresenter implements Presenter<TokenAuthView> {
 
     /**
      * Save token retrieved from firebase to shared preferences.
+     * @param completionListener - Completion listener.
      */
     public void saveToken(CompletionListener completionListener) {
         firebaseAuth.getCurrentUser().getIdToken(true)
@@ -58,9 +55,18 @@ public class TokenAuthPresenter implements Presenter<TokenAuthView> {
         this.tokenAuthView = view;
     }
 
-
+    /**
+     * Login completion callback. Called when firebase token is fetched or if an error occurs.
+     */
     interface CompletionListener {
+        /**
+         * Called when token is fetched.
+         */
         void onComplete();
+
+        /**
+         * Called when error occurs.
+         */
         void onError();
     }
 }

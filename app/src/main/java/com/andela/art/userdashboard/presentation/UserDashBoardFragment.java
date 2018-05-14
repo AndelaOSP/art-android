@@ -12,9 +12,6 @@ import com.andela.art.databinding.FragmentUserDashboardBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * Displays the user dashboard screen.

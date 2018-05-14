@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -158,7 +156,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
      */
     @Override
     public void onDisplayErrorMessage(Throwable error) {
-
+        Toast.makeText(this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
     }
 
     /**
