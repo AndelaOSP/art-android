@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#1E1D23">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivPhoto"
             android:src="@drawable/photo"
@@ -17,28 +16,26 @@
             android:layout_marginTop="12dp"
             app:civ_border_color="@android:color/transparent"
             app:civ_border_width="0dp"/>
-
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivPhoto"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/avenir_heavy"
             android:text="@string/full_name"
             android:textColor="#dadcdf"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textAllCaps="true"/>
-
         <TextView
             android:id="@+id/email_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="19dp"
             android:fontFamily="@font/avenir_book"
             android:text="@string/email_address"

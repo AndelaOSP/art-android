@@ -21,16 +21,15 @@
         <FrameLayout
             android:id="@+id/profile_container"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_below="@+id/userdashboard_in_toolbar" />
 
         <FrameLayout
             android:id="@+id/slider_container"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:layout_below="@+id/profile_container"
             >
-
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
@@ -48,3 +47,4 @@
 
     </RelativeLayout>
 </layout>
+
