@@ -33,7 +33,7 @@ public class SerialPresenterTest {
     Throwable error;
 
     @Rule
-    public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
+    public final RxSchedulersOverrideRule overrideSchedulersRule = new RxSchedulersOverrideRule();
 
     /**
      * Test setup method.
