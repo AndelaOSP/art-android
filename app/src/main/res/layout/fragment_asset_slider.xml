@@ -65,7 +65,6 @@
                         android:fontFamily="@font/avenir_medium"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:text="Headset"
                         />
 
                     <TextView
@@ -75,7 +74,6 @@
                         android:fontFamily="@font/avenir_medium"
                         android:textColor="@color/cardHeader"
                         android:textSize="14sp"
-                        android:text="serial"
                         />
 
                 </LinearLayout>
@@ -87,7 +85,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir_medium"
-            android:text="2134253647"
             android:textColor="@color/cardHeader"
             android:textSize="14sp" />
     </ScrollView>
