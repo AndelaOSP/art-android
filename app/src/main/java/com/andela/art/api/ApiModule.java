@@ -58,8 +58,8 @@ public class ApiModule {
 
         };
         return new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
                 .addInterceptor(authInterceptor)
+                .addInterceptor(loggingInterceptor)
                 .build();
     }
 

@@ -11,8 +11,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by lewismbogo on 08/05/2018.
  */
 
-public class AssetsPresenter implements Presenter<UserDashBoardView> {
-    public UserDashBoardView userDashBoardView;
+public class AssetsPresenter implements Presenter<SliderView> {
+    public SliderView sliderView;
     public ApiService apiService;
     private Disposable disposable;
 
@@ -25,8 +25,8 @@ public class AssetsPresenter implements Presenter<UserDashBoardView> {
     }
 
     @Override
-    public void attachView(UserDashBoardView view) {
-        this.userDashBoardView = view;
+    public void attachView(SliderView view) {
+        this.sliderView = view;
     }
 
     /**
@@ -34,7 +34,7 @@ public class AssetsPresenter implements Presenter<UserDashBoardView> {
      */
     public void getAssets() {
         disposable = apiService.getAssets().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(userDashBoardView::onGetAssets,
-                        userDashBoardView::onDisplayErrorMessage);
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(sliderView::onGetAssets,
+                        sliderView::onDisplayErrorMessage);
     }
 }

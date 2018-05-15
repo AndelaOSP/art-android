@@ -71,4 +71,12 @@ public class SharedPreferenceImpl implements SharedPrefsWrapper {
         return sharedPreferences.getString(key, null);
     }
 
+    /**
+     * Clear shared preferences on log out.
+     */
+    public void clear() {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS, 0).edit();
+        editor.clear();
+        editor.apply();
+    }
 }

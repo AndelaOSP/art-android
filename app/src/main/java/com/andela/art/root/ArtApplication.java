@@ -22,6 +22,7 @@ public class ArtApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         applicationComponent = DaggerApplicationComponent.builder()
                 .application(this)
                 .applicationModule(new ApplicationModule(this))

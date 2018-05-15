@@ -8,33 +8,53 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentActivityBinding;
+import com.andela.art.models.Asset;
+import com.andela.art.root.ApplicationComponent;
+import com.andela.art.root.ApplicationModule;
+import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
+import com.andela.art.userdashboard.injection.DaggerUserDashBoardComponent;
+import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
  * Hosts UserDashboardFragment.
  */
-public class UserDashBoardActivity extends BaseMenuActivity {
+public class UserDashBoardActivity extends BaseMenuActivity implements SliderView {
 
     private static final String EXTRA_ACCOUNT_INFORMATION = "user_account";
+    private PagerAdapter pagerAdapter;
     GoogleSignInAccount account;
     FragmentActivityBinding binding;
     String name, email;
     Uri photoUrl;
     boolean backButtonToExitPressedTwice;
+    FragmentManager fragmentManager;
+
+
+    @Inject
+    AssetsPresenter assetsPresenter;
+
+    ApplicationComponent applicationComponent;
+
 
     /**
      * creates and configures UserDashboardFragment.
      * @return fragment
      */
-    public  Fragment createFragment() {
+    public  Fragment profileFragment() {
         account = getIntent()
                 .getParcelableExtra(EXTRA_ACCOUNT_INFORMATION);
         return UserDashBoardFragment.newInstance(account);
@@ -49,31 +69,31 @@ public class UserDashBoardActivity extends BaseMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_activity);
-
         setSupportActionBar(binding.userdashboardInToolbar);
+        initializeUserDashBoardComponent();
+        assetsPresenter.getAssets();
 
-       FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 name = user.getDisplayName();
                 email = user.getEmail();
                 photoUrl = user.getPhotoUrl();
             }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
-
         Bundle bundle = new Bundle();
         bundle.putString("name", name);
         bundle.putString("email", email);
         bundle.putString("photoUrl", photoUrl.toString());
 
-        if (fragment == null) {
-            fragment = createFragment();
-            fragment.setArguments(bundle);
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment profileFragment = profileFragment();
+        profileFragment.setArguments(bundle);
+        fragmentTransaction.add(R.id.profile_container, profileFragment);
+        fragmentTransaction.commit();
+
+
     }
 
     /**
@@ -112,4 +132,42 @@ public class UserDashBoardActivity extends BaseMenuActivity {
         }, 2000);
     }
 
+    /**
+     * Initialize userDashBoardComponent.
+     */
+    private void initializeUserDashBoardComponent() {
+        applicationComponent = ((ArtApplication) this
+                .getApplication()).applicationComponent();
+
+        DaggerUserDashBoardComponent.builder()
+                .applicationComponent(applicationComponent)
+                .applicationModule(new ApplicationModule(getApplication()))
+                .userDashBoardModule(new UserDashBoardModule())
+                .build()
+                .inject(this);
+        assetsPresenter.attachView(this);
+    }
+
+
+    /**
+     * Handle error message.
+     *
+     * @param error error.
+     */
+    @Override
+    public void onDisplayErrorMessage(Throwable error) {
+        Toast.makeText(this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * gets all the assets for a particular user.
+     *
+     * @param assets List of assets
+     */
+    @Override
+    public void onGetAssets(List<Asset> assets) {
+        pagerAdapter = new PagerAdapter(fragmentManager, assets);
+        binding.pager.setAdapter(pagerAdapter);
+        binding.tabDots.setupWithViewPager(binding.pager, true);
+    }
 }
