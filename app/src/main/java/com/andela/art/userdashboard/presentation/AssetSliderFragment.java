@@ -52,8 +52,12 @@ public class AssetSliderFragment extends Fragment {
      * Set asset details on card.
      */
     public void setDetails() {
-        binding.assetType.setText(getArguments().getString("type"));
-        binding.serial.setText(getArguments().getString("serial"));
-        binding.tag.setText(getArguments().getString("tag"));
+        if (!getArguments().isEmpty()) {
+            binding.assetType.setText(getArguments().getString("type"));
+            binding.serial.setText(getArguments().getString("serial"));
+            binding.tag.setText(getArguments().getString("tag"));
+        } else {
+            binding.serial.setText(R.string.unassigned);
+        }
     }
 }

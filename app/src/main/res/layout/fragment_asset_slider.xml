@@ -10,7 +10,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#25252f"
             card_view:cardBackgroundColor="#25252f"
             card_view:cardCornerRadius="4dp"
@@ -25,7 +25,6 @@
                     android:id="@+id/asset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_toStartOf="@+id/linearLayout"
                     android:fontFamily="@font/avenir_heavy"
                     android:text="@string/Asset"
@@ -42,11 +41,11 @@
 
                     <ImageView
                         android:id="@+id/mac"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="17dp"
+                        android:baselineAligned="false"
                         android:contentDescription="@string/mac"
-                        android:padding="5dp"
                         android:src="@drawable/baseline_headset_white_18dp" />
                 </LinearLayout>
 
@@ -56,7 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/asset"
                     android:layout_toEndOf="@id/image_layout"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                     <TextView
                         android:id="@+id/asset_type"
@@ -64,7 +64,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenir_medium"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        />
 
                     <TextView
                         android:id="@+id/serial"
@@ -73,16 +74,16 @@
                         android:fontFamily="@font/avenir_medium"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
-                        android:textColor="#35ccc8"
+                        android:textColor="@color/cardHeader"
                         android:textSize="14sp"
-                        tools:text="24523522354" />
+                        />
 
                     <TextView
                         android:id="@+id/tag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenir_medium"
-                        android:textColor="#35ccc8"
+                        android:textColor="@color/cardHeader"
                         android:textSize="14sp" />
                 </LinearLayout>
             </RelativeLayout>

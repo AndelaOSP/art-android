@@ -41,7 +41,7 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
-            buildConfigField "String" ,"BASE_URL", "\"http:/localhost:3000\""
+            buildConfigField "String" ,"BASE_URL", "\"http://localhost:3000\""
         }
         prod {
             buildConfigField "String" ,"BASE_URL", "\"http://art-backend.herokuapp.com\""
