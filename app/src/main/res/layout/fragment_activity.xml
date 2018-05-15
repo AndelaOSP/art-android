@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="#25252f"
-            android:paddingLeft="37dp"
+            android:paddingStart="37dp"
             app:popupTheme="@style/ThemeOverlay.AppBarPopup"
             app:theme="@style/AppTheme.AppBarOverlay"
             app:titleTextAppearance="@style/AppBarTitle" />
@@ -40,10 +40,12 @@
             android:id="@+id/tabDots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
+            app:tabIndicatorHeight="0dp"
+            android:layout_below="@+id/slider_container"
+
+            />
 
     </RelativeLayout>
 </layout>
