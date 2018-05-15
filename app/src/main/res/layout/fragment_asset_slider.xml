@@ -65,6 +65,7 @@
                         android:fontFamily="@font/avenir_medium"
                         android:textColor="@color/white"
                         android:textSize="14sp"
+                        android:text="Headset"
                         />
 
                     <TextView
@@ -72,21 +73,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/avenir_medium"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
                         android:textColor="@color/cardHeader"
                         android:textSize="14sp"
+                        android:text="serial"
                         />
 
-                    <TextView
-                        android:id="@+id/tag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/avenir_medium"
-                        android:textColor="@color/cardHeader"
-                        android:textSize="14sp" />
                 </LinearLayout>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_medium"
+            android:text="2134253647"
+            android:textColor="@color/cardHeader"
+            android:textSize="14sp" />
     </ScrollView>
 </layout>
