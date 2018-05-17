@@ -1,4 +1,4 @@
-package com.andela.art.securitydashboard;
+package com.andela.art.utils;
 
 /**
  * Created by zack on 4/18/18.

@@ -3,9 +3,9 @@ package com.andela.art.reportproblem.injection;
 
 import com.andela.art.api.ApiModule;
 import com.andela.art.firebase.FirebaseModule;
+import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.root.Activity;
 import com.andela.art.root.ApplicationComponent;
-import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.root.ApplicationModule;
 
 import dagger.Component;
