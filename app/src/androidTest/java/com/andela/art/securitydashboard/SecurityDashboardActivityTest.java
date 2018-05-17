@@ -10,6 +10,10 @@ import android.support.test.runner.AndroidJUnit4;
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.andela.art.utils.MockWebServerRule;
+import com.andela.art.utils.OkHttpIdlingResourceRule;
+import com.andela.art.utils.RestServiceTestHelper;
+import com.andela.art.utils.WaitActivityIsResumedIdlingResource;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -102,7 +106,7 @@ public class SecurityDashboardActivityTest {
 
     /**
      * Test an Unassigned asset displays a toast.
-     * @throws Exception if an error occurss
+     * @throws Exception if an error occurs
      */
     @Test
     public void testUnassignedAssetDisplaysUnassignedToast() throws Exception {
@@ -115,6 +119,12 @@ public class SecurityDashboardActivityTest {
         onView(withId(R.id.serial_edit_text)).
                 perform(typeText("123"), closeSoftKeyboard());
         closeSoftKeyboard();
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(withId(R.id.submit)).perform(click());
 
         onView(withText("Asset not assigned.")).inRoot(RootMatchers
