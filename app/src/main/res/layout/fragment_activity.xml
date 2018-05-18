@@ -47,6 +47,18 @@
 
             />
 
+        <Button
+            android:id="@+id/incident_button"
+            android:layout_width="183dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tabDots"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:background="@drawable/incident_button"
+            android:fontFamily="@font/avenir_book"
+            android:text="@string/report_damage_loss"
+            android:textColor="@android:color/white" />
+
     </RelativeLayout>
 </layout>
 
