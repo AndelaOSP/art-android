@@ -81,7 +81,8 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
         String reportType = "bug";
 
         if (message.isEmpty()) {
-            Toast.makeText(this, "Cannot submit an empty report", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Cannot submit an empty report",
+                    Toast.LENGTH_LONG).show();
             return;
         }
 

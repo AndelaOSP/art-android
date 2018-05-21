@@ -174,4 +174,5 @@ public class SecurityDashboardActivityTest {
 
         pressBack();
     }
+
 }
