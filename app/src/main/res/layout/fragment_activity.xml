@@ -27,9 +27,9 @@
         <FrameLayout
             android:id="@+id/slider_container"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/profile_container"
-            >
+            android:layout_height="148dp"
+            android:layout_below="@+id/profile_container">
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentActivityBinding;
+import com.andela.art.incidentreport.presentation.IncidentReportActivity;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -176,6 +177,16 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         binding.tabDots.setupWithViewPager(binding.pager, true);
         if (!assets.isEmpty()) {
             binding.incidentButton.setVisibility(View.VISIBLE);
+            binding.incidentButton.setOnClickListener(view -> {
+                int listPosition = pagerAdapter.getCurrentPosition();
+                Asset asset = assets.get((listPosition - 1));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("asset", asset);
+                Intent intent = new Intent(UserDashBoardActivity.this,
+                        IncidentReportActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            });
         }
     }
 

@@ -10,6 +10,7 @@ import com.andela.art.R;
 import com.andela.art.databinding.ActivityIncidentBinding;
 import com.andela.art.incidentreport.injection.DaggerReportIncidentComponent;
 import com.andela.art.incidentreport.injection.IncidentReportModule;
+import com.andela.art.models.Asset;
 import com.andela.art.models.IncidentModel;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -23,6 +24,8 @@ import javax.inject.Inject;
 public class IncidentReportActivity extends AppCompatActivity implements IncidentReportView {
     ActivityIncidentBinding binding;
     ApplicationComponent applicationComponent;
+    Bundle bundle;
+    Asset asset;
 
     @Inject
     IncidentReportPresenter  presenter;
@@ -43,7 +46,12 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
                     .getDrawable(R.drawable.pressed_incident_button));
             enterReportDetails();
         });
+
+        binding.incidentToolbar.setNavigationOnClickListener(view -> onBackPressed());
+
         presenter.attachView(this);
+        bundle = getIntent().getExtras();
+        asset = (Asset) bundle.getSerializable("asset");
     }
 
     /**
@@ -78,4 +86,5 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
     public void showSuccess() {
         Toast.makeText(this, "Incident reported successfully", Toast.LENGTH_LONG).show();
     }
+
 }

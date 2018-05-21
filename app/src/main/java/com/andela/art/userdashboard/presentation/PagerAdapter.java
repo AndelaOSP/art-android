@@ -16,6 +16,7 @@ import java.util.List;
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private final List<Asset> assets;
     private Asset asset;
+    private int currentPosition;
 
     /**
      *
@@ -38,6 +39,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         AssetSliderFragment fragment = new AssetSliderFragment();
         asset = assets.get(position);
         Bundle bundle = new Bundle();
+        currentPosition = position;
         bundle.putString("type", asset.getAssetType());
         bundle.putString("serial", asset.getSerialNumber());
         bundle.putString("tag", asset.getItemCode());
@@ -70,5 +72,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getItemPosition(Object object) {
         return PagerAdapter.POSITION_NONE;
+    }
+
+    /**
+     * Get's the current fragment's position.
+     * @return currentPosition - int CurrentPosition
+     */
+    public int getCurrentPosition() {
+        return currentPosition;
     }
 }
