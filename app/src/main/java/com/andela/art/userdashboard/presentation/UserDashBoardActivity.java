@@ -9,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.FragmentActivityBinding;
+import com.andela.art.incidentreport.presentation.IncidentReportActivity;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -92,6 +94,10 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         profileFragment.setArguments(bundle);
         fragmentTransaction.add(R.id.profile_container, profileFragment);
         fragmentTransaction.commit();
+        binding.incidentButton.setOnClickListener(v -> {
+            binding.incidentButton.setBackground(getResources()
+                    .getDrawable(R.drawable.incident_button_clicked));
+        });
 
 
     }
@@ -169,5 +175,20 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         pagerAdapter = new PagerAdapter(fragmentManager, assets);
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
+        if (!assets.isEmpty()) {
+            binding.incidentButton.setVisibility(View.VISIBLE);
+            binding.incidentButton.setOnClickListener(view -> {
+                int listPosition = pagerAdapter.getCurrentPosition();
+                Asset asset = assets.get((listPosition - 1));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("asset", asset);
+                Intent intent = new Intent(UserDashBoardActivity.this,
+                        IncidentReportActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            });
+        }
     }
+
+
 }

@@ -2,12 +2,14 @@ package com.andela.art.api;
 
 import com.andela.art.models.Asset;
 import com.andela.art.models.CheckInModel;
+import com.andela.art.models.IncidentModel;
 import com.andela.art.models.ReportProblem;
 import com.andela.art.models.SendFeedback;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -100,5 +102,17 @@ public interface ApiService {
             @Field("reported_by") String reportedBy,
             @Field("message") String message,
             @Field("report_type") String reportType
+    );
+
+    /**
+     * Send incident report.
+     * @param incidentModel - incident model object
+     *
+     * @return Observable
+     */
+    @FormUrlEncoded
+    @POST("")
+    Observable<IncidentModel> reportIncident(
+           @Body IncidentModel incidentModel
     );
 }
