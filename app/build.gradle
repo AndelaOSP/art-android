@@ -65,14 +65,16 @@ android {
 
     gradle.taskGraph.useFilter { task ->
         if (task.name.startsWith("test") && task.name.contains("Prod")) {
-            return false;
+            return false
         }
         else if(task.name.startsWith("connected")&& task.name.contains("Prod")){
-            return false;
+            return false
         } else if(task.name.contains("createProdDebugAndroidTestCoverageReport")){
-            return false;
+            return false
+        } else if(task.name.contains("Prod")&& task.name.contains("AndroidTest")){
+            return false
         }
-        return true;
+        return true
     }
 }
 

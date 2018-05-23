@@ -92,7 +92,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      */
     public void sendIntent(Asset asset) {
         if (asset.getAssignee() == null) {
-            Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Asset not assigned.",
+                    Toast.LENGTH_SHORT).show();
         } else {
             Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
                     CheckInActivity.class);
