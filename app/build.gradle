@@ -71,6 +71,8 @@ android {
             return false;
         } else if(task.name.contains("createProdDebugAndroidTestCoverageReport")){
             return false;
+        } else if(task.name.contains("Prod")&& task.name.contains("AndroidTest")){
+            return false
         }
         return true;
     }

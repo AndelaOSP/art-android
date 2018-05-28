@@ -6,6 +6,7 @@ import android.support.test.espresso.intent.matcher.BundleMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
@@ -15,6 +16,7 @@ import com.andela.art.utils.OkHttpIdlingResourceRule;
 import com.andela.art.utils.RestServiceTestHelper;
 import com.andela.art.utils.WaitActivityIsResumedIdlingResource;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -173,5 +175,16 @@ public class SecurityDashboardActivityTest {
         }
 
         pressBack();
+    }
+
+    /**
+     * Remove any toast message that is still shown.
+     */
+    @After
+    public void tearDown() {
+        Toast toast = activityTestRule.getActivity().toast;
+        if (toast != null) {
+            toast.cancel();
+        }
     }
 }

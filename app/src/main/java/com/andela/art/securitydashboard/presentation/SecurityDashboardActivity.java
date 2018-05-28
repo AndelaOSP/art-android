@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -39,6 +40,9 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     FirebasePresenter firebasePresenter;
 
     boolean backButtonToExitPressedTwice = false;
+
+    @VisibleForTesting
+    public Toast toast;
 
     /**
      * Activity on create method.
@@ -92,7 +96,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      */
     public void sendIntent(Asset asset) {
         if (asset.getAssignee() == null) {
-            Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT).show();
+            toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
+            toast.show();
         } else {
             Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
                     CheckInActivity.class);
@@ -134,7 +139,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     @Override
     public void displayErrorMessage(Throwable error) {
         String message = error.getMessage().toString();
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
@@ -156,8 +162,9 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             finish();
             moveTaskToBack(true);
         } else {
-            Toast.makeText(this.getApplicationContext(), "Press again to exit.",
-                    Toast.LENGTH_SHORT).show();
+            toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         this.backButtonToExitPressedTwice = true;
