@@ -1,4 +1,4 @@
-package com.andela.art.securitydashboard;
+package com.andela.art.utils;
 
 import android.app.Activity;
 import android.support.test.espresso.IdlingResource;
