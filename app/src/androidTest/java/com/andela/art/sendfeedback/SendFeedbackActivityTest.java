@@ -9,12 +9,12 @@ import android.support.test.runner.lifecycle.Stage;
 import android.widget.Toast;
 
 import com.andela.art.R;
-import com.andela.art.securitydashboard.MockWebServerRule;
-import com.andela.art.securitydashboard.OkHttpIdlingResourceRule;
-import com.andela.art.securitydashboard.RestServiceTestHelper;
 import com.andela.art.sendfeedback.presentation.SendFeedbackActivity;
 import com.andela.art.settings.SettingsActivity;
 import com.andela.art.utils.ControlledActivityTestRule;
+import com.andela.art.utils.MockWebServerRule;
+import com.andela.art.utils.OkHttpIdlingResourceRule;
+import com.andela.art.utils.RestServiceTestHelper;
 
 import org.junit.After;
 import org.junit.Rule;
