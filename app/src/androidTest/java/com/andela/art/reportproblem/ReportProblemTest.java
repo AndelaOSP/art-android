@@ -91,7 +91,7 @@ public class ReportProblemTest {
         onView(withId(R.id.reportProblemText)).perform(closeSoftKeyboard());
 
         try {
-             Thread.sleep(3500);
+             Thread.sleep(7500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,7 +115,7 @@ public class ReportProblemTest {
         onView(withId(R.id.reportProblemText)).perform(closeSoftKeyboard());
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(7500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

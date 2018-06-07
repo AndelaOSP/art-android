@@ -87,7 +87,7 @@ public class SendFeedbackActivityTest {
                 .perform(typeText("I like the user interface."));
         onView(withId(R.id.seedFeedbackText)).perform(closeSoftKeyboard());
 
-        Thread.sleep(3000);
+        Thread.sleep(7500);
 
         onView(withId(R.id.submit_feedback)).perform(click());
 
@@ -110,7 +110,7 @@ public class SendFeedbackActivityTest {
                 .perform(typeText(""));
         onView(withId(R.id.seedFeedbackText)).perform(closeSoftKeyboard());
 
-        Thread.sleep(5000);
+        Thread.sleep(7500);
         onView(withId(R.id.submit_feedback)).perform(click());
         onView(withText("Please provide feedback")).inRoot(RootMatchers
                 .withDecorView(not(sendFeedbackActivityActivityTestRule.
