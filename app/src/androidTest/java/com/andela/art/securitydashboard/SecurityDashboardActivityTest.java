@@ -123,7 +123,7 @@ public class SecurityDashboardActivityTest {
         closeSoftKeyboard();
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(7500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
