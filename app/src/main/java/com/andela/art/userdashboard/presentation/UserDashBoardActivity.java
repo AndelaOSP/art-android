@@ -23,7 +23,6 @@ import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.userdashboard.injection.DaggerUserDashBoardComponent;
 import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
 
 
     @Inject
-    AssetsPresenter assetsPresenter;
+    public AssetsPresenter assetsPresenter;
 
     ApplicationComponent applicationComponent;
 
@@ -76,8 +75,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         assetsPresenter.getAssets();
 
 
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = assetsPresenter.getUser();
             if (user != null) {
                 name = user.getDisplayName();
                 email = user.getEmail();

@@ -1,7 +1,9 @@
 package com.andela.art.userdashboard.presentation;
 
+import com.andela.art.Injection;
 import com.andela.art.api.ApiService;
 import com.andela.art.root.Presenter;
+import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -36,5 +38,13 @@ public class AssetsPresenter implements Presenter<SliderView> {
         disposable = apiService.getAssets().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(sliderView::onGetAssets,
                         sliderView::onDisplayErrorMessage);
+    }
+
+    /**
+     * Gets a firebase user.
+     * @return FirebaseUser
+     */
+    public FirebaseUser getUser() {
+        return Injection.provideGetUser();
     }
 }

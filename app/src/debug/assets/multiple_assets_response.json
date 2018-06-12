@@ -1,0 +1,77 @@
+[
+  {
+    "id": 15,
+    "asset_code": "AND/HS/0010",
+    "serial_number": "BSBSBS",
+    "model_number": "Microsoft Lifechat LX-6000",
+    "checkin_status": null,
+    "assigned_to": {
+      "id": 41,
+      "first_name": "Isaiah",
+      "last_name": "Kingori",
+      "full_name": "Isaiah Kingori",
+      "email": "isaiah.kingori@andela.com",
+      "cohort": null,
+      "slack_handle": null,
+      "picture": null,
+      "phone_number": null,
+      "last_modified": "2018-05-17T14:08:41.699463Z",
+      "date_joined": "2018-05-17T14:08:34.970027Z",
+      "last_login": null
+    },
+    "created_at": "2018-05-24T08:53:58.617910Z",
+    "last_modified": "2018-05-24T08:54:56.113124Z",
+    "current_status": "Allocated",
+    "asset_type": "Headset"
+  },
+  {
+    "id": 16,
+    "asset_code": "AND/HS/0011",
+    "serial_number": "KSKSKS",
+    "model_number": "Illumatt 4 Way",
+    "checkin_status": null,
+    "assigned_to": {
+      "id": 41,
+      "first_name": "Isaiah",
+      "last_name": "Kingori",
+      "full_name": "Isaiah Kingori",
+      "email": "isaiah.kingori@andela.com",
+      "cohort": null,
+      "slack_handle": null,
+      "picture": null,
+      "phone_number": null,
+      "last_modified": "2018-05-17T14:08:41.699463Z",
+      "date_joined": "2018-05-17T14:08:34.970027Z",
+      "last_login": null
+    },
+    "created_at": "2018-05-24T08:54:06.874392Z",
+    "last_modified": "2018-05-24T08:55:04.154136Z",
+    "current_status": "Allocated",
+    "asset_type": "Extension Cord"
+  },
+  {
+    "id": 17,
+    "asset_code": "AND/HS/0012",
+    "serial_number": "OPOPOP",
+    "model_number": "Microsoft Lifechat LX-6000",
+    "checkin_status": null,
+    "assigned_to": {
+      "id": 41,
+      "first_name": "Isaiah",
+      "last_name": "Kingori",
+      "full_name": "Isaiah Kingori",
+      "email": "isaiah.kingori@andela.com",
+      "cohort": null,
+      "slack_handle": null,
+      "picture": null,
+      "phone_number": null,
+      "last_modified": "2018-05-17T14:08:41.699463Z",
+      "date_joined": "2018-05-17T14:08:34.970027Z",
+      "last_login": null
+    },
+    "created_at": "2018-05-24T08:54:20.706857Z",
+    "last_modified": "2018-05-24T08:55:13.701549Z",
+    "current_status": "Allocated",
+    "asset_type": "Headset"
+  }
+]
