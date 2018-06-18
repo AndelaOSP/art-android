@@ -3,6 +3,7 @@ package com.andela.art.incidentreport.presentation;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
 
     @Inject
     IncidentReportPresenter  presenter;
+    @VisibleForTesting
+    public Toast toast;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +88,8 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
 
     @Override
     public void showSuccess() {
-        Toast.makeText(this, "Incident reported successfully", Toast.LENGTH_LONG).show();
+       toast =  Toast.makeText(this, "Incident reported successfully", Toast.LENGTH_LONG);
+       toast.show();
     }
 
 }

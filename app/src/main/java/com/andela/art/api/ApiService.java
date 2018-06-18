@@ -110,8 +110,7 @@ public interface ApiService {
      *
      * @return Observable
      */
-    @FormUrlEncoded
-    @POST("")
+    @POST("/api/v1/incidence-reports")
     Observable<IncidentModel> reportIncident(
            @Body IncidentModel incidentModel
     );

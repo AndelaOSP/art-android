@@ -36,9 +36,7 @@ public class IncidentReportPresenter {
                 .subscribe(new DisposableObserver<IncidentModel>() {
                     @Override
                     public void onNext(IncidentModel response) {
-                        if (response != null) {
-                            view.showSuccess();
-                        }
+                        // Called before OnComplete
                     }
 
                     @Override
@@ -49,6 +47,8 @@ public class IncidentReportPresenter {
                     @Override
                     public void onComplete() {
                         // Run this on completion.
+                        view.showSuccess();
+
                     }
                 });
     }
