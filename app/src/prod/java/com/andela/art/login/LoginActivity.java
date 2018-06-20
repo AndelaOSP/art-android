@@ -78,21 +78,12 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .loginModule(new LoginModule())
                 .build()
                 .inject(this);
-        securityEmailsPresenter.attachView(this);
-        tokenAuthPresenter.attachView(this);
-        securityEmailsPresenter.retrieveOauthToken();
-        dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
-        ActivityLoginBinding activityLoginBinding = DataBindingUtil
-                .setContentView(this, R.layout.activity_login);
-        activityLoginBinding.googleSignInButton.setOnClickListener(view -> signIn());
-
-        mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 mConnectionProgressDialog.dismiss();
                 // filter out Andela email addresses
-                if ("andela.com".equals(mAuth.getCurrentUser().getEmail())) {
+                if (mAuth.getCurrentUser().getEmail().endsWith("andela.com")) {
                     Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, UserDashBoardActivity.class);
                     startActivity(intent);
@@ -117,6 +108,16 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 }
             }
         };
+
+        securityEmailsPresenter.attachView(this);
+        tokenAuthPresenter.attachView(this);
+        securityEmailsPresenter.retrieveOauthToken();
+        dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
+        ActivityLoginBinding activityLoginBinding = DataBindingUtil
+                .setContentView(this, R.layout.activity_login);
+        activityLoginBinding.googleSignInButton.setOnClickListener(view -> signIn());
+
+        mAuth = FirebaseAuth.getInstance();
 
         mConnectionProgressDialog = new ProgressDialog(this);
         mConnectionProgressDialog.setMessage("Signing in...");
