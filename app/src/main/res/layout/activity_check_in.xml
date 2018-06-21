@@ -31,11 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="235dp"
+            android:layout_marginTop="212dp"
             android:fontFamily="@font/avenir_heavy"
             android:text="@string/full_name"
             android:textColor="#dadcdf"
-            android:textSize="25sp"
+            android:textSize="23sp"
             android:textStyle="normal" />
 
 
