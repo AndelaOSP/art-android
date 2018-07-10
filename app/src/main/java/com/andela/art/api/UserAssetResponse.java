@@ -22,7 +22,7 @@ public class UserAssetResponse {
     private Object previous;
     @SerializedName("results")
     @Expose
-    private List<Asset> assets = null;
+    private List<Asset> assets;
 
     /**
      *
