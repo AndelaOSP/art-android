@@ -6,8 +6,6 @@ import com.andela.art.models.IncidentModel;
 import com.andela.art.models.ReportProblem;
 import com.andela.art.models.SendFeedback;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -37,7 +35,7 @@ public interface ApiService {
      * @return Observable
      */
     @GET("/api/v1/assets/")
-    Observable<List<Asset>> getAssets();
+    Observable<UserAssetResponse> getAssets();
 
     /**
      * Fetch oauth token to be used for fetching security users emails.

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.databinding.FragmentActivityBinding;
 import com.andela.art.incidentreport.presentation.IncidentReportActivity;
 import com.andela.art.models.Asset;
@@ -166,10 +167,11 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     /**
      * gets all the assets for a particular user.
      *
-     * @param assets List of assets
+     * @param response List of assets
      */
     @Override
-    public void onGetAssets(List<Asset> assets) {
+    public void onGetAssets(UserAssetResponse response) {
+        List<Asset> assets = response.getAssets();
         pagerAdapter = new PagerAdapter(fragmentManager, assets);
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
