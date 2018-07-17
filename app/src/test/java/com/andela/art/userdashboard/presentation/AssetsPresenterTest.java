@@ -2,7 +2,7 @@ package com.andela.art.userdashboard.presentation;
 
 
 import com.andela.art.api.ApiService;
-import com.andela.art.models.Asset;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.util.RxSchedulersOverrideRule;
 
 import org.junit.Before;
@@ -10,9 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -50,17 +47,9 @@ public class AssetsPresenterTest {
      */
     @Test
     public void testAssetsListFetched() {
-        when(apiService.getAssets()).thenReturn(Observable.just(assets()));
+        UserAssetResponse assets = new UserAssetResponse();
+        when(apiService.getAssets()).thenReturn(Observable.just(assets));
         assetsPresenter.getAssets();
-        verify(sliderView).onGetAssets(assets());
-    }
-
-    /**
-     * Test asset list.
-     * @return assets - list of assets.
-     */
-    public List<Asset> assets() {
-        List<Asset> assets = new ArrayList<>();
-        return assets;
+        verify(sliderView).onGetAssets(assets);
     }
 }
