@@ -42,6 +42,12 @@ Run the following command: `keytool -list -v -keystore ~/.android/debug.keystore
 ## Trouble logging in?
 If you get an authentication error ` Google account not selected `
 #### First
+- Check if you are in the correct build variant flavor.
+
+![Build flavor](https://image.ibb.co/ir1Z6V/Screenshot-2018-10-24-at-17-51-16.png)
+
+
+#### Next
 - Find the pinned post in ` art-android ` slack channel that contains ` Super Secret Stuff ` and download it to your ` Downloads ` folder.
 - Move it to your secrets folder by running the following command while in the base directory of the app: ` mkdir -p ~/.secrets && mv ~/Downloads/art-android.jks ~/.secrets/art-android.jks `
 - Next you'll need to export the following variables and you're good to go:
@@ -51,5 +57,5 @@ If you get an authentication error ` Google account not selected `
   export STORE_PASSWORD=art-android
   ```
 
-#### Next
+#### Other fixes
 Confirm your SHA-1 key has been added to the database.
