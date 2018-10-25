@@ -1,6 +1,6 @@
 default: &defaults
   docker:
-    - image: http://gcr.io/bench-projects/bench-projects/circlebuildenv:v5
+    - image: gcr.io/bench-projects/bench-projects/circlebuildenv:v6
       auth:
         username: _json_key
         password: '${SERVICE_ACCOUNT_JSON_KEY}'
