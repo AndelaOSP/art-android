@@ -1,6 +1,6 @@
 default: &defaults
   docker:
-    - image: gcr.io/andela-learning/circlebuildenv:v4
+    - image: gcr.io/bench-projects/bench-projects/circlebuildenv:v5
       auth:
         username: _json_key
         password: '${SERVICE_ACCOUNT_JSON_KEY}'
