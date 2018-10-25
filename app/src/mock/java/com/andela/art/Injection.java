@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.google.android.gms.internal.zzebw;
+import com.google.android.gms.internal.firebase_auth.zzcz;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
@@ -56,18 +56,18 @@ public class Injection {
 
             @NonNull
             @Override
-            public FirebaseUser zzar(@NonNull List<? extends UserInfo> list) {
+            public FirebaseUser zza(@NonNull List<? extends UserInfo> list) {
                 return null;
             }
 
             @Override
-            public FirebaseUser zzck(boolean b) {
+            public FirebaseUser zzce() {
                 return null;
             }
 
             @NonNull
             @Override
-            public FirebaseApp zzbtl() {
+            public FirebaseApp zzcc() {
                 return null;
             }
 
@@ -95,26 +95,32 @@ public class Injection {
                 return null;
             }
 
-            @NonNull
+            @Nullable
             @Override
-            public zzebw zzbtm() {
-                return null;
-            }
-
-            @Override
-            public void zza(@NonNull zzebw zzebw) {
-
-            }
-
-            @NonNull
-            @Override
-            public String zzbtn() {
+            public String zzcf() {
                 return null;
             }
 
             @NonNull
             @Override
-            public String zzbto() {
+            public zzcz zzcg() {
+                return null;
+            }
+
+            @Override
+            public void zza(@NonNull zzcz zzcz) {
+
+            }
+
+            @NonNull
+            @Override
+            public String zzch() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public String zzci() {
                 return null;
             }
 
