@@ -234,7 +234,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
         }
     }
 
-
     /**
      * Check to see if a given non Andela GMail address is among the ones allowed to login.
      *
@@ -255,6 +254,9 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      */
     @Override
     public void populateEmailList(List<String> emails) {
+        if (emails.isEmpty()) {
+            return;
+        }
         allowedEmailAddresses.addAll(emails);
     }
 
