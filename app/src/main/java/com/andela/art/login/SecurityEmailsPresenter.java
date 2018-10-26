@@ -62,7 +62,6 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
     }
     /**
      * Fetch the emails for a security user.
-     * @param
      */
     public void fetchSecurityUserEmails() {
          apiService.getEmails()

@@ -79,6 +79,10 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .build()
                 .inject(this);
 
+        securityEmailsPresenter.attachView(this);
+        tokenAuthPresenter.attachView(this);
+        securityEmailsPresenter.retrieveOauthToken();
+
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 mConnectionProgressDialog.dismiss();
@@ -89,29 +93,25 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                     startActivity(intent);
 
                 } else {
-
-                    // filter out only specific GMail addresses assigned to the guards
-                    if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
-                        Toast.makeText(this, "Allowed non Andela email",
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this,
-                                SecurityDashboardActivity.class);
-                        startActivity(intent);
-                    } else {
-                        mGoogleSignInClient.signOut();
-                        try {
-                            throw new ApiException(new Status(UNAUTHORIZED_CODE));
-                        } catch (ApiException e) {
-                            e.printStackTrace();
+                        // filter out only specific GMail addresses assigned to the guards
+                        if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
+                            Toast.makeText(this, "Allowed non Andela email",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this,
+                                    SecurityDashboardActivity.class);
+                            startActivity(intent);
+                        } else {
+                            mGoogleSignInClient.signOut();
+                            try {
+                                throw new ApiException(new Status(UNAUTHORIZED_CODE));
+                            } catch (ApiException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
                 }
             }
         };
 
-        securityEmailsPresenter.attachView(this);
-        tokenAuthPresenter.attachView(this);
-        securityEmailsPresenter.retrieveOauthToken();
         dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
@@ -234,7 +234,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
         }
     }
 
-
     /**
      * Check to see if a given non Andela GMail address is among the ones allowed to login.
      *
@@ -242,11 +241,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      * @return boolean true if an email is allowed, false if the email is not allowed
      */
     public boolean isAllowedNonAndelaEmail(String email) {
-        if (allowedEmailAddresses.isEmpty()) {
-            return false;
-        }
-        return allowedEmailAddresses.contains(email);
-
+        return !allowedEmailAddresses.isEmpty() && allowedEmailAddresses.contains(email);
     }
 
     /**
@@ -255,6 +250,9 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      */
     @Override
     public void populateEmailList(List<String> emails) {
+        if (emails.isEmpty()) {
+            return;
+        }
         allowedEmailAddresses.addAll(emails);
     }
 
