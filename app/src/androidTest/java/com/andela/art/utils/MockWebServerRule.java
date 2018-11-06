@@ -18,7 +18,7 @@ public class MockWebServerRule implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                server.start(3000);
+                server.start(63123);
                 base.evaluate();
                 server.shutdown();
             }
