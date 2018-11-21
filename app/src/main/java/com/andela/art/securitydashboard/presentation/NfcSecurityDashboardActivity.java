@@ -3,41 +3,44 @@ package com.andela.art.securitydashboard.presentation;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.widget.Toast;
+
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.databinding.NfcSecurityDashboardBinding;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.databinding.SecurityDashboardBinding;
-import com.andela.art.login.LoginActivity;
-import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
-import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
+import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.squareup.picasso.Picasso;
+
 import javax.inject.Inject;
 
 /**
- * Display Dialog box to enter serial and retrieve asset details.
+ * Display Dialog box to show asset details from nfc and retrieve further details of asset.
  */
 
-public class SecurityDashboardActivity extends BaseMenuActivity implements SerialView {
+public class NfcSecurityDashboardActivity extends AppCompatActivity implements SerialView {
+
+    private NfcAdapter mNfcAdapter;
 
     @Inject
     SerialPresenter serialPresenter;
 
-    SecurityDashboardBinding securityDashboardBinding;
+    NfcSecurityDashboardBinding nfcSecurityDashboardBinding;
 
     @Inject
     FirebasePresenter firebasePresenter;
@@ -49,17 +52,19 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     /**
      * Activity on create method.
+     *
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        securityDashboardBinding = DataBindingUtil.setContentView(this,
-                R.layout.security_dashboard);
-        setSupportActionBar((Toolbar) securityDashboardBinding.mToolBar);
-        securityDashboardBinding.addSerial.setOnClickListener(view -> openDialog());
+        nfcSecurityDashboardBinding = DataBindingUtil.setContentView(this,
+                R.layout.nfc_security_dashboard);
+        setSupportActionBar((Toolbar) nfcSecurityDashboardBinding.mToolBar);
+        nfcSecurityDashboardBinding.scanNFcButton.setOnClickListener(view -> getNfcData());
         ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         DaggerSerialEntryComponent.builder()
                 .applicationComponent(applicationComponent)
@@ -68,18 +73,30 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
                 .firebasePresenterModule(new FirebasePresenterModule())
                 .build()
                 .inject(this);
-        serialPresenter.attachView(this);
+        Log.d("check", "onCreate: adapter " + mNfcAdapter);
+
+        if (mNfcAdapter == null) {
+            Intent intent = new Intent(NfcSecurityDashboardActivity.this,
+                    SecurityDashboardActivity.class);
+            startActivity(intent);
+        }
+
+        if (mNfcAdapter != null && !mNfcAdapter.isEnabled()) {
+            Toast.makeText(this, "NFC is disabled.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "NFC is enabled.", Toast.LENGTH_LONG).show();
+        }
+
         firebasePresenter.attachView(this);
         firebasePresenter.onAuthStateChanged();
+    }
 
-        Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
-                "This device doesn't support NFC.",
-                Snackbar.LENGTH_INDEFINITE);
-        View snackbarView = snackbar.getView();
-        snackbarView.setPadding(10, 10, 10, 12);
-        snackbarView.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.colorAccent));
-        snackbar.show();
+    /**
+     * Get data from nfc tag.
+     */
+    public void getNfcData() {
+
+        openDialog();
     }
 
     /**
@@ -87,18 +104,15 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      */
     public void openDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        SerialDialog serialDialog = SerialDialog.newInstance();
-        serialDialog.show(fragmentManager, "Serial Dialog");
+        NfcDialog nfcDialog = NfcDialog.newInstance();
+        nfcDialog.show(fragmentManager, "Nfc Dialog");
     }
 
-    /**
-     * Retrieve asset on confirm button is clicked.
-     *
-     * @param serial
-     */
     @Override
     public void onConfirmClicked(String serial) {
-        serialPresenter.getAsset(serial);
+        //TODO: Set up asset acquisition from api using serial from nfc tag.
+        toast = Toast.makeText(this, "Retrieve data", Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     /**
@@ -111,7 +125,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+            Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
                     CheckInActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("asset", asset);
@@ -132,20 +146,21 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     /**
      * Set account details once a user logs in.
+     *
      * @param email email
-     * @param name name
+     * @param name  name
      * @param photo photo
      */
     @Override
     public void setAccountDetails(String email, String name, String photo) {
         Uri photoUri = Uri.parse(photo);
-        securityDashboardBinding.emailAddress.setText(email);
-        securityDashboardBinding.displayName.setText(name);
+        nfcSecurityDashboardBinding.emailAddress.setText(email);
+        nfcSecurityDashboardBinding.displayName.setText(name);
         Picasso.with(getApplicationContext())
                 .load(photoUri)
                 .fit()
                 .centerCrop()
-                .into(securityDashboardBinding.profilePhoto);
+                .into(nfcSecurityDashboardBinding.profilePhoto);
     }
 
     @Override

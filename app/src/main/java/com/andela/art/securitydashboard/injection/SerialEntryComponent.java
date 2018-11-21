@@ -4,6 +4,7 @@ import com.andela.art.api.ApiModule;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.firebase.FirebaseModule;
 import com.andela.art.root.ApplicationModule;
+import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 
 import dagger.Component;
@@ -17,6 +18,7 @@ import dagger.Component;
                 ApplicationModule.class,
                 ApiModule.class,
                 SerialEntryModule.class,
+                NfcEntryModule.class,
                 FirebaseModule.class,
                 FirebasePresenterModule.class})
 public interface SerialEntryComponent {
@@ -25,4 +27,10 @@ public interface SerialEntryComponent {
      * @param securityDashboardActivity activity where serial presenter will be injected
      */
     void inject(SecurityDashboardActivity securityDashboardActivity);
+
+    /**
+     * Inject serial presenter to serial entry activity.
+     * @param nfcSecurityDashboardActivity activity where serial presenter will be injected
+     */
+    void inject(NfcSecurityDashboardActivity nfcSecurityDashboardActivity);
 }

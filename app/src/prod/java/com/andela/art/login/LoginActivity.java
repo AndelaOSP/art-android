@@ -9,13 +9,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.andela.art.R;
-import com.andela.art.root.ApplicationComponent;
 import com.andela.art.databinding.ActivityLoginBinding;
 import com.andela.art.login.injection.DaggerLoginComponent;
 import com.andela.art.login.injection.LoginModule;
+import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
-import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.andela.art.userdashboard.presentation.UserDashBoardActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -93,19 +93,12 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                     startActivity(intent);
 
                 } else {
-                    while (allowedEmailAddresses.isEmpty()) {
-                        try {
-                            wait(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
                         // filter out only specific GMail addresses assigned to the guards
                         if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
                             Toast.makeText(this, "Allowed non Andela email",
                                     Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this,
-                                    SecurityDashboardActivity.class);
+                                    NfcSecurityDashboardActivity.class);
                             startActivity(intent);
                         } else {
                             mGoogleSignInClient.signOut();
@@ -119,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
             }
         };
 
-        dashboard = new Intent(LoginActivity.this, SecurityDashboardActivity.class);
+        dashboard = new Intent(LoginActivity.this, NfcSecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
         activityLoginBinding.googleSignInButton.setOnClickListener(view -> signIn());
@@ -157,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                                             "Allowed non Andela email",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this,
-                                            SecurityDashboardActivity.class);
+                                            NfcSecurityDashboardActivity.class);
                                     startActivity(intent);
                                 }
 
@@ -211,7 +204,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                     firebasewithGoogleAuth(account);
 
                 } else {
-
                     // filter out only specific GMail addresses assigned to the guards
                     if (isAllowedNonAndelaEmail(account.getEmail())) {
                         andelan = false;

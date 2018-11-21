@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/securityDashboardLayout"
+        android:id="@+id/nfc_dashboard_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryBalticSea"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/display_name" />
 
         <Button
-            android:id="@+id/addSerial"
+            android:id="@+id/scanNFcButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_button_margin_top"
@@ -57,7 +57,7 @@
             android:paddingRight="@dimen/profile_button_padding_left"
             android:paddingTop="@dimen/profile_button_padding_top"
             android:textAllCaps="false"
-            android:text="@string/check_serial"
+            android:text="@string/check_nfc"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sixteen_sp"
             app:layout_constraintEnd_toEndOf="parent"
