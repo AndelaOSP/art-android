@@ -278,7 +278,11 @@ jobs:
             REPORTS_DIR=$(gsutil ls gs://art-firebase-test-results | tail -1)
             mkdir ~/reports
             gsutil cp -r $REPORTS_DIR ~/reports
-            
+    # Storing instrumented test reports
+      - store_artifacts:
+          path: ~/reports
+          destination: reports
+
   deploy_test_build:
     <<: *defaults
     steps:
