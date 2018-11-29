@@ -246,6 +246,11 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
+    # Build apk with instrumented tests
+      - run:
+          name: Creating an apk file with instrumented tests
+          command: |
+            ./gradlew build :app:assembleDebug :app:assembleAndroidTest -PdisablePreDex
  
   deploy_test_build:
     <<: *defaults
