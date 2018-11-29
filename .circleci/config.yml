@@ -290,6 +290,12 @@ jobs:
           command: |
             echo $CIRCLE_ARTIFACTS
             bash .circleci/notify_slack.sh
+      - run:
+          name: Notifying slack channel on fail
+          when: on_fail
+          command: |
+            echo $CIRCLE_ARTIFACTS
+            bash .circleci/notify_slack_fail.sh
 
   deploy_test_build:
     <<: *defaults
