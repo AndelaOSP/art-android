@@ -283,6 +283,14 @@ jobs:
           path: ~/reports
           destination: reports
 
+    # Sending notification
+      - run:
+          name: Notifying slack channel on succeed
+          when: on_success
+          command: |
+            echo $CIRCLE_ARTIFACTS
+            bash .circleci/notify_slack.sh
+
   deploy_test_build:
     <<: *defaults
     steps:
