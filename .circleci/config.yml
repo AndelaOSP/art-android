@@ -251,6 +251,14 @@ jobs:
           name: Creating an apk file with instrumented tests
           command: |
             ./gradlew build :app:assembleDebug :app:assembleAndroidTest -PdisablePreDex
+    # Set project ID and use the service account
+      - run:
+          name: Set gcloud project ID and authenticate service account
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud config set project $GCP_PROJECT_ID
+
  
   deploy_test_build:
     <<: *defaults
