@@ -38,12 +38,7 @@ public class NfcDialog extends AppCompatDialogFragment {
                         R.layout.nfc_dialog, null, false);
 
         nfcDialogBinding.submit.setOnClickListener(view -> {
-            String serial = nfcDialogBinding.assetNameNfc.getText().toString();
-            ((NfcSecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
-            dismiss();
-        });
-
-        nfcDialogBinding.cancel.setOnClickListener(view -> {
+            ((NfcSecurityDashboardActivity) getActivity()).onConfirmClicked();
             dismiss();
         });
 

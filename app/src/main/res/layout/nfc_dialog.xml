@@ -11,43 +11,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dialog_padding_text"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="82dp"
             android:background="@android:color/white"
             android:text="@string/asset_scanned_textview"
             android:textColor="@color/dialog_text_view"
             android:textSize="@dimen/dialog_text_size" />
-
-        <TextView
-            android:id="@+id/asset_name_nfc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:background="@android:color/white"
-            android:text="@string/asset_name_textview"
-            android:textColor="@color/dialog_text_view"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/asset_serial_nfc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:background="@android:color/white"
-            android:text="@string/asset_serial_textview"
-            android:textColor="@color/dialog_text_view"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="@dimen/dialog_button_width"
-            android:layout_height="@dimen/dialog_button_height"
-            android:layout_marginBottom="@dimen/button_margin_bottom"
-            android:layout_marginLeft="@dimen/cancel_margin_left"
-            android:layout_marginTop="@dimen/button_margin_top"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/avenir_medium"
-            android:text="@string/cancel"
-            android:textColor="@color/dialog_tint" />
 
         <Button
             android:id="@+id/submit"
@@ -58,7 +27,7 @@
             android:layout_marginTop="@dimen/button_margin_top"
             android:background="@android:color/transparent"
             android:fontFamily="@font/avenir_medium"
-            android:text="@string/submit"
+            android:text="@string/okay"
             android:textColor="@color/dialog_tint" />
 
     </android.support.design.widget.CoordinatorLayout>

@@ -40,7 +40,8 @@ public class SerialDialog extends AppCompatDialogFragment {
 
         dialogBinding.submit.setOnClickListener(view -> {
             String serial = dialogBinding.serialEditText.getText().toString();
-            ((SecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
+            ((SecurityDashboardActivity) getActivity()).onConfirmClicked(serial,
+                    "Asset code place-holder");
             dismiss();
         });
 

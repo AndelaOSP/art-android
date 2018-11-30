@@ -45,23 +45,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/display_name" />
 
-        <Button
-            android:id="@+id/scanNFcButton"
+        <TextView
+            android:id="@+id/scanNfcTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/profile_button_margin_top"
-            android:background="@color/profileButtonBg"
-            android:fontFamily="@font/avenir_book"
-            android:paddingBottom="@dimen/profile_button_padding_top"
-            android:paddingLeft="@dimen/profile_button_padding_left"
-            android:paddingRight="@dimen/profile_button_padding_left"
-            android:paddingTop="@dimen/profile_button_padding_top"
-            android:textAllCaps="false"
             android:text="@string/check_nfc"
+            android:fontFamily="@font/avenir_book"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/sixteen_sp"
+            tools:layout_editor_absoluteX="162dp"
+            tools:layout_editor_absoluteY="329dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email_address" />
+            app:layout_constraintTop_toBottomOf="@+id/email_address"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

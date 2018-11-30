@@ -10,13 +10,19 @@ import com.andela.art.root.View;
 public interface SerialView extends View {
     /**
      *
-     * @param serial serial entered by dialog
+     * @param serial serial entered by dialog.
+     * @param assetCode asset code.
      */
-    void onConfirmClicked(String serial);
+    void onConfirmClicked(String serial, String assetCode);
+
+    /**
+     * No param confirm.
+     */
+    void onConfirmClicked();
 
     /**
      *
-     * @param asset asset that is passed from presenter
+     * @param asset asset that is passed from presenter.
      */
     void sendIntent(Asset asset);
 

@@ -80,6 +80,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         snackbarView.setBackgroundColor(ContextCompat.getColor(this,
                 R.color.colorAccent));
         snackbar.show();
+
     }
 
     /**
@@ -97,8 +98,13 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      * @param serial
      */
     @Override
-    public void onConfirmClicked(String serial) {
+    public void onConfirmClicked(String serial, String assetCode) {
         serialPresenter.getAsset(serial);
+    }
+
+    @Override
+    public void onConfirmClicked() {
+        // Won't be used by this activity.
     }
 
     /**
