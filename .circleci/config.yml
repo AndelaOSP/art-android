@@ -236,8 +236,8 @@ jobs:
           command: |
             gcloud beta firebase test android run \
             --type instrumentation \
-            --app app/build/outputs/apk/debug/app-debug.apk \
-            --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+            --app app/build/outputs/apk/mock/debug/app-mock-debug.apk \
+            --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk \
             --directories-to-pull=/sdcard/tmp \
             --timeout 20m \
             --results-bucket art-firebase-test-results
