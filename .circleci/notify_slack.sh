@@ -56,7 +56,7 @@ declare_env_variables() {
   elif [ "$CIRCLE_JOB" == 'test' ]; then
     MESSAGE_TEXT="Test Phase Passed! :smiley:"
 
-    # Sorting through the artifact urls to get only the unit test and integration test reports
+    # Sorting through the artifact urls to get only the unit test reports
     DEBUG_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' | grep 'test[A-Za-z0-9]*Debug[A-Za-z0-9]*\/index\.html')"
     RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
@@ -65,16 +65,34 @@ declare_env_variables() {
 /g' | grep 'jacoco[A-Za-z0-9]*Debug[A-Za-z0-9]*\/html\/index\.html')"
     JACOCO_RELEASE_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
 /g' | grep 'jacoco[A-Za-z0-9]*Release[A-Za-z0-9]*\/html\/index\.html')"
-    INTEGRATION_TEST_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'AVD')"
+
     CIRCLE_ARTIFACTS_BUTTON="$(echo \
         "{\"type\": \"button\", \"text\": \"Unit Test Report (Debug)\", \"url\": \"${DEBUG_REPORT}\"}", \
         "{\"type\": \"button\", \"text\": \"Unit Test Report (Release)\", \"url\": \"${RELEASE_REPORT}\"}", \
         "{\"type\": \"button\", \"text\": \"Jacoco Test Report (Debug)\", \"url\": \"${JACOCO_DEBUG_REPORT}\"}", \
         "{\"type\": \"button\", \"text\": \"Jacoco Test Report (Release)\", \"url\": \"${JACOCO_RELEASE_REPORT}\"}", \
-        "{\"type\": \"button\", \"text\": \"Android Virtual Device (AVD) Test Report\", \"url\": \"${INTEGRATION_TEST_REPORT}\"}" \
     )"
 
+  elif [ "$CIRCLE_JOB" == 'instrumented_test' ];  then
+    MESSAGE_TEXT="The Instrumented Tests Passed! :smiley:"
+
+    # Sorting through the artifact urls to get only the instrumentation test reports
+    INSTRUMENTATION_RESULTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'instrumentation.results')"
+    LOGCAT_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'logcat')"
+    TEST_RESULT_REPORT="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'test_result_1.xml')"
+    TEST_RESULT_VIDEO="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
+/g' |  grep 'video.mp4')"
+
+    CIRCLE_ARTIFACTS_BUTTON="$(echo \
+        "{\"type\": \"button\", \"text\": \"Instrumentation Test Report \", \"url\": \"${INSTRUMENTATION_RESULTS}\"}", \
+        "{\"type\": \"button\", \"text\": \"Logcat Test Report \", \"url\": \"${LOGCAT_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Test Result Report \", \"url\": \"${TEST_RESULT_REPORT}\"}", \
+        "{\"type\": \"button\", \"text\": \"Test Result Video \", \"url\": \"${TEST_RESULT_VIDEO}\"}", \
+    )"
+    
   elif [ "$CIRCLE_JOB" == 'deploy_test_build' ]; then
     # Sorting through the artifact urls to get only the apk files
     CIRCLE_APK_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\

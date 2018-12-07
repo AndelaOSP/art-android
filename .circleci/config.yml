@@ -3,7 +3,7 @@ default: &defaults
     - image: gcr.io/bench-projects/bench-projects/circlebuildenv:v6
       auth:
         username: _json_key
-        password: '${SERVICE_ACCOUNT_JSON_KEY}'
+        password: "${SERVICE_ACCOUNT_JSON_KEY}"
 
   working_directory: ~/repo
 
@@ -21,26 +21,26 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      
+
       # Running static analysis tools
       - run:
           name: Running quality checks
           command: |
             echo "Run android lint"
             ./gradlew lint
-      
+
       # Storing reports
       - store_artifacts:
           path: ~/repo/app/build/reports
-      
+
       # Sending notification
       - run:
           name: Notifying slack channel (succeeded)
@@ -60,15 +60,15 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      
+
       # Running static analysis tools
       - run:
           name: Running quality checks
@@ -76,11 +76,11 @@ jobs:
             echo "Run findbugs"
             ./gradlew assemble
             ./gradlew findbugs
-      
+
       # Storing reports
       - store_artifacts:
           path: ~/repo/app/build/outputs
-      
+
       # Sending notification
       - run:
           name: Notifying slack channel (succeeded)
@@ -100,26 +100,26 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      
+
       # Running static analysis tools
       - run:
           name: Running quality checks
           command: |
             echo "Run PMD"
             ./gradlew pmd
-      
+
       # Storing reports
       - store_artifacts:
           path: ~/repo/app/build
-      
+
       # Sending notification
       - run:
           name: Notifying slack channel (succeeded)
@@ -139,26 +139,26 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      
+
       # Running static analysis tools
       - run:
           name: Running quality checks
           command: |
             echo "Run checkstyle"
             ./gradlew checkstyle
-      
+
       # Storing reports
       - store_artifacts:
           path: ~/repo/app/build/reports
-      
+
       # Sending notification
       - run:
           name: Notifying slack channel (succeeded)
@@ -172,15 +172,15 @@ jobs:
             bash ~/repo/.circleci/notify_slack_fail.sh
 
   test:
-    <<: *defaults 
+    <<: *defaults
     steps:
       - checkout
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -193,7 +193,7 @@ jobs:
           command: |
             ./gradlew build jacocoTestReport assembleAndroidTest
             ls -a app/build/outputs/logs
-      
+
       # Storing unit test reports
       - store_artifacts:
           path: ~/repo/app/build/reports/jacoco
@@ -201,35 +201,70 @@ jobs:
       - store_artifacts:
           path: ~/repo/app/build/reports/tests
           destination: reports
-      
-      # Running UI tests
+
+  instrumented_test:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      # Build apk with instrumented tests
       - run:
-          name: Running instrumentation tests on apk build
+          name: Creating an apk file with instrumented tests
           command: |
-            echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
-            echo no | avdmanager create avd --force --name test --abi armeabi-v7a -k "system-images;android-22;default;armeabi-v7a"
-            echo y | emulator -avd test -skin 768x1280 -no-window &
-            circle-android wait-for-boot
-            ./gradlew connectedAndroidTest
-      
-      # Storing UI test reports
+            ./gradlew build :app:assembleDebug :app:assembleAndroidTest -PdisablePreDex
+      # Set project ID and use the service account
+      - run:
+          name: Set gcloud project ID and authenticate service account
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud config set project $GCP_PROJECT_ID
+
+      # Send test apk to firebase
+      - run:
+          name: Run instrumented tests on firebase
+          command: |
+            gcloud beta firebase test android run \
+            --type instrumentation \
+            --app app/build/outputs/apk/mock/debug/app-mock-debug.apk \
+            --test app/build/outputs/apk/androidTest/mock/debug/app-mock-debug-androidTest.apk \
+            --directories-to-pull=/sdcard/tmp \
+            --timeout 20m \
+            --results-bucket art-firebase-test-results
+      # Get test reports from the storage bucket
+      - run:
+          name: Download test reports from storage bucket
+          when: always
+          command: |
+            REPORTS_DIR=$(gsutil ls gs://art-firebase-test-results | tail -1)
+            mkdir ~/reports
+            gsutil cp -r $REPORTS_DIR ~/reports
+      # Storing instrumented test reports
       - store_artifacts:
-          path: ~/repo/app/build/outputs/androidTest-results
+          path: ~/reports
           destination: reports
-      
+
       # Sending notification
       - run:
           name: Notifying slack channel on succeed
           when: on_success
           command: |
-            bash <(curl -s https://codecov.io/bash)
-            bash ~/repo/.circleci/notify_slack.sh
+            bash .circleci/notify_slack.sh
       - run:
           name: Notifying slack channel on fail
           when: on_fail
           command: |
-            bash <(curl -s https://codecov.io/bash)
-            bash ~/repo/.circleci/notify_slack_fail.sh
+            bash .circleci/notify_slack_fail.sh
 
   deploy_test_build:
     <<: *defaults
@@ -238,9 +273,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -281,9 +316,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -324,9 +359,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew androidDependencies
       - save_cache:
           paths:
@@ -374,6 +409,15 @@ workflows:
             - findbugs_lint
             - pmd_lint
             - checkstyle_lint
+      - instrumented_test:
+          requires:
+            - test
+          filters:
+                branches:
+                    only:
+                        - master
+                        - staging
+                        - develop
       - deploy_test_build:
           requires:
             - test
