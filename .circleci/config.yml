@@ -246,12 +246,12 @@ workflows:
       - instrumented_test:
           requires:
             - test
-          filters:
-                branches:
-                    only:
-                        - master
-                        - staging
-                        - develop
+          # filters:
+          #       branches:
+          #           only:
+          #               - master
+          #               - staging
+          #               - develop
       - deploy_test_build:
           requires:
             - test
