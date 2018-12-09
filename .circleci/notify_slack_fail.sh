@@ -17,43 +17,8 @@ declare_env_variables() {
 
   # Assigning slack messages based on the CircleCI job name
 
-  if [ "$CIRCLE_JOB" == 'android_lint' ]; then
-    MESSAGE_TEXT="Android Lint Phase Failed! :crying_cat_face:"
 
-    # Sorting through the artifact urls to get only the android lint report
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html' || true)"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Android Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
-    MESSAGE_TEXT="Findbugs Lint Phase Failed! :crying_cat_face:"
-
-    # Sorting through the artifact urls to get only the findbugs lint report
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'findbugs\.html' || true)"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Findbugs Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
-    MESSAGE_TEXT="PMD Lint Phase Failed! :crying_cat_face:"
-
-    # Sorting through the artifact urls to get only the PMD lint report
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html' || true)"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"PMD Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
-    MESSAGE_TEXT="Checkstyle Lint Phase Failed! :crying_cat_face:"
-
-    # Sorting through the artifact urls to get only the checkstyle lint report
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html' || true)"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Checkstyle Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'test' ]; then
+  if [ "$CIRCLE_JOB" == 'test' ]; then
     MESSAGE_TEXT="Test Phase Failed! :scream:"
 
     # Sorting through the artifact urls to get only the unit test  reports
