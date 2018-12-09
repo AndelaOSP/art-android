@@ -14,6 +14,7 @@ default: &defaults
 
 version: 2
 jobs:
+
   test:
     <<: *defaults
     steps:
@@ -243,9 +244,7 @@ workflows:
   lint_test_and_deployment:
     jobs:
       - test
-      - instrumented_test:
-          requires:
-            - test
+      - instrumented_test
           # filters:
           #       branches:
           #           only:
@@ -254,10 +253,11 @@ workflows:
           #               - develop
       - deploy_test_build:
           requires:
+            - instrumented_test
             - test
-          filters:
-            branches:
-              only: develop
+          # filters:
+          #   branches:
+          #     only: develop
       - deploy_staging_build:
           requires:
             - test
