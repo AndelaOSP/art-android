@@ -74,7 +74,7 @@ public class Injection {
             @Nullable
             @Override
             public String getDisplayName() {
-                return "Isaiah King'ori";
+                return "Philip Kalela";
             }
 
             @Nullable
@@ -86,7 +86,7 @@ public class Injection {
             @Nullable
             @Override
             public String getEmail() {
-                return "isaiah.kingori@andela.com";
+                return "philip.kalela@andela.com";
             }
 
             @Nullable
