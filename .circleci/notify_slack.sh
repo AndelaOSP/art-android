@@ -17,43 +17,7 @@ declare_env_variables() {
 
   # Assigning slack messages based on the CircleCI job name
 
-  if [ "$CIRCLE_JOB" == 'android_lint' ]; then
-    MESSAGE_TEXT="Android Lint Phase Passed! :smirk_cat:"
-
-    # Sorting through the artifact urls to get only the android lint reports
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Android Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'findbugs_lint' ]; then
-    MESSAGE_TEXT="Findbugs Lint Phase Passed! :smirk_cat:"
-
-    # Sorting through the artifact urls to get only the findbugs lint reports
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep 'findbugs\.html')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Findbugs Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'pmd_lint' ]; then
-    MESSAGE_TEXT="PMD Lint Phase Passed! :smirk_cat:"
-
-    # Sorting through the artifact urls to get only the PMD lint reports
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"PMD Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'checkstyle_lint' ]; then
-    MESSAGE_TEXT="Checkstyle Lint Phase Passed! :smirk_cat:"
-
-    # Sorting through the artifact urls to get only the findbugs lint reports
-
-    CIRCLE_REPORT_ARTIFACTS="$(echo $CIRCLE_ARTIFACTS_URL | sed -E -e 's/[[:blank:]]+/\
-/g' |  grep '\.html')"
-    CIRCLE_ARTIFACTS_BUTTON="$(echo {\"type\": \"button\", \"text\": \"Checkstyle Lint Report\", \"url\": \"${CIRCLE_REPORT_ARTIFACTS}\"})"
-
-  elif [ "$CIRCLE_JOB" == 'test' ]; then
+  if [ "$CIRCLE_JOB" == 'test' ]; then
     MESSAGE_TEXT="Test Phase Passed! :smiley:"
 
     # Sorting through the artifact urls to get only the unit test reports
