@@ -260,12 +260,14 @@ workflows:
               only: develop
       - deploy_staging_build:
           requires:
+            - instrumented_test
             - test
           filters:
             branches:
               only: staging
       - deploy_production_build:
           requires:
+            - instrumented_test
             - test
           filters:
             branches:
