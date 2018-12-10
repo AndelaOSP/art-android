@@ -1,0 +1,34 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="@dimen/dialog_height"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/dialog_padding_text">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="82dp"
+            android:background="@android:color/white"
+            android:text="@string/asset_scanned_textview"
+            android:textColor="@color/dialog_text_view"
+            android:textSize="@dimen/dialog_text_size" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="@dimen/dialog_button_width"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_marginBottom="@dimen/button_margin_bottom"
+            android:layout_marginLeft="@dimen/submit_margin_left"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/avenir_medium"
+            android:text="@string/okay"
+            android:textColor="@color/dialog_tint" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

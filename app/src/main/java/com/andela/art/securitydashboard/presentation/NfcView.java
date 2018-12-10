@@ -1,28 +1,23 @@
 package com.andela.art.securitydashboard.presentation;
 
+
 import com.andela.art.models.Asset;
 import com.andela.art.root.View;
 
 /**
- * Created by zack on 3/5/18.
+ * Created by kalela on 20/11/18.
  */
 
-public interface SerialView extends View {
+public interface NfcView extends View {
     /**
      *
-     * @param serial serial entered by dialog.
-     * @param assetCode asset code.
+     * @param serial serial entered by dialog
      */
-    void onConfirmClicked(String serial, String assetCode);
-
-    /**
-     * No param confirm.
-     */
-    void onConfirmClicked();
+    void onConfirmClicked(String serial);
 
     /**
      *
-     * @param asset asset that is passed from presenter.
+     * @param asset asset that is passed from presenter
      */
     void sendIntent(Asset asset);
 

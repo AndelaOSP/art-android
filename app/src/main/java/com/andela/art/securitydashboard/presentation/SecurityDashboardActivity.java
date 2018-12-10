@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
@@ -68,6 +71,16 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         serialPresenter.attachView(this);
         firebasePresenter.attachView(this);
         firebasePresenter.onAuthStateChanged();
+
+        Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
+                "This device doesn't support NFC.",
+                Snackbar.LENGTH_INDEFINITE);
+        View snackbarView = snackbar.getView();
+        snackbarView.setPadding(10, 10, 10, 12);
+        snackbarView.setBackgroundColor(ContextCompat.getColor(this,
+                R.color.colorAccent));
+        snackbar.show();
+
     }
 
     /**
@@ -85,8 +98,13 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      * @param serial
      */
     @Override
-    public void onConfirmClicked(String serial) {
+    public void onConfirmClicked(String serial, String assetCode) {
         serialPresenter.getAsset(serial);
+    }
+
+    @Override
+    public void onConfirmClicked() {
+        // Won't be used by this activity.
     }
 
     /**
@@ -169,13 +187,6 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
         this.backButtonToExitPressedTwice = true;
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                backButtonToExitPressedTwice = false;
-            }
-
-        }, 2000);
+        new Handler().postDelayed(() -> backButtonToExitPressedTwice = false, 2000);
     }
 }

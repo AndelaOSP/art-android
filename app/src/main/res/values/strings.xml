@@ -20,11 +20,13 @@
     <string name="full_name">Full name</string>
     <string name="email">example@gmail.com</string>
     <string name="check_serial">Check Serial</string>
+    <string name="check_nfc">Scan NFC</string>
     <string name="enter_text">Enter Serial</string>
     <string name="serial_hint">Serial Number</string>
     <string name="serial_settings">settings</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="okay">Okay</string>
     <string name="logout_yes">YES</string>
     <string name="logout_cancel">CANCEL</string>
     <string name="logout_message">Are you sure you want to log out?</string>
@@ -41,6 +43,9 @@
     <string name="unassigned">NO ASSET ASSIGNED YET </string>
     <string name="report_problem_description">SOMETHING IS\'NT WORKING?</string>
     <string name="send_feedback_hint">What would you like us to improve?</string>
+    <string name="asset_scanned_textview">Tag Scanned</string>
+    <string name="asset_code_textview">Asset Code</string>
+    <string name="asset_serial_textview">Serial</string>
     <string name="send_feedback_description">
         Kindly leave us feeback regarding our app and it’s features.
     </string>

@@ -17,7 +17,7 @@ android {
             abortOnError false
         }
         dataBinding {
-            enabled = true
+            enabled true
         }
     }
     signingConfigs {
