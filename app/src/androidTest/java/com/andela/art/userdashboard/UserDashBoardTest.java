@@ -9,6 +9,7 @@ import android.support.test.runner.lifecycle.Stage;
 import com.andela.art.R;
 import com.andela.art.userdashboard.presentation.UserDashBoardActivity;
 import com.andela.art.utils.MockWebServerRule;
+import com.andela.art.utils.OkHttpIdlingResourceRule;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,6 +39,9 @@ public class UserDashBoardTest {
                     false);
 
     @Rule
+    public OkHttpIdlingResourceRule okHttpIdlingResourceRule = new OkHttpIdlingResourceRule();
+
+    @Rule
     public MockWebServerRule mockWebServerRule = new MockWebServerRule();
 
     /**
@@ -64,70 +68,6 @@ public class UserDashBoardTest {
         onView(withId(R.id.incident_button))
                 .check(matches(not(isDisplayed())));
     }
-
-//    /**
-//     * Test new user can be able to swipe between multiple tabs to see different assets that they
-//     * have.
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    public void testUserCanSwipeToSeeDifferentAssets() throws Exception {
-//        String fileName = "multiple_assets_response.json";
-//        String asset = RestServiceTestHelper.
-//                getStringFromFile(getTargetContext(), fileName);
-//        mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
-//        userDashboardActivityTestRule.launchActivity(null);
-//
-//        onView(withText("BSBSBS")).check(matches(isCompletelyDisplayed()));
-//
-//        onView(withId(R.id.pager)).perform(withCustomConstraints(swipeLeft(),
-//                isDisplayingAtLeast(80)));
-//
-//        onView(withText("KSKSKS")).check(matches(isCompletelyDisplayed()));
-//
-//        onView(withId(R.id.pager)).perform(withCustomConstraints(swipeLeft(),
-//                isDisplayingAtLeast(80)));
-//
-//        onView(withText("OPOPOP")).check(matches(isCompletelyDisplayed()));
-//    }
-//
-//    /**
-//     * Test the incidence report button does appear when assets are available.
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    public void testIncidentReportButtonAppearsWhenAssetAreAvailable() throws Exception {
-//        String fileName = "double_asset_response.json";
-//        String asset = RestServiceTestHelper.
-//                getStringFromFile(getTargetContext(), fileName);
-//        mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
-//        userDashboardActivityTestRule.launchActivity(null);
-//        onView(withId(R.id.incident_button))
-//                .check(matches(isDisplayed()));
-//    }
-//
-//    /**
-//     * Test clicking the report incidence button launches the IncidentReportActivity.
-//     * @throws Exception if an error occurs
-//     */
-//    @Test
-//    public void testReportIncidenceButtonClickLaunchesIncidentReportActivity() throws Exception {
-//        String fileName = "double_asset_response.json";
-//        String asset = RestServiceTestHelper.
-//                getStringFromFile(getTargetContext(), fileName);
-//        mockWebServerRule.server.enqueue(new MockResponse().setBody(asset));
-//        userDashboardActivityTestRule.launchActivity(null);
-//
-//        onView(withId(R.id.incident_button)).perform(click());
-//
-//        IdlingResource idlingResource = new WaitActivityIsResumedIdlingResource(
-//                IncidentReportActivity.class.getName());
-//        IdlingRegistry.getInstance().register(idlingResource);
-//
-//        Assert.assertEquals(IncidentReportActivity.class,
-//                getCurrentActivity().getClass());
-//        IdlingRegistry.getInstance().unregister(idlingResource);
-//    }
 
     /**
      * Get a current activity.
