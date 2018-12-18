@@ -32,6 +32,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 /**
  * LoginActivity handles the login of user into the application.
  */
@@ -121,6 +125,9 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
 
         mConnectionProgressDialog = new ProgressDialog(this);
         mConnectionProgressDialog.setMessage("Signing in...");
+
+        AppCenter.start(getApplication(), "f37dc08d-4d29-4c85-bf2c-82eb95a916e6",
+        Analytics.class, Crashes.class);
     }
 
     /**
