@@ -53,7 +53,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
     String nfcSerial;
 
     @Inject
-    SerialPresenter serialPresenter;
+    NfcPresenter nfcPresenter;
 
     NfcSecurityDashboardBinding nfcSecurityDashboardBinding;
 
@@ -166,13 +166,18 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
     @Override
     public void onConfirmClicked(String serial, String assetCode) {
         // Won't be used by this activity.
+        nfcPresenter.getAsset(serial);
     }
 
     @Override
     public void onConfirmClicked() {
-        toast = Toast.makeText(this, "Retrieve data", Toast.LENGTH_SHORT);
-        toast.show();
-        //TODO: Set up data query using serial aqcuired from nfc tag
+//        if (nfcSerial != null) {
+//            serialPresenter.getAsset(nfcSerial);
+//        }
+//        else {
+//            toast = Toast.makeText(this, "Data retrieval failed", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
     }
 
     /**
