@@ -1,15 +1,13 @@
 package com.andela.art.root;
 
-
 /**
- * Presenter interface.
- * @param <T>
+ * NfcPresenter interface.
+ * @param <U>
  */
 
-public interface Presenter<T extends View> {
+public interface NPresenter<U extends View> {
     /**
      * @param view view that will be instantiated by the presenter
      */
-    void attachView(T view);
-
+    void attachVieww(U view);
 }

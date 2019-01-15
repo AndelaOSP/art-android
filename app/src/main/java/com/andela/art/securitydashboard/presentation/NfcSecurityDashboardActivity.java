@@ -44,7 +44,7 @@ import javax.inject.Inject;
  * Display Dialog box to show asset details from nfc and retrieve further details of asset.
  */
 
-public class NfcSecurityDashboardActivity extends AppCompatActivity implements SerialView {
+public class NfcSecurityDashboardActivity extends AppCompatActivity implements NfcView {
 
     private NfcAdapter mNfcAdapter;
 
@@ -101,8 +101,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
         } else {
             Toast.makeText(this, "NFC is enabled.", Toast.LENGTH_LONG).show();
         }
-
-        firebasePresenter.attachView(this);
+        nfcPresenter.attachVieww(this);
+        firebasePresenter.attachVieww(this);
         firebasePresenter.onAuthStateChanged();
     }
 
@@ -163,21 +163,12 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
         nfcDialog.show(fragmentManager, "Nfc Dialog");
     }
 
-    @Override
-    public void onConfirmClicked(String serial, String assetCode) {
-        // Won't be used by this activity.
+    /**
+     *
+     * @param serial serial entered by ehrn user confirms nfcTag scan.
+     */
+    public void onConfirmClicked(String serial) {
         nfcPresenter.getAsset(serial);
-    }
-
-    @Override
-    public void onConfirmClicked() {
-//        if (nfcSerial != null) {
-//            serialPresenter.getAsset(nfcSerial);
-//        }
-//        else {
-//            toast = Toast.makeText(this, "Data retrieval failed", Toast.LENGTH_SHORT);
-//            toast.show();
-//        }
     }
 
     /**

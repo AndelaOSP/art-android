@@ -16,11 +16,6 @@ public interface SerialView extends View {
     void onConfirmClicked(String serial, String assetCode);
 
     /**
-     * No param confirm.
-     */
-    void onConfirmClicked();
-
-    /**
      *
      * @param asset asset that is passed from presenter.
      */

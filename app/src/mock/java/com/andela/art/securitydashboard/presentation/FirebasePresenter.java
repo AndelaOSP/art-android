@@ -1,5 +1,6 @@
 package com.andela.art.securitydashboard.presentation;
 
+import com.andela.art.root.NPresenter;
 import com.andela.art.root.Presenter;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -7,7 +8,8 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by zack on 3/29/18.
  */
 
-public class FirebasePresenter implements Presenter<SerialView> {
+public class FirebasePresenter implements Presenter<SerialView>, NPresenter<NfcView> {
+    private NfcView nfcView;
     private SerialView serialView;
     private final FirebaseAuth firebaseAuth;
     private final FirebaseAuth.AuthStateListener authStateListener;
@@ -25,6 +27,15 @@ public class FirebasePresenter implements Presenter<SerialView> {
         this.authStateListener = authStateListener;
         dummyUser = new MockUser("Zacharia Mwangi", "zac@gmail.com",
                 imagePath);
+    }
+
+    /**
+     * Attach the view to the nfcpresenter.
+     * @param view view that will be instantiated by the presenter
+     */
+    @Override
+    public void attachVieww(NfcView view) {
+        this.nfcView = view;
     }
 
     /**

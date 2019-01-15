@@ -40,8 +40,7 @@ public class NfcDialog extends AppCompatDialogFragment {
         nfcDialogBinding.submit.setOnClickListener(view -> {
             String serial = ((NfcSecurityDashboardActivity) getActivity()).nfcSerial;
             if (serial != null) {
-                ((NfcSecurityDashboardActivity) getActivity()).onConfirmClicked(serial,
-                        "Asset code place-holder");
+                ((NfcSecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
                 dismiss();
             }
         });

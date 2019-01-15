@@ -102,11 +102,6 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         serialPresenter.getAsset(serial);
     }
 
-    @Override
-    public void onConfirmClicked() {
-        // Won't be used by this activity.
-    }
-
     /**
      * Start checkin Activity with asset data.
      *
