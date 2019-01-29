@@ -14,8 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 import com.andela.art.R;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
-import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -107,15 +107,15 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      *
      * @param asset - asset data sent to check in activity
      */
-    public void sendIntent(Asset asset) {
-        if (asset.getAssignee() == null) {
+    public void sendIntent(UserAssetResponse asset) {
+        if (asset.getAssets() == null) {
             toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
                     CheckInActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("asset", asset);
+            bundle.putSerializable("asset", asset.getAssets().get(0));
             checkInIntent.putExtras(bundle);
             startActivity(checkInIntent);
         }
@@ -175,7 +175,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             finish();
             moveTaskToBack(true);
         } else {
-            toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
+           toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
                     Toast.LENGTH_SHORT);
             toast.show();
         }
