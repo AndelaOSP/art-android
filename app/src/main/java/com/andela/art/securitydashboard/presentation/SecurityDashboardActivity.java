@@ -1,8 +1,10 @@
 package com.andela.art.securitydashboard.presentation;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -39,6 +41,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     SecurityDashboardBinding securityDashboardBinding;
 
+    private View mProgressView;
+
     @Inject
     FirebasePresenter firebasePresenter;
 
@@ -72,6 +76,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         firebasePresenter.attachView(this);
         firebasePresenter.onAuthStateChanged();
 
+        mProgressView = findViewById(R.id.asset_details_progress_bar_serial);
+
         Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
                 "This device doesn't support NFC.",
                 Snackbar.LENGTH_INDEFINITE);
@@ -93,12 +99,23 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     }
 
     /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    /**
      * Retrieve asset on confirm button is clicked.
      *
      * @param serial
      */
     @Override
     public void onConfirmClicked(String serial, String assetCode) {
+        showProgressBar(true);
         serialPresenter.getAsset(serial);
     }
 
@@ -159,6 +176,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     @Override
     protected void onStart() {
         super.onStart();
+        showProgressBar(false);
         firebasePresenter.start();
     }
 

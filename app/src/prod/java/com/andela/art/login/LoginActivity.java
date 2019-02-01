@@ -93,6 +93,12 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                     startActivity(intent);
 
                 } else {
+                        Thread waitForSecurityEmails = new Thread() {
+                            @Override
+                            public void run() {
+
+                            }
+                        };
                         // filter out only specific GMail addresses assigned to the guards
                         if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
                             Toast.makeText(this, "Allowed non Andela email",
@@ -249,6 +255,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      */
     @Override
     public void populateEmailList(List<String> emails) {
+        Log.d(TAG, "populateEmailList: " + emails);
         if (emails.isEmpty()) {
             return;
         }

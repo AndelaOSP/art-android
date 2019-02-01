@@ -9,6 +9,34 @@
         android:background="@color/primaryBalticSea"
         tools:context="com.andela.art.securitydashboard.presentation.SecurityDashboardActivity">
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/asset_details_progress_bar_serial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addSerial"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="80dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/serial_progress_bar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_wait"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@id/serial_progress_bar"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+
         <include
             android:id="@+id/mToolBar"
             layout="@layout/tool_bar" />

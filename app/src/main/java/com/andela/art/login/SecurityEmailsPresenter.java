@@ -69,7 +69,7 @@ public class SecurityEmailsPresenter implements Presenter<SecurityEmailsView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(emailsResponse -> {
                     List<String> emails = emailsResponse.getEmails();
-                    securityEmailsView.populateEmailList(emails);
+                        securityEmailsView.populateEmailList(emails);
                 });
     }
 }

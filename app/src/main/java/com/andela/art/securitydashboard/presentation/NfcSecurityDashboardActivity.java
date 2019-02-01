@@ -1,5 +1,6 @@
 package com.andela.art.securitydashboard.presentation;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -51,6 +54,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     public static final String MIME_TEXT_PLAIN = "text/plain";
 
     String nfcSerial;
+
+    private View mProgressView;
 
     @Inject
     NfcPresenter nfcPresenter;
@@ -90,6 +95,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
                 .build()
                 .inject(this);
 
+        mProgressView = findViewById(R.id.asset_details_progress_bar);
+
         if (mNfcAdapter == null && getIntent().getStringExtra("developer_override") == null) {
             Intent intent = new Intent(NfcSecurityDashboardActivity.this,
                     SecurityDashboardActivity.class);
@@ -110,6 +117,16 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     protected void onNewIntent(Intent intent) {
         handleIntent(intent);
         getNfcData();
+    }
+
+    /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -168,6 +185,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
      * @param serial serial entered by ehrn user confirms nfcTag scan.
      */
     public void onConfirmClicked(String serial) {
+        showProgressBar(true);
         nfcPresenter.getAsset(serial);
     }
 
@@ -240,6 +258,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     @Override
     protected void onStart() {
         super.onStart();
+        showProgressBar(false);
         firebasePresenter.start();
     }
 
