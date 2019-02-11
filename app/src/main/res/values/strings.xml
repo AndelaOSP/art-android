@@ -43,7 +43,8 @@
     <string name="unassigned">NO ASSET ASSIGNED YET </string>
     <string name="report_problem_description">SOMETHING IS\'NT WORKING?</string>
     <string name="send_feedback_hint">What would you like us to improve?</string>
-    <string name="asset_scanned_textview">Tag Scanned</string>
+    <string name="asset_scanned_textview">NFC Security Tag Scanned</string>
+    <string name="asset_scanned_press">Press submit to check asset owner</string>
     <string name="asset_code_textview">Asset Code</string>
     <string name="asset_serial_textview">Serial</string>
     <string name="send_feedback_description">
@@ -57,4 +58,5 @@
     <string name="police_abstract">Have you obtained a police abstract?</string>
     <string name="witnesses">Were there any witness? If Yes, please list them down with their contact information.</string>
     <string name="property_list">Was there any loss of property involved during this incident? If Yes, Please list and describe theproperty lost</string>
+    <string name="please_wait">Please wait…</string>
 </resources>

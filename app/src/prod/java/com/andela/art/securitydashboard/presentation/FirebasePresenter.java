@@ -3,6 +3,7 @@ package com.andela.art.securitydashboard.presentation;
 
 
 
+import com.andela.art.root.NPresenter;
 import com.andela.art.root.Presenter;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -10,8 +11,9 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by zack on 3/29/18.
  */
 
-public class FirebasePresenter implements Presenter<SerialView> {
+public class FirebasePresenter implements Presenter<SerialView>, NPresenter<NfcView> {
     private SerialView serialView;
+    private NfcView nfcView;
     private final FirebaseAuth firebaseAuth;
     private final FirebaseAuth.AuthStateListener authStateListener;
 
@@ -36,6 +38,15 @@ public class FirebasePresenter implements Presenter<SerialView> {
     }
 
     /**
+     * Attach the view to the presenter.
+     * @param view view that will be instantiated by the presenter
+     */
+    @Override
+    public void attachVieww(NfcView view) {
+        this.nfcView = view;
+    }
+
+    /**
      * Add auth state listener at the start of the activity.
      */
     public void start() {
@@ -56,6 +67,7 @@ public class FirebasePresenter implements Presenter<SerialView> {
     public void onAuthStateChanged() {
         if (firebaseAuth.getCurrentUser() == null) {
             serialView.redirectLoggedOutUser();
+            nfcView.redirectLoggedOutUser();
         } else {
             setAccountDetails();
         }
@@ -68,6 +80,10 @@ public class FirebasePresenter implements Presenter<SerialView> {
        String email = firebaseAuth.getCurrentUser().getEmail();
        String name = firebaseAuth.getCurrentUser().getDisplayName();
        String photo = firebaseAuth.getCurrentUser().getPhotoUrl().toString();
-       serialView.setAccountDetails(email, name, photo);
+       if (nfcView == null) {
+           serialView.setAccountDetails(email, name, photo);
+       } else if (serialView == null) {
+           nfcView.setAccountDetails(email, name, photo);
+       }
     }
 }

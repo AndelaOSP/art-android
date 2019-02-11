@@ -1,6 +1,5 @@
 package com.andela.art.api;
 
-import com.andela.art.models.Asset;
 import com.andela.art.models.CheckInModel;
 import com.andela.art.models.IncidentModel;
 import com.andela.art.models.ReportProblem;
@@ -12,7 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by zack on 3/5/18.
@@ -26,8 +25,8 @@ public interface ApiService {
      * @param serial serial to be searched
      * @return Observable
      */
-    @GET("/api/v1/assets/{serial_number}/")
-    Observable<Asset> getAsset(@Path("serial_number") String serial);
+    @GET("/api/v1/assets")
+    Observable<UserAssetResponse> getAsset(@Query("serial_number") String serial);
 
     /**
      * Get all assets method.

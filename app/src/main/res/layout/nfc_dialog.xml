@@ -12,11 +12,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:layout_marginLeft="82dp"
+            android:layout_marginLeft="15dp"
             android:background="@android:color/white"
             android:text="@string/asset_scanned_textview"
             android:textColor="@color/dialog_text_view"
             android:textSize="@dimen/dialog_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="20dp"
+            android:background="@android:color/white"
+            android:text="@string/asset_scanned_press"
+            android:textColor="@color/dialog_text_view"
+            android:textSize="@dimen/small_dialog_text_size" />
 
         <Button
             android:id="@+id/submit"
@@ -27,7 +37,7 @@
             android:layout_marginTop="@dimen/button_margin_top"
             android:background="@android:color/transparent"
             android:fontFamily="@font/avenir_medium"
-            android:text="@string/okay"
+            android:text="@string/submit"
             android:textColor="@color/dialog_tint" />
 
     </android.support.design.widget.CoordinatorLayout>

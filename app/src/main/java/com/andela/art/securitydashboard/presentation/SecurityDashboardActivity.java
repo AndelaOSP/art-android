@@ -1,8 +1,10 @@
 package com.andela.art.securitydashboard.presentation;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,8 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 import com.andela.art.R;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
-import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -38,6 +40,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     SerialPresenter serialPresenter;
 
     SecurityDashboardBinding securityDashboardBinding;
+
+    private View mProgressView;
 
     @Inject
     FirebasePresenter firebasePresenter;
@@ -72,6 +76,8 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         firebasePresenter.attachView(this);
         firebasePresenter.onAuthStateChanged();
 
+        mProgressView = findViewById(R.id.asset_details_progress_bar_serial);
+
         Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
                 "This device doesn't support NFC.",
                 Snackbar.LENGTH_INDEFINITE);
@@ -93,18 +99,24 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     }
 
     /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    /**
      * Retrieve asset on confirm button is clicked.
      *
      * @param serial
      */
     @Override
     public void onConfirmClicked(String serial, String assetCode) {
+        showProgressBar(true);
         serialPresenter.getAsset(serial);
-    }
-
-    @Override
-    public void onConfirmClicked() {
-        // Won't be used by this activity.
     }
 
     /**
@@ -112,15 +124,15 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      *
      * @param asset - asset data sent to check in activity
      */
-    public void sendIntent(Asset asset) {
-        if (asset.getAssignee() == null) {
+    public void sendIntent(UserAssetResponse asset) {
+        if (asset.getAssets() == null) {
             toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
             toast.show();
         } else {
             Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
                     CheckInActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("asset", asset);
+            bundle.putSerializable("asset", asset.getAssets().get(0));
             checkInIntent.putExtras(bundle);
             startActivity(checkInIntent);
         }
@@ -164,6 +176,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     @Override
     protected void onStart() {
         super.onStart();
+        showProgressBar(false);
         firebasePresenter.start();
     }
 
@@ -180,7 +193,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             finish();
             moveTaskToBack(true);
         } else {
-            toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
+           toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
                     Toast.LENGTH_SHORT);
             toast.show();
         }
