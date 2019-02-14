@@ -208,6 +208,31 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/check_in_view_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:layout_marginStart="170dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/nfc_progress_bar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_wait"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@id/nfc_progress_bar"/>
+
+        </android.support.constraint.ConstraintLayout>
+
         <Button
             android:id="@+id/checkInButton"
             android:layout_width="150dp"

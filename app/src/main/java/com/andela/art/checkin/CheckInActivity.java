@@ -1,9 +1,13 @@
 package com.andela.art.checkin;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+
 import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
@@ -31,11 +35,13 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     Asset asset;
     Asignee user;
     Bundle bundle;
+    private View mProgressView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_check_in);
+        mProgressView = findViewById(R.id.check_in_view_progressbar);
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         initializeCheckInComponent();
@@ -44,7 +50,7 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         asset = (Asset) bundle.getSerializable("asset");
         user = asset.getAssignee();
         binding.checkInButton.setOnClickListener(v ->
-                callCheckin(asset.getSerialNumber(), asset.getCheckinStatus()));
+                callCheckin(asset.getId(), asset.getCheckinStatus()));
 
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
@@ -63,6 +69,12 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         binding.cohortNumber.setText(String.valueOf(user.getCohort()));
         loadResizedImage(user.getPicture());
         showCheckout(asset);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showProgressBar(false);
     }
 
     /**
@@ -118,6 +130,16 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     }
 
     /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    /**
      * Initialize check in component.
      */
     public void initializeCheckInComponent() {
@@ -132,16 +154,17 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     /**
      * Call the check in method in presenter.
      *
-     * @param serial - asset serial number
+     * @param id - asset serial number
      * @param logType - check in status
      */
-    public void callCheckin(String serial, String logType) {
+    public void callCheckin(Integer id, String logType) {
+        showProgressBar(true);
         String status;
         if ("checked_in".equals(logType)) {
             status = "Checkout";
         } else {
             status = "Checkin";
         }
-        presenter.checkIn(serial, status);
+        presenter.checkIn(id, status);
     }
 }
