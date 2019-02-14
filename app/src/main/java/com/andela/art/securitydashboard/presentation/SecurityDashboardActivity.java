@@ -15,19 +15,21 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
+
 import com.andela.art.R;
 import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.databinding.SecurityDashboardBinding;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.databinding.SecurityDashboardBinding;
-import com.andela.art.login.LoginActivity;
 import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
-import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
+import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.squareup.picasso.Picasso;
+
 import javax.inject.Inject;
 
 /**
@@ -116,7 +118,22 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     @Override
     public void onConfirmClicked(String serial, String assetCode) {
         showProgressBar(true);
-        serialPresenter.getAsset(serial);
+        if (serial.isEmpty()) {
+            showNoRecordToast();
+        } else {
+            serialPresenter.getAsset(serial);
+        }
+    }
+
+    /**
+     * Show snackbar when user does not input serial.
+     * //TODO: Use inbuilt checker instead
+     */
+    private void showNoRecordToast() {
+        showProgressBar(false);
+        toast = Toast.makeText(this.getApplicationContext(), "Please insert serial",
+                Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     /**

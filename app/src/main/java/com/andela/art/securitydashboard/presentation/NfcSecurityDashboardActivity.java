@@ -53,6 +53,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
 
+    public static final String TAG = "NfcSecurityDashboardAct";
+
     String nfcSerial;
 
     private View mProgressView;
@@ -144,7 +146,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
                 new NdefReaderTask().execute(tag);
 
             } else {
-                Log.d("check", "Wrong mime type: " + type);
+                Log.d(TAG, "Wrong mime type: " + type);
             }
         } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -186,7 +188,14 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
      */
     public void onConfirmClicked(String serial) {
         showProgressBar(true);
-        nfcPresenter.getAsset(serial);
+        if (serial.isEmpty()) {
+            showProgressBar(false);
+            toast = Toast.makeText(this.getApplicationContext(), "No records found on Scanned Tag",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            nfcPresenter.getAsset(serial);
+        }
     }
 
     /**
@@ -313,7 +322,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
         try {
             filters[0].addDataType(MIME_TEXT_PLAIN);
         } catch (IntentFilter.MalformedMimeTypeException e) {
-            Log.e("check", "Check your mime type", e);
+            Log.e(TAG, "Check your mime type", e);
         }
         if (adapter != null) {
             adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
@@ -356,7 +365,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
                     try {
                         return readText(ndefRecord);
                     } catch (UnsupportedEncodingException e) {
-                        Log.e("check", "Unsupported Encoding", e);
+                        Log.e(TAG, "Unsupported Encoding", e);
                     }
                 }
             }
