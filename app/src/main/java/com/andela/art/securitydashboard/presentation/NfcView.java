@@ -39,4 +39,10 @@ public interface NfcView extends View {
      * @param error error
      */
     void displayErrorMessage(Throwable error);
+
+    /**
+     * Update serial textview.
+     * @param result string in tag
+     */
+    void updateSerial(String result);
 }
