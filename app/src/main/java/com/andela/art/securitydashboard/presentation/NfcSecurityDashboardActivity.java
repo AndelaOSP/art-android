@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -23,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -30,6 +32,7 @@ import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.databinding.NfcSecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
+import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -196,17 +199,29 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
      */
     public void sendIntent(UserAssetResponse asset) {
         if (asset.getAssets() == null) {
-            toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(this,
+                    "The asset serial number is not available.", Toast.LENGTH_LONG);
             toast.show();
         } else {
-            Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
-                    CheckInActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("asset", asset.getAssets().get(0));
-            checkInIntent.putExtras(bundle);
-            startActivity(checkInIntent);
+            Asset assetInfo = asset.getAssets().get(0);
+            if (assetInfo.getCurrentStatus().equals("Available")) {
+                showProgressBar(false);
+                toast = Toast.makeText(this,
+                        "The asset serial number is not assigned to any user.", Toast.LENGTH_LONG);
+                View view = toast.getView();
+                view.setBackgroundResource(android.R.drawable.toast_frame);
+                TextView text = view.findViewById(android.R.id.message);
+                text.setBackgroundColor(Color.parseColor("#DCDCDC"));
+                toast.show();
+            } else {
+                Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
+                        CheckInActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("asset", assetInfo);
+                checkInIntent.putExtras(bundle);
+                startActivity(checkInIntent);
+            }
         }
-
     }
 
     @Override

@@ -30,6 +30,8 @@ public class Asset implements Serializable {
     private String mSerialNumber;
     @SerializedName("asset_type")
     private String mAssetType;
+    @SerializedName("current_status")
+    private String mCurrentStatus;
 
     /**
      * Allocation status getter.
@@ -46,6 +48,15 @@ public class Asset implements Serializable {
     public void setAllocationStatus(String allocationStatus) {
         mAllocationStatus = allocationStatus;
     }
+
+    /**
+     * Current status getter.
+     * @return mCurrentStatus - String
+     */
+    public String getCurrentStatus() {
+        return mCurrentStatus;
+    }
+
 
     /**
      * Assigned to getter.
