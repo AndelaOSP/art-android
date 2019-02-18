@@ -58,13 +58,13 @@ public interface ApiService {
 
     /**
      * Check in route.
-     * @param serialNumber - asset serial number
+     * @param id - asset serial number
      * @param logType - check in status
      * @return Observable
      */
     @POST("/api/v1/asset-logs/")
     @FormUrlEncoded
-    Observable<CheckInModel> checkIn(@Field("asset") String serialNumber,
+    Observable<CheckInModel> checkIn(@Field("asset") Integer id,
                                      @Field("log_type") String logType);
 
     /**
