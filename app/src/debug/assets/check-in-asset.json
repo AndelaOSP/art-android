@@ -23,3 +23,87 @@
     "current_status":"Available",
     "asset_type":"Extension Cord"
 }
+//  {
+//      "count":1,
+//      "next":null,
+//      "previous":null,
+//      "results":[
+//          {
+//              "id":197,"uuid":"0004d878-2d65-4932-8241-f44bc29ef86b",
+//              "asset_category":"Electronics",
+//              "asset_sub_category":"Computers",
+//              "asset_make":"Macbook Pro",
+//              "make_label":"Macbook Pro",
+//              "asset_code":"FTYUGHII",
+//              "serial_number":"FTYUGIHOJ",
+//              "model_number":"MF839",
+//              "checkin_status":"checked_out",
+//              "created_at":"2018-10-12T09:06:54.332836Z",
+//              "last_modified":"2018-11-02T12:05:26.829324Z",
+//              "current_status":"Allocated","asset_type":"Macbook",
+//              "allocation_history":[
+//                  {
+//                      "id":361,
+//                      "current_owner":"philip.kalela@andela.com",
+//                      "previous_owner":null,
+//                      "created_at":"2018-10-26T12:27:09.328109Z"
+//                  }, {
+//                      "id":360,
+//                      "current_owner":null,
+//                      "previous_owner":"margaret.kinyanjui@andela.com",
+//                      "created_at":"2018-10-26T12:26:54.189898Z"
+//                  },{
+//                      "id":359,
+//                      "current_owner":"margaret.kinyanjui@andela.com",
+//                      "previous_owner":null,"created_at":"2018-10-26T08:26:54.427111Z"
+//                  },{
+//                      "id":358,
+//                      "current_owner":null,
+//                      "previous_owner":"philip.kalela@andela.com",
+//                      "created_at":"2018-10-26T08:26:41.478600Z"
+//                  },{
+//                      "id":356,
+//                      "current_owner":"philip.kalela@andela.com",
+//                      "previous_owner":null,
+//                      "created_at":"2018-10-17T12:32:15.662067Z"
+//                  }, {
+//                      "id":355,
+//                      "current_owner":null,
+//                      "previous_owner":"test1@gmail.com",
+//                      "created_at":"2018-10-15T11:41:14.617328Z"
+//                  },{
+//                      "id":354,
+//                      "current_owner":"test1@gmail.com",
+//                      "previous_owner":null,"created_at":"2018-10-15T11:40:57.399342Z"}
+//              ],
+//              "specs":{
+//                  "id":7,
+//                  "year_of_manufacture":null,
+//                  "processor_type":"Intel core i5",
+//                  "processor_speed":2.3,
+//                  "screen_size":15,
+//                  "storage":256,
+//                  "memory":8
+//              },
+//              "purchase_date":null,
+//              "notes":" ",
+//              "assigned_to":{
+//                  "id":111,
+//                  "first_name":"Philip",
+//                  "last_name":"Kalela",
+//                  "full_name":"Philip Kalela",
+//                  "email":"philip.kalela@andela.com",
+//                  "cohort":24,"slack_handle":"@kalela",
+//                  "picture":null,
+//                  "phone_number":null,
+//                  "location":1,
+//                  "allocated_asset_count":1,
+//                  "last_modified":"2018-11-02T12:05:05.748754Z",
+//                  "date_joined":"2018-10-15T12:32:38.742690Z",
+//                  "last_login":null
+//              },
+//              "asset_location":"Dojo",
+//              "verified":true
+//          }
+//      ]
+//  }

@@ -113,6 +113,15 @@ public class CheckInActivityTest {
     }
 
     /**
+     * Test toolbar is displayed.
+     */
+    @Test
+    public void testToolbarIsDisplayed() {
+        mActivityRule.launchActivity(null);
+        onView(withId(R.id.check_in_toolbar)).check(matches(isDisplayed()));
+    }
+
+    /**
      * Test check out functionality.
      * @throws Exception - exception
      */
@@ -162,15 +171,6 @@ public class CheckInActivityTest {
     public void testClickCheckIn() {
         mActivityRule.launchActivity(null);
         onView(withId(R.id.checkInButton)).check(matches(withText("CHECK-IN")));
-    }
-
-    /**
-     * Test toolbar is displayed.
-     */
-    @Test
-    public void testToolbarIsDisplayed() {
-        mActivityRule.launchActivity(null);
-        onView(withId(R.id.check_in_toolbar)).check(matches(isDisplayed()));
     }
 
     /**
