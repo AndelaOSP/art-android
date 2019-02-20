@@ -40,7 +40,11 @@ public class NfcDialog extends AppCompatDialogFragment {
         nfcDialogBinding.submit.setOnClickListener(view -> {
             String serial = ((NfcSecurityDashboardActivity) getActivity()).nfcSerial;
             if (serial != null) {
+                serial = serial.replaceAll("\\W", "");
                 ((NfcSecurityDashboardActivity) getActivity()).onConfirmClicked(serial);
+                dismiss();
+            } else {
+                ((NfcSecurityDashboardActivity) getActivity()).showTagHasNoData();
                 dismiss();
             }
         });

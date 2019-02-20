@@ -3,7 +3,6 @@ package com.andela.art.securitydashboard.presentation;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -30,7 +28,9 @@ import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
+import com.andela.art.securitydashboard.injection.SecurityDashboardUtilsInjector;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
+import com.andela.art.securitydashboard.utils.SecurityDashboardUtils;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -40,6 +40,8 @@ import javax.inject.Inject;
  */
 
 public class SecurityDashboardActivity extends BaseMenuActivity implements SerialView {
+
+    SecurityDashboardUtils securityDashboardUtils;
 
     @Inject
     SerialPresenter serialPresenter;
@@ -122,21 +124,12 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     public void onConfirmClicked(String serial, String assetCode) {
         showProgressBar(true);
         if (serial.isEmpty()) {
-            showNoRecordToast();
+            handleToast("Please insert serial",
+                    Toast.LENGTH_SHORT,
+                    true);
         } else {
             serialPresenter.getAsset(serial);
         }
-    }
-
-    /**
-     * Show snackbar when user does not input serial.
-     * //TODO: Use inbuilt checker instead
-     */
-    private void showNoRecordToast() {
-        showProgressBar(false);
-        toast = Toast.makeText(this.getApplicationContext(), "Please insert serial",
-                Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     /**
@@ -145,30 +138,9 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      * @param asset - asset data sent to check in activity
      */
     public void sendIntent(UserAssetResponse asset) {
-        if (asset.getAssets() == null) {
-            toast = Toast.makeText(this,
-                    "The asset serial number is not available.", Toast.LENGTH_LONG);
-            toast.show();
-        } else {
-            Asset assetInfo = asset.getAssets().get(0);
-            if (assetInfo.getCurrentStatus().equals("Available")) {
-                showProgressBar(false);
-                toast = Toast.makeText(this,
-                        "The asset serial number is not assigned to any user.", Toast.LENGTH_LONG);
-                View view = toast.getView();
-                view.setBackgroundResource(android.R.drawable.toast_frame);
-                TextView text = view.findViewById(android.R.id.message);
-                text.setBackgroundColor(Color.parseColor("#DCDCDC"));
-                toast.show();
-            } else {
-                Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
-                        CheckInActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("asset", assetInfo);
-                checkInIntent.putExtras(bundle);
-                startActivity(checkInIntent);
-            }
-        }
+        securityDashboardUtils = SecurityDashboardUtilsInjector
+                .provideSecurityDashboardUtils(asset, this);
+        securityDashboardUtils.goToCheckin();
     }
 
     /**
@@ -178,6 +150,28 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     public void redirectLoggedOutUser() {
         Intent redirect = new Intent(this, LoginActivity.class);
         startActivity(redirect);
+    }
+
+    /**
+     * handle this activities toasts.
+     */
+    @Override
+    public void handleToast(String toastString, Integer toastLength, Boolean showProgressBar) {
+        if (!showProgressBar) {
+            showProgressBar(false);
+        }
+        toast = Toast.makeText(this, toastString, toastLength);
+        toast.show();
+    }
+
+    @Override
+    public void handleCheckinIntent(Asset assetInfo) {
+        Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+                CheckInActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("asset", assetInfo);
+        checkInIntent.putExtras(bundle);
+        startActivity(checkInIntent);
     }
 
     /**
@@ -201,8 +195,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     @Override
     public void displayErrorMessage(Throwable error) {
         String message = error.getMessage().toString();
-        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-        toast.show();
+        handleToast(message, Toast.LENGTH_LONG, false);
     }
 
     @Override
@@ -225,9 +218,9 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             finish();
             moveTaskToBack(true);
         } else {
-           toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            handleToast("Press again to exit.",
+                    Toast.LENGTH_SHORT,
+                    false);
         }
 
         this.backButtonToExitPressedTwice = true;

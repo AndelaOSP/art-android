@@ -1,6 +1,7 @@
 package com.andela.art.securitydashboard.presentation;
 
 import com.andela.art.api.UserAssetResponse;
+import com.andela.art.models.Asset;
 import com.andela.art.root.View;
 
 /**
@@ -39,4 +40,20 @@ public interface SerialView extends View {
      * @param error error
      */
     void displayErrorMessage(Throwable error);
+
+    /**
+     * Handle activity toasts.
+     * @param toastMessage the message
+     * @param toastLength toast length
+     * @param showProgressBar stopProgressbar?
+     */
+    void handleToast(String toastMessage, Integer toastLength, Boolean showProgressBar);
+
+    /**
+     * Handle the activity intents.
+     * @param assetInfo the asset
+     */
+    void handleCheckinIntent(Asset assetInfo);
+
+
 }
