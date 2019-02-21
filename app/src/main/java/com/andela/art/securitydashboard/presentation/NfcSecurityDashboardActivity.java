@@ -274,8 +274,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = error.getMessage().toString();
-        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        String message = "The asset is not available.";
+        toast = Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.show();
     }
 

@@ -160,7 +160,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         if (!showProgressBar) {
             showProgressBar(false);
         }
-        toast = Toast.makeText(this, toastString, toastLength);
+        toast = Toast.makeText(this.getApplicationContext(), toastString, toastLength);
         toast.show();
     }
 
@@ -194,7 +194,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = error.getMessage().toString();
+        String message = "The asset is not available.";
         handleToast(message, Toast.LENGTH_LONG, false);
     }
 
