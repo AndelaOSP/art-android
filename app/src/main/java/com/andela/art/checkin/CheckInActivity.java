@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
@@ -14,6 +15,8 @@ import com.andela.art.checkin.injection.DaggerCheckInComponent;
 import com.andela.art.databinding.ActivityCheckInBinding;
 import com.andela.art.models.Asset;
 import com.andela.art.models.Asignee;
+import com.andela.art.room.CheckInEntity;
+import com.andela.art.room.CheckInRepository;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
@@ -36,6 +39,8 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     Asignee user;
     Bundle bundle;
     private View mProgressView;
+    private CheckInRepository mRepository;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,7 +157,7 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     }
 
     /**
-     * Call the check in method in presenter.
+     * Call the check in method in presenter and save status in DB.
      *
      * @param id - asset serial number
      * @param logType - check in status
@@ -166,5 +171,25 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
             status = "Checkin";
         }
         presenter.checkIn(id, status);
+        saveCheckIn(id, status);
+    }
+
+    /**
+     * Save status in DB.
+     *
+     * @param id - asset serial number
+     * @param logType - check in status
+     */
+    public void saveCheckIn(Integer id, String logType) {
+        CheckInEntity checkInEntity = new CheckInEntity();
+        checkInEntity.setSerialNumber(id);
+        checkInEntity.setLogStatus(logType);
+
+        mRepository = new CheckInRepository(getApplication());
+        mRepository.insert(checkInEntity);
+
+        Toast.makeText(getApplicationContext(),
+                "CheckIn data added to the database successfully",
+                Toast.LENGTH_SHORT).show();
     }
 }
