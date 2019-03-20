@@ -18,7 +18,7 @@ import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
-import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -124,7 +124,7 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     @Override
     public void goToCheckSerial() {
         Intent intent = new Intent(CheckInActivity.this,
-                SecurityDashboardActivity.class);
+                NfcSecurityDashboardActivity.class);
         startActivity(intent);
         finish();
     }

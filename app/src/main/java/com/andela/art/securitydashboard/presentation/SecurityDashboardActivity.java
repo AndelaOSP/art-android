@@ -160,6 +160,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         if (!showProgressBar) {
             showProgressBar(false);
         }
+        showProgressBar(false);
         toast = Toast.makeText(this.getApplicationContext(), toastString, toastLength);
         toast.show();
     }
