@@ -96,7 +96,7 @@ public class CheckInRepository {
             } else {
                 presenter.checkIn(checkInData.get(0).getId(), //NOPMD
                         checkInData.get(0).getLogStatus()); //NOPMD
-                mAsyncTaskDao.deleteAllRecords(checkInData);
+                mAsyncTaskDao.deleteAllRecords();
 
             }
             return null;

@@ -1,7 +1,6 @@
 package com.andela.art.room;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -32,9 +31,8 @@ public interface ArtDao {
 
     /**
      * Delete all Check In Records.
-     * @param checkInEntity CheckInEntity
      */
-    @Delete
-    void deleteAllRecords(List<CheckInEntity> checkInEntity);
+    @Query("DELETE FROM checkIn")
+    void deleteAllRecords();
 
 }
