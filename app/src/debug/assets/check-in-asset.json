@@ -1,10 +1,15 @@
-  {
-    "id":3,
-    "asset_code":"AND/EC/02",
-    "serial_number":"serial1",
-    "model_number":2,
-    "checkin_status":"checked_in",
-    "assigned_to": {
+{
+  "count":1,
+  "next":null,
+  "previous":null,
+  "results":[
+    {
+      "id":3,
+      "asset_code":"AND/EC/02",
+      "serial_number":"serial1",
+      "model_number":2,
+      "checkin_status":"checked_in",
+      "assigned_to": {
         "id":21,
         "first_name":"Margaret",
         "last_name":"Kinyanjui",
@@ -17,12 +22,15 @@
         "last_modified":"2018-04-19T08:48:55.061424Z",
         "date_joined":"2018-04-19T08:48:54.859461Z",
         "last_login":null
-    },
-    "created_at":"2018-03-22T14:47:26.977310Z",
-    "last_modified":"2018-05-10T09:43:09.950324Z",
-    "current_status":"Available",
-    "asset_type":"Extension Cord"
+      },
+      "created_at":"2018-03-22T14:47:26.977310Z",
+      "last_modified":"2018-05-10T09:43:09.950324Z",
+      "current_status":"Available",
+      "asset_type":"Extension Cord"
+    }
+  ]
 }
+
 //  {
 //      "count":1,
 //      "next":null,

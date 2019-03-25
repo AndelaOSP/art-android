@@ -122,11 +122,6 @@ public class SecurityDashboardActivityTest {
                 perform(typeText("123"), closeSoftKeyboard());
         closeSoftKeyboard();
 
-        try {
-            Thread.sleep(7500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(withId(R.id.submit)).perform(click());
 
         onView(withText("Asset not assigned.")).inRoot(RootMatchers

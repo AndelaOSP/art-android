@@ -38,16 +38,19 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
         }
 
         NdefMessage ndefMessage = ndef.getCachedNdefMessage();
-
-        NdefRecord[] records = ndefMessage.getRecords();
-        for (NdefRecord ndefRecord : records) {
-            if (ndefRecord.getTnf() == NdefRecord
-                    .TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(),
-                    NdefRecord.RTD_TEXT)) {
-                try {
-                    return readText(ndefRecord);
-                } catch (UnsupportedEncodingException e) {
-                    Log.e(TAG, "Unsupported Encoding", e);
+        if (ndefMessage == null) {
+            return null;
+        } else {
+            NdefRecord[] records = ndefMessage.getRecords();
+            for (NdefRecord ndefRecord : records) {
+                if (ndefRecord.getTnf() == NdefRecord
+                        .TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(),
+                        NdefRecord.RTD_TEXT)) {
+                    try {
+                        return readText(ndefRecord);
+                    } catch (UnsupportedEncodingException e) {
+                        Log.e(TAG, "Unsupported Encoding", e);
+                    }
                 }
             }
         }

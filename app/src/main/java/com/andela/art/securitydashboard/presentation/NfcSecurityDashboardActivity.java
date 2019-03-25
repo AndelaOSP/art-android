@@ -173,7 +173,6 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         new NdefReaderTask(this).execute(tag);
-
     }
 
     /**
@@ -198,7 +197,12 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
      */
     public void onConfirmClicked(String serial) {
         showProgressBar(true);
-        nfcPresenter.getAsset(serial);
+        if (serial.isEmpty()) {
+            showProgressBar(false);
+            showTagHasNoData();
+        } else {
+            nfcPresenter.getAsset(serial);
+        }
     }
 
     /**
@@ -274,8 +278,9 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = error.getMessage().toString();
-        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        showProgressBar(false);
+        String message = "The asset is not available.";
+        toast = Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.show();
     }
 

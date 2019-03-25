@@ -10,6 +10,7 @@ import com.andela.art.securitydashboard.presentation.SerialView;
  * Prod SecurityDashboardUtils class.
  */
 public class SecurityDashboardUtils {
+    private static final String TAG = "Check";
     UserAssetResponse asset;
     SerialView view;
 
@@ -27,13 +28,13 @@ public class SecurityDashboardUtils {
      * Initiate intent to move to Check in activity.
      */
     public void goToCheckin() {
-        if (asset.getAssets() == null) {
-            view.handleToast("The asset serial number is not available.",
+        if (asset.getCount() == 0) {
+            view.handleToast("The asset is not available.",
                     Toast.LENGTH_LONG, false);
         } else {
             Asset assetInfo = asset.getAssets().get(0);
-            if (assetInfo.getCurrentStatus().equals("Available")) {
-                view.handleToast("The asset serial number is not assigned to any user.",
+            if (assetInfo.getAssignee() == null) {
+                view.handleToast("Asset not assigned.",
                         Toast.LENGTH_LONG, false);
             } else {
                 view.handleCheckinIntent(assetInfo);
