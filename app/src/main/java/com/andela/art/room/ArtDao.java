@@ -36,4 +36,5 @@ public interface ArtDao {
      */
     @Delete
     void deleteAllRecords(List<CheckInEntity> checkInEntity);
+
 }

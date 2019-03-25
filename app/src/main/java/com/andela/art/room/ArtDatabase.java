@@ -26,12 +26,12 @@ public abstract class ArtDatabase extends RoomDatabase {
      * @return instance - database instance
      */
     static ArtDatabase getDatabase(final Context context) {
-            synchronized (ArtDatabase.class) {
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
+        synchronized (ArtDatabase.class) {
+            if (instance == null) {
+                instance = Room.databaseBuilder(context.getApplicationContext(),
                             ArtDatabase.class, "artdb").build();
-                }
             }
+        }
         return instance;
     }
 
