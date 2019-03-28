@@ -84,16 +84,13 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         firebasePresenter.onAuthStateChanged();
 
         mProgressView = findViewById(R.id.asset_details_progress_bar_serial);
-
         Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
-                "This device doesn't support NFC.",
-                Snackbar.LENGTH_INDEFINITE);
+                "This device does not support NFC.", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        snackbarView.setPadding(10, 10, 10, 12);
+        snackbarView.setPadding(10, 10, 10, 130);
         snackbarView.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.colorAccent));
+                R.color.snackbar_background_color));
         snackbar.show();
-
     }
 
     /**

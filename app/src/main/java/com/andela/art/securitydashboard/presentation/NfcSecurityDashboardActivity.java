@@ -105,10 +105,14 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
             startActivity(intent);
         }
 
-        if (mNfcAdapter != null && !mNfcAdapter.isEnabled()) {
-            Toast.makeText(this, "NFC is disabled.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "NFC is enabled.", Toast.LENGTH_LONG).show();
+        if (mNfcAdapter != null) {
+            if (!mNfcAdapter.isEnabled()) {
+                Toast.makeText(this.getApplicationContext(), "NFC is disabled.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this.getApplicationContext(), "NFC is enabled.",
+                        Toast.LENGTH_LONG).show();
+            }
         }
         isActivityActive = true;
         nfcPresenter.attachVieww(this);
