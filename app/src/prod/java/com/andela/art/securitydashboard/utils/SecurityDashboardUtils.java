@@ -29,12 +29,12 @@ public class SecurityDashboardUtils {
      */
     public void goToCheckin() {
         if (asset.getCount() == 0) {
-            view.handleToast("The asset is not available.",
+            view.handleToast("This asset is not in the system.",
                     Toast.LENGTH_LONG, false);
         } else {
             Asset assetInfo = asset.getAssets().get(0);
             if (assetInfo.getAssignee() == null) {
-                view.handleToast("Asset not assigned.",
+                view.handleToast("Asset with this serial number is not assigned to anyone.",
                         Toast.LENGTH_LONG, false);
             } else {
                 view.handleCheckinIntent(assetInfo);
