@@ -16,6 +16,19 @@ then
     exit 1
 fi
 
+## Run instrumentation tests with gradle wrapper.
+./gradlew test connectedAndroidTest --daemon
+
+# Store the last exit code in a variable.
+instrumentationTestResult=$?
+
+# Perform checks
+if [ $instrumentationTestResult -ne 0 ]
+then
+    echo "Tests failed to run, fix them to proceed with the commit"
+    exit 1
+fi
+
 ## Run checkstyle to check the code quality.
 ./gradlew check --daemon
 
