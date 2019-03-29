@@ -123,7 +123,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         if (serial.isEmpty()) {
             handleToast("Please insert serial",
                     Toast.LENGTH_SHORT,
-                    true);
+                    false);
         } else {
             serialPresenter.getAsset(serial);
         }
@@ -157,7 +157,6 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         if (!showProgressBar) {
             showProgressBar(false);
         }
-        showProgressBar(false);
         toast = Toast.makeText(this.getApplicationContext(), toastString, toastLength);
         toast.show();
     }
@@ -217,7 +216,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             moveTaskToBack(true);
         } else {
             handleToast("Press again to exit.",
-                    Toast.LENGTH_SHORT,
+                    Toast.LENGTH_LONG,
                     false);
         }
 

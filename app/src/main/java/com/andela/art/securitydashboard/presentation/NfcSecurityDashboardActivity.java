@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -21,7 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andela.art.R;
@@ -216,19 +214,16 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
      */
     public void sendIntent(UserAssetResponse asset) {
         if (asset.getAssets() == null) {
-            toast = Toast.makeText(this,
-                    "The asset serial number is not available.", Toast.LENGTH_LONG);
+            toast = Toast.makeText(this.getApplicationContext(),
+                    "This asset is not in the system.", Toast.LENGTH_LONG);
             toast.show();
         } else {
             Asset assetInfo = asset.getAssets().get(0);
             if (assetInfo.getCurrentStatus().equals("Available")) {
                 showProgressBar(false);
-                toast = Toast.makeText(this,
-                        "The asset serial number is not assigned to any user.", Toast.LENGTH_LONG);
-                View view = toast.getView();
-                view.setBackgroundResource(android.R.drawable.toast_frame);
-                TextView text = view.findViewById(android.R.id.message);
-                text.setBackgroundColor(Color.parseColor("#DCDCDC"));
+                toast = Toast.makeText(this.getApplicationContext(),
+                        "Asset with this serial number is not assigned to anyone.",
+                        Toast.LENGTH_LONG);
                 toast.show();
             } else {
                 Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
