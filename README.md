@@ -1,6 +1,7 @@
 # ART Android Application
 [![CircleCI](https://circleci.com/gh/AndelaOSP/art-android.svg?style=svg&circle-token=b1250aceec287752949d11b859d661b0499d1fd7)](https://circleci.com/gh/AndelaOSP/art-android)
 [![codecov.io](https://codecov.io/gh/AndelaOSP/art-android/branch/develop/graph/badge.svg)](https://codecov.io/gh/AndelaOSP/art-android/)
+[![Build status](https://build.appcenter.ms/v0.1/apps/d4500178-11b2-401f-83b8-e30fea93bb06/branches/ch-setup-microsoft-app-centre-%23162710280/badge)](https://appcenter.ms)
 
 
 The Andela Resource Tracker Android app.
