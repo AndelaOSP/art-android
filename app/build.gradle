@@ -19,6 +19,11 @@ android {
         dataBinding {
             enabled true
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     signingConfigs {
         release {
@@ -132,6 +137,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.16.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    
     // App Centre SDK
     def appCenterSdkVersion = '1.11.0'
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"

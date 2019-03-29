@@ -1,8 +1,10 @@
 package com.andela.art.securitydashboard.presentation;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,19 +15,24 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
+
 import com.andela.art.R;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
+import com.andela.art.databinding.SecurityDashboardBinding;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.databinding.SecurityDashboardBinding;
-import com.andela.art.login.LoginActivity;
 import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
-import com.andela.art.securitydashboard.injection.SerialEntryModule;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
+import com.andela.art.securitydashboard.injection.SecurityDashboardUtilsInjector;
+import com.andela.art.securitydashboard.injection.SerialEntryModule;
+import com.andela.art.securitydashboard.utils.SecurityDashboardUtils;
 import com.squareup.picasso.Picasso;
+
 import javax.inject.Inject;
 
 /**
@@ -34,10 +41,14 @@ import javax.inject.Inject;
 
 public class SecurityDashboardActivity extends BaseMenuActivity implements SerialView {
 
+    SecurityDashboardUtils securityDashboardUtils;
+
     @Inject
     SerialPresenter serialPresenter;
 
     SecurityDashboardBinding securityDashboardBinding;
+
+    private View mProgressView;
 
     @Inject
     FirebasePresenter firebasePresenter;
@@ -72,15 +83,14 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
         firebasePresenter.attachView(this);
         firebasePresenter.onAuthStateChanged();
 
+        mProgressView = findViewById(R.id.asset_details_progress_bar_serial);
         Snackbar snackbar = Snackbar.make(securityDashboardBinding.securityDashboardLayout,
-                "This device doesn't support NFC.",
-                Snackbar.LENGTH_INDEFINITE);
+                "This device does not support NFC.", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        snackbarView.setPadding(10, 10, 10, 12);
+        snackbarView.setPadding(10, 10, 10, 130);
         snackbarView.setBackgroundColor(ContextCompat.getColor(this,
-                R.color.colorAccent));
+                R.color.snackbar_background_color));
         snackbar.show();
-
     }
 
     /**
@@ -93,18 +103,30 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     }
 
     /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    /**
      * Retrieve asset on confirm button is clicked.
      *
      * @param serial
      */
     @Override
     public void onConfirmClicked(String serial, String assetCode) {
-        serialPresenter.getAsset(serial);
-    }
-
-    @Override
-    public void onConfirmClicked() {
-        // Won't be used by this activity.
+        showProgressBar(true);
+        if (serial.isEmpty()) {
+            handleToast("Please insert serial",
+                    Toast.LENGTH_SHORT,
+                    false);
+        } else {
+            serialPresenter.getAsset(serial);
+        }
     }
 
     /**
@@ -112,19 +134,10 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
      *
      * @param asset - asset data sent to check in activity
      */
-    public void sendIntent(Asset asset) {
-        if (asset.getAssignee() == null) {
-            toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
-                    CheckInActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("asset", asset);
-            checkInIntent.putExtras(bundle);
-            startActivity(checkInIntent);
-        }
-
+    public void sendIntent(UserAssetResponse asset) {
+        securityDashboardUtils = SecurityDashboardUtilsInjector
+                .provideSecurityDashboardUtils(asset, this);
+        securityDashboardUtils.goToCheckin();
     }
 
     /**
@@ -134,6 +147,28 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
     public void redirectLoggedOutUser() {
         Intent redirect = new Intent(this, LoginActivity.class);
         startActivity(redirect);
+    }
+
+    /**
+     * handle this activities toasts.
+     */
+    @Override
+    public void handleToast(String toastString, Integer toastLength, Boolean showProgressBar) {
+        if (!showProgressBar) {
+            showProgressBar(false);
+        }
+        toast = Toast.makeText(this.getApplicationContext(), toastString, toastLength);
+        toast.show();
+    }
+
+    @Override
+    public void handleCheckinIntent(Asset assetInfo) {
+        Intent checkInIntent = new Intent(SecurityDashboardActivity.this,
+                CheckInActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("asset", assetInfo);
+        checkInIntent.putExtras(bundle);
+        startActivity(checkInIntent);
     }
 
     /**
@@ -156,14 +191,14 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = error.getMessage().toString();
-        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-        toast.show();
+        String message = "The asset is not available.";
+        handleToast(message, Toast.LENGTH_LONG, false);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        showProgressBar(false);
         firebasePresenter.start();
     }
 
@@ -180,9 +215,9 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
             finish();
             moveTaskToBack(true);
         } else {
-            toast = Toast.makeText(this.getApplicationContext(), "Press again to exit.",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            handleToast("Press again to exit.",
+                    Toast.LENGTH_LONG,
+                    false);
         }
 
         this.backButtonToExitPressedTwice = true;

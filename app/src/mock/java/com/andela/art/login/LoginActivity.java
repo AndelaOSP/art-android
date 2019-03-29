@@ -144,7 +144,16 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
     /**
      * Sign in and redirect.
      */
-    public void signIn() {
+    public void
+
+
+
+    signIn() {
+
+
+
+
+
         // Show the dialog as we are now signing in.
         mConnectionProgressDialog.show();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

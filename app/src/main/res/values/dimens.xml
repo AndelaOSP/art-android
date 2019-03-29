@@ -22,6 +22,7 @@
     <dimen name="dialog_button_height">36dp</dimen>
     <dimen name="dialog_padding_text">24dp</dimen>
     <dimen name="dialog_text_size">20sp</dimen>
+    <dimen name="small_dialog_text_size">15sp</dimen>
     <dimen name="edit_text_margin_top">72dp</dimen>
     <dimen name="button_margin_top">144dp</dimen>
     <dimen name="button_margin_bottom">16dp</dimen>

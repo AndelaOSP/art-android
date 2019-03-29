@@ -1,7 +1,7 @@
 package com.andela.art.securitydashboard.presentation;
 
 
-import com.andela.art.models.Asset;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.root.View;
 
 /**
@@ -19,7 +19,7 @@ public interface NfcView extends View {
      *
      * @param asset asset that is passed from presenter
      */
-    void sendIntent(Asset asset);
+    void sendIntent(UserAssetResponse asset);
 
     /**
      * redirect user if they are logged out.
@@ -39,4 +39,10 @@ public interface NfcView extends View {
      * @param error error
      */
     void displayErrorMessage(Throwable error);
+
+    /**
+     * Update serial textview.
+     * @param result string in tag
+     */
+    void updateSerial(String result);
 }

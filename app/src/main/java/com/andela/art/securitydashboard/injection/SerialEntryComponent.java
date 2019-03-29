@@ -33,4 +33,6 @@ public interface SerialEntryComponent {
      * @param nfcSecurityDashboardActivity activity where serial presenter will be injected
      */
     void inject(NfcSecurityDashboardActivity nfcSecurityDashboardActivity);
+
+
 }

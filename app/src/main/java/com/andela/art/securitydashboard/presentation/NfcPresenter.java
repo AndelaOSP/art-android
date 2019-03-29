@@ -1,7 +1,7 @@
 package com.andela.art.securitydashboard.presentation;
 
 import com.andela.art.api.ApiService;
-import com.andela.art.root.Presenter;
+import com.andela.art.root.NPresenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by kalela on 20/11/18.
  */
 
-public class NfcPresenter implements Presenter<NfcView> {
+public class NfcPresenter implements NPresenter<NfcView> {
     private NfcView nfcView;
     private final ApiService apiService;
     private Disposable disposable;
@@ -39,7 +39,7 @@ public class NfcPresenter implements Presenter<NfcView> {
      * @param view view that will be instantiated
      */
     @Override
-    public void attachView(NfcView view) {
+    public void attachVieww(NfcView view) {
         this.nfcView = view;
     }
 

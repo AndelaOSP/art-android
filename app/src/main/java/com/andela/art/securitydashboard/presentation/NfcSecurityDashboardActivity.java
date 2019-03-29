@@ -1,17 +1,16 @@
 package com.andela.art.securitydashboard.presentation;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -20,9 +19,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
+import com.andela.art.api.UserAssetResponse;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.databinding.NfcSecurityDashboardBinding;
 import com.andela.art.login.LoginActivity;
@@ -33,10 +34,8 @@ import com.andela.art.root.ArtApplication;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
+import com.andela.art.securitydashboard.presentation.threading.NdefReaderTask;
 import com.squareup.picasso.Picasso;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -44,16 +43,22 @@ import javax.inject.Inject;
  * Display Dialog box to show asset details from nfc and retrieve further details of asset.
  */
 
-public class NfcSecurityDashboardActivity extends AppCompatActivity implements SerialView {
+public class NfcSecurityDashboardActivity extends AppCompatActivity implements NfcView {
 
     private NfcAdapter mNfcAdapter;
 
     public static final String MIME_TEXT_PLAIN = "text/plain";
 
+    public static final String TAG = "check";
+
     String nfcSerial;
 
+    Boolean isActivityActive = false;
+
+    private View mProgressView;
+
     @Inject
-    SerialPresenter serialPresenter;
+    NfcPresenter nfcPresenter;
 
     NfcSecurityDashboardBinding nfcSecurityDashboardBinding;
 
@@ -90,19 +95,26 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
                 .build()
                 .inject(this);
 
+        mProgressView = findViewById(R.id.asset_details_progress_bar);
+
         if (mNfcAdapter == null && getIntent().getStringExtra("developer_override") == null) {
             Intent intent = new Intent(NfcSecurityDashboardActivity.this,
                     SecurityDashboardActivity.class);
             startActivity(intent);
         }
 
-        if (mNfcAdapter != null && !mNfcAdapter.isEnabled()) {
-            Toast.makeText(this, "NFC is disabled.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "NFC is enabled.", Toast.LENGTH_LONG).show();
+        if (mNfcAdapter != null) {
+            if (!mNfcAdapter.isEnabled()) {
+                Toast.makeText(this.getApplicationContext(), "NFC is disabled.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this.getApplicationContext(), "NFC is enabled.",
+                        Toast.LENGTH_LONG).show();
+            }
         }
-
-        firebasePresenter.attachView(this);
+        isActivityActive = true;
+        nfcPresenter.attachVieww(this);
+        firebasePresenter.attachVieww(this);
         firebasePresenter.onAuthStateChanged();
     }
 
@@ -110,6 +122,25 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
     protected void onNewIntent(Intent intent) {
         handleIntent(intent);
         getNfcData();
+    }
+
+    /**
+     * show toast if tag has no data.
+     */
+    public void showTagHasNoData() {
+        toast = Toast.makeText(this.getApplicationContext(), "No records found on Scanned Tag",
+                Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -124,10 +155,10 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
             if (MIME_TEXT_PLAIN.equals(type)) {
 
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReaderTask().execute(tag);
+                new NdefReaderTask(this).execute(tag);
 
             } else {
-                Log.d("check", "Wrong mime type: " + type);
+                Log.d(TAG, "Wrong mime type: " + type);
             }
         } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -136,15 +167,14 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
 
             for (String tech : techList) {
                 if (searchedTech.equals(tech)) {
-                    new NdefReaderTask().execute(tag);
+                    new NdefReaderTask(this).execute(tag);
                     break;
                 }
             }
         }
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        new NdefReaderTask().execute(tag);
-
+        new NdefReaderTask(this).execute(tag);
     }
 
     /**
@@ -163,16 +193,18 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
         nfcDialog.show(fragmentManager, "Nfc Dialog");
     }
 
-    @Override
-    public void onConfirmClicked(String serial, String assetCode) {
-        // Won't be used by this activity.
-    }
-
-    @Override
-    public void onConfirmClicked() {
-        toast = Toast.makeText(this, "Retrieve data", Toast.LENGTH_SHORT);
-        toast.show();
-        //TODO: Set up data query using serial aqcuired from nfc tag
+    /**
+     *
+     * @param serial serial entered by ehrn user confirms nfcTag scan.
+     */
+    public void onConfirmClicked(String serial) {
+        showProgressBar(true);
+        if (serial.isEmpty()) {
+            showProgressBar(false);
+            showTagHasNoData();
+        } else {
+            nfcPresenter.getAsset(serial);
+        }
     }
 
     /**
@@ -180,19 +212,28 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
      *
      * @param asset - asset data sent to check in activity
      */
-    public void sendIntent(Asset asset) {
-        if (asset.getAssignee() == null) {
-            toast = Toast.makeText(this, "Asset not assigned.", Toast.LENGTH_SHORT);
+    public void sendIntent(UserAssetResponse asset) {
+        if (asset.getAssets() == null) {
+            toast = Toast.makeText(this.getApplicationContext(),
+                    "This asset is not in the system.", Toast.LENGTH_LONG);
             toast.show();
         } else {
-            Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
-                    CheckInActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("asset", asset);
-            checkInIntent.putExtras(bundle);
-            startActivity(checkInIntent);
+            Asset assetInfo = asset.getAssets().get(0);
+            if (assetInfo.getCurrentStatus().equals("Available")) {
+                showProgressBar(false);
+                toast = Toast.makeText(this.getApplicationContext(),
+                        "Asset with this serial number is not assigned to anyone.",
+                        Toast.LENGTH_LONG);
+                toast.show();
+            } else {
+                Intent checkInIntent = new Intent(NfcSecurityDashboardActivity.this,
+                        CheckInActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("asset", assetInfo);
+                checkInIntent.putExtras(bundle);
+                startActivity(checkInIntent);
+            }
         }
-
     }
 
     @Override
@@ -236,14 +277,24 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = error.getMessage().toString();
-        toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        showProgressBar(false);
+        String message = "The asset is not available.";
+        toast = Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    @Override
+    public void updateSerial(String result) {
+        nfcSecurityDashboardBinding.scanNfcTitleTextView
+                .setText(String.format("Serial: %s", result));
+        nfcSerial = result;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        showProgressBar(false);
+        nfcSecurityDashboardBinding.scanNfcTitleTextView.setText(R.string.check_nfc);
         firebasePresenter.start();
     }
 
@@ -289,16 +340,19 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
                 .getActivity(activity.getApplicationContext(),
                 0, intent, 0);
 
-        IntentFilter[] filters = new IntentFilter[1];
-        String[][] techList = new String[][]{};
+        IntentFilter[] filters = new IntentFilter[2];
+        String[][] techList = new String[][]{new String[] {"android.nfc.tech.Ndef"}};
 
         filters[0] = new IntentFilter();
+        filters[1] = new IntentFilter();
         filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[1].addAction(NfcAdapter.ACTION_TECH_DISCOVERED);
         filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        filters[1].addCategory(Intent.CATEGORY_DEFAULT);
         try {
             filters[0].addDataType(MIME_TEXT_PLAIN);
         } catch (IntentFilter.MalformedMimeTypeException e) {
-            Log.e("check", "Check your mime type", e);
+            Log.e(TAG, "Check your mime type", e);
         }
         if (adapter != null) {
             adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
@@ -314,74 +368,6 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements S
     public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         if (adapter != null) {
             adapter.disableForegroundDispatch(activity);
-        }
-    }
-
-    /**
-     * Tag reader async task.
-     */
-    private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
-
-        @Override
-        protected String doInBackground(Tag... params) {
-            Tag tag = params[0];
-
-            Ndef ndef = Ndef.get(tag);
-            if (ndef == null) {
-                return null;
-            }
-
-            NdefMessage ndefMessage = ndef.getCachedNdefMessage();
-
-            NdefRecord[] records = ndefMessage.getRecords();
-            for (NdefRecord ndefRecord : records) {
-                if (ndefRecord.getTnf() == NdefRecord
-                        .TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(),
-                        NdefRecord.RTD_TEXT)) {
-                    try {
-                        return readText(ndefRecord);
-                    } catch (UnsupportedEncodingException e) {
-                        Log.e("check", "Unsupported Encoding", e);
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        /**
-         * Read ndef data.
-         * @param record read a record in tag.
-         * @return string
-         * @throws UnsupportedEncodingException exception.
-         */
-        private String readText(NdefRecord record) throws UnsupportedEncodingException {
-
-            byte[] payload = record.getPayload();
-
-            String textEncoding;
-            if ((payload[0] & 128) == 0) {
-                textEncoding = "UTF-8";
-            } else {
-                textEncoding = "UTF-16";
-            }
-
-            int languageCodeLength = payload[0] & 0063; //NOPMD
-
-            return new String(payload,
-                    languageCodeLength + 1,
-                    payload.length - languageCodeLength - 1,
-                    textEncoding);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                nfcSecurityDashboardBinding.scanNfcTitleTextView
-                        .setText(String.format("Serial: %s", result));
-                nfcSerial = result;
-
-            }
         }
     }
 

@@ -92,15 +92,18 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 mConnectionProgressDialog.dismiss();
                 // filter out Andela email addresses
                 if (mAuth.getCurrentUser().getEmail().endsWith("andela.com")) {
-                    Toast.makeText(this, "Andela email", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, UserDashBoardActivity.class);
                     startActivity(intent);
 
                 } else {
+                        Thread waitForSecurityEmails = new Thread() {
+                            @Override
+                            public void run() {
+
+                            }
+                        };
                         // filter out only specific GMail addresses assigned to the guards
                         if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
-                            Toast.makeText(this, "Allowed non Andela email",
-                                    Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this,
                                     NfcSecurityDashboardActivity.class);
                             startActivity(intent);
@@ -146,16 +149,10 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                             public void onComplete() {
                                 // Add check if user is admin here in future
                                 if (andelan) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Andela email",
-                                            Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this,
                                             UserDashBoardActivity.class);
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Allowed non Andela email",
-                                            Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this,
                                             NfcSecurityDashboardActivity.class);
                                     startActivity(intent);
@@ -256,6 +253,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
      */
     @Override
     public void populateEmailList(List<String> emails) {
+        Log.d(TAG, "populateEmailList: " + emails);
         if (emails.isEmpty()) {
             return;
         }

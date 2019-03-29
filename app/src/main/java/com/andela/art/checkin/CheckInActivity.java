@@ -1,20 +1,27 @@
 package com.andela.art.checkin;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Toast;
+
 import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
 import com.andela.art.databinding.ActivityCheckInBinding;
 import com.andela.art.models.Asset;
 import com.andela.art.models.Asignee;
+import com.andela.art.room.CheckInEntity;
+import com.andela.art.room.CheckInRepository;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
-import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
 import java.util.Locale;
 import javax.inject.Inject;
@@ -31,11 +38,15 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     Asset asset;
     Asignee user;
     Bundle bundle;
+    private View mProgressView;
+    private CheckInRepository mRepository;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_check_in);
+        mProgressView = findViewById(R.id.check_in_view_progressbar);
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         initializeCheckInComponent();
@@ -44,7 +55,7 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         asset = (Asset) bundle.getSerializable("asset");
         user = asset.getAssignee();
         binding.checkInButton.setOnClickListener(v ->
-                callCheckin(asset.getSerialNumber(), asset.getCheckinStatus()));
+                callCheckin(asset.getId(), asset.getCheckinStatus()));
 
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
@@ -63,6 +74,12 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         binding.cohortNumber.setText(String.valueOf(user.getCohort()));
         loadResizedImage(user.getPicture());
         showCheckout(asset);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showProgressBar(false);
     }
 
     /**
@@ -112,9 +129,19 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     @Override
     public void goToCheckSerial() {
         Intent intent = new Intent(CheckInActivity.this,
-                SecurityDashboardActivity.class);
+                NfcSecurityDashboardActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Shows the progress bar.
+     * @param show Boolean to show progressbar.
+     */
+    @SuppressWarnings("AvoidInlineConditionals")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgressBar(final boolean show) {
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -130,18 +157,39 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     }
 
     /**
-     * Call the check in method in presenter.
+     * Call the check in method in presenter and save status in DB.
      *
-     * @param serial - asset serial number
+     * @param id - asset serial number
      * @param logType - check in status
      */
-    public void callCheckin(String serial, String logType) {
+    public void callCheckin(Integer id, String logType) {
+        showProgressBar(true);
         String status;
         if ("checked_in".equals(logType)) {
             status = "Checkout";
         } else {
             status = "Checkin";
         }
-        presenter.checkIn(serial, status);
+        presenter.checkIn(id, status);
+        saveCheckIn(id, status);
+    }
+
+    /**
+     * Save status in DB.
+     *
+     * @param id - asset serial number
+     * @param logType - check in status
+     */
+    public void saveCheckIn(Integer id, String logType) {
+        CheckInEntity checkInEntity = new CheckInEntity();
+        checkInEntity.setSerialNumber(id);
+        checkInEntity.setLogStatus(logType);
+
+        mRepository = new CheckInRepository(getApplication());
+        mRepository.insert(checkInEntity);
+
+        Toast.makeText(getApplicationContext(),
+                "CheckIn data added to the database successfully",
+                Toast.LENGTH_SHORT).show();
     }
 }
