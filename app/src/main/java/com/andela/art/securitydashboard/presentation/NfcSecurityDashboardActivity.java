@@ -201,6 +201,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
         showProgressBar(true);
         if (serial.isEmpty()) {
             showProgressBar(false);
+            nfcSecurityDashboardBinding.scanNfcTitleTextView
+                    .setVisibility(View.VISIBLE);
             showTagHasNoData();
         } else {
             nfcPresenter.getAsset(serial);
@@ -221,6 +223,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
             Asset assetInfo = asset.getAssets().get(0);
             if (assetInfo.getCurrentStatus().equals("Available")) {
                 showProgressBar(false);
+                nfcSecurityDashboardBinding.scanNfcTitleTextView
+                        .setVisibility(View.VISIBLE);
                 toast = Toast.makeText(this.getApplicationContext(),
                         "Asset with this serial number is not assigned to anyone.",
                         Toast.LENGTH_LONG);
@@ -279,6 +283,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     public void displayErrorMessage(Throwable error) {
         showProgressBar(false);
         String message = "The asset is not available.";
+        nfcSecurityDashboardBinding.scanNfcTitleTextView
+                .setVisibility(View.VISIBLE);
         toast = Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_LONG);
         toast.show();
     }
@@ -286,7 +292,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     @Override
     public void updateSerial(String result) {
         nfcSecurityDashboardBinding.scanNfcTitleTextView
-                .setText(String.format("Serial: %s", result));
+                .setVisibility(View.GONE);
         nfcSerial = result;
     }
 
@@ -294,7 +300,8 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     protected void onStart() {
         super.onStart();
         showProgressBar(false);
-        nfcSecurityDashboardBinding.scanNfcTitleTextView.setText(R.string.check_nfc);
+        nfcSecurityDashboardBinding.scanNfcTitleTextView
+                .setVisibility(View.VISIBLE);
         firebasePresenter.start();
     }
 
