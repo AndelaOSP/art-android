@@ -20,7 +20,7 @@
     <string name="full_name">Full name</string>
     <string name="email">example@gmail.com</string>
     <string name="check_serial">Check Serial</string>
-    <string name="check_nfc">Scan NFC</string>
+    <string name="check_nfc">Scan NFC Tag</string>
     <string name="enter_text">Enter Serial</string>
     <string name="serial_hint">Serial Number</string>
     <string name="serial_settings">settings</string>
