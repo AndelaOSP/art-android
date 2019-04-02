@@ -83,10 +83,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .build()
                 .inject(this);
 
-        securityEmailsPresenter.attachView(this);
-        tokenAuthPresenter.attachView(this);
-        securityEmailsPresenter.retrieveOauthToken();
-
         mAuthListener = firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 mConnectionProgressDialog.dismiss();
@@ -94,31 +90,27 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 if (mAuth.getCurrentUser().getEmail().endsWith("andela.com")) {
                     Intent intent = new Intent(LoginActivity.this, UserDashBoardActivity.class);
                     startActivity(intent);
-
                 } else {
-                        Thread waitForSecurityEmails = new Thread() {
-                            @Override
-                            public void run() {
-
-                            }
-                        };
-                        // filter out only specific GMail addresses assigned to the guards
-                        if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
-                            Intent intent = new Intent(LoginActivity.this,
-                                    NfcSecurityDashboardActivity.class);
-                            startActivity(intent);
-                        } else {
-                            mGoogleSignInClient.signOut();
-                            try {
-                                throw new ApiException(new Status(UNAUTHORIZED_CODE));
-                            } catch (ApiException e) {
-                                e.printStackTrace();
-                            }
+                    // filter out only specific GMail addresses assigned to the guards
+                    if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
+                        Intent intent = new Intent(LoginActivity.this,
+                                NfcSecurityDashboardActivity.class);
+                        startActivity(intent);
+                    } else {
+                        mGoogleSignInClient.signOut();
+                        try {
+                            throw new ApiException(new Status(UNAUTHORIZED_CODE));
+                        } catch (ApiException e) {
+                            e.printStackTrace();
                         }
+                    }
                 }
             }
         };
 
+        securityEmailsPresenter.attachView(this);
+        tokenAuthPresenter.attachView(this);
+        securityEmailsPresenter.retrieveOauthToken();
         dashboard = new Intent(LoginActivity.this, NfcSecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
@@ -148,16 +140,7 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                             @Override
                             public void onComplete() {
                                 // Add check if user is admin here in future
-                                if (andelan) {
-                                    Intent intent = new Intent(LoginActivity.this,
-                                            UserDashBoardActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Intent intent = new Intent(LoginActivity.this,
-                                            NfcSecurityDashboardActivity.class);
-                                    startActivity(intent);
-                                }
-
+                                //This has been implemented using the mAuthListener in onCreate()
                             }
 
                             @Override
@@ -206,7 +189,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 if ("andela.com".equals(emailDomain)) {
                     andelan = true;
                     firebasewithGoogleAuth(account);
-
                 } else {
                     // filter out only specific GMail addresses assigned to the guards
                     if (isAllowedNonAndelaEmail(account.getEmail())) {
