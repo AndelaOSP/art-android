@@ -100,7 +100,6 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                             @Override
                             public void onComplete() {
                                 // Add check if user is admin here in future
-                                //This has been implemented using the mAuthListener in onCreate()
                                 if (andelan) {
                                     Intent intent = new Intent(LoginActivity.this,
                                             UserDashBoardActivity.class);
