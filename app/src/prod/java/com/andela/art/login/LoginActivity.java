@@ -48,27 +48,12 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 2;
     static final String TAG = "LoginActivity";
-    FirebaseAuth.AuthStateListener mAuthListener;
     ProgressDialog mConnectionProgressDialog;
     Intent dashboard;
     boolean andelan;
 
     public List<String> allowedEmailAddresses = new ArrayList();
     private static final int UNAUTHORIZED_CODE = 14672;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,35 +67,10 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                 .loginModule(new LoginModule())
                 .build()
                 .inject(this);
-
-        mAuthListener = firebaseAuth -> {
-            if (firebaseAuth.getCurrentUser() != null) {
-                mConnectionProgressDialog.dismiss();
-                // filter out Andela email addresses
-                if (mAuth.getCurrentUser().getEmail().endsWith("andela.com")) {
-                    Intent intent = new Intent(LoginActivity.this, UserDashBoardActivity.class);
-                    startActivity(intent);
-                } else {
-                    // filter out only specific GMail addresses assigned to the guards
-                    if (isAllowedNonAndelaEmail(mAuth.getCurrentUser().getEmail())) {
-                        Intent intent = new Intent(LoginActivity.this,
-                                NfcSecurityDashboardActivity.class);
-                        startActivity(intent);
-                    } else {
-                        mGoogleSignInClient.signOut();
-                        try {
-                            throw new ApiException(new Status(UNAUTHORIZED_CODE));
-                        } catch (ApiException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        };
-
         securityEmailsPresenter.attachView(this);
         tokenAuthPresenter.attachView(this);
         securityEmailsPresenter.retrieveOauthToken();
+
         dashboard = new Intent(LoginActivity.this, NfcSecurityDashboardActivity.class);
         ActivityLoginBinding activityLoginBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_login);
@@ -141,6 +101,15 @@ public class LoginActivity extends AppCompatActivity implements SecurityEmailsVi
                             public void onComplete() {
                                 // Add check if user is admin here in future
                                 //This has been implemented using the mAuthListener in onCreate()
+                                if (andelan) {
+                                    Intent intent = new Intent(LoginActivity.this,
+                                            UserDashBoardActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(LoginActivity.this,
+                                            NfcSecurityDashboardActivity.class);
+                                    startActivity(intent);
+                                }
                             }
 
                             @Override
