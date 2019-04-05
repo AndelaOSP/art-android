@@ -2,6 +2,7 @@ package com.andela.art.checkin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.IdlingRegistry;
@@ -12,6 +13,7 @@ import com.andela.art.R;
 import com.andela.art.models.Asignee;
 import com.andela.art.models.Asset;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
+import com.andela.art.utils.ConditionalIgnoreRule;
 import com.andela.art.utils.MockWebServerRule;
 import com.andela.art.utils.RestServiceTestHelper;
 import com.andela.art.utils.WaitActivityIsResumedIdlingResource;
@@ -91,6 +93,9 @@ public class CheckInActivityTest {
     @Rule
     public MockWebServerRule mockWebServerRule = new MockWebServerRule();
 
+    @Rule
+    public ConditionalIgnoreRule rule = new ConditionalIgnoreRule();
+
     /**
      * Test details fed from intent is displayed.
      */
@@ -126,6 +131,7 @@ public class CheckInActivityTest {
      * @throws Exception - exception
      */
     @Test
+    @ConditionalIgnoreRule.ConditionalIgnore(condition = RunningOnDevice.class)
     public void testClickCheckOut() throws Exception {
         String fileName = "check-in-asset.json";
         String fileName2 = "asset_response.json";
@@ -178,5 +184,18 @@ public class CheckInActivityTest {
      */
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Condition that should cause a test to be ignored.
+     */
+    public class RunningOnDevice implements ConditionalIgnoreRule.IgnoreCondition {
+        /**
+         * Return boolean if condition is satisfied or not.
+         * @return boolean
+         */
+        public boolean isSatisfied() {
+            return !Build.PRODUCT.startsWith("sdk_google");
+        }
     }
 }

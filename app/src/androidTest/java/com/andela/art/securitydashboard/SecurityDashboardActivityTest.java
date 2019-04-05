@@ -1,5 +1,6 @@
 package com.andela.art.securitydashboard;
 
+import android.os.Build;
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.intent.matcher.BundleMatchers;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
 import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
+import com.andela.art.utils.ConditionalIgnoreRule;
 import com.andela.art.utils.MockWebServerRule;
 import com.andela.art.utils.OkHttpIdlingResourceRule;
 import com.andela.art.utils.RestServiceTestHelper;
@@ -69,11 +71,15 @@ public class SecurityDashboardActivityTest {
     @Rule
     public MockWebServerRule mockWebServerRule = new MockWebServerRule();
 
+    @Rule
+    public ConditionalIgnoreRule rule = new ConditionalIgnoreRule();
+
     /**
      * Test dialog box.
      * @throws IOException if an error occurs
      */
     @Test
+    @ConditionalIgnoreRule.ConditionalIgnore(condition = RunningOnDevice.class)
     public void testDialogBoxAppearsWhenButtonClicked() throws IOException {
         activityTestRule.launchActivity(null);
         onView(withId(R.id.addSerial))
@@ -86,6 +92,7 @@ public class SecurityDashboardActivityTest {
      * @throws Exception if an error occurs
      */
     @Test
+    @ConditionalIgnoreRule.ConditionalIgnore(condition = RunningOnDevice.class)
     public void testAssetDataIsRetrievedWhenCorrectSerialIsEntered() throws Exception {
         String fileName = "asset_response.json";
         String asset = RestServiceTestHelper.
@@ -111,6 +118,7 @@ public class SecurityDashboardActivityTest {
      * @throws Exception if an error occurs
      */
     @Test
+    @ConditionalIgnoreRule.ConditionalIgnore(condition = RunningOnDevice.class)
     public void testUnassignedAssetDisplaysUnassignedToast() throws Exception {
         String fileName = "null_asset_response.json";
         String nullAsset = RestServiceTestHelper.
@@ -180,6 +188,19 @@ public class SecurityDashboardActivityTest {
         Toast toast = activityTestRule.getActivity().toast;
         if (toast != null) {
             toast.cancel();
+        }
+    }
+
+    /**
+     * Condition that should cause a test to be ignored.
+     */
+    public class RunningOnDevice implements ConditionalIgnoreRule.IgnoreCondition {
+        /**
+         * Return boolean if condition is satisfied or not.
+         * @return boolean
+         */
+        public boolean isSatisfied() {
+            return !Build.PRODUCT.startsWith("sdk_google");
         }
     }
 }
