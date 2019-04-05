@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.checkin.CheckInActivity;
-import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
+import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
 import com.andela.art.utils.ConditionalIgnoreRule;
 import com.andela.art.utils.MockWebServerRule;
 import com.andela.art.utils.OkHttpIdlingResourceRule;
@@ -49,7 +49,7 @@ import static org.hamcrest.Matchers.not;
  * Created by zack on 3/20/18.
  */
 @RunWith(AndroidJUnit4.class)
-public class SecurityDashboardActivityTest {
+public class SerialSecurityDashboardActivityTest {
 
 
 
@@ -61,8 +61,8 @@ public class SecurityDashboardActivityTest {
      * blocks of Junit tests.
      */
     @Rule
-    public IntentsTestRule<NfcSecurityDashboardActivity> activityTestRule =
-            new IntentsTestRule<>(NfcSecurityDashboardActivity.class,
+    public IntentsTestRule<SecurityDashboardActivity> activityTestRule =
+            new IntentsTestRule<>(SecurityDashboardActivity.class,
                     true, false);
 
     @Rule
