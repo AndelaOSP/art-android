@@ -82,7 +82,8 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
         String reportType = "bug";
 
         if (message.isEmpty()) {
-            Toast.makeText(this, "Cannot submit an empty report", Toast.LENGTH_LONG).show();
+            String toastMessage = "Cannot submit an empty report";
+            displayToast(toastMessage);
             return;
         }
 
@@ -96,10 +97,8 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
      * @param reportProblem reportProblem model
      */
     public void reportProblemSuccess(ReportProblem reportProblem) {
-        Toast.makeText(
-                this,
-                "Report submitted successfully",
-                Toast.LENGTH_LONG).show();
+        String toastMessage = "Report submitted successfully";
+        displayToast(toastMessage);
 
         reportProblemPresenter.dispose();
     }
@@ -110,9 +109,19 @@ public class ReportProblemActivity extends AppCompatActivity implements ReportPr
      * @param e throwable exception
      */
     public void reportProblemError(Throwable e) {
+        String toastMessage = "Report not submitted. Please try again";
+        displayToast(toastMessage);
+    }
+
+    /**
+     * Display toast feedback.
+     *
+     * @param message The toast message
+     */
+    public void displayToast(String message) {
         Toast.makeText(
-                this,
-                "Report not submitted. Please try again",
+                getApplicationContext(),
+                message,
                 Toast.LENGTH_LONG).show();
     }
 }

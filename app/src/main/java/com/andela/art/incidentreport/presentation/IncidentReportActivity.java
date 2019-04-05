@@ -88,7 +88,8 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
 
     @Override
     public void showSuccess() {
-       toast =  Toast.makeText(this, "Incident reported successfully", Toast.LENGTH_LONG);
+       toast =  Toast.makeText(getApplicationContext(),
+               "Incident reported successfully", Toast.LENGTH_LONG);
        toast.show();
     }
 

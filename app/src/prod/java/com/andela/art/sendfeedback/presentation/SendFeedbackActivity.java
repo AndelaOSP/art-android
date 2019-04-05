@@ -65,7 +65,8 @@ public class SendFeedbackActivity extends AppCompatActivity implements SendFeedb
         String reportType = "feedback";
 
         if (message.isEmpty()) {
-            Toast.makeText(this, "Please provide feedback", Toast.LENGTH_LONG).show();
+            String toastMessage = "Please provide feedback";
+            displayToast(toastMessage);
             return;
         }
 
@@ -78,10 +79,8 @@ public class SendFeedbackActivity extends AppCompatActivity implements SendFeedb
      * @param sendFeedback reportProblem model
      */
     public void sendFeedbackSuccess(SendFeedback sendFeedback) {
-        Toast.makeText(
-                this,
-                "Feedback sent successfully",
-                Toast.LENGTH_LONG).show();
+        String toastMessage = "Feedback sent successfully";
+        displayToast(toastMessage);
 
         sendFeedbackPresenter.dispose();
     }
@@ -92,10 +91,8 @@ public class SendFeedbackActivity extends AppCompatActivity implements SendFeedb
      * @param e throwable exception
      */
     public void sendFeedbackError(Throwable e) {
-        Toast.makeText(
-                this,
-                "Report not submitted. Please try again",
-                Toast.LENGTH_LONG).show();
+        String toastMessage = "Report not submitted. Please try again";
+        displayToast(toastMessage);
     }
 
     /**
@@ -106,5 +103,17 @@ public class SendFeedbackActivity extends AppCompatActivity implements SendFeedb
     public void closeFeedback(View view) {
         super.onBackPressed();
         finish();
+    }
+
+    /**
+     * Display toast feedback.
+     *
+     * @param message The toast message
+     */
+    public void displayToast(String message) {
+        Toast.makeText(
+                getApplicationContext(),
+                message,
+                Toast.LENGTH_LONG).show();
     }
 }
