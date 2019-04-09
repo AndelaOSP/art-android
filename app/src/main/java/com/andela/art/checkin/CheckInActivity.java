@@ -6,6 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,7 +23,6 @@ import com.andela.art.room.CheckInRepository;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
 import java.util.Locale;
@@ -30,7 +32,7 @@ import javax.inject.Inject;
  * Created by zack on 3/26/18.
  */
 
-public class CheckInActivity extends BaseMenuActivity implements CheckInView {
+public class CheckInActivity extends AppCompatActivity implements CheckInView {
     ActivityCheckInBinding binding;
     @Inject
     CheckInPresenter presenter;
@@ -41,6 +43,10 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     private View mProgressView;
     private CheckInRepository mRepository;
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return false;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -170,6 +176,7 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         } else {
             status = "Checkin";
         }
+        Log.d("memememe", "callCheckin: " + id);
         presenter.checkIn(id, status);
         saveCheckIn(id, status);
     }

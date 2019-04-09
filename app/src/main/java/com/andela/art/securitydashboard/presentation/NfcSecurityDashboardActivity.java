@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +30,7 @@ import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
+import com.andela.art.root.BaseMenuActivity;
 import com.andela.art.securitydashboard.injection.DaggerSerialEntryComponent;
 import com.andela.art.securitydashboard.injection.FirebasePresenterModule;
 import com.andela.art.securitydashboard.injection.SerialEntryModule;
@@ -43,7 +43,7 @@ import javax.inject.Inject;
  * Display Dialog box to show asset details from nfc and retrieve further details of asset.
  */
 
-public class NfcSecurityDashboardActivity extends AppCompatActivity implements NfcView {
+public class NfcSecurityDashboardActivity extends BaseMenuActivity implements NfcView {
 
     private NfcAdapter mNfcAdapter;
 
@@ -82,7 +82,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
         nfcSecurityDashboardBinding = DataBindingUtil.setContentView(this,
                 R.layout.nfc_security_dashboard);
 
-        setSupportActionBar((Toolbar) nfcSecurityDashboardBinding.mToolBar);
+        setSupportActionBar((Toolbar) nfcSecurityDashboardBinding.nfcToolBar);
         ApplicationComponent applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
