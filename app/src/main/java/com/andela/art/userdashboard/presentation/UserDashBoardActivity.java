@@ -26,6 +26,7 @@ import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -172,6 +173,17 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     @Override
     public void onGetAssets(UserAssetResponse response) {
         List<Asset> assets = response.getAssets();
+        if (assets.isEmpty()) {
+            List<Asset> asset = new ArrayList();
+            Asset newAsset = new Asset();
+            newAsset.setSerialNumber("NO ASSET ASSIGNED YET");
+            asset.add(newAsset);
+            pagerAdapter = new PagerAdapter(fragmentManager, asset);
+            binding.pager.setAdapter(pagerAdapter);
+            binding.tabDots.setupWithViewPager(binding.pager, true);
+            return;
+        }
+
         pagerAdapter = new PagerAdapter(fragmentManager, assets);
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
