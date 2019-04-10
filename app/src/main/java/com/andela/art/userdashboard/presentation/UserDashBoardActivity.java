@@ -174,16 +174,9 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     public void onGetAssets(UserAssetResponse response) {
         List<Asset> assets = response.getAssets();
         if (assets.isEmpty()) {
-            List<Asset> asset = new ArrayList();
-            Asset newAsset = new Asset();
-            newAsset.setSerialNumber("NO ASSET ASSIGNED YET");
-            asset.add(newAsset);
-            pagerAdapter = new PagerAdapter(fragmentManager, asset);
-            binding.pager.setAdapter(pagerAdapter);
-            binding.tabDots.setupWithViewPager(binding.pager, true);
+            onEmptyAsset();
             return;
         }
-
         pagerAdapter = new PagerAdapter(fragmentManager, assets);
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
@@ -202,5 +195,16 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         }
     }
 
-
+    /**
+     * called when user is not assigned any asset.
+     */
+    public void onEmptyAsset() {
+        List<Asset> asset = new ArrayList();
+        Asset newAsset = new Asset();
+        newAsset.setSerialNumber("NO ASSET ASSIGNED YET");
+        asset.add(newAsset);
+        pagerAdapter = new PagerAdapter(fragmentManager, asset);
+        binding.pager.setAdapter(pagerAdapter);
+        binding.tabDots.setupWithViewPager(binding.pager, true);
+    }
 }
