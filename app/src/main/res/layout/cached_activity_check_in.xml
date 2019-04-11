@@ -1,0 +1,256 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1E1D23">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/check_in_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="#25252f"
+            app:theme="@style/AppTheme.AppBarOverlay"
+            app:titleTextAppearance="@style/AppBarTitle"
+            app:popupTheme="@style/ThemeOverlay.AppBarPopup"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_below="@+id/check_in_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="0dp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="212dp"
+            android:fontFamily="@font/avenir_heavy"
+            android:text="@string/full_name"
+            android:textColor="#dadcdf"
+            android:textSize="23sp"
+            android:textStyle="normal" />
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="75dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:background="#25252f"
+            card_view:cardBackgroundColor="#25252f"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent">
+
+                <ImageView
+                    android:id="@+id/mac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/info_text"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="-12dp"
+                    android:layout_marginStart="23dp"
+                    android:contentDescription="@string/mac"
+                    android:src="@drawable/ic_computer_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/info_text"
+                    android:layout_alignTop="@+id/serial_info"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/serial"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/serial_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="122dp"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="CRT23R45"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/cohort_number"
+                    android:layout_below="@+id/serial_info"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/avenir_light"
+                    android:text="@string/serial_hint"
+                    android:textColor="@color/cardText"
+                    android:textSize="12sp" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="300dp"
+                    android:layout_height="0.25dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="58dp"
+                    android:layout_marginTop="75dp"
+                    android:background="#dadcdf" />
+
+                <ImageView
+                    android:id="@+id/users"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/cohort_header"
+                    android:layout_alignStart="@+id/mac"
+                    android:layout_marginBottom="-12dp"
+                    android:src="@drawable/ic_group_black_24dp" />
+
+
+                <TextView
+                    android:id="@+id/cohort_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="85dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="18"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/cohort_header"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/cohort_number"
+                    android:layout_below="@+id/cohort_number"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/avenir_light"
+                    android:text="@string/cohort"
+                    android:textColor="@color/cardText"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="300dp"
+                    android:layout_height="0.25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="58dp"
+                    android:layout_marginBottom="98dp"
+                    android:background="#dadcdf" />
+
+
+                <ImageView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/mac"
+                    android:layout_marginBottom="45dp"
+                    android:src="@drawable/ic_email_black_24dp" />
+
+                <TextView
+                    android:id="@+id/email_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="59dp"
+                    android:layout_marginStart="68dp"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/email_address"
+                    android:textColor="@color/cardHeader"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/email_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/email_text"
+                    android:layout_marginStart="68dp"
+                    android:layout_marginTop="-53dp"
+                    android:fontFamily="@font/avenir_light"
+                    android:text="@string/email_title"
+                    android:textColor="@color/cardText"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="300dp"
+                    android:layout_height="0.25dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/divider"
+                    android:layout_marginBottom="17dp"
+                    android:background="#dadcdf" />
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/check_in_view_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:layout_marginStart="170dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/nfc_progress_bar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_wait"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@id/nfc_progress_bar"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <Button
+            android:id="@+id/checkInButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/checkout_button"
+            android:fontFamily="@font/avenir_book"
+            android:paddingBottom="9dp"
+            android:paddingEnd="27dp"
+            android:paddingStart="27dp"
+            android:paddingTop="9dp"
+            android:text="@string/check_out"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+</layout>

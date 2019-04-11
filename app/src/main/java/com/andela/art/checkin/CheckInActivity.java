@@ -21,6 +21,7 @@ import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.root.BaseMenuActivity;
+import com.andela.art.utils.NetworkUtil;
 import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
 import java.util.Locale;
@@ -40,12 +41,19 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
     Bundle bundle;
     private View mProgressView;
     private CheckInRepository mRepository;
+    public NetworkUtil networkUtil = new NetworkUtil();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_check_in);
+        mRepository = new CheckInRepository(getApplication());
+        if (!networkUtil.isNetworkAvailable(this)) {
+            //TODO: Should be different layout for offline devices
+            binding = DataBindingUtil.setContentView(this, R.layout.cached_activity_check_in);
+        }
+
         mProgressView = findViewById(R.id.check_in_view_progressbar);
         applicationComponent = ((ArtApplication) getApplication())
                 .applicationComponent();
@@ -60,6 +68,8 @@ public class CheckInActivity extends BaseMenuActivity implements CheckInView {
         setSupportActionBar(binding.checkInToolbar);
         binding.checkInToolbar.setTitleTextAppearance(this, R.style.CheckInTitle);
         presenter.attachView(this);
+        mRepository.setPresenter(presenter);
+        mRepository.query();
         displayDetails();
     }
 
