@@ -191,7 +191,7 @@ public class SecurityDashboardActivity extends BaseMenuActivity implements Seria
 
     @Override
     public void displayErrorMessage(Throwable error) {
-        String message = "The asset is not available.";
+        String message = "Asset retrieval unsuccessful.";
         handleToast(message, Toast.LENGTH_LONG, false);
     }
 

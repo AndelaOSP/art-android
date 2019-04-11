@@ -282,7 +282,7 @@ public class NfcSecurityDashboardActivity extends AppCompatActivity implements N
     @Override
     public void displayErrorMessage(Throwable error) {
         showProgressBar(false);
-        String message = "The asset is not available.";
+        String message = "Asset retrieval unsuccessful.";
         nfcSecurityDashboardBinding.scanNfcTitleTextView
                 .setVisibility(View.VISIBLE);
         toast = Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_LONG);
