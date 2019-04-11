@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryBalticSea"
-        tools:context="com.andela.art.securitydashboard.presentation.SecurityDashboardActivity">
+        tools:context="com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/asset_details_progress_bar"
@@ -38,7 +38,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <include
-            android:id="@+id/mToolBar"
+            android:id="@+id/nfcToolBar"
             layout="@layout/tool_bar" />
 
         <de.hdodenhof.circleimageview.CircleImageView
