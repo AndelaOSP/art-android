@@ -235,10 +235,10 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     public void dismissDialog(String fetchStatus) {
         if (mSwipeRefreshLayout.isRefreshing()) {
             if ("200".equalsIgnoreCase(fetchStatus)) {
-                Toast.makeText(getApplicationContext(), "Assets updated successfully.",
-                        Toast.LENGTH_LONG).show();
                 mSwipeRefreshLayout.setRefreshing(false);
             } else {
+                Toast.makeText(getApplicationContext(), "Updating assets failed.",
+                        Toast.LENGTH_LONG).show();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }
