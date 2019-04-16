@@ -56,8 +56,15 @@ public class AssetSliderFragment extends Fragment {
             binding.assetType.setText(getArguments().getString("type"));
             binding.serial.setText(getArguments().getString("serial"));
             binding.tag.setText(getArguments().getString("tag"));
-        } else {
-            binding.serial.setText(R.string.unassigned);
+
+            if (getArguments().getString("serial").
+                    equals(getResources().getString(R.string.unassigned))) {
+                //setTextAlignment and setGravity not responding hence setPadding
+                binding.serial.setPadding(200, 0, 0, 0);
+                binding.serial.setTextSize(16);
+                binding.asset.setVisibility(View.GONE);
+                binding.mac.setVisibility(View.GONE);
+            }
         }
     }
 }

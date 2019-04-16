@@ -49,9 +49,9 @@ android {
             buildConfigField "String" ,"BASE_URL", "\"http://localhost:3000\""
         }
         prod {
+            // Should switch to art-backend in production
             buildConfigField "String" ,"BASE_URL", "\"http://api-staging-art.andela.com\""
 //            buildConfigField "String" ,"BASE_URL", "\"https://art-backend.herokuapp.com\""
-// Should switch to art-backend in production
         }
     }
 
