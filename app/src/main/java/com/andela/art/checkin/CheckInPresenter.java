@@ -1,5 +1,6 @@
 package com.andela.art.checkin;
 
+
 import com.andela.art.api.ApiService;
 import com.andela.art.models.CheckInModel;
 
@@ -40,7 +41,7 @@ public class CheckInPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        // Run this in case of errors.
+                        view.displayError(logType);
                     }
 
                     @Override

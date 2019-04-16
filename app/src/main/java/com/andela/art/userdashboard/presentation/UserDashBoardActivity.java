@@ -224,6 +224,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
 
+        binding.incidentButton.setVisibility(View.GONE);
         dismissDialog("200");
     }
 
