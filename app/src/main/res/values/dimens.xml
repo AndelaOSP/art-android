@@ -29,4 +29,6 @@
     <dimen name="cancel_margin_left">115dp</dimen>
     <dimen name="submit_margin_left">207dp</dimen>
     <dimen name="settings_page_item_top_padding">24dp</dimen>
+    <dimen name="spinner_right_padding">50dp</dimen>
+    <dimen name="spinner_left_padding">20dp</dimen>
 </resources>
