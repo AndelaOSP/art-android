@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     Uri photoUrl;
     boolean backButtonToExitPressedTwice;
     FragmentManager fragmentManager;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     @Inject
@@ -76,6 +78,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         initializeUserDashBoardComponent();
         assetsPresenter.getAssets();
 
+        mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.blue, R.color.green);
 
         FirebaseUser user = assetsPresenter.getUser();
             if (user != null) {
@@ -97,6 +101,13 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         binding.incidentButton.setOnClickListener(v -> {
             binding.incidentButton.setBackground(getResources()
                     .getDrawable(R.drawable.incident_button_clicked));
+        });
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                assetsPresenter.getAssets();
+            }
         });
 
 
@@ -162,7 +173,12 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
      */
     @Override
     public void onDisplayErrorMessage(Throwable error) {
-        Toast.makeText(this, error.getMessage().toString(), Toast.LENGTH_LONG).show();
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+        String errorMessage = "Failed to load data. Please try again later.";
+        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+
     }
 
     /**
@@ -183,8 +199,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         if (!assets.isEmpty()) {
             binding.incidentButton.setVisibility(View.VISIBLE);
             binding.incidentButton.setOnClickListener(view -> {
-                int listPosition = pagerAdapter.getCurrentPosition();
-                Asset asset = assets.get((listPosition - 1));
+                int listPosition = binding.pager.getCurrentItem();
+                Asset asset = assets.get(listPosition);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("asset", asset);
                 Intent intent = new Intent(UserDashBoardActivity.this,
@@ -193,6 +209,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
                 startActivity(intent);
             });
         }
+        dismissDialog("200");
     }
 
     /**
@@ -206,5 +223,27 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         pagerAdapter = new PagerAdapter(fragmentManager, asset);
         binding.pager.setAdapter(pagerAdapter);
         binding.tabDots.setupWithViewPager(binding.pager, true);
+
+        binding.incidentButton.setVisibility(View.GONE);
+        dismissDialog("200");
     }
+
+    /**
+     * called to dismiss swipe to refresh loader.
+     *
+     * @param fetchStatus 200 OK
+     */
+    public void dismissDialog(String fetchStatus) {
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            if ("200".equalsIgnoreCase(fetchStatus)) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            } else {
+                Toast.makeText(getApplicationContext(), "Updating assets failed.",
+                        Toast.LENGTH_LONG).show();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
+    }
+
 }

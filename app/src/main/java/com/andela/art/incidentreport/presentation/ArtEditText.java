@@ -5,8 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.support.v7.widget.AppCompatEditText;
 
-public class ArtEditText extends AppCompatEditText {
 
+/**
+ * Custom EditText field.
+ */
+public class ArtEditText extends AppCompatEditText {
 
     /**
      * Constructor for Art EditText class.
@@ -24,11 +27,9 @@ public class ArtEditText extends AppCompatEditText {
         if (error == null) {
             super.setError(null, icon);
             setCompoundDrawables(null, null, null, null);
-        }
-        else if (error.toString().equals("")) {
+        } else if (error.toString().equals("")) {
             setCompoundDrawables(null, null, icon, null);
-        }
-        else {
+        } else {
             super.setError(error, icon);
         }
     }
