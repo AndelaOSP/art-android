@@ -103,15 +103,11 @@ public class NfcSecurityDashboardActivity extends BaseMenuActivity implements Nf
             startActivity(intent);
         }
 
-        if (mNfcAdapter != null) {
-            if (!mNfcAdapter.isEnabled()) {
-                Toast.makeText(this.getApplicationContext(), "NFC is disabled.",
-                        Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this.getApplicationContext(), "NFC is enabled.",
-                        Toast.LENGTH_LONG).show();
-            }
+        if (mNfcAdapter != null && !mNfcAdapter.isEnabled()) {
+            Toast.makeText(this.getApplicationContext(), "NFC is disabled.",
+                    Toast.LENGTH_LONG).show();
         }
+
         isActivityActive = true;
         nfcPresenter.attachVieww(this);
         firebasePresenter.attachVieww(this);
@@ -247,6 +243,10 @@ public class NfcSecurityDashboardActivity extends BaseMenuActivity implements Nf
             Intent intent = new Intent(NfcSecurityDashboardActivity.this,
                     SecurityDashboardActivity.class);
             startActivity(intent);
+        }
+        if (mNfcAdapter != null && !mNfcAdapter.isEnabled()) {
+                Toast.makeText(this.getApplicationContext(), "NFC is disabled.",
+                        Toast.LENGTH_LONG).show();
         }
         setupForegroundDispatch(this, mNfcAdapter);
     }

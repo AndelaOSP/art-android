@@ -2,13 +2,13 @@ package com.andela.art.incidentreport.presentation;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -91,8 +91,6 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
      */
     private void enterReportDetails() {
         IncidentModel model = new IncidentModel();
-        Log.d("TAG", "enterReportDetails: " + asset.getId());
-
         model.setAsset(String.valueOf(asset.getId()));
         model.setIncidentType(incidentType);
         model.setIncidentDescription(binding.description.getText().toString().trim());
@@ -105,19 +103,24 @@ public class IncidentReportActivity extends AppCompatActivity implements Inciden
         presenter.reportIncident(model);
     }
 
-
-//    @Override
-//    public void finish() {
-//        super.finish();
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-//    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
 
     @Override
     public void showSuccess() {
         toast =  Toast.makeText(this.getApplicationContext(),
                "Incident reported successfully", Toast.LENGTH_LONG);
-       toast.show();
-       finish();
+        toast.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                finish();
+            }
+        }, 4000);
     }
 
     @Override
