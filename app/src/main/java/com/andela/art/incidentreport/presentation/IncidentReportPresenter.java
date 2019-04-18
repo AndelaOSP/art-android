@@ -42,13 +42,13 @@ public class IncidentReportPresenter {
                     @Override
                     public void onError(Throwable e) {
                         // Run this in case of errors.
+                        view.displayError();
                     }
 
                     @Override
                     public void onComplete() {
                         // Run this on completion.
                         view.showSuccess();
-
                     }
                 });
     }
