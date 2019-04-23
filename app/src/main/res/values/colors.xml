@@ -15,4 +15,7 @@
     <color name="dialog_tint">#35ccc8</color>
     <color name="dialog_text_view">#262729</color>
     <color name="snackbar_background_color">#000000</color>
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="blue">#000099</color>
 </resources>

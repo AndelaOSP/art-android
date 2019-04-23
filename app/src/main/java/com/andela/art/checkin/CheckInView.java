@@ -28,4 +28,10 @@ public interface CheckInView {
      * Get back to security dashboard activity.
      */
     void goToCheckSerial();
+
+    /**
+     * show user when an error occurs.
+     * @param logType - The current log status
+     */
+    void displayError(String logType);
 }

@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -141,6 +140,18 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
     }
 
     /**
+     * show user when an error occurs.
+     * @param logType - The current log status
+     */
+    @Override
+    public void displayError(String logType) {
+        showProgressBar(false);
+        Toast.makeText(getApplicationContext(),
+                logType + " failed, please try again.",
+                Toast.LENGTH_LONG).show();
+    }
+
+    /**
      * Shows the progress bar.
      * @param show Boolean to show progressbar.
      */
@@ -176,9 +187,8 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
         } else {
             status = "Checkin";
         }
-        Log.d("memememe", "callCheckin: " + id);
         presenter.checkIn(id, status);
-        saveCheckIn(id, status);
+//        saveCheckIn(id, status);
     }
 
     /**
@@ -188,15 +198,13 @@ public class CheckInActivity extends AppCompatActivity implements CheckInView {
      * @param logType - check in status
      */
     public void saveCheckIn(Integer id, String logType) {
+        //Implement to only add data to the database when there is no network
+
         CheckInEntity checkInEntity = new CheckInEntity();
         checkInEntity.setSerialNumber(id);
         checkInEntity.setLogStatus(logType);
 
         mRepository = new CheckInRepository(getApplication());
         mRepository.insert(checkInEntity);
-
-        Toast.makeText(getApplicationContext(),
-                "CheckIn data added to the database successfully",
-                Toast.LENGTH_SHORT).show();
     }
 }
