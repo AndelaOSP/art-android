@@ -48,7 +48,6 @@ public class Asset implements Serializable {
     public void setAllocationStatus(String allocationStatus) {
         mAllocationStatus = allocationStatus;
     }
-
     /**
      * Current status getter.
      * @return mCurrentStatus - String

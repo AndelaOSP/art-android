@@ -10,15 +10,119 @@
       "client_info": {
         "mobilesdk_app_id": "1:236168090156:android:87126738dadfd41b",
         "android_client_info": {
-          "package_name": "com.andela.art.mock"
+          "package_name": "com.andela.art"
         }
       },
       "oauth_client": [
         {
+          "client_id": "236168090156-csvfv3qep0pq8sk18mdcrthvuaqivrtq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "99648d0d2a9efbe55859eb51b5ba42e34875529c"
+          }
+        },
+        {
+          "client_id": "236168090156-g2km3hl7167bmdqdnr19iah9qjosde7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "ccdf23c76658d1712afe589cb6caedb3f3ef2bd3"
+          }
+        },
+        {
+          "client_id": "236168090156-nj6h7tdnlromnteetg6c33kjvfp689gd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "5f4e30913a5319c01be08dcbab80376bfeba2d10"
+          }
+        },
+        {
+          "client_id": "236168090156-psv4bc75ueoa1f56g5r6boe2alu5eu4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "098d14c9df54fe4c459f852888ac6562366f9afa"
+          }
+        },
+        {
+          "client_id": "236168090156-fmqn1sjrgkg5s547s81qulfib6en5ems.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "708470c1f69828708e322d01bb76b3f991b17665"
+          }
+        },
+        {
+          "client_id": "236168090156-ji032050aiptel369evgu0i2e9isllin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "4baddb73b17df46f3a4c65cf4d9879a3fbc89a45"
+          }
+        },
+        {
+          "client_id": "236168090156-5ps4d1oseqqmq7o27tekrtcrrptopha6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "8d0b94287a31b1025974c48dce8057c91fce0f12"
+          }
+        },
+        {
+          "client_id": "236168090156-1d9cnbm10mug1844jar075p7h067ami1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "5354e10737c7cf28abffe0ba8dee4818ed341d63"
+          }
+        },
+        {
+          "client_id": "236168090156-vlk3nmtskanamb88b3k088p8tik1digm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "70a52c532a450de07c86bdf7cb25db184ff7dae9"
+          }
+        },
+        {
+          "client_id": "236168090156-lvjn1oigbjg589a4f1uaqftelh8j2iu3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "c2ded2211b15795cf389700c071b012d2b453339"
+          }
+        },
+        {
+          "client_id": "236168090156-9fmpppgjopfcr55vh87isjfm5e43ltc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "1c99baeb23e9d885b8c6f00951c7dce1ae6ec710"
+          }
+        },
+        {
+          "client_id": "236168090156-2v75smg1eba8r45mj8ki4ors2cfo2tfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "f41bb2c72423af025df33587c5ba1815b15eef82"
+          }
+        },
+        {
+          "client_id": "236168090156-n4nm5mtie376v23359v6s23dofbm6heo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andela.art",
+            "certificate_hash": "9abbde92084357bc31fe30bd0f2c50fa64a601a5"
+          }
+        },
+        {
           "client_id": "236168090156-c9dintcvd71t28c7miefa8hm9lmihgjm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "a0b25e9e8eb2a3e949dd3d51b886506fc1430816"
           }
         },
@@ -26,7 +130,7 @@
           "client_id": "236168090156-3irh1erm3rj5c5kdamgvefk8heuo2eh9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "1dca52ebc4e893c465298bae3181f982a3bc23e5"
           }
         },
@@ -34,7 +138,7 @@
           "client_id": "236168090156-39org0veoh8h6ocip745ekcfdgnj0ssn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "82097eef3114c862c9ce062d2a1d2d90e63f4d26"
           }
         },
@@ -42,7 +146,7 @@
           "client_id": "236168090156-l5dmmretobjit78k9l5429nb5m4p5pdb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "4180f52fd83b7283f96456587f26e1675e14d650"
           }
         },
@@ -50,7 +154,7 @@
           "client_id": "236168090156-3mojvn8hm5la0goi6r6nal4d0ake1ccn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "f1f4bcb74c5cc34072576973fb1adb693a36cff0"
           }
         },
@@ -58,7 +162,7 @@
           "client_id": "236168090156-8fi9jt4q9mju0fuidvk6lje2q16l0f2q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "ca262ff5fabacd529344623da2d801a6d4a2c45f"
           }
         },
@@ -66,7 +170,7 @@
           "client_id": "236168090156-dtqpqnuqoi1449hts9kc43acmvfo8o9u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "5fc4a69f3cf21759eb0bc7b4571fde9d155c4f78"
           }
         },
@@ -74,7 +178,7 @@
           "client_id": "236168090156-89ioi5fd2kapvse48vm364cfofjiharb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "bd84a67f5bb920ca835cc4eaea368386de7e4a2e"
           }
         },
@@ -82,7 +186,7 @@
           "client_id": "236168090156-b2dcls1n44e08gfb9kbp76vsd3dsienn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "49e53688a0bcbadc4665d9149b4d8e9ff9089b8f"
           }
         },
@@ -90,7 +194,7 @@
           "client_id": "236168090156-qfbk7cd280l0l4q0ffsbnpvlbp21ov47.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "a510b050c1bcff0bb8550365fac3bce1e1ca6df0"
           }
         },
@@ -98,7 +202,7 @@
           "client_id": "236168090156-bm69ie9tefknndgcr9ponnm22m700th6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "7e7e0778a6f5bba08a84eeba0a6401832b84570e"
           }
         },
@@ -106,7 +210,7 @@
           "client_id": "236168090156-lsdh3ut1f4j3nhronos4068kibp0i93n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.andela.art.mock",
+            "package_name": "com.andela.art",
             "certificate_hash": "3c5025849acf8b74750cc90e7b6a1de05d8bbbee"
           }
         },
@@ -121,20 +225,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "236168090156-btj6h113flq4vsiknpsv8gs636rl6idr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

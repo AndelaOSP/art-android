@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
  */
 public class IncidentModel {
 
+    @SerializedName("asset")
+    private String mAsset;
+    @SerializedName("incident_type")
+    private String mIncidentType;
     @SerializedName("incident_description")
     private String mIncidentDescription;
     @SerializedName("incident_location")
@@ -21,6 +25,38 @@ public class IncidentModel {
     @SerializedName("witnesses")
     private String mWitnesses;
 
+
+    /**
+     * Asset getter.
+     * @return mAsset - assetId
+     */
+    public String getAsset() {
+        return mAsset;
+    }
+
+    /**
+     * Asset setter.
+     * @param asset - assetId
+     */
+    public void setAsset(String asset) {
+        mAsset = asset;
+    }
+
+    /**
+     * Type getter.
+     * @return String - type
+     */
+    public String getIncidentType() {
+        return mIncidentType;
+    }
+
+    /**
+     * Type setter.
+     * @param incidentType - type of incident
+     */
+    public void setIncidentType(String incidentType) {
+        mIncidentType = incidentType;
+    }
     /**
      * Description getter.
      * @return String - description

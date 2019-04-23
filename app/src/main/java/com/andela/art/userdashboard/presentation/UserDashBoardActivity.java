@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -178,7 +179,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         }
         String errorMessage = "Failed to load data. Please try again later.";
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
-
+        Log.v("Error Message", error.getMessage());
     }
 
     /**
@@ -199,8 +200,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         if (!assets.isEmpty()) {
             binding.incidentButton.setVisibility(View.VISIBLE);
             binding.incidentButton.setOnClickListener(view -> {
-                int listPosition = pagerAdapter.getCurrentPosition();
-                Asset asset = assets.get((listPosition - 1));
+                int listPosition = binding.pager.getCurrentItem();
+                Asset asset = assets.get(listPosition);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("asset", asset);
                 Intent intent = new Intent(UserDashBoardActivity.this,

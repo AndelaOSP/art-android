@@ -47,11 +47,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir_book"
+                android:text="@string/type"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/avenir_book"
                 android:text="@string/location"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +84,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +102,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/injuries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +120,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/property"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +138,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/witness"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +156,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
-            <EditText
+            <com.andela.art.incidentreport.presentation.ArtEditText
                 android:id="@+id/abstract_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
