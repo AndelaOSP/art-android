@@ -199,8 +199,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         if (!assets.isEmpty()) {
             binding.incidentButton.setVisibility(View.VISIBLE);
             binding.incidentButton.setOnClickListener(view -> {
-                int listPosition = pagerAdapter.getCurrentPosition();
-                Asset asset = assets.get((listPosition - 1));
+                int listPosition = binding.pager.getCurrentItem();
+                Asset asset = assets.get(listPosition);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("asset", asset);
                 Intent intent = new Intent(UserDashBoardActivity.this,
