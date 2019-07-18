@@ -178,8 +178,8 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
             mSwipeRefreshLayout.setRefreshing(false);
         }
         String errorMessage = "Failed to load data. Please try again later.";
-        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
-        Log.v("Error Message", error.getMessage());
+        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+        Log.d("AssetsError", error.getMessage());
     }
 
     /**

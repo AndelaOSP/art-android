@@ -50,8 +50,7 @@ android {
         }
         prod {
             // Should switch to art-backend in production
-            buildConfigField "String" ,"BASE_URL", "\"http://api-staging-art.andela.com\""
-//            buildConfigField "String" ,"BASE_URL", "\"https://art-backend.herokuapp.com\""
+            buildConfigField "String" ,"BASE_URL", "\"https://art-backend.herokuapp.com\""
         }
     }
 
@@ -107,7 +106,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'com.google.dagger:dagger-android:2.14.1'
+    implementation 'com.google.dagger:dagger-android:2.15'
     implementation 'com.google.dagger:dagger-android-support:2.14.1'
     implementation 'com.google.firebase:firebase-core:12.0.1'
     implementation 'com.google.firebase:firebase-auth:12.0.1'
