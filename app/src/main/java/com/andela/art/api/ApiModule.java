@@ -3,7 +3,6 @@ package com.andela.art.api;
 import com.andela.art.BuildConfig;
 import com.andela.art.root.SharedPrefsWrapper;
 
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;

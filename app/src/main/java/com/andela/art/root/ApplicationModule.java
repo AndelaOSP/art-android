@@ -2,6 +2,7 @@ package com.andela.art.root;
 
 import android.app.Application;
 import android.content.Context;
+
 import dagger.Module;
 import dagger.Provides;
 

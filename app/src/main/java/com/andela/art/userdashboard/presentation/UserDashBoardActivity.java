@@ -4,20 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
-import android.view.View;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.api.UserAssetResponse;
 import com.andela.art.databinding.FragmentActivityBinding;
-import com.andela.art.incidentreport.presentation.IncidentReportActivity;
 import com.andela.art.models.Asset;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
@@ -40,7 +39,9 @@ import javax.inject.Inject;
 public class UserDashBoardActivity extends BaseMenuActivity implements SliderView {
 
     private static final String EXTRA_ACCOUNT_INFORMATION = "user_account";
-    private PagerAdapter pagerAdapter;
+    private AssetAdapter assetAdapter;
+    private RecyclerView recyclerView;
+    private GridLayoutManager gridLayoutManager;
     GoogleSignInAccount account;
     FragmentActivityBinding binding;
     String name, email;
@@ -99,10 +100,6 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         profileFragment.setArguments(bundle);
         fragmentTransaction.add(R.id.profile_container, profileFragment);
         fragmentTransaction.commit();
-        binding.incidentButton.setOnClickListener(v -> {
-            binding.incidentButton.setBackground(getResources()
-                    .getDrawable(R.drawable.incident_button_clicked));
-        });
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -178,8 +175,6 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
             mSwipeRefreshLayout.setRefreshing(false);
         }
         String errorMessage = "Failed to load data. Please try again later.";
-        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-        Log.d("AssetsError", error.getMessage());
     }
 
     /**
@@ -194,22 +189,11 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
             onEmptyAsset();
             return;
         }
-        pagerAdapter = new PagerAdapter(fragmentManager, assets);
-        binding.pager.setAdapter(pagerAdapter);
-        binding.tabDots.setupWithViewPager(binding.pager, true);
-        if (!assets.isEmpty()) {
-            binding.incidentButton.setVisibility(View.VISIBLE);
-            binding.incidentButton.setOnClickListener(view -> {
-                int listPosition = binding.pager.getCurrentItem();
-                Asset asset = assets.get(listPosition);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("asset", asset);
-                Intent intent = new Intent(UserDashBoardActivity.this,
-                        IncidentReportActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            });
-        }
+        assetAdapter = new AssetAdapter(getApplicationContext(), assets);
+        recyclerView = findViewById(R.id.recycler);
+        recyclerView.setAdapter(assetAdapter);
+        gridLayoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(gridLayoutManager);
         dismissDialog("200");
     }
 
@@ -221,11 +205,6 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
         Asset newAsset = new Asset();
         newAsset.setSerialNumber("NO ASSET ASSIGNED YET");
         asset.add(newAsset);
-        pagerAdapter = new PagerAdapter(fragmentManager, asset);
-        binding.pager.setAdapter(pagerAdapter);
-        binding.tabDots.setupWithViewPager(binding.pager, true);
-
-        binding.incidentButton.setVisibility(View.GONE);
         dismissDialog("200");
     }
 

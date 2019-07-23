@@ -3,8 +3,8 @@ package com.andela.art.sendfeedback.presentation;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 import android.view.View;
+import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.ActivitySendFeedbackBinding;

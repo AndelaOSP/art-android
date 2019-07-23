@@ -1,10 +1,10 @@
 package com.andela.art.api;
 
-import java.util.List;
-
 import com.andela.art.models.Asset;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * UserAssetResponse pojo.

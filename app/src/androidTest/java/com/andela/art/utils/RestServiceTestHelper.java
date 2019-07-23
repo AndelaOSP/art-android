@@ -5,6 +5,7 @@ package com.andela.art.utils;
  */
 
 import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

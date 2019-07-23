@@ -1,8 +1,8 @@
 package com.andela.art.securitydashboard.injection;
 
 import com.andela.art.api.ApiModule;
-import com.andela.art.root.ApplicationComponent;
 import com.andela.art.firebase.FirebaseModule;
+import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;

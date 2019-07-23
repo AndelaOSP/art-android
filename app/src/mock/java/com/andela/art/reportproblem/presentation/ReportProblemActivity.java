@@ -1,19 +1,19 @@
 package com.andela.art.reportproblem.presentation;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.andela.art.R;
 import com.andela.art.databinding.ActivityReportProblemBinding;
 import com.andela.art.models.ReportProblem;
+import com.andela.art.reportproblem.injection.DaggerReportProblemComponent;
+import com.andela.art.reportproblem.injection.ReportProblemModule;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
-import com.andela.art.reportproblem.injection.DaggerReportProblemComponent;
-import com.andela.art.reportproblem.injection.ReportProblemModule;
 import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Inject;

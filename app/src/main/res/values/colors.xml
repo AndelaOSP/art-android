@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <color name="colorPrimary">#3359DF</color>
     <color name="colorPrimaryDark">#0834D0</color>
     <color name="colorAccent">#49AAAF</color>
