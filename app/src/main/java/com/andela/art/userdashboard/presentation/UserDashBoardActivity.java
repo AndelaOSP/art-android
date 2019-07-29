@@ -204,7 +204,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
     public void onEmptyAsset() {
         List<Asset> asset = new ArrayList();
         Asset newAsset = new Asset();
-        newAsset.setSerialNumber("NO ASSET ASSIGNED YET");
+        newAsset.setSerialNumber("NO ASSET ASSIGNED YET.");
         asset.add(newAsset);
         dismissDialog("200");
     }
