@@ -19,7 +19,7 @@ task findbugs(type: FindBugs) {
     description 'Find bugs maingly design flaws, bad practices'
     group 'verification'
     excludeFilter = rootProject.file('app/code_quality_tools/findbugs.xml')
-    classes = fileTree("$project.buildDir/intermediates/classes/mock/debug/")
+    classes = fileTree("$project.buildDir/intermediates/javac/")
     source 'src'
     effort 'max'
     include '**/*.java'
@@ -40,6 +40,7 @@ task pmd(type: Pmd) {
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**'
+    ignoreFailures = true
 
     reports {
         xml.enabled = false

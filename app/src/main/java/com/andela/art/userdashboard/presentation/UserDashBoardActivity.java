@@ -27,7 +27,6 @@ import com.andela.art.userdashboard.injection.UserDashBoardModule;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -202,10 +201,7 @@ public class UserDashBoardActivity extends BaseMenuActivity implements SliderVie
      * called when user is not assigned any asset.
      */
     public void onEmptyAsset() {
-        List<Asset> asset = new ArrayList();
-        Asset newAsset = new Asset();
-        newAsset.setSerialNumber("NO ASSET ASSIGNED YET.");
-        asset.add(newAsset);
+        Toast.makeText(getApplicationContext(), "NO ASSET ASSIGNED YET.", Toast.LENGTH_LONG);
         dismissDialog("200");
     }
 
