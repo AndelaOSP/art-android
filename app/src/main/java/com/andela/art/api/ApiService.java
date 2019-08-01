@@ -33,7 +33,7 @@ public interface ApiService {
      *
      * @return Observable
      */
-    @GET("/api/v1/assets/")
+    @GET("/api/v1/assets")
     Observable<UserAssetResponse> getAssets();
 
     /**

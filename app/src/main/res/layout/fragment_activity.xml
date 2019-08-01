@@ -29,40 +29,12 @@
                 android:layout_height="250dp"
                 android:layout_below="@+id/userdashboard_in_toolbar" />
 
-            <FrameLayout
-                android:id="@+id/slider_container"
-                android:layout_width="match_parent"
-                android:layout_height="148dp"
-                android:layout_below="@+id/profile_container">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp" />
-            </FrameLayout>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabDots"
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp"
-                android:layout_below="@+id/slider_container"
-
-                />
-
-            <Button
-                android:id="@+id/incident_button"
-                android:layout_width="183dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/tabDots"
-                android:layout_centerHorizontal="true"
-                android:visibility="invisible"
-                android:background="@drawable/incident_button"
-                android:fontFamily="@font/avenir_book"
-                android:text="@string/report_damage_loss"
-                android:textColor="@android:color/white" />
+                android:layout_below="@id/profile_container"
+                android:id="@+id/recycler">
+            </android.support.v7.widget.RecyclerView>
 
         </RelativeLayout>
 

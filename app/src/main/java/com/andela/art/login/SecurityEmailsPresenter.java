@@ -2,6 +2,7 @@ package com.andela.art.login;
 
 import android.content.Context;
 import android.widget.Toast;
+
 import com.andela.art.api.ApiService;
 import com.andela.art.root.Constants;
 import com.andela.art.root.Presenter;

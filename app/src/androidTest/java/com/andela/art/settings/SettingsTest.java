@@ -5,9 +5,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.andela.art.R;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.reportproblem.presentation.ReportProblemActivity;
 import com.andela.art.securitydashboard.presentation.SecurityDashboardActivity;
-import com.andela.art.login.LoginActivity;
 import com.andela.art.sendfeedback.presentation.SendFeedbackActivity;
 
 import org.junit.After;

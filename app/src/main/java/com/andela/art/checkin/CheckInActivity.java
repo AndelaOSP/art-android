@@ -15,8 +15,8 @@ import com.andela.art.R;
 import com.andela.art.checkin.injection.CheckInModule;
 import com.andela.art.checkin.injection.DaggerCheckInComponent;
 import com.andela.art.databinding.ActivityCheckInBinding;
-import com.andela.art.models.Asset;
 import com.andela.art.models.Asignee;
+import com.andela.art.models.Asset;
 import com.andela.art.room.CheckInEntity;
 import com.andela.art.room.CheckInRepository;
 import com.andela.art.root.ApplicationComponent;
@@ -24,7 +24,9 @@ import com.andela.art.root.ApplicationModule;
 import com.andela.art.root.ArtApplication;
 import com.andela.art.securitydashboard.presentation.NfcSecurityDashboardActivity;
 import com.squareup.picasso.Picasso;
+
 import java.util.Locale;
+
 import javax.inject.Inject;
 
 /**

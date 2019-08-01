@@ -48,13 +48,12 @@ public class Asset implements Serializable {
     public void setAllocationStatus(String allocationStatus) {
         mAllocationStatus = allocationStatus;
     }
-
     /**
      * Current status getter.
      * @return mCurrentStatus - String
      */
     public String getCurrentStatus() {
-        return mCurrentStatus;
+        return String.valueOf(mCurrentStatus);
     }
 
 
@@ -79,7 +78,7 @@ public class Asset implements Serializable {
      * @return mCheckinStatus - String
      */
     public String getCheckinStatus() {
-        return mCheckinStatus;
+        return String.valueOf(mCheckinStatus);
     }
 
     /**
@@ -127,7 +126,7 @@ public class Asset implements Serializable {
      * @return mItemCode - String
      */
     public String getItemCode() {
-        return mItemCode;
+        return String.valueOf(mItemCode);
     }
 
     /**
@@ -175,7 +174,7 @@ public class Asset implements Serializable {
      * @return mSerialNumber - String
      */
     public String getSerialNumber() {
-        return mSerialNumber;
+        return String.valueOf(mSerialNumber);
     }
 
     /**
@@ -191,7 +190,7 @@ public class Asset implements Serializable {
      * @return mAssetType - String
      */
     public String getAssetType() {
-        return mAssetType;
+        return String.valueOf(mAssetType);
     }
 
     /**

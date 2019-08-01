@@ -24,7 +24,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.core.IsNot.not;
 
 /**
  * Test for UserDashBoard.
@@ -57,16 +56,6 @@ public class UserDashBoardTest {
                 .check(matches(allOf(isDisplayed(),
                         withText("Philip Kalela"))
                 ));
-    }
-
-    /**
-     * Test incidence report button does not appear when no assets are available.
-     */
-    @Test
-    public void testIncidentReportButtonDoesNotAppearWhenNoAssetIsAvailable() {
-        userDashboardActivityTestRule.launchActivity(null);
-        onView(withId(R.id.incident_button))
-                .check(matches(not(isDisplayed())));
     }
 
     /**

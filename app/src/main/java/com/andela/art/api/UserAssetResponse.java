@@ -1,10 +1,10 @@
 package com.andela.art.api;
 
-import java.util.List;
-
 import com.andela.art.models.Asset;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * UserAssetResponse pojo.
@@ -16,10 +16,10 @@ public class UserAssetResponse {
     private Integer count;
     @SerializedName("next")
     @Expose
-    private Integer next;
+    private String next;
     @SerializedName("previous")
     @Expose
-    private Object previous;
+    private String previous;
     @SerializedName("results")
     @Expose
     private List<Asset> assets;
@@ -34,17 +34,17 @@ public class UserAssetResponse {
 
     /**
      *
-     * @return next - Integer
+     * @return next - String
      */
-    public Integer getNext() {
+    public String getNext() {
         return next;
     }
 
     /**
      *
-     * @return  previous - Object
+     * @return  previous - String
      */
-    public Object getPrevious() {
+    public String getPrevious() {
         return previous;
     }
 

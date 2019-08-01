@@ -3,6 +3,7 @@ package com.andela.art.util;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+
 import java.util.concurrent.Callable;
 
 import io.reactivex.Scheduler;

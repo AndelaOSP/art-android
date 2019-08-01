@@ -2,10 +2,10 @@ package com.andela.art.login.injection;
 
 import com.andela.art.api.ApiModule;
 import com.andela.art.firebase.FirebaseModule;
+import com.andela.art.login.LoginActivity;
 import com.andela.art.root.Activity;
 import com.andela.art.root.ApplicationComponent;
 import com.andela.art.root.ApplicationModule;
-import com.andela.art.login.LoginActivity;
 import com.andela.art.settings.SettingsActivity;
 
 import dagger.Component;

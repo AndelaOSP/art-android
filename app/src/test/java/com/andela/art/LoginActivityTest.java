@@ -1,11 +1,11 @@
 package com.andela.art;
 
+import com.andela.art.login.LoginActivity;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import com.andela.art.login.LoginActivity;
 
 /**
  * Created by allan on 27/03/2018.
